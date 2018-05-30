@@ -1,0 +1,30 @@
+---
+title: "MODISTools"
+author: "Koen Hufkens"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{daymetr functionality}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+# load the library
+library(MODISTools)
+
+```
+
+# list products
+
+# list coverage (dates)
+
+# download a location
+
+# batch download multiple locations
+

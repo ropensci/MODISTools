@@ -1,0 +1,26 @@
+Package: MODISTools
+Title: Interface to the 'MODIS Land Products Subsets' Web Services
+Version: 0.1.0
+Authors@R: person("Hufkens","Koen",
+		  email="koen.hufkens@gmail.com",
+		  role=c("aut", "cre"))
+Description: Programmatic interface to the 'MODIS Land Products Subsets'
+    web services (<https://modis.ornl.gov/data/modis_webservice.html>).
+    Allows for easy downloads of 'MODIS' time series directly to your R 
+    workspace or your computer.
+Depends:
+    R (>= 3.4.0)
+Imports:
+    httr,
+    tools,
+    utils
+License: AGPL-3
+LazyData: true
+ByteCompile: true
+RoxygenNote: 6.0.1
+Suggests:
+    knitr,
+    rmarkdown,
+    covr,
+    testthat
+VignetteBuilder: knitr

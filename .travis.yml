@@ -1,0 +1,15 @@
+language: R
+sudo: required
+cache: packages
+warnings_are_errors: false
+
+r:
+  - release
+  - devel
+
+r_packages:
+  - devtools
+  - covr
+
+after_success:
+- Rscript -e 'covr::codecov()'
