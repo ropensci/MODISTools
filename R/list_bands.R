@@ -39,6 +39,6 @@ list_bands <- function(product = NULL){
     stop("Your requested timed out or the server is unreachable")
   }
 
-  # return a data frame with all products and their details
+  # return a data frame with all bands
   return(bands$bands)
 }
