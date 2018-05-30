@@ -13,7 +13,8 @@ Depends:
 Imports:
     httr,
     tools,
-    utils
+    utils,
+    jsonlite
 License: AGPL-3
 LazyData: true
 ByteCompile: true
