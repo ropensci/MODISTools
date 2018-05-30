@@ -2,7 +2,7 @@
 % Please edit documentation in R/list_products.R
 \name{list_products}
 \alias{list_products}
-\title{Function to download all available products}
+\title{Download all available products}
 \usage{
 list_products()
 }
@@ -10,7 +10,7 @@ list_products()
 A data frame of all available MODIS Land Products Subsets products
 }
 \description{
-Function to download all available products
+Lists all available MODIS Land Products Subset products.
 }
 \examples{
 

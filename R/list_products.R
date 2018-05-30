@@ -1,4 +1,6 @@
-#' Function to download all available products
+#' Download all available products
+#'
+#' Lists all available MODIS Land Products Subset products.
 #'
 #' @return A data frame of all available MODIS Land Products Subsets products
 #' @keywords MODIS Land Products Subsets, products, meta-data
@@ -30,5 +32,5 @@ list_products <- function(){
   }
 
   # return a data frame with all products and their details
-  return(products)
+  return(products$products)
 }
