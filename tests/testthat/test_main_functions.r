@@ -46,3 +46,20 @@ test_that("test list_dates()",{
   # check if no error occured
   expect_true(check)
 })
+
+test_that("test get_subset()",{
+
+  # download data
+  subset = try(get_subset(product = "MOD11A2",
+                    lat = 40,
+                    lon = -110,
+                    band = "LST_Day_1km",
+                    start = "2004-01-01",
+                    end = "2004-03-31"))
+
+  # see if any of the runs failed
+  check = !inherits(subset, "try-error")
+
+  # check if no error occured
+  expect_true(check)
+})

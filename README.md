@@ -4,8 +4,8 @@
 
 ```diff
 - THIS PROJECT IS STARTING SO NOTHING HERE YET, CHECK IN LATER!
+- BASIC SUBSETTING IS PROVIDED BUT EXPERIMENTAL...
 ```
-
 
 Programmatic interface to the ['MODIS Land Products Subsets' web services](https://modis.ornl.gov/data/modis_webservice.html). Allows for easy downloads of 'MODIS' time series directly to your R workspace or your computer.
 

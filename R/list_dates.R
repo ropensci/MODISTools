@@ -6,7 +6,7 @@
 #' @param product a valid MODIS product name
 #' @param lat latitude in decimal degrees
 #' @param lon longitude in decimal degrees
-#' @param siteid site id
+#' @param site_id site id (overides lat / lon)
 #' @return A data frame of all available dates for a MODIS Land
 #' Products Subsets products at the given location.
 #' @keywords MODIS Land Products Subsets, products, meta-data
@@ -23,25 +23,37 @@
 list_dates <- function(product = NULL,
                        lat = NULL,
                        lon = NULL,
-                       siteid = NULL){
+                       site_id = NULL){
 
   # load all products
   products <- list_products()$product
 
   # error trap
-  if (is.null(product) | !(product %in% products) |
-      is.null(lat) | is.null(lon)){
+  if (is.null(product) | !(product %in% products) ){
     stop("please specify a product, or check your product name...")
+  }
+
+  # error trap
+  if (is.null(site_id) & (is.null(lat) | is.null(lon)) ){
+    stop("please specify coordinates...")
   }
 
   # define server settings (main server should become global
   # as in not specified in every function)
   server <- "https://modis.ornl.gov/rst/"
-  url <- paste0(server,"api/v1/",product,"/dates")
 
-  # construct the query to be served to the server
-  query <- list("latitude" = lat,
-               "longitude" = lon)
+  # switch url in case of siteid
+  if (is.null(site_id)){
+    url <- paste0(server,"api/v1/",product,"/dates")
+
+    # construct the query to be served to the server
+    query <- list("latitude" = lat,
+                  "longitude" = lon)
+
+  } else {
+    url <- paste0(server,"api/v1/",product,"/",site_id,"/dates")
+    query <- NULL
+  }
 
   # try to download the data
   resp = try(httr::GET(url = url,
