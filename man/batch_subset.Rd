@@ -7,7 +7,7 @@
 batch_subset(df = NULL, product = NULL, band = NULL,
   start = "2000-01-01", end = format(Sys.time(), "\%Y-\%m-\%d"),
   km_lr = 0, km_ab = 0, out_dir = tempdir(), internal = TRUE,
-  ncores = 7)
+  ncores = "auto")
 }
 \arguments{
 \item{df}{a file holding locations and their sitenames to batch process}
@@ -28,6 +28,9 @@ batch_subset(df = NULL, product = NULL, band = NULL,
 
 \item{internal}{should the data be returned as an internal data structure
 \code{TRUE} or \code{FALSE} (default = \code{TRUE})}
+
+\item{ncores}{number of cores to use while downloading in parallel
+(auto will select the all cpu cores - 1)}
 }
 \value{
 A nested list containing the downloaded data and a descriptive

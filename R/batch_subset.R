@@ -11,6 +11,8 @@
 #' @param km_lr km left-right to sample
 #' @param km_ab km above-below to sample
 #' @param out_dir location where to store all data
+#' @param ncores number of cores to use while downloading in parallel
+#' (auto will select the all cpu cores - 1)
 #' @param internal should the data be returned as an internal data structure
 #' \code{TRUE} or \code{FALSE} (default = \code{TRUE})
 #' @return A nested list containing the downloaded data and a descriptive
@@ -34,7 +36,7 @@ batch_subset <- function(df = NULL,
                          km_ab = 0,
                          out_dir = tempdir(),
                          internal = TRUE,
-                         ncores = 7){
+                         ncores = "auto"){
   # error trap
   if (is.null(df)){
     stop("please specify a batch file...")
