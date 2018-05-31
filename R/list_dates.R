@@ -26,7 +26,7 @@ list_dates <- function(product = NULL,
                        site_id = NULL){
 
   # load all products
-  products <- list_products()$product
+  products <- MODISTools::list_products()$product
 
   # error trap
   if (is.null(product) | !(product %in% products) ){

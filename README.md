@@ -189,7 +189,78 @@ temporal coverage see function descriptions below.
 
 ### Batch downloading MODIS time series
 
-TODO
+``` r
+# create data frame with a site_name, lat and lon column
+# holding the respective names of sites and their location
+df <- data.frame("site_name" = paste("test",1:2))
+df$lat <- 40
+df$lon <- -110
+  
+# test batch download
+subsets <- batch_subset(df = df,
+                     product = "MOD11A2",
+                     band = "LST_Day_1km",
+                     internal = TRUE,
+                     start = "2004-01-01",
+                     end = "2004-03-31",
+                     out_dir = "~")
+
+print(str(subsets))
+#> List of 2
+#>  $ test 1:List of 2
+#>   ..$ header:List of 15
+#>   .. ..$ xllcorner: chr "-9370036.39"
+#>   .. ..$ yllcorner: chr "4447802.08"
+#>   .. ..$ cellsize : chr "926.62543305583381"
+#>   .. ..$ nrows    : int 1
+#>   .. ..$ ncols    : int 1
+#>   .. ..$ band     : chr "LST_Day_1km"
+#>   .. ..$ units    : chr "Kelvin"
+#>   .. ..$ scale    : chr "0.02"
+#>   .. ..$ latitude : num 40
+#>   .. ..$ longitude: num -110
+#>   .. ..$ site     : chr "test 1"
+#>   .. ..$ product  : chr "MOD11A2"
+#>   .. ..$ start    : chr "2004-01-01"
+#>   .. ..$ end      : chr "2004-03-31"
+#>   .. ..$ complete : logi TRUE
+#>   ..$ data  :'data.frame':   12 obs. of  7 variables:
+#>   .. ..$ modis_date   : chr [1:12] "A2004001" "A2004009" "A2004017" "A2004025" ...
+#>   .. ..$ calendar_date: chr [1:12] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...
+#>   .. ..$ band         : chr [1:12] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" ...
+#>   .. ..$ tile         : chr [1:12] "h09v05" "h09v05" "h09v05" "h09v05" ...
+#>   .. ..$ proc_date    : chr [1:12] "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...
+#>   .. ..$ pixel        : chr [1:12] "1" "1" "1" "1" ...
+#>   .. ..$ data         : int [1:12] 13098 13062 13297 13323 13315 13227 13739 13783 14748 15105 ...
+#>   ..- attr(*, "class")= chr "MODISTools"
+#>  $ test 2:List of 2
+#>   ..$ header:List of 15
+#>   .. ..$ xllcorner: chr "-9370036.39"
+#>   .. ..$ yllcorner: chr "4447802.08"
+#>   .. ..$ cellsize : chr "926.62543305583381"
+#>   .. ..$ nrows    : int 1
+#>   .. ..$ ncols    : int 1
+#>   .. ..$ band     : chr "LST_Day_1km"
+#>   .. ..$ units    : chr "Kelvin"
+#>   .. ..$ scale    : chr "0.02"
+#>   .. ..$ latitude : num 40
+#>   .. ..$ longitude: num -110
+#>   .. ..$ site     : chr "test 2"
+#>   .. ..$ product  : chr "MOD11A2"
+#>   .. ..$ start    : chr "2004-01-01"
+#>   .. ..$ end      : chr "2004-03-31"
+#>   .. ..$ complete : logi TRUE
+#>   ..$ data  :'data.frame':   12 obs. of  7 variables:
+#>   .. ..$ modis_date   : chr [1:12] "A2004001" "A2004009" "A2004017" "A2004025" ...
+#>   .. ..$ calendar_date: chr [1:12] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...
+#>   .. ..$ band         : chr [1:12] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" ...
+#>   .. ..$ tile         : chr [1:12] "h09v05" "h09v05" "h09v05" "h09v05" ...
+#>   .. ..$ proc_date    : chr [1:12] "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...
+#>   .. ..$ pixel        : chr [1:12] "1" "1" "1" "1" ...
+#>   .. ..$ data         : int [1:12] 13098 13062 13297 13323 13315 13227 13739 13783 14748 15105 ...
+#>   ..- attr(*, "class")= chr "MODISTools"
+#> NULL
+```
 
 ### Listing products
 

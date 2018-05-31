@@ -50,7 +50,7 @@ get_subset <- function(product = NULL,
                        internal = TRUE){
 
   # load all products
-  products <- list_products()$product
+  products <- MODISTools::list_products()$product
 
   # error trap
   if (is.null(product) | !(product %in% products) ){
@@ -74,7 +74,7 @@ get_subset <- function(product = NULL,
   }
 
   # get date range convert format
-  dates <- list_dates(product = product,
+  dates <- MODISTools::list_dates(product = product,
                       lat = lat,
                       lon = lon)
 
@@ -112,13 +112,13 @@ get_subset <- function(product = NULL,
                   "kmLeftRight" = km_lr)
 
     # try to download the data
-    resp = try(httr::GET(url = url,
+    resp = httr::GET(url = url,
                          query = query,
-                         httr::write_memory()))
+                         httr::write_memory())
 
     # trap errors on download, return a general error statement
     # with the most common causes
-    if (httr::http_error(resp) | inherits(resp, "try-error")){
+    if (httr::http_error(resp)){
       warning("Your requested timed out or the server is unreachable")
       return(NULL)
     }

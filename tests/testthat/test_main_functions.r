@@ -78,3 +78,55 @@ test_that("test get_subset()",{
   # check if no error occured
   expect_true(check)
 })
+
+test_that("test batch_subset()",{
+
+  # create data frame with a site_name, lat and lon column
+  # holding the respective names of sites and their location
+  df <- data.frame("site_name" = paste("test",1:2))
+  df$lat <- 40
+  df$lon <- -110
+
+  write.table(df, paste0(tempdir(),"/batch.csv"),
+              quote = FALSE,
+              row.names = FALSE,
+              col.names = TRUE,
+              sep = ",")
+
+  # test batch download
+  subsets <- try(batch_subset(df = df,
+                          product = "MOD11A2",
+                          band = "LST_Day_1km",
+                          internal = TRUE,
+                          start = "2004-01-01",
+                          end = "2004-03-31",
+                          out_dir = "~"))
+
+  # test batch download
+  subsets_file <- try(batch_subset(df = paste0(tempdir(),"/batch.csv"),
+                                  product = "MOD11A2",
+                                  band = "LST_Day_1km",
+                                  internal = TRUE,
+                                  start = "2004-01-01",
+                                  end = "2004-03-31",
+                                  out_dir = "~"))
+
+  # test batch download
+  subsets_no_file <- try(batch_subset(df = "fail.csv",
+                          product = "MOD11A2",
+                          band = "LST_Day_1km",
+                          internal = TRUE,
+                          start = "2004-01-01",
+                          end = "2004-03-31",
+                          out_dir = "~"))
+
+  print(subsets_no_file)
+
+  # see if any of the runs failed
+  check = !inherits(subsets, "try-error") &
+          !inherits(subsets_file, "try-error") &
+          inherits(subsets_no_file, "try-error")
+
+  # check if no error occured
+  expect_true(check)
+})
