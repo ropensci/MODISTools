@@ -39,9 +39,14 @@ test_that("test list_dates()",{
                           lat = 40,
                           lon = -110))
 
+  dates_coord_err <- try(list_dates(product = "MOD11A6",
+                              lat = NULL,
+                              lon = -110))
+
   # see if any of the runs failed
   check = !inherits(dates, "try-error") &
-    inherits(dates_err, "try-error")
+    inherits(dates_err, "try-error") &
+    inherits(dates_coord_err, "try-error")
 
   # check if no error occured
   expect_true(check)
