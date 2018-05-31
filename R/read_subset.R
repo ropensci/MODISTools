@@ -60,15 +60,27 @@ read_subset <- function(filename){
   # assign names to values
   names(values) = descriptor
 
+  # overwrite original header with final copy
+  header = lapply(values, function(x){x})
+
   # read the time series data
   data = utils::read.table(filename,
                            header = TRUE,
                            sep = ",",
                            stringsAsFactors = FALSE)
 
+  # convert data to match get_subset() routine (consistency)
+  data$proc_date <- as.character(data$proc_date)
+  data$pixel <- as.character(data$pixel)
+  header$ncols <- as.integer(header$ncols)
+  header$nrows <- as.integer(header$nrows)
+  header$latitude <- as.numeric(header$latitude)
+  header$longitude <- as.numeric(header$longitude)
+  header$complete <- as.logical(header$complete)
+
   # format final output as a nested list of class phenocamr
   output = list(
-    "header" = lapply(values, function(x){x}),
+    "header" = header,
     "data" = data)
 
   # set proper phenocamr class
