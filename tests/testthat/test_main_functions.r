@@ -57,8 +57,18 @@ test_that("test get_subset()",{
                     start = "2004-01-01",
                     end = "2004-03-31"))
 
+  # download data
+  subset_disk = try(get_subset(product = "MOD11A2",
+                          lat = 40,
+                          lon = -110,
+                          band = "LST_Day_1km",
+                          start = "2004-01-01",
+                          end = "2004-03-31",
+                          internal = FALSE))
+
   # see if any of the runs failed
-  check = !inherits(subset, "try-error")
+  check = !inherits(subset, "try-error") &
+          !inherits(subset_disk, "try-error")
 
   # check if no error occured
   expect_true(check)

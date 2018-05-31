@@ -6,12 +6,13 @@
 \usage{
 get_subset(product = NULL, band = NULL, lat = NULL, lon = NULL,
   start = "2000-01-01", end = format(Sys.time(), "\%Y-\%m-\%d"),
-  km_lr = 0, km_ab = 0, site_id = NULL)
+  km_lr = 0, km_ab = 0, site_id = NULL, site_name = "sitename",
+  out_dir = tempdir(), internal = TRUE)
 }
 \arguments{
 \item{product}{a valid MODIS product name}
 
-\item{band}{band to download (default = NULL, all bands)}
+\item{band}{band to download (default = \code{NULL}, all bands)}
 
 \item{lat}{latitude in decimal degrees}
 
@@ -26,6 +27,15 @@ get_subset(product = NULL, band = NULL, lat = NULL, lon = NULL,
 \item{km_ab}{km above-below to sample}
 
 \item{site_id}{site id (overides lat / lon)}
+
+\item{site_name}{arbitrary site name used in writing data to file
+(default = sitename)}
+
+\item{out_dir}{path where to store the data if writing to disk
+(default = tempdir())}
+
+\item{internal}{should the data be returned as an internal data structure
+\code{TRUE} or \code{FALSE} (default = \code{TRUE})}
 }
 \value{
 A nested list containing the downloaded data and a descriptive
@@ -39,8 +49,13 @@ at a particular location.
 
 \donttest{
 # list all available MODIS Land Products Subsets products
-bands <- list_dates(product = "MOD11A2", lat =)
-print(bands)
+# download data
+subset = try(get_subset(product = "MOD11A2",
+                        lat = 40,
+                        lon = -110,
+                        band = "LST_Day_1km",
+                        start = "2004-01-01",
+                        end = "2004-03-31"))
 
 }
 }

@@ -4,7 +4,7 @@
 #' at a particular location.
 #'
 #' @param product a valid MODIS product name
-#' @param band band to download (default = NULL, all bands)
+#' @param band band to download (default = \code{NULL}, all bands)
 #' @param lat latitude in decimal degrees
 #' @param lon longitude in decimal degrees
 #' @param start start date
@@ -12,6 +12,12 @@
 #' @param km_lr km left-right to sample
 #' @param km_ab km above-below to sample
 #' @param site_id site id (overides lat / lon)
+#' @param site_name arbitrary site name used in writing data to file
+#' (default = sitename)
+#' @param out_dir path where to store the data if writing to disk
+#' (default = tempdir())
+#' @param internal should the data be returned as an internal data structure
+#' \code{TRUE} or \code{FALSE} (default = \code{TRUE})
 #' @return A nested list containing the downloaded data and a descriptive
 #' header with meta-data.
 #' @keywords MODIS Land Products Subsets, products, meta-data
@@ -20,8 +26,13 @@
 #'
 #' \donttest{
 #' # list all available MODIS Land Products Subsets products
-#' bands <- list_dates(product = "MOD11A2", lat =)
-#' print(bands)
+#' # download data
+#' subset = try(get_subset(product = "MOD11A2",
+#'                         lat = 40,
+#'                         lon = -110,
+#'                         band = "LST_Day_1km",
+#'                         start = "2004-01-01",
+#'                         end = "2004-03-31"))
 #'
 #'}
 
@@ -33,7 +44,10 @@ get_subset <- function(product = NULL,
                        end = format(Sys.time(),"%Y-%m-%d"),
                        km_lr = 0,
                        km_ab = 0,
-                       site_id = NULL){
+                       site_id = NULL,
+                       site_name = "sitename",
+                       out_dir = tempdir(),
+                       internal = TRUE){
 
   # load all products
   products <- list_products()$product
@@ -63,11 +77,18 @@ get_subset <- function(product = NULL,
   dates <- list_dates(product = product,
                       lat = lat,
                       lon = lon)
+
+  # convert to date object for easier handling
   dates$calendar_date <- as.Date(dates$calendar_date)
 
   # subset the dates
   dates <- dates[which( dates$calendar_date <= as.Date(end) &
            dates$calendar_date >= as.Date(start)),]
+
+  # check if something remains
+  if (nrow(dates)==0){
+    stop("No data points exist for the selected date range...")
+  }
 
   # list breaks
   breaks <- seq(1,nrow(dates),10)
@@ -98,12 +119,14 @@ get_subset <- function(product = NULL,
     # trap errors on download, return a general error statement
     # with the most common causes
     if (httr::http_error(resp) | inherits(resp, "try-error")){
-      stop("Your requested timed out or the server is unreachable")
+      warning("Your requested timed out or the server is unreachable")
+      return(NULL)
     }
 
     # check the content of the response
     if (httr::http_type(resp) != "application/json") {
-      stop("API did not return json", call. = FALSE)
+      warning("API did not return json", call. = FALSE)
+      return(NULL)
     }
 
     # grab content
@@ -115,15 +138,55 @@ get_subset <- function(product = NULL,
     return(chunk)
   })
 
-  # header
-  header <- subset_data[[1]][1:10]
+  # split out a header including
+  # additional ancillary data
+  header <- subset_data[[1]][!(names(subset_data[[1]]) %in%
+                                   c("header","subset"))]
+  header$site <- ifelse(is.null(site_id),
+                          site_name,
+                          site_id)
+  header$product <- product
+  header$start <- start
+  header$end <- end
 
-  # reshape the data
+  # This is a check on the complete nature of the retrieved data
+  # the process will not stall on errors occur in the download
+  # process but just return NULL, these are trapped here and
+  # reported as complete TRUE/FALSE in the header or the returned
+  # object. Using this flag one can decide to reprocess.
+  header$complete <- !any(unlist(lapply(subset_data, is.null)))
+
+  # reshape the data converting it to a tidy data frame
+  # data will be reported row wise
   subset_data <- do.call("rbind",
                          lapply(subset_data,
                                 function(x)x$subset))
+  pixels <- do.call("rbind",
+                    subset_data$data)
+  colnames(pixels) <- 1:ncol(pixels)
+
+  # remove old nested list data and substitute with columns
+  subset_data <- cbind(subset_data[,!(names(subset_data) %in% "data")],
+                            pixels)
+
+  # create tidy data frame
+  subset_data <- tidyr::gather(subset_data,
+         key = "pixel",
+         value = "data",
+         grep("[0-9]",names(subset_data)))
+
+  # re-structure by addint a header
+  subset_data <- list("header" = header,
+                      "data" = subset_data)
+  # attach class
+  class(subset_data) = "MODISTools"
 
   # return a nested list with all data
-  return(list("header" = header,
-              "subset" = subset_data))
+  # to workspace or to file
+  if (internal){
+    return(subset_data)
+  } else {
+    write_subset(subset_data,
+                 out_dir = out_dir)
+  }
 }
