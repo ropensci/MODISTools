@@ -105,7 +105,7 @@ subsets <- batch_subset(df = df,
                      band = "LST_Day_1km",
                      internal = TRUE,
                      start = "2004-01-01",
-                     end = "2004-03-31",
+                     end = "2004-02-01",
                      out_dir = "~")
 
 print(str(subsets))
@@ -163,4 +163,10 @@ subset_disk <- read_subset(paste0(tempdir(),
 identical(subset, subset_disk)
 ```
 
+## References
 
+Tuck et al. (2014). [MODISTools - downloading and processing MODIS remotely sensed data in R Ecology & Evolution](https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.1273), 4, 4658 - 4668.
+
+## Acknowledgements
+
+Original development was supported by the UK Natural Environment Research Council (NERC; grants NE/K500811/1 and NE/J011193/1), and the Hans Rausing Scholarship. Refactoring was supported through the Belgian Science Policy office COBECORE project (BELSPO; grant BR/175/A3/COBECORE).
