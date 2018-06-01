@@ -7,10 +7,15 @@ Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/kh
 
 # MODISTools
 
+MODISTools is an R package for retrieving and using MODIS data subsets
+using ORNL DAAC web service (SOAP) for subsetting from Oak Ridge
+National Laboratory (ORNL).
+
 Programmatic interface to the [‘MODIS Land Products Subsets’ web
 services](https://modis.ornl.gov/data/modis_webservice.html). Allows for
-easy downloads of ‘MODIS’ time series directly to your R workspace or
-your computer.
+easy downloads of [‘MODIS’](http://modis.gsfc.nasa.gov/) time series
+directly to your R workspace or your computer. When using the package
+please cite the manuscript as referenced below.
 
 ## Installation
 
@@ -295,7 +300,7 @@ identical(subset, subset_disk)
 Tuck et al. (2014). [MODISTools - downloading and processing MODIS
 remotely sensed data in R Ecology &
 Evolution](https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.1273),
-4, 4658 - 4668.
+4(24), 4658 - 4668.
 
 ## Acknowledgements
 
