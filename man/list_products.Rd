@@ -17,9 +17,7 @@ Lists all available MODIS Land Products Subset products.
 \donttest{
 # list all available MODIS Land Products Subsets products
 products <- list_products()
-
-#' # For other practical examples consult the included
-# vignette.
+print(products)
 }
 }
 \keyword{Land}

@@ -11,18 +11,22 @@
 #'
 #' \donttest{
 #' # download data
-#' subset = try(get_subset(product = "MOD11A2",
+#' subset <- get_subset(product = "MOD11A2",
 #'                         lat = 40,
 #'                         lon = -110,
 #'                         band = "LST_Day_1km",
 #'                         start = "2004-01-01",
-#'                         end = "2004-02-31"))
+#'                         end = "2004-02-01")
+#' # write the above file to disk
+#' write_subset(df = subset,
+#'              out_dir = tempdir())
 #'
-#' # print data structure
-#' print(summary(df))
+#' # read the data back in
+#' subset_disk <- read_subset(paste0(tempdir(),
+#'                "/sitename_MOD11A2_2004-01-01_2004-02-01.csv"))
 #'
-#' # write the phenocamo data file
-#' write_subset(df, out_dir = tempdir())
+#' # compare original to read from disk
+#' identical(subset, subset_disk)
 #' }
 
 write_subset <- function(df = NULL,

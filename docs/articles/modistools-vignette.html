@@ -60,7 +60,14 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/khufkens/MODISTools">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -77,42 +84,263 @@
             
             <h4 class="date">2018-06-01</h4>
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/khufkens/MODISTools/blob/master/vignettes/modistools-vignette.Rmd"><code>vignettes/modistools-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>modistools-vignette.Rmd</code></div>
 
     </div>
 
     
     
-<div id="list-products" class="section level1">
-<h1 class="hasAnchor">
-<a href="#list-products" class="anchor"></a>list products</h1>
+<p>The MODISTools package has as goal to facilitate the interface between R and the MODIS Land Product Subset API at the Oak Ridge National Laboratory DAAC. This programmatic interface to the <a href="https://modis.ornl.gov/data/modis_webservice.html">‘MODIS Land Products Subsets’ web services</a> allows for easy downloads of ‘MODIS’ time series directly to your R workspace or your computer. Below an examples are provided on how to download a MODIS time series as well as list ancillary data.</p>
+<div id="listing-products-bands-dates" class="section level3">
+<h3 class="hasAnchor">
+<a href="#listing-products-bands-dates" class="anchor"></a>Listing products / bands / dates</h3>
+<p>In order to assess which products are available, which product bands are provided and which temporal range is covered one has to list these ancillary data. All these options can be queried using the list_*() functions.</p>
+<p>To list all available products use the list_products() function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">products &lt;-<span class="st"> </span><span class="kw"><a href="../reference/list_products.html">list_products</a></span>()
+<span class="kw">head</span>(products)
+<span class="co">#&gt;    product</span>
+<span class="co">#&gt; 1 MCD15A2H</span>
+<span class="co">#&gt; 2 MCD15A3H</span>
+<span class="co">#&gt; 3  MOD09A1</span>
+<span class="co">#&gt; 4  MOD11A2</span>
+<span class="co">#&gt; 5  MOD13Q1</span>
+<span class="co">#&gt; 6 MOD15A2H</span>
+<span class="co">#&gt;                                                                               description</span>
+<span class="co">#&gt; 1        MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR)  8-Day L4 Global 500 m SIN Grid</span>
+<span class="co">#&gt; 2         MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR) 4-Day L4 Global 500 m SIN Grid</span>
+<span class="co">#&gt; 3                    MODIS/Terra Surface Reflectance (SREF) 8-Day L3 Global 500m SIN Grid</span>
+<span class="co">#&gt; 4 MODIS/Terra Land Surface Temperature and Emissivity (LST) 8-Day L3 Global 1 km SIN Grid</span>
+<span class="co">#&gt; 5                MODIS/Terra Vegetation Indices (NDVI/EVI) 16-Day L3 Global 250m SIN Grid</span>
+<span class="co">#&gt; 6              MODIS/Terra Leaf Area Index/FPAR (LAI/FPAR) 8-Day L4 Global 500 m SIN Grid</span>
+<span class="co">#&gt;   frequency resolution_meters</span>
+<span class="co">#&gt; 1     8-Day               500</span>
+<span class="co">#&gt; 2     4-Day               500</span>
+<span class="co">#&gt; 3     8-Day               500</span>
+<span class="co">#&gt; 4     8-Day              1000</span>
+<span class="co">#&gt; 5    16-Day               250</span>
+<span class="co">#&gt; 6     8-Day               500</span></code></pre></div>
+<p>To list all available bands for a given product use the list_bands() function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bands &lt;-<span class="st"> </span><span class="kw"><a href="../reference/list_bands.html">list_bands</a></span>(<span class="dt">product =</span> <span class="st">"MOD11A2"</span>)
+<span class="kw">head</span>(bands)
+<span class="co">#&gt; [1] "Clear_sky_days"   "Clear_sky_nights" "Day_view_angl"   </span>
+<span class="co">#&gt; [4] "Day_view_time"    "Emis_31"          "Emis_32"</span></code></pre></div>
+<p>To list all available dates (temporal coverage) for a given product and location use the list_dates() function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/list_dates.html">list_dates</a></span>(<span class="dt">product =</span> <span class="st">"MOD11A2"</span>, <span class="dt">lat =</span> <span class="dv">42</span>, <span class="dt">lon =</span> <span class="op">-</span><span class="dv">110</span>)
+<span class="kw">head</span>(dates)
+<span class="co">#&gt;   modis_date calendar_date</span>
+<span class="co">#&gt; 1   A2000049    2000-02-18</span>
+<span class="co">#&gt; 2   A2000057    2000-02-26</span>
+<span class="co">#&gt; 3   A2000065    2000-03-05</span>
+<span class="co">#&gt; 4   A2000073    2000-03-13</span>
+<span class="co">#&gt; 5   A2000081    2000-03-21</span>
+<span class="co">#&gt; 6   A2000089    2000-03-29</span></code></pre></div>
 </div>
-<div id="list-coverage-dates" class="section level1">
-<h1 class="hasAnchor">
-<a href="#list-coverage-dates" class="anchor"></a>list coverage (dates)</h1>
+<div id="downloading-modis-time-series" class="section level3">
+<h3 class="hasAnchor">
+<a href="#downloading-modis-time-series" class="anchor"></a>Downloading MODIS time series</h3>
+<p>Once you decide on which data to download using the above functions you can use these parameters to download a time series using the get_subset() function. The below query downloads MOD11A2 based daytime lands surface temperatures. The location is named ‘testsite’ and only covers the first month of 2004. The output is saved to a variable called subset in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the library</span>
+<span class="kw">library</span>(MODISTools)
+
+<span class="co"># download data</span>
+subset &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_subset.html">get_subset</a></span>(<span class="dt">product =</span> <span class="st">"MOD11A2"</span>,
+                    <span class="dt">lat =</span> <span class="dv">40</span>,
+                    <span class="dt">lon =</span> <span class="op">-</span><span class="dv">110</span>,
+                    <span class="dt">band =</span> <span class="st">"LST_Day_1km"</span>,
+                    <span class="dt">start =</span> <span class="st">"2004-01-01"</span>,
+                    <span class="dt">end =</span> <span class="st">"2004-02-01"</span>,
+                    <span class="dt">km_lr =</span> <span class="dv">1</span>,
+                    <span class="dt">km_ab =</span> <span class="dv">1</span>,
+                    <span class="dt">site_name =</span> <span class="st">"testsite"</span>,
+                    <span class="dt">internal =</span> <span class="ot">TRUE</span>)
+<span class="kw">head</span>(subset)
+<span class="co">#&gt; $header</span>
+<span class="co">#&gt; $header$xllcorner</span>
+<span class="co">#&gt; [1] "-9370962.97"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$yllcorner</span>
+<span class="co">#&gt; [1] "4446875.49"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$cellsize</span>
+<span class="co">#&gt; [1] "926.62543305583381"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$nrows</span>
+<span class="co">#&gt; [1] 3</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$ncols</span>
+<span class="co">#&gt; [1] 3</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$band</span>
+<span class="co">#&gt; [1] "LST_Day_1km"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$units</span>
+<span class="co">#&gt; [1] "Kelvin"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$scale</span>
+<span class="co">#&gt; [1] "0.02"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$latitude</span>
+<span class="co">#&gt; [1] 40</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$longitude</span>
+<span class="co">#&gt; [1] -110</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$site</span>
+<span class="co">#&gt; [1] "testsite"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$product</span>
+<span class="co">#&gt; [1] "MOD11A2"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$start</span>
+<span class="co">#&gt; [1] "2004-01-01"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$end</span>
+<span class="co">#&gt; [1] "2004-02-01"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $header$complete</span>
+<span class="co">#&gt; [1] TRUE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $data</span>
+<span class="co">#&gt;    modis_date calendar_date        band   tile     proc_date pixel  data</span>
+<span class="co">#&gt; 1    A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     1 13135</span>
+<span class="co">#&gt; 2    A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     1 13120</span>
+<span class="co">#&gt; 3    A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     1 13350</span>
+<span class="co">#&gt; 4    A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     1 13354</span>
+<span class="co">#&gt; 5    A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     2 13123</span>
+<span class="co">#&gt; 6    A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     2 13100</span>
+<span class="co">#&gt; 7    A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     2 13324</span>
+<span class="co">#&gt; 8    A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     2 13331</span>
+<span class="co">#&gt; 9    A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     3 13098</span>
+<span class="co">#&gt; 10   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     3 13069</span>
+<span class="co">#&gt; 11   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     3 13288</span>
+<span class="co">#&gt; 12   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     3 13317</span>
+<span class="co">#&gt; 13   A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     4 13127</span>
+<span class="co">#&gt; 14   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     4 13073</span>
+<span class="co">#&gt; 15   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     4 13336</span>
+<span class="co">#&gt; 16   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     4 13352</span>
+<span class="co">#&gt; 17   A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     5 13098</span>
+<span class="co">#&gt; 18   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     5 13062</span>
+<span class="co">#&gt; 19   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     5 13297</span>
+<span class="co">#&gt; 20   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     5 13323</span>
+<span class="co">#&gt; 21   A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     6 13082</span>
+<span class="co">#&gt; 22   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     6 13045</span>
+<span class="co">#&gt; 23   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     6 13271</span>
+<span class="co">#&gt; 24   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     6 13287</span>
+<span class="co">#&gt; 25   A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     7 13113</span>
+<span class="co">#&gt; 26   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     7 13082</span>
+<span class="co">#&gt; 27   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     7 13309</span>
+<span class="co">#&gt; 28   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     7 13340</span>
+<span class="co">#&gt; 29   A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     8 13099</span>
+<span class="co">#&gt; 30   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     8 13015</span>
+<span class="co">#&gt; 31   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     8 13290</span>
+<span class="co">#&gt; 32   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     8 13287</span>
+<span class="co">#&gt; 33   A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     9 13081</span>
+<span class="co">#&gt; 34   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     9 13005</span>
+<span class="co">#&gt; 35   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     9 13272</span>
+<span class="co">#&gt; 36   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     9 13271</span></code></pre></div>
+<p>The output format is a nested list with the true data provided as a <em>tidy</em> data frame, as shown above. When witten to a csv, when the parameter ‘internal’ is set to FALSE, the same information is retained. Data can be read back into the same format with the included read_subset() function (see below).</p>
+<p>Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the ‘pixel’ column in the data frame containing the time series data. The remote sensing values are listed in the ‘data’ column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values.</p>
+<p>When a large selection of locations is needed you might benefit from using the batch download function batch_subset(), which provides a wrapper around the get_subset() function in order to speed up large download batches. This function has a similar syntax to get_subset() but requires a data frame defining site names (site_name) and locations (lat / lon) (or a comma delimited file with the same structure) to specify a list of download locations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create data frame with a site_name, lat and lon column</span>
+<span class="co"># holding the respective names of sites and their location</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">"site_name"</span> =<span class="st"> </span><span class="kw">paste</span>(<span class="st">"test"</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>))
+df<span class="op">$</span>lat &lt;-<span class="st"> </span><span class="dv">40</span>
+df<span class="op">$</span>lon &lt;-<span class="st"> </span><span class="op">-</span><span class="dv">110</span>
+
+<span class="co"># an example batch download data frame</span>
+<span class="kw">print</span>(df)
+<span class="co">#&gt;   site_name lat  lon</span>
+<span class="co">#&gt; 1    test 1  40 -110</span>
+<span class="co">#&gt; 2    test 2  40 -110</span>
+
+<span class="co"># test batch download</span>
+subsets &lt;-<span class="st"> </span><span class="kw"><a href="../reference/batch_subset.html">batch_subset</a></span>(<span class="dt">df =</span> df,
+                     <span class="dt">product =</span> <span class="st">"MOD11A2"</span>,
+                     <span class="dt">band =</span> <span class="st">"LST_Day_1km"</span>,
+                     <span class="dt">internal =</span> <span class="ot">TRUE</span>,
+                     <span class="dt">start =</span> <span class="st">"2004-01-01"</span>,
+                     <span class="dt">end =</span> <span class="st">"2004-03-31"</span>,
+                     <span class="dt">out_dir =</span> <span class="st">"~"</span>)
+
+<span class="kw">print</span>(<span class="kw">str</span>(subsets))
+<span class="co">#&gt; List of 2</span>
+<span class="co">#&gt;  $ test 1:List of 2</span>
+<span class="co">#&gt;   ..$ header:List of 15</span>
+<span class="co">#&gt;   .. ..$ xllcorner: chr "-9370036.39"</span>
+<span class="co">#&gt;   .. ..$ yllcorner: chr "4447802.08"</span>
+<span class="co">#&gt;   .. ..$ cellsize : chr "926.62543305583381"</span>
+<span class="co">#&gt;   .. ..$ nrows    : int 1</span>
+<span class="co">#&gt;   .. ..$ ncols    : int 1</span>
+<span class="co">#&gt;   .. ..$ band     : chr "LST_Day_1km"</span>
+<span class="co">#&gt;   .. ..$ units    : chr "Kelvin"</span>
+<span class="co">#&gt;   .. ..$ scale    : chr "0.02"</span>
+<span class="co">#&gt;   .. ..$ latitude : num 40</span>
+<span class="co">#&gt;   .. ..$ longitude: num -110</span>
+<span class="co">#&gt;   .. ..$ site     : chr "test 1"</span>
+<span class="co">#&gt;   .. ..$ product  : chr "MOD11A2"</span>
+<span class="co">#&gt;   .. ..$ start    : chr "2004-01-01"</span>
+<span class="co">#&gt;   .. ..$ end      : chr "2004-03-31"</span>
+<span class="co">#&gt;   .. ..$ complete : logi TRUE</span>
+<span class="co">#&gt;   ..$ data  :'data.frame':   12 obs. of  7 variables:</span>
+<span class="co">#&gt;   .. ..$ modis_date   : chr [1:12] "A2004001" "A2004009" "A2004017" "A2004025" ...</span>
+<span class="co">#&gt;   .. ..$ calendar_date: chr [1:12] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...</span>
+<span class="co">#&gt;   .. ..$ band         : chr [1:12] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" ...</span>
+<span class="co">#&gt;   .. ..$ tile         : chr [1:12] "h09v05" "h09v05" "h09v05" "h09v05" ...</span>
+<span class="co">#&gt;   .. ..$ proc_date    : chr [1:12] "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...</span>
+<span class="co">#&gt;   .. ..$ pixel        : chr [1:12] "1" "1" "1" "1" ...</span>
+<span class="co">#&gt;   .. ..$ data         : int [1:12] 13098 13062 13297 13323 13315 13227 13739 13783 14748 15105 ...</span>
+<span class="co">#&gt;   ..- attr(*, "class")= chr "MODISTools"</span>
+<span class="co">#&gt;  $ test 2:List of 2</span>
+<span class="co">#&gt;   ..$ header:List of 15</span>
+<span class="co">#&gt;   .. ..$ xllcorner: chr "-9370036.39"</span>
+<span class="co">#&gt;   .. ..$ yllcorner: chr "4447802.08"</span>
+<span class="co">#&gt;   .. ..$ cellsize : chr "926.62543305583381"</span>
+<span class="co">#&gt;   .. ..$ nrows    : int 1</span>
+<span class="co">#&gt;   .. ..$ ncols    : int 1</span>
+<span class="co">#&gt;   .. ..$ band     : chr "LST_Day_1km"</span>
+<span class="co">#&gt;   .. ..$ units    : chr "Kelvin"</span>
+<span class="co">#&gt;   .. ..$ scale    : chr "0.02"</span>
+<span class="co">#&gt;   .. ..$ latitude : num 40</span>
+<span class="co">#&gt;   .. ..$ longitude: num -110</span>
+<span class="co">#&gt;   .. ..$ site     : chr "test 2"</span>
+<span class="co">#&gt;   .. ..$ product  : chr "MOD11A2"</span>
+<span class="co">#&gt;   .. ..$ start    : chr "2004-01-01"</span>
+<span class="co">#&gt;   .. ..$ end      : chr "2004-03-31"</span>
+<span class="co">#&gt;   .. ..$ complete : logi TRUE</span>
+<span class="co">#&gt;   ..$ data  :'data.frame':   12 obs. of  7 variables:</span>
+<span class="co">#&gt;   .. ..$ modis_date   : chr [1:12] "A2004001" "A2004009" "A2004017" "A2004025" ...</span>
+<span class="co">#&gt;   .. ..$ calendar_date: chr [1:12] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...</span>
+<span class="co">#&gt;   .. ..$ band         : chr [1:12] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" ...</span>
+<span class="co">#&gt;   .. ..$ tile         : chr [1:12] "h09v05" "h09v05" "h09v05" "h09v05" ...</span>
+<span class="co">#&gt;   .. ..$ proc_date    : chr [1:12] "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...</span>
+<span class="co">#&gt;   .. ..$ pixel        : chr [1:12] "1" "1" "1" "1" ...</span>
+<span class="co">#&gt;   .. ..$ data         : int [1:12] 13098 13062 13297 13323 13315 13227 13739 13783 14748 15105 ...</span>
+<span class="co">#&gt;   ..- attr(*, "class")= chr "MODISTools"</span>
+<span class="co">#&gt; NULL</span></code></pre></div>
 </div>
-<div id="download-a-location" class="section level1">
-<h1 class="hasAnchor">
-<a href="#download-a-location" class="anchor"></a>download a location</h1>
-</div>
-<div id="batch-download-multiple-locations" class="section level1">
-<h1 class="hasAnchor">
-<a href="#batch-download-multiple-locations" class="anchor"></a>batch download multiple locations</h1>
+<div id="reading-and-writing-data-from-to-file" class="section level3">
+<h3 class="hasAnchor">
+<a href="#reading-and-writing-data-from-to-file" class="anchor"></a>Reading and writing data from / to file</h3>
+<p>In both download functions data can be written to a csv file in a particular directory using the ‘internal’ and ‘out_dir’ function options. The read_subset() function allows you to read in these csv files easily and into the same data structure as used when downloading directy into your R workspace.</p>
+<pre><code>[site_name]_[product]_[start]_[end].csv</code></pre>
+<p>The data can be read back into the original nested structed using read_subset().</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># write the above file to disk</span>
+<span class="kw"><a href="../reference/write_subset.html">write_subset</a></span>(<span class="dt">df =</span> subset,
+             <span class="dt">out_dir =</span> <span class="kw">tempdir</span>())
+
+<span class="co"># read the data back in</span>
+subset_disk &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_subset.html">read_subset</a></span>(<span class="kw">paste0</span>(<span class="kw">tempdir</span>(),
+                  <span class="st">"/testsite_MOD11A2_2004-01-01_2004-02-01.csv"</span>))
+
+<span class="co"># compare original to read from disk</span>
+<span class="kw">identical</span>(subset, subset_disk)
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#list-products">list products</a></li>
-      <li><a href="#list-coverage-dates">list coverage (dates)</a></li>
-      <li><a href="#download-a-location">download a location</a></li>
-      <li><a href="#batch-download-multiple-locations">batch download multiple locations</a></li>
-      </ul>
-</div>
       </div>
 
 </div>

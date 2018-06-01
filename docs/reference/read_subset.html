@@ -91,7 +91,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/khufkens/MODISTools">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -105,7 +110,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Read a MODISTools data file</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/khufkens/MODISTools/blob/master/R/read_subset.R'><code>R/read_subset.R</code></a></small>
     <div class="hidden name"><code>read_subset.Rd</code></div>
     </div>
 
@@ -144,8 +149,72 @@ header and the data as a `data.frame()`.</p>
            <span class='kw'>internal</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># read file</span>
-<span class='no'>df</span> <span class='kw'>=</span> <span class='fu'>read_subset</span>(<span class='fu'>paste0</span>(<span class='fu'>tempdir</span>(),
-               <span class='st'>"/sitename_MOD11A2_2004-01-01_2004-03-31.csv"</span>))</div></pre>
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_subset</span>(<span class='fu'>paste0</span>(<span class='fu'>tempdir</span>(),
+               <span class='st'>"/sitename_MOD11A2_2004-01-01_2004-03-31.csv"</span>))
+<span class='fu'>print</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; $header
+#&gt; $header$xllcorner
+#&gt; [1] "-9370036.39"
+#&gt; 
+#&gt; $header$yllcorner
+#&gt; [1] "4447802.08"
+#&gt; 
+#&gt; $header$cellsize
+#&gt; [1] "926.62543305583381"
+#&gt; 
+#&gt; $header$nrows
+#&gt; [1] 1
+#&gt; 
+#&gt; $header$ncols
+#&gt; [1] 1
+#&gt; 
+#&gt; $header$band
+#&gt; [1] "LST_Day_1km"
+#&gt; 
+#&gt; $header$units
+#&gt; [1] "Kelvin"
+#&gt; 
+#&gt; $header$scale
+#&gt; [1] "0.02"
+#&gt; 
+#&gt; $header$latitude
+#&gt; [1] 40
+#&gt; 
+#&gt; $header$longitude
+#&gt; [1] -110
+#&gt; 
+#&gt; $header$site
+#&gt; [1] "sitename"
+#&gt; 
+#&gt; $header$product
+#&gt; [1] "MOD11A2"
+#&gt; 
+#&gt; $header$start
+#&gt; [1] "2004-01-01"
+#&gt; 
+#&gt; $header$end
+#&gt; [1] "2004-03-31"
+#&gt; 
+#&gt; $header$complete
+#&gt; [1] TRUE
+#&gt; 
+#&gt; 
+#&gt; $data
+#&gt;    modis_date calendar_date        band   tile     proc_date pixel  data
+#&gt; 1    A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     1 13098
+#&gt; 2    A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     1 13062
+#&gt; 3    A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     1 13297
+#&gt; 4    A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     1 13323
+#&gt; 5    A2004033    2004-02-02 LST_Day_1km h09v05 2015213090158     1 13315
+#&gt; 6    A2004041    2004-02-10 LST_Day_1km h09v05 2015213165253     1 13227
+#&gt; 7    A2004049    2004-02-18 LST_Day_1km h09v05 2015216182840     1 13739
+#&gt; 8    A2004057    2004-02-26 LST_Day_1km h09v05 2015217020635     1 13783
+#&gt; 9    A2004065    2004-03-05 LST_Day_1km h09v05 2015217091316     1 14748
+#&gt; 10   A2004073    2004-03-13 LST_Day_1km h09v05 2015217164857     1 15105
+#&gt; 11   A2004081    2004-03-21 LST_Day_1km h09v05 2015217230030     1 15290
+#&gt; 12   A2004089    2004-03-29 LST_Day_1km h09v05 2015218055617     1 15410
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "MODISTools"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

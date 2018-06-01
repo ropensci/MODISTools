@@ -79,7 +79,7 @@ subset <- get_subset(product = "MOD11A2",
                     km_ab = 1,
                     site_name = "testsite",
                     internal = TRUE)
-head(subset)
+print(str(subset))
 ```
 
 The output format is a nested list with the true data provided as a *tidy* data frame, as shown above. When witten to a csv, when the parameter 'internal' is set to FALSE, the same information is retained. Data can be read back into the same format with the included read_subset() function (see below).

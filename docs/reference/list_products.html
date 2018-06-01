@@ -91,7 +91,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/khufkens/MODISTools">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -105,7 +110,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Download all available products</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/khufkens/MODISTools/blob/master/R/list_products.R'><code>R/list_products.R</code></a></small>
     <div class="hidden name"><code>list_products.Rd</code></div>
     </div>
 
@@ -126,9 +131,54 @@
     <pre class="examples"><div class='input'>
 </div><div class='input'><span class='co'># list all available MODIS Land Products Subsets products</span>
 <span class='no'>products</span> <span class='kw'>&lt;-</span> <span class='fu'>list_products</span>()
-
-<span class='co'>#' # For other practical examples consult the included</span>
-<span class='co'># vignette.</span></div></pre>
+<span class='fu'>print</span>(<span class='no'>products</span>)</div><div class='output co'>#&gt;     product
+#&gt; 1  MCD15A2H
+#&gt; 2  MCD15A3H
+#&gt; 3   MOD09A1
+#&gt; 4   MOD11A2
+#&gt; 5   MOD13Q1
+#&gt; 6  MOD15A2H
+#&gt; 7   MOD16A2
+#&gt; 8  MOD17A2H
+#&gt; 9  MOD17A3H
+#&gt; 10  MYD09A1
+#&gt; 11  MYD11A2
+#&gt; 12  MYD13Q1
+#&gt; 13 MYD15A2H
+#&gt; 14 MYD17A2H
+#&gt; 15 MYD17A3H
+#&gt;                                                                                description
+#&gt; 1         MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR)  8-Day L4 Global 500 m SIN Grid
+#&gt; 2          MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR) 4-Day L4 Global 500 m SIN Grid
+#&gt; 3                     MODIS/Terra Surface Reflectance (SREF) 8-Day L3 Global 500m SIN Grid
+#&gt; 4  MODIS/Terra Land Surface Temperature and Emissivity (LST) 8-Day L3 Global 1 km SIN Grid
+#&gt; 5                 MODIS/Terra Vegetation Indices (NDVI/EVI) 16-Day L3 Global 250m SIN Grid
+#&gt; 6               MODIS/Terra Leaf Area Index/FPAR (LAI/FPAR) 8-Day L4 Global 500 m SIN Grid
+#&gt; 7                   MODIS/Terra Net Evapotranspiration (ET) 8-Day L4 Global 500 m SIN Grid
+#&gt; 8              MODIS/Terra Gross Primary Productivity (GPP) 8-Day L4 Global 500 m SIN Grid
+#&gt; 9                 MODIS/Terra Net Primary Production (NPP) Yearly L4 Global 500 m SIN Grid
+#&gt; 10                     MODIS/Aqua Surface Reflectance (SREF) 8-Day L3 Global 500m SIN Grid
+#&gt; 11  MODIS/Aqua Land Surface Temperature and Emissivity (LST) 8-Day L3 Global 1 km SIN Grid
+#&gt; 12                 MODIS/Aqua Vegetation Indices (NDVI/EVI) 16-Day L3 Global 250m SIN Grid
+#&gt; 13               MODIS/Aqua Leaf Area Index/FPAR (LAI/FPAR) 8-Day L4 Global 500 m SIN Grid
+#&gt; 14              MODIS/Aqua Gross Primary Productivity (GPP) 8-Day L4 Global 500 m SIN Grid
+#&gt; 15                 MODIS/Aqua Net Primary Production (NPP) Yearly L4 Global 500 m SIN Grid
+#&gt;    frequency resolution_meters
+#&gt; 1      8-Day               500
+#&gt; 2      4-Day               500
+#&gt; 3      8-Day               500
+#&gt; 4      8-Day              1000
+#&gt; 5     16-Day               250
+#&gt; 6      8-Day               500
+#&gt; 7      8-Day               500
+#&gt; 8      8-Day               500
+#&gt; 9     Yearly               500
+#&gt; 10     8-Day               500
+#&gt; 11     8-Day              1000
+#&gt; 12    16-Day               250
+#&gt; 13     8-Day               500
+#&gt; 14     8-Day               500
+#&gt; 15    Yearly               500</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

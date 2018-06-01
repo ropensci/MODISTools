@@ -20,9 +20,7 @@ library(MODISTools)
 
 ```
 
-The MODISTools package has as goal to facilitate the interface between R and the MODIS Land Product Subset API at the Oak Ridge National Laboratory DAAC. This programmatic interface to the ['MODIS Land Products Subsets' web services](https://modis.ornl.gov/data/modis_webservice.html). Allows for easy downloads of 'MODIS' time series directly to your R workspace or your computer.
-
-Below an example is provided on how to download a MODIS time series as well as list ancillary data.
+The MODISTools package has as goal to facilitate the interface between R and the MODIS Land Product Subset API at the Oak Ridge National Laboratory DAAC. This programmatic interface to the ['MODIS Land Products Subsets' web services](https://modis.ornl.gov/data/modis_webservice.html) allows for easy downloads of 'MODIS' time series directly to your R workspace or your computer. Below an examples are provided on how to download a MODIS time series as well as list ancillary data.
 
 ### Listing products / bands / dates
 
@@ -51,7 +49,7 @@ head(dates)
 
 ### Downloading MODIS time series
 
-Once you decide on which data to download using the above functions you can use these parameters to download a time series using the get_subset() function.
+Once you decide on which data to download using the above functions you can use these parameters to download a time series using the get_subset() function. The below query downloads MOD11A2 based daytime lands surface temperatures. The location is named 'testsite' and only covers the first month of 2004. The output is saved to a variable called subset in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file).
 
 ```{r eval = TRUE}
 # load the library
@@ -101,7 +99,7 @@ print(str(subsets))
 
 ### Reading and writing data from / to file
 
-In both download functions data can be written to a csv file in a particular directory. The read_subset() function allows you to read in the data easily and into the same data structure as used when downloading directy into your R workspace.
+In both download functions data can be written to a csv file in a particular directory using the 'internal' and 'out_dir' function options. The read_subset() function allows you to read in these csv files easily and into the same data structure as used when downloading directy into your R workspace.
 
 ```
 [site_name]_[product]_[start]_[end].csv

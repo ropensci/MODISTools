@@ -118,92 +118,34 @@ subset <- get_subset(product = "MOD11A2",
                     km_ab = 1,
                     site_name = "testsite",
                     internal = TRUE)
-head(subset)
-#> $header
-#> $header$xllcorner
-#> [1] "-9370962.97"
-#> 
-#> $header$yllcorner
-#> [1] "4446875.49"
-#> 
-#> $header$cellsize
-#> [1] "926.62543305583381"
-#> 
-#> $header$nrows
-#> [1] 3
-#> 
-#> $header$ncols
-#> [1] 3
-#> 
-#> $header$band
-#> [1] "LST_Day_1km"
-#> 
-#> $header$units
-#> [1] "Kelvin"
-#> 
-#> $header$scale
-#> [1] "0.02"
-#> 
-#> $header$latitude
-#> [1] 40
-#> 
-#> $header$longitude
-#> [1] -110
-#> 
-#> $header$site
-#> [1] "testsite"
-#> 
-#> $header$product
-#> [1] "MOD11A2"
-#> 
-#> $header$start
-#> [1] "2004-01-01"
-#> 
-#> $header$end
-#> [1] "2004-02-01"
-#> 
-#> $header$complete
-#> [1] TRUE
-#> 
-#> 
-#> $data
-#>    modis_date calendar_date        band   tile     proc_date pixel  data
-#> 1    A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     1 13135
-#> 2    A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     1 13120
-#> 3    A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     1 13350
-#> 4    A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     1 13354
-#> 5    A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     2 13123
-#> 6    A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     2 13100
-#> 7    A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     2 13324
-#> 8    A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     2 13331
-#> 9    A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     3 13098
-#> 10   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     3 13069
-#> 11   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     3 13288
-#> 12   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     3 13317
-#> 13   A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     4 13127
-#> 14   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     4 13073
-#> 15   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     4 13336
-#> 16   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     4 13352
-#> 17   A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     5 13098
-#> 18   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     5 13062
-#> 19   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     5 13297
-#> 20   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     5 13323
-#> 21   A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     6 13082
-#> 22   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     6 13045
-#> 23   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     6 13271
-#> 24   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     6 13287
-#> 25   A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     7 13113
-#> 26   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     7 13082
-#> 27   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     7 13309
-#> 28   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     7 13340
-#> 29   A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     8 13099
-#> 30   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     8 13015
-#> 31   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     8 13290
-#> 32   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     8 13287
-#> 33   A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     9 13081
-#> 34   A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     9 13005
-#> 35   A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     9 13272
-#> 36   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     9 13271
+print(str(subset))
+#> List of 2
+#>  $ header:List of 15
+#>   ..$ xllcorner: chr "-9370962.97"
+#>   ..$ yllcorner: chr "4446875.49"
+#>   ..$ cellsize : chr "926.62543305583381"
+#>   ..$ nrows    : int 3
+#>   ..$ ncols    : int 3
+#>   ..$ band     : chr "LST_Day_1km"
+#>   ..$ units    : chr "Kelvin"
+#>   ..$ scale    : chr "0.02"
+#>   ..$ latitude : num 40
+#>   ..$ longitude: num -110
+#>   ..$ site     : chr "testsite"
+#>   ..$ product  : chr "MOD11A2"
+#>   ..$ start    : chr "2004-01-01"
+#>   ..$ end      : chr "2004-02-01"
+#>   ..$ complete : logi TRUE
+#>  $ data  :'data.frame':  36 obs. of  7 variables:
+#>   ..$ modis_date   : chr [1:36] "A2004001" "A2004009" "A2004017" "A2004025" ...
+#>   ..$ calendar_date: chr [1:36] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...
+#>   ..$ band         : chr [1:36] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" ...
+#>   ..$ tile         : chr [1:36] "h09v05" "h09v05" "h09v05" "h09v05" ...
+#>   ..$ proc_date    : chr [1:36] "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...
+#>   ..$ pixel        : chr [1:36] "1" "1" "1" "1" ...
+#>   ..$ data         : int [1:36] 13135 13120 13350 13354 13123 13100 13324 13331 13098 13069 ...
+#>  - attr(*, "class")= chr "MODISTools"
+#> NULL
 ```
 
 The output format is a nested list with the true data provided as a *tidy* data frame, as shown above. When witten to a csv, when the parameter 'internal' is set to FALSE, the same information is retained. Data can be read back into the same format with the included read\_subset() function (see below).

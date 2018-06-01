@@ -92,7 +92,12 @@ at a particular location." />
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/khufkens/MODISTools">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -106,7 +111,7 @@ at a particular location." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Download MODIS Land Products subsets</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/khufkens/MODISTools/blob/master/R/get_subset.R'><code>R/get_subset.R</code></a></small>
     <div class="hidden name"><code>get_subset.Rd</code></div>
     </div>
 
@@ -188,12 +193,39 @@ header with meta-data.</p>
     <pre class="examples"><div class='input'>
 </div><div class='input'><span class='co'># list all available MODIS Land Products Subsets products</span>
 <span class='co'># download data</span>
-<span class='no'>subset</span> <span class='kw'>=</span> <span class='fu'>try</span>(<span class='fu'>get_subset</span>(<span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"MOD11A2"</span>,
+<span class='no'>subset</span> <span class='kw'>&lt;-</span> <span class='fu'>get_subset</span>(<span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"MOD11A2"</span>,
                         <span class='kw'>lat</span> <span class='kw'>=</span> <span class='fl'>40</span>,
                         <span class='kw'>lon</span> <span class='kw'>=</span> -<span class='fl'>110</span>,
                         <span class='kw'>band</span> <span class='kw'>=</span> <span class='st'>"LST_Day_1km"</span>,
                         <span class='kw'>start</span> <span class='kw'>=</span> <span class='st'>"2004-01-01"</span>,
-                        <span class='kw'>end</span> <span class='kw'>=</span> <span class='st'>"2004-03-31"</span>))</div></pre>
+                        <span class='kw'>end</span> <span class='kw'>=</span> <span class='st'>"2004-03-31"</span>)
+ <span class='fu'>print</span>(<span class='fu'>str</span>(<span class='no'>subset</span>))</div><div class='output co'>#&gt; List of 2
+#&gt;  $ header:List of 15
+#&gt;   ..$ xllcorner: chr "-9370036.39"
+#&gt;   ..$ yllcorner: chr "4447802.08"
+#&gt;   ..$ cellsize : chr "926.62543305583381"
+#&gt;   ..$ nrows    : int 1
+#&gt;   ..$ ncols    : int 1
+#&gt;   ..$ band     : chr "LST_Day_1km"
+#&gt;   ..$ units    : chr "Kelvin"
+#&gt;   ..$ scale    : chr "0.02"
+#&gt;   ..$ latitude : num 40
+#&gt;   ..$ longitude: num -110
+#&gt;   ..$ site     : chr "sitename"
+#&gt;   ..$ product  : chr "MOD11A2"
+#&gt;   ..$ start    : chr "2004-01-01"
+#&gt;   ..$ end      : chr "2004-03-31"
+#&gt;   ..$ complete : logi TRUE
+#&gt;  $ data  :'data.frame':	12 obs. of  7 variables:
+#&gt;   ..$ modis_date   : chr [1:12] "A2004001" "A2004009" "A2004017" "A2004025" ...
+#&gt;   ..$ calendar_date: chr [1:12] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...
+#&gt;   ..$ band         : chr [1:12] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" ...
+#&gt;   ..$ tile         : chr [1:12] "h09v05" "h09v05" "h09v05" "h09v05" ...
+#&gt;   ..$ proc_date    : chr [1:12] "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...
+#&gt;   ..$ pixel        : chr [1:12] "1" "1" "1" "1" ...
+#&gt;   ..$ data         : int [1:12] 13098 13062 13297 13323 13315 13227 13739 13783 14748 15105 ...
+#&gt;  - attr(*, "class")= chr "MODISTools"
+#&gt; NULL</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -8,6 +8,8 @@ Description: Programmatic interface to the 'MODIS Land Products Subsets'
     web services (<https://modis.ornl.gov/data/modis_webservice.html>).
     Allows for easy downloads of 'MODIS' time series directly to your R 
     workspace or your computer.
+URL: https://github.com/khufkens/MODISTools
+BugReports: https://github.com/khufkens/MODISTools/issues
 Depends:
     R (>= 3.4.0)
 Imports:

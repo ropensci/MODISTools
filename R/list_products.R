@@ -10,9 +10,7 @@
 #' \donttest{
 #' # list all available MODIS Land Products Subsets products
 #' products <- list_products()
-#'
-#' #' # For other practical examples consult the included
-#' # vignette.
+#' print(products)
 #'}
 
 list_products <- function(){

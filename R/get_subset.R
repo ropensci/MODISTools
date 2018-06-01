@@ -27,13 +27,13 @@
 #' \donttest{
 #' # list all available MODIS Land Products Subsets products
 #' # download data
-#' subset = try(get_subset(product = "MOD11A2",
+#' subset <- get_subset(product = "MOD11A2",
 #'                         lat = 40,
 #'                         lon = -110,
 #'                         band = "LST_Day_1km",
 #'                         start = "2004-01-01",
-#'                         end = "2004-03-31"))
-#'
+#'                         end = "2004-03-31")
+#'  print(str(subset))
 #'}
 
 get_subset <- function(product = NULL,

@@ -20,8 +20,9 @@
 #'            internal = FALSE)
 #'
 #' # read file
-#' df = read_subset(paste0(tempdir(),
+#' df <- read_subset(paste0(tempdir(),
 #'                "/sitename_MOD11A2_2004-01-01_2004-03-31.csv"))
+#' print(df)
 #' }
 
 read_subset <- function(filename){
