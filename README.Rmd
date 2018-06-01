@@ -84,13 +84,13 @@ head(subset)
 
 The output format is a nested list with the true data provided as a *tidy* data frame, as shown above. When witten to a csv, when the parameter 'internal' is set to FALSE, the same information is retained. Data can be read back into the same format with the included read_subset() function (see below).
 
-Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are index using the 'pixel' column in the data frame containing the time series data. The remote sensing values are listed in the 'data' column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values. 
+Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the 'pixel' column in the data frame containing the time series data. The remote sensing values are listed in the 'data' column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values. 
 
 To list all available products, bands for particular products and temporal coverage see function descriptions below.
 
 ### Batch downloading MODIS time series
 
-
+Below an example is provided on how to batch download data for a data frame of given site names and locations (lat / lon).
 
 ```{r eval = TRUE}
 # create data frame with a site_name, lat and lon column

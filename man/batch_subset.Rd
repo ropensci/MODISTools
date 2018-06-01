@@ -2,7 +2,7 @@
 % Please edit documentation in R/batch_subset.R
 \name{batch_subset}
 \alias{batch_subset}
-\title{Download all available dates}
+\title{Batch download MODIS Land Products subsets}
 \usage{
 batch_subset(df = NULL, product = NULL, band = NULL,
   start = "2000-01-01", end = format(Sys.time(), "\%Y-\%m-\%d"),

@@ -1,4 +1,4 @@
-#' Download all available dates
+#' Download MODIS Land Products subsets
 #'
 #' Lists all available dates for a MODIS Land Products Subset product
 #' at a particular location.

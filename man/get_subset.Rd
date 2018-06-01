@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_subset.R
 \name{get_subset}
 \alias{get_subset}
-\title{Download all available dates}
+\title{Download MODIS Land Products subsets}
 \usage{
 get_subset(product = NULL, band = NULL, lat = NULL, lon = NULL,
   start = "2000-01-01", end = format(Sys.time(), "\%Y-\%m-\%d"),

@@ -1,23 +1,18 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+[![Build Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools) [![codecov](https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/khufkens/MODISTools)
 
-[![Build
-Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools)
-[![codecov](https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/khufkens/MODISTools)
+MODISTools
+==========
 
-# MODISTools
+Programmatic interface to the ['MODIS Land Products Subsets' web services](https://modis.ornl.gov/data/modis_webservice.html). Allows for easy downloads of 'MODIS' time series directly to your R workspace or your computer.
 
-Programmatic interface to the [‘MODIS Land Products Subsets’ web
-services](https://modis.ornl.gov/data/modis_webservice.html). Allows for
-easy downloads of ‘MODIS’ time series directly to your R workspace or
-your computer.
-
-## Installation
+Installation
+------------
 
 ### development release
 
-To install the development releases of the package run the following
-commands:
+To install the development releases of the package run the following commands:
 
 ``` r
 if(!require(devtools)){install.package("devtools")}
@@ -25,8 +20,7 @@ devtools::install_github("khufkens/MODISTools")
 library("MODISTools")
 ```
 
-Vignettes are not rendered by default, if you want to include additional
-documentation please use:
+Vignettes are not rendered by default, if you want to include additional documentation please use:
 
 ``` r
 if(!require(devtools)){install.package("devtools")}
@@ -34,37 +28,79 @@ devtools::install_github("khufkens/MODISTools", build_vignettes = TRUE)
 library("MODISTools")
 ```
 
-## Use
+Use
+---
 
 ### Downloading MODIS time series
 
-To extract a time series of modis data for a given location and its
-direct environment use the get\_subset() function.
+To extract a time series of modis data for a given location and its direct environment use the get\_subset() function.
 
-<details>
-
-<summary>detailed parameter description (click to
-expand)</summary>
-
+<details><summary>detailed parameter description (click to expand)</summary>
 <p>
-
-| Parameter  | Description                                                                                                                     |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| product    | a MODIS product                                                                                                                 |
-| band       | a MODIS product band (if NULL all bands are downloaded)                                                                         |
-| lat        | latitude of the site                                                                                                            |
-| lon        | longitude of the site                                                                                                           |
-| start      | start year of the time series (data start in 1980)                                                                              |
-| end        | end year of the time series (current year - 2 years, use force = TRUE to override)                                              |
-| internal   | logical, TRUE or FALSE, if true data is imported into R workspace otherwise it is downloaded into the current working directory |
-| out\_dir   | path where to store the data when not used internally, defaults to tempdir()                                                    |
-| km\_lr     | force “out of temporal range” downloads (integer)                                                                               |
-| km\_ab     | suppress the verbose output (integer)                                                                                           |
-| site\_name | a site identifier                                                                                                               |
-| site\_id   | a site\_id for predefined locations (not required)                                                                              |
+<table style="width:62%;">
+<colgroup>
+<col width="19%" />
+<col width="43%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>product</td>
+<td>a MODIS product</td>
+</tr>
+<tr class="even">
+<td>band</td>
+<td>a MODIS product band (if NULL all bands are downloaded)</td>
+</tr>
+<tr class="odd">
+<td>lat</td>
+<td>latitude of the site</td>
+</tr>
+<tr class="even">
+<td>lon</td>
+<td>longitude of the site</td>
+</tr>
+<tr class="odd">
+<td>start</td>
+<td>start year of the time series (data start in 1980)</td>
+</tr>
+<tr class="even">
+<td>end</td>
+<td>end year of the time series (current year - 2 years, use force = TRUE to override)</td>
+</tr>
+<tr class="odd">
+<td>internal</td>
+<td>logical, TRUE or FALSE, if true data is imported into R workspace otherwise it is downloaded into the current working directory</td>
+</tr>
+<tr class="even">
+<td>out_dir</td>
+<td>path where to store the data when not used internally, defaults to tempdir()</td>
+</tr>
+<tr class="odd">
+<td>km_lr</td>
+<td>force &quot;out of temporal range&quot; downloads (integer)</td>
+</tr>
+<tr class="even">
+<td>km_ab</td>
+<td>suppress the verbose output (integer)</td>
+</tr>
+<tr class="odd">
+<td>site_name</td>
+<td>a site identifier</td>
+</tr>
+<tr class="even">
+<td>site_id</td>
+<td>a site_id for predefined locations (not required)</td>
+</tr>
+</tbody>
+</table>
 
 </p>
-
 </details>
 
 ``` r
@@ -170,24 +206,15 @@ head(subset)
 #> 36   A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     9 13271
 ```
 
-The output format is a nested list with the true data provided as a
-*tidy* data frame, as shown above. When witten to a csv, when the
-parameter ‘internal’ is set to FALSE, the same information is retained.
-Data can be read back into the same format with the included
-read\_subset() function (see below).
+The output format is a nested list with the true data provided as a *tidy* data frame, as shown above. When witten to a csv, when the parameter 'internal' is set to FALSE, the same information is retained. Data can be read back into the same format with the included read\_subset() function (see below).
 
-Note that when a a region is defined using km\_lr and km\_ab multiple
-pixels might be returned. These are index using the ‘pixel’ column in
-the data frame containing the time series data. The remote sensing
-values are listed in the ‘data’ column. When no band is specified all
-bands of a given product are returned, be mindful of the fact that
-different bands might require different multipliers to represent their
-true values.
+Note that when a a region is defined using km\_lr and km\_ab multiple pixels might be returned. These are indexed using the 'pixel' column in the data frame containing the time series data. The remote sensing values are listed in the 'data' column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values.
 
-To list all available products, bands for particular products and
-temporal coverage see function descriptions below.
+To list all available products, bands for particular products and temporal coverage see function descriptions below.
 
 ### Batch downloading MODIS time series
+
+Below an example is provided on how to batch download data for a data frame of given site names and locations (lat / lon).
 
 ``` r
 # create data frame with a site_name, lat and lon column
@@ -294,8 +321,7 @@ head(products)
 
 ### Listing bands
 
-To list all available bands for a given product use the list\_bands()
-function.
+To list all available bands for a given product use the list\_bands() function.
 
 ``` r
 bands <- list_bands(product = "MOD11A2")
@@ -306,8 +332,7 @@ head(bands)
 
 ### listing dates
 
-To list all available dates (temporal coverage) for a given product and
-location use the list\_dates() function.
+To list all available dates (temporal coverage) for a given product and location use the list\_dates() function.
 
 ``` r
 dates <- list_dates(product = "MOD11A2", lat = 42, lon = -110)
@@ -323,13 +348,11 @@ head(dates)
 
 ### Reading and writing data from / to file
 
-Data can be written to file using the write\_subset() function which
-uses the following file format:
+Data can be written to file using the write\_subset() function which uses the following file format:
 
     [site_name]_[product]_[start]_[end].csv
 
-The data can be read back into the original nested structed using
-read\_subset().
+The data can be read back into the original nested structed using read\_subset().
 
 ``` r
 # write the above file to disk
