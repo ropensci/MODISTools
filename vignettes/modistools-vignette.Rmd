@@ -4,7 +4,7 @@ author: "Koen Hufkens"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{daymetr functionality}
+  %\VignetteIndexEntry{MODISTools functionality}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -20,11 +20,106 @@ library(MODISTools)
 
 ```
 
-# list products
+The MODISTools package has as goal to facilitate the interface between R and the MODIS Land Product Subset API at the Oak Ridge National Laboratory DAAC. This programmatic interface to the ['MODIS Land Products Subsets' web services](https://modis.ornl.gov/data/modis_webservice.html). Allows for easy downloads of 'MODIS' time series directly to your R workspace or your computer.
 
-# list coverage (dates)
+Below an example is provided on how to download a MODIS time series as well as list ancillary data.
 
-# download a location
+### Listing products / bands / dates
 
-# batch download multiple locations
+In order to assess which products are available, which product bands are provided and which temporal range is covered one has to list these ancillary data. All these options can be queried using the list_*() functions.
+
+To list all available products use the list_products() function.
+
+```{r eval = TRUE}
+products <- list_products()
+head(products)
+```
+
+To list all available bands for a given product use the list_bands() function.
+
+```{r eval = TRUE}
+bands <- list_bands(product = "MOD11A2")
+head(bands)
+```
+
+To list all available dates (temporal coverage) for a given product and location use the list_dates() function.
+
+```{r eval = TRUE}
+dates <- list_dates(product = "MOD11A2", lat = 42, lon = -110)
+head(dates)
+```
+
+### Downloading MODIS time series
+
+Once you decide on which data to download using the above functions you can use these parameters to download a time series using the get_subset() function.
+
+```{r eval = TRUE}
+# load the library
+library(MODISTools)
+
+# download data
+subset <- get_subset(product = "MOD11A2",
+                    lat = 40,
+                    lon = -110,
+                    band = "LST_Day_1km",
+                    start = "2004-01-01",
+                    end = "2004-02-01",
+                    km_lr = 1,
+                    km_ab = 1,
+                    site_name = "testsite",
+                    internal = TRUE)
+head(subset)
+```
+
+The output format is a nested list with the true data provided as a *tidy* data frame, as shown above. When witten to a csv, when the parameter 'internal' is set to FALSE, the same information is retained. Data can be read back into the same format with the included read_subset() function (see below).
+
+Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the 'pixel' column in the data frame containing the time series data. The remote sensing values are listed in the 'data' column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values. 
+
+When a large selection of locations is needed you might benefit from using the batch download function batch_subset(), which provides a wrapper around the get_subset() function in order to speed up large download batches. This function has a similar syntax to get_subset() but requires a data frame defining site names (site_name) and locations (lat / lon) (or a comma delimited file with the same structure) to specify a list of download locations.
+
+```{r eval = TRUE}
+# create data frame with a site_name, lat and lon column
+# holding the respective names of sites and their location
+df <- data.frame("site_name" = paste("test",1:2))
+df$lat <- 40
+df$lon <- -110
+
+# an example batch download data frame
+print(df)
+
+# test batch download
+subsets <- batch_subset(df = df,
+                     product = "MOD11A2",
+                     band = "LST_Day_1km",
+                     internal = TRUE,
+                     start = "2004-01-01",
+                     end = "2004-03-31",
+                     out_dir = "~")
+
+print(str(subsets))
+```
+
+### Reading and writing data from / to file
+
+In both download functions data can be written to a csv file in a particular directory. The read_subset() function allows you to read in the data easily and into the same data structure as used when downloading directy into your R workspace.
+
+```
+[site_name]_[product]_[start]_[end].csv
+```
+
+The data can be read back into the original nested structed using read_subset().
+
+```{r eval = TRUE}
+# write the above file to disk
+write_subset(df = subset,
+             out_dir = tempdir())
+
+# read the data back in
+subset_disk <- read_subset(paste0(tempdir(),
+                  "/testsite_MOD11A2_2004-01-01_2004-02-01.csv"))
+
+# compare original to read from disk
+identical(subset, subset_disk)
+```
+
 
