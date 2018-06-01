@@ -7,10 +7,6 @@ Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/kh
 
 # MODISTools
 
-MODISTools is an R package for retrieving and using MODIS data subsets
-using ORNL DAAC web service (SOAP) for subsetting from Oak Ridge
-National Laboratory (ORNL).
-
 Programmatic interface to the [‘MODIS Land Products Subsets’ web
 services](https://modis.ornl.gov/data/modis_webservice.html). Allows for
 easy downloads of [‘MODIS’](http://modis.gsfc.nasa.gov/) time series
