@@ -12,10 +12,9 @@ Description: Programmatic interface to the 'MODIS Land Products Subsets'
 URL: https://github.com/khufkens/MODISTools
 BugReports: https://github.com/khufkens/MODISTools/issues
 Depends:
-    R (>= 3.4.0)
+    R (>= 3.4)
 Imports:
     httr,
-    tools,
     utils,
     tidyr,
     jsonlite
