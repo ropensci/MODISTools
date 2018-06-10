@@ -119,11 +119,12 @@ mt_batch_subset <- function(df = NULL,
   # stop cluster
   parallel::stopCluster(cl)
 
-  # add site names to list
-  names(output) <- df$site_name
-
   # return data
   if(internal){
+
+    # add site names to list
+    names(output) <- df$site_name
+
     return(output)
   } else {
     invisible(NULL)
