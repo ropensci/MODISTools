@@ -69,7 +69,7 @@ site_id | a site_id for predefined locations (not required)
 library(MODISTools)
 
 # download data
-subset <- get_subset(product = "MOD11A2",
+subset <- mt_subset(product = "MOD11A2",
                     lat = 40,
                     lon = -110,
                     band = "LST_Day_1km",
@@ -100,7 +100,7 @@ df$lat <- 40
 df$lon <- -110
   
 # test batch download
-subsets <- batch_subset(df = df,
+subsets <- mt_batch_subset(df = df,
                      product = "MOD11A2",
                      band = "LST_Day_1km",
                      internal = TRUE,
@@ -117,7 +117,7 @@ print(str(subsets))
 To list all available products use the list_products() function.
 
 ```{r eval = TRUE}
-products <- list_products()
+products <- mt_products()
 head(products)
 ```
 
@@ -127,7 +127,7 @@ head(products)
 To list all available bands for a given product use the list_bands() function.
 
 ```{r eval = TRUE}
-bands <- list_bands(product = "MOD11A2")
+bands <- mt_bands(product = "MOD11A2")
 head(bands)
 ```
 
@@ -136,7 +136,7 @@ head(bands)
 To list all available dates (temporal coverage) for a given product and location use the list_dates() function.
 
 ```{r eval = TRUE}
-dates <- list_dates(product = "MOD11A2", lat = 42, lon = -110)
+dates <- mt_dates(product = "MOD11A2", lat = 42, lon = -110)
 head(dates)
 ```
 
@@ -152,7 +152,7 @@ The data can be read back into the original nested structed using read_subset().
 
 ```{r eval = TRUE}
 # write the above file to disk
-write_subset(df = subset,
+mt_write(df = subset,
              out_dir = tempdir())
 
 # read the data back in
