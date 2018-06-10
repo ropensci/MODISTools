@@ -8,8 +8,8 @@
 <title>Interface to the 'MODIS Land Products Subsets' Web Services • MODISTools</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><meta property="og:title" content="Interface to the 'MODIS Land Products Subsets' Web Services">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script><meta property="og:title" content="Interface to the 'MODIS Land Products Subsets' Web Services">
 <meta property="og:description" content="Programmatic interface to the 'MODIS Land Products Subsets'
     web services (&lt;https://modis.ornl.gov/data/modis_webservice.html&gt;).
     Allows for easy downloads of 'MODIS' time series directly to your R 
@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">MODISTools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.0</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
 <div id="modistools" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#modistools" class="anchor"></a>MODISTools</h1></div>
-<p>Programmatic interface to the <a href="https://modis.ornl.gov/data/modis_webservice.html">‘MODIS Land Products Subsets’ web services</a>. Allows for easy downloads of ‘MODIS’ time series directly to your R workspace or your computer.</p>
+<p>Programmatic interface to the <a href="https://modis.ornl.gov/data/modis_webservice.html">‘MODIS Land Products Subsets’ web services</a>. Allows for easy downloads of <a href="http://modis.gsfc.nasa.gov/">‘MODIS’</a> time series directly to your R workspace or your computer. When using the package please cite the manuscript as referenced below.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -98,13 +98,13 @@
 <h3 class="hasAnchor">
 <a href="#development-release" class="anchor"></a>development release</h3>
 <p>To install the development releases of the package run the following commands:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span>(<span class="op">!</span><span class="kw">require</span>(devtools)){<span class="kw">install.package</span>(<span class="st">"devtools"</span>)}
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"khufkens/MODISTools"</span>)
-<span class="kw">library</span>(<span class="st">"MODISTools"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="cf">if</span>(<span class="op">!</span><span class="kw">require</span>(devtools)){<span class="kw">install.package</span>(<span class="st">"devtools"</span>)}</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"khufkens/MODISTools"</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(<span class="st">"MODISTools"</span>)</a></code></pre></div>
 <p>Vignettes are not rendered by default, if you want to include additional documentation please use:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span>(<span class="op">!</span><span class="kw">require</span>(devtools)){<span class="kw">install.package</span>(<span class="st">"devtools"</span>)}
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"khufkens/MODISTools"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)
-<span class="kw">library</span>(<span class="st">"MODISTools"</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="cf">if</span>(<span class="op">!</span><span class="kw">require</span>(devtools)){<span class="kw">install.package</span>(<span class="st">"devtools"</span>)}</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"khufkens/MODISTools"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">library</span>(<span class="st">"MODISTools"</span>)</a></code></pre></div>
 </div>
 </div>
 <div id="use" class="section level2">
@@ -113,13 +113,13 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <div id="downloading-modis-time-series" class="section level3">
 <h3 class="hasAnchor">
 <a href="#downloading-modis-time-series" class="anchor"></a>Downloading MODIS time series</h3>
-<p>To extract a time series of modis data for a given location and its direct environment use the get_subset() function.</p>
+<p>To extract a time series of modis data for a given location and its direct environment use the mt_subset() function.</p>
 <details><summary>detailed parameter description (click to expand)</summary><p>
 </p>
-<table style="width:62%;" class="table">
+<table class="table">
 <colgroup>
-<col width="19%">
-<col width="43%">
+<col width="30%">
+<col width="69%">
 </colgroup>
 <thead><tr class="header">
 <th>Parameter</th>
@@ -175,50 +175,49 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <td>a site_id for predefined locations (not required)</td>
 </tr>
 </tbody>
-</table>
-<p></p></details><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the library</span>
-<span class="kw">library</span>(MODISTools)
-
-<span class="co"># download data</span>
-subset &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_subset.html">get_subset</a></span>(<span class="dt">product =</span> <span class="st">"MOD11A2"</span>,
-                    <span class="dt">lat =</span> <span class="dv">40</span>,
-                    <span class="dt">lon =</span> <span class="op">-</span><span class="dv">110</span>,
-                    <span class="dt">band =</span> <span class="st">"LST_Day_1km"</span>,
-                    <span class="dt">start =</span> <span class="st">"2004-01-01"</span>,
-                    <span class="dt">end =</span> <span class="st">"2004-02-01"</span>,
-                    <span class="dt">km_lr =</span> <span class="dv">1</span>,
-                    <span class="dt">km_ab =</span> <span class="dv">1</span>,
-                    <span class="dt">site_name =</span> <span class="st">"testsite"</span>,
-                    <span class="dt">internal =</span> <span class="ot">TRUE</span>)
-<span class="kw">print</span>(<span class="kw">str</span>(subset))
-<span class="co">#&gt; List of 2</span>
-<span class="co">#&gt;  $ header:List of 15</span>
-<span class="co">#&gt;   ..$ xllcorner: chr "-9370962.97"</span>
-<span class="co">#&gt;   ..$ yllcorner: chr "4446875.49"</span>
-<span class="co">#&gt;   ..$ cellsize : chr "926.62543305583381"</span>
-<span class="co">#&gt;   ..$ nrows    : int 3</span>
-<span class="co">#&gt;   ..$ ncols    : int 3</span>
-<span class="co">#&gt;   ..$ band     : chr "LST_Day_1km"</span>
-<span class="co">#&gt;   ..$ units    : chr "Kelvin"</span>
-<span class="co">#&gt;   ..$ scale    : chr "0.02"</span>
-<span class="co">#&gt;   ..$ latitude : num 40</span>
-<span class="co">#&gt;   ..$ longitude: num -110</span>
-<span class="co">#&gt;   ..$ site     : chr "testsite"</span>
-<span class="co">#&gt;   ..$ product  : chr "MOD11A2"</span>
-<span class="co">#&gt;   ..$ start    : chr "2004-01-01"</span>
-<span class="co">#&gt;   ..$ end      : chr "2004-02-01"</span>
-<span class="co">#&gt;   ..$ complete : logi TRUE</span>
-<span class="co">#&gt;  $ data  :'data.frame':  36 obs. of  7 variables:</span>
-<span class="co">#&gt;   ..$ modis_date   : chr [1:36] "A2004001" "A2004009" "A2004017" "A2004025" ...</span>
-<span class="co">#&gt;   ..$ calendar_date: chr [1:36] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...</span>
-<span class="co">#&gt;   ..$ band         : chr [1:36] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" ...</span>
-<span class="co">#&gt;   ..$ tile         : chr [1:36] "h09v05" "h09v05" "h09v05" "h09v05" ...</span>
-<span class="co">#&gt;   ..$ proc_date    : chr [1:36] "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...</span>
-<span class="co">#&gt;   ..$ pixel        : chr [1:36] "1" "1" "1" "1" ...</span>
-<span class="co">#&gt;   ..$ data         : int [1:36] 13135 13120 13350 13354 13123 13100 13324 13331 13098 13069 ...</span>
-<span class="co">#&gt;  - attr(*, "class")= chr "MODISTools"</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
-<p>The output format is a nested list with the true data provided as a <em>tidy</em> data frame, as shown above. When witten to a csv, when the parameter ‘internal’ is set to FALSE, the same information is retained. Data can be read back into the same format with the included read_subset() function (see below).</p>
+</table></details><div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># load the library</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">library</span>(MODISTools)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># download data</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">subset &lt;-<span class="st"> </span><span class="kw"><a href="reference/mt_subset.html">mt_subset</a></span>(<span class="dt">product =</span> <span class="st">"MOD11A2"</span>,</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">                    <span class="dt">lat =</span> <span class="dv">40</span>,</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">                    <span class="dt">lon =</span> <span class="dv">-110</span>,</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">                    <span class="dt">band =</span> <span class="st">"LST_Day_1km"</span>,</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">                    <span class="dt">start =</span> <span class="st">"2004-01-01"</span>,</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">                    <span class="dt">end =</span> <span class="st">"2004-02-01"</span>,</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">                    <span class="dt">km_lr =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">                    <span class="dt">km_ab =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">                    <span class="dt">site_name =</span> <span class="st">"testsite"</span>,</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">                    <span class="dt">internal =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="kw">print</span>(<span class="kw">str</span>(subset))</a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; List of 2</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt;  $ header:List of 15</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt;   ..$ xllcorner: chr "-9370962.97"</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;   ..$ yllcorner: chr "4446875.49"</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;   ..$ cellsize : chr "926.62543305583381"</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;   ..$ nrows    : int 3</span></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;   ..$ ncols    : int 3</span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;   ..$ band     : chr "LST_Day_1km"</span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;   ..$ units    : chr "Kelvin"</span></a>
+<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt;   ..$ scale    : chr "0.02"</span></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt;   ..$ latitude : num 40</span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt;   ..$ longitude: num -110</span></a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;   ..$ site     : chr "testsite"</span></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt;   ..$ product  : chr "MOD11A2"</span></a>
+<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt;   ..$ start    : chr "2004-01-01"</span></a>
+<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt;   ..$ end      : chr "2004-02-01"</span></a>
+<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt;   ..$ complete : logi TRUE</span></a>
+<a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt;  $ data  :'data.frame':  36 obs. of  7 variables:</span></a>
+<a class="sourceLine" id="cb3-34" data-line-number="34"><span class="co">#&gt;   ..$ modis_date   : chr [1:36] "A2004001" "A2004009" "A2004017" "A2004025" ...</span></a>
+<a class="sourceLine" id="cb3-35" data-line-number="35"><span class="co">#&gt;   ..$ calendar_date: chr [1:36] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...</span></a>
+<a class="sourceLine" id="cb3-36" data-line-number="36"><span class="co">#&gt;   ..$ band         : chr [1:36] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" ...</span></a>
+<a class="sourceLine" id="cb3-37" data-line-number="37"><span class="co">#&gt;   ..$ tile         : chr [1:36] "h09v05" "h09v05" "h09v05" "h09v05" ...</span></a>
+<a class="sourceLine" id="cb3-38" data-line-number="38"><span class="co">#&gt;   ..$ proc_date    : chr [1:36] "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...</span></a>
+<a class="sourceLine" id="cb3-39" data-line-number="39"><span class="co">#&gt;   ..$ pixel        : chr [1:36] "1" "1" "1" "1" ...</span></a>
+<a class="sourceLine" id="cb3-40" data-line-number="40"><span class="co">#&gt;   ..$ data         : int [1:36] 13135 13120 13350 13354 13123 13100 13324 13331 13098 13069 ...</span></a>
+<a class="sourceLine" id="cb3-41" data-line-number="41"><span class="co">#&gt;  - attr(*, "class")= chr "MODISTools"</span></a>
+<a class="sourceLine" id="cb3-42" data-line-number="42"><span class="co">#&gt; NULL</span></a></code></pre></div>
+<p>The output format is a nested list with the true data provided as a <em>tidy</em> data frame, as shown above. When witten to a csv, when the parameter ‘internal’ is set to FALSE, the same information is retained. Data can be read back into the same format with the included mt_read() function (see below).</p>
 <p>Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the ‘pixel’ column in the data frame containing the time series data. The remote sensing values are listed in the ‘data’ column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values.</p>
 <p>To list all available products, bands for particular products and temporal coverage see function descriptions below.</p>
 </div>
@@ -226,146 +225,155 @@ subset &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_sub
 <h3 class="hasAnchor">
 <a href="#batch-downloading-modis-time-series" class="anchor"></a>Batch downloading MODIS time series</h3>
 <p>Below an example is provided on how to batch download data for a data frame of given site names and locations (lat / lon).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create data frame with a site_name, lat and lon column</span>
-<span class="co"># holding the respective names of sites and their location</span>
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">"site_name"</span> =<span class="st"> </span><span class="kw">paste</span>(<span class="st">"test"</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>))
-df<span class="op">$</span>lat &lt;-<span class="st"> </span><span class="dv">40</span>
-df<span class="op">$</span>lon &lt;-<span class="st"> </span><span class="op">-</span><span class="dv">110</span>
-  
-<span class="co"># test batch download</span>
-subsets &lt;-<span class="st"> </span><span class="kw"><a href="reference/batch_subset.html">batch_subset</a></span>(<span class="dt">df =</span> df,
-                     <span class="dt">product =</span> <span class="st">"MOD11A2"</span>,
-                     <span class="dt">band =</span> <span class="st">"LST_Day_1km"</span>,
-                     <span class="dt">internal =</span> <span class="ot">TRUE</span>,
-                     <span class="dt">start =</span> <span class="st">"2004-01-01"</span>,
-                     <span class="dt">end =</span> <span class="st">"2004-03-31"</span>,
-                     <span class="dt">out_dir =</span> <span class="st">"~"</span>)
-
-<span class="kw">print</span>(<span class="kw">str</span>(subsets))
-<span class="co">#&gt; List of 2</span>
-<span class="co">#&gt;  $ test 1:List of 2</span>
-<span class="co">#&gt;   ..$ header:List of 15</span>
-<span class="co">#&gt;   .. ..$ xllcorner: chr "-9370036.39"</span>
-<span class="co">#&gt;   .. ..$ yllcorner: chr "4447802.08"</span>
-<span class="co">#&gt;   .. ..$ cellsize : chr "926.62543305583381"</span>
-<span class="co">#&gt;   .. ..$ nrows    : int 1</span>
-<span class="co">#&gt;   .. ..$ ncols    : int 1</span>
-<span class="co">#&gt;   .. ..$ band     : chr "LST_Day_1km"</span>
-<span class="co">#&gt;   .. ..$ units    : chr "Kelvin"</span>
-<span class="co">#&gt;   .. ..$ scale    : chr "0.02"</span>
-<span class="co">#&gt;   .. ..$ latitude : num 40</span>
-<span class="co">#&gt;   .. ..$ longitude: num -110</span>
-<span class="co">#&gt;   .. ..$ site     : chr "test 1"</span>
-<span class="co">#&gt;   .. ..$ product  : chr "MOD11A2"</span>
-<span class="co">#&gt;   .. ..$ start    : chr "2004-01-01"</span>
-<span class="co">#&gt;   .. ..$ end      : chr "2004-03-31"</span>
-<span class="co">#&gt;   .. ..$ complete : logi TRUE</span>
-<span class="co">#&gt;   ..$ data  :'data.frame':   12 obs. of  7 variables:</span>
-<span class="co">#&gt;   .. ..$ modis_date   : chr [1:12] "A2004001" "A2004009" "A2004017" "A2004025" ...</span>
-<span class="co">#&gt;   .. ..$ calendar_date: chr [1:12] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...</span>
-<span class="co">#&gt;   .. ..$ band         : chr [1:12] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" ...</span>
-<span class="co">#&gt;   .. ..$ tile         : chr [1:12] "h09v05" "h09v05" "h09v05" "h09v05" ...</span>
-<span class="co">#&gt;   .. ..$ proc_date    : chr [1:12] "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...</span>
-<span class="co">#&gt;   .. ..$ pixel        : chr [1:12] "1" "1" "1" "1" ...</span>
-<span class="co">#&gt;   .. ..$ data         : int [1:12] 13098 13062 13297 13323 13315 13227 13739 13783 14748 15105 ...</span>
-<span class="co">#&gt;   ..- attr(*, "class")= chr "MODISTools"</span>
-<span class="co">#&gt;  $ test 2:List of 2</span>
-<span class="co">#&gt;   ..$ header:List of 15</span>
-<span class="co">#&gt;   .. ..$ xllcorner: chr "-9370036.39"</span>
-<span class="co">#&gt;   .. ..$ yllcorner: chr "4447802.08"</span>
-<span class="co">#&gt;   .. ..$ cellsize : chr "926.62543305583381"</span>
-<span class="co">#&gt;   .. ..$ nrows    : int 1</span>
-<span class="co">#&gt;   .. ..$ ncols    : int 1</span>
-<span class="co">#&gt;   .. ..$ band     : chr "LST_Day_1km"</span>
-<span class="co">#&gt;   .. ..$ units    : chr "Kelvin"</span>
-<span class="co">#&gt;   .. ..$ scale    : chr "0.02"</span>
-<span class="co">#&gt;   .. ..$ latitude : num 40</span>
-<span class="co">#&gt;   .. ..$ longitude: num -110</span>
-<span class="co">#&gt;   .. ..$ site     : chr "test 2"</span>
-<span class="co">#&gt;   .. ..$ product  : chr "MOD11A2"</span>
-<span class="co">#&gt;   .. ..$ start    : chr "2004-01-01"</span>
-<span class="co">#&gt;   .. ..$ end      : chr "2004-03-31"</span>
-<span class="co">#&gt;   .. ..$ complete : logi TRUE</span>
-<span class="co">#&gt;   ..$ data  :'data.frame':   12 obs. of  7 variables:</span>
-<span class="co">#&gt;   .. ..$ modis_date   : chr [1:12] "A2004001" "A2004009" "A2004017" "A2004025" ...</span>
-<span class="co">#&gt;   .. ..$ calendar_date: chr [1:12] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...</span>
-<span class="co">#&gt;   .. ..$ band         : chr [1:12] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" ...</span>
-<span class="co">#&gt;   .. ..$ tile         : chr [1:12] "h09v05" "h09v05" "h09v05" "h09v05" ...</span>
-<span class="co">#&gt;   .. ..$ proc_date    : chr [1:12] "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...</span>
-<span class="co">#&gt;   .. ..$ pixel        : chr [1:12] "1" "1" "1" "1" ...</span>
-<span class="co">#&gt;   .. ..$ data         : int [1:12] 13098 13062 13297 13323 13315 13227 13739 13783 14748 15105 ...</span>
-<span class="co">#&gt;   ..- attr(*, "class")= chr "MODISTools"</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># create data frame with a site_name, lat and lon column</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co"># holding the respective names of sites and their location</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">"site_name"</span> =<span class="st"> </span><span class="kw">paste</span>(<span class="st">"test"</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">df<span class="op">$</span>lat &lt;-<span class="st"> </span><span class="dv">40</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">df<span class="op">$</span>lon &lt;-<span class="st"> </span><span class="dv">-110</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co"># test batch download</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">subsets &lt;-<span class="st"> </span><span class="kw"><a href="reference/mt_batch_subset.html">mt_batch_subset</a></span>(<span class="dt">df =</span> df,</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">                     <span class="dt">product =</span> <span class="st">"MOD11A2"</span>,</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">                     <span class="dt">band =</span> <span class="st">"LST_Day_1km"</span>,</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">                     <span class="dt">internal =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">                     <span class="dt">start =</span> <span class="st">"2004-01-01"</span>,</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">                     <span class="dt">end =</span> <span class="st">"2004-02-01"</span>)</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="kw">print</span>(<span class="kw">str</span>(subsets))</a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; List of 2</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt;  $ test 1:List of 2</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt;   ..$ header:List of 15</span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt;   .. ..$ xllcorner: chr "-9370036.39"</span></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt;   .. ..$ yllcorner: chr "4447802.08"</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt;   .. ..$ cellsize : chr "926.62543305583381"</span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt;   .. ..$ nrows    : int 1</span></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt;   .. ..$ ncols    : int 1</span></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt;   .. ..$ band     : chr "LST_Day_1km"</span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">#&gt;   .. ..$ units    : chr "Kelvin"</span></a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt;   .. ..$ scale    : chr "0.02"</span></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="co">#&gt;   .. ..$ latitude : num 40</span></a>
+<a class="sourceLine" id="cb4-28" data-line-number="28"><span class="co">#&gt;   .. ..$ longitude: num -110</span></a>
+<a class="sourceLine" id="cb4-29" data-line-number="29"><span class="co">#&gt;   .. ..$ site     : chr "test 1"</span></a>
+<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="co">#&gt;   .. ..$ product  : chr "MOD11A2"</span></a>
+<a class="sourceLine" id="cb4-31" data-line-number="31"><span class="co">#&gt;   .. ..$ start    : chr "2004-01-01"</span></a>
+<a class="sourceLine" id="cb4-32" data-line-number="32"><span class="co">#&gt;   .. ..$ end      : chr "2004-02-01"</span></a>
+<a class="sourceLine" id="cb4-33" data-line-number="33"><span class="co">#&gt;   .. ..$ complete : logi TRUE</span></a>
+<a class="sourceLine" id="cb4-34" data-line-number="34"><span class="co">#&gt;   ..$ data  :'data.frame':   4 obs. of  7 variables:</span></a>
+<a class="sourceLine" id="cb4-35" data-line-number="35"><span class="co">#&gt;   .. ..$ modis_date   : chr [1:4] "A2004001" "A2004009" "A2004017" "A2004025"</span></a>
+<a class="sourceLine" id="cb4-36" data-line-number="36"><span class="co">#&gt;   .. ..$ calendar_date: chr [1:4] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25"</span></a>
+<a class="sourceLine" id="cb4-37" data-line-number="37"><span class="co">#&gt;   .. ..$ band         : chr [1:4] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km"</span></a>
+<a class="sourceLine" id="cb4-38" data-line-number="38"><span class="co">#&gt;   .. ..$ tile         : chr [1:4] "h09v05" "h09v05" "h09v05" "h09v05"</span></a>
+<a class="sourceLine" id="cb4-39" data-line-number="39"><span class="co">#&gt;   .. ..$ proc_date    : chr [1:4] "2015212185706" "2015212201022" "2015212213103" "2015213005429"</span></a>
+<a class="sourceLine" id="cb4-40" data-line-number="40"><span class="co">#&gt;   .. ..$ pixel        : chr [1:4] "1" "1" "1" "1"</span></a>
+<a class="sourceLine" id="cb4-41" data-line-number="41"><span class="co">#&gt;   .. ..$ data         : int [1:4] 13098 13062 13297 13323</span></a>
+<a class="sourceLine" id="cb4-42" data-line-number="42"><span class="co">#&gt;   ..- attr(*, "class")= chr "MODISTools"</span></a>
+<a class="sourceLine" id="cb4-43" data-line-number="43"><span class="co">#&gt;  $ test 2:List of 2</span></a>
+<a class="sourceLine" id="cb4-44" data-line-number="44"><span class="co">#&gt;   ..$ header:List of 15</span></a>
+<a class="sourceLine" id="cb4-45" data-line-number="45"><span class="co">#&gt;   .. ..$ xllcorner: chr "-9370036.39"</span></a>
+<a class="sourceLine" id="cb4-46" data-line-number="46"><span class="co">#&gt;   .. ..$ yllcorner: chr "4447802.08"</span></a>
+<a class="sourceLine" id="cb4-47" data-line-number="47"><span class="co">#&gt;   .. ..$ cellsize : chr "926.62543305583381"</span></a>
+<a class="sourceLine" id="cb4-48" data-line-number="48"><span class="co">#&gt;   .. ..$ nrows    : int 1</span></a>
+<a class="sourceLine" id="cb4-49" data-line-number="49"><span class="co">#&gt;   .. ..$ ncols    : int 1</span></a>
+<a class="sourceLine" id="cb4-50" data-line-number="50"><span class="co">#&gt;   .. ..$ band     : chr "LST_Day_1km"</span></a>
+<a class="sourceLine" id="cb4-51" data-line-number="51"><span class="co">#&gt;   .. ..$ units    : chr "Kelvin"</span></a>
+<a class="sourceLine" id="cb4-52" data-line-number="52"><span class="co">#&gt;   .. ..$ scale    : chr "0.02"</span></a>
+<a class="sourceLine" id="cb4-53" data-line-number="53"><span class="co">#&gt;   .. ..$ latitude : num 40</span></a>
+<a class="sourceLine" id="cb4-54" data-line-number="54"><span class="co">#&gt;   .. ..$ longitude: num -110</span></a>
+<a class="sourceLine" id="cb4-55" data-line-number="55"><span class="co">#&gt;   .. ..$ site     : chr "test 2"</span></a>
+<a class="sourceLine" id="cb4-56" data-line-number="56"><span class="co">#&gt;   .. ..$ product  : chr "MOD11A2"</span></a>
+<a class="sourceLine" id="cb4-57" data-line-number="57"><span class="co">#&gt;   .. ..$ start    : chr "2004-01-01"</span></a>
+<a class="sourceLine" id="cb4-58" data-line-number="58"><span class="co">#&gt;   .. ..$ end      : chr "2004-02-01"</span></a>
+<a class="sourceLine" id="cb4-59" data-line-number="59"><span class="co">#&gt;   .. ..$ complete : logi TRUE</span></a>
+<a class="sourceLine" id="cb4-60" data-line-number="60"><span class="co">#&gt;   ..$ data  :'data.frame':   4 obs. of  7 variables:</span></a>
+<a class="sourceLine" id="cb4-61" data-line-number="61"><span class="co">#&gt;   .. ..$ modis_date   : chr [1:4] "A2004001" "A2004009" "A2004017" "A2004025"</span></a>
+<a class="sourceLine" id="cb4-62" data-line-number="62"><span class="co">#&gt;   .. ..$ calendar_date: chr [1:4] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25"</span></a>
+<a class="sourceLine" id="cb4-63" data-line-number="63"><span class="co">#&gt;   .. ..$ band         : chr [1:4] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km"</span></a>
+<a class="sourceLine" id="cb4-64" data-line-number="64"><span class="co">#&gt;   .. ..$ tile         : chr [1:4] "h09v05" "h09v05" "h09v05" "h09v05"</span></a>
+<a class="sourceLine" id="cb4-65" data-line-number="65"><span class="co">#&gt;   .. ..$ proc_date    : chr [1:4] "2015212185706" "2015212201022" "2015212213103" "2015213005429"</span></a>
+<a class="sourceLine" id="cb4-66" data-line-number="66"><span class="co">#&gt;   .. ..$ pixel        : chr [1:4] "1" "1" "1" "1"</span></a>
+<a class="sourceLine" id="cb4-67" data-line-number="67"><span class="co">#&gt;   .. ..$ data         : int [1:4] 13098 13062 13297 13323</span></a>
+<a class="sourceLine" id="cb4-68" data-line-number="68"><span class="co">#&gt;   ..- attr(*, "class")= chr "MODISTools"</span></a>
+<a class="sourceLine" id="cb4-69" data-line-number="69"><span class="co">#&gt; NULL</span></a></code></pre></div>
 </div>
 <div id="listing-products" class="section level3">
 <h3 class="hasAnchor">
 <a href="#listing-products" class="anchor"></a>Listing products</h3>
-<p>To list all available products use the list_products() function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">products &lt;-<span class="st"> </span><span class="kw"><a href="reference/list_products.html">list_products</a></span>()
-<span class="kw">head</span>(products)
-<span class="co">#&gt;    product</span>
-<span class="co">#&gt; 1 MCD15A2H</span>
-<span class="co">#&gt; 2 MCD15A3H</span>
-<span class="co">#&gt; 3  MOD09A1</span>
-<span class="co">#&gt; 4  MOD11A2</span>
-<span class="co">#&gt; 5  MOD13Q1</span>
-<span class="co">#&gt; 6 MOD15A2H</span>
-<span class="co">#&gt;                                                                               description</span>
-<span class="co">#&gt; 1        MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR)  8-Day L4 Global 500 m SIN Grid</span>
-<span class="co">#&gt; 2         MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR) 4-Day L4 Global 500 m SIN Grid</span>
-<span class="co">#&gt; 3                    MODIS/Terra Surface Reflectance (SREF) 8-Day L3 Global 500m SIN Grid</span>
-<span class="co">#&gt; 4 MODIS/Terra Land Surface Temperature and Emissivity (LST) 8-Day L3 Global 1 km SIN Grid</span>
-<span class="co">#&gt; 5                MODIS/Terra Vegetation Indices (NDVI/EVI) 16-Day L3 Global 250m SIN Grid</span>
-<span class="co">#&gt; 6              MODIS/Terra Leaf Area Index/FPAR (LAI/FPAR) 8-Day L4 Global 500 m SIN Grid</span>
-<span class="co">#&gt;   frequency resolution_meters</span>
-<span class="co">#&gt; 1     8-Day               500</span>
-<span class="co">#&gt; 2     4-Day               500</span>
-<span class="co">#&gt; 3     8-Day               500</span>
-<span class="co">#&gt; 4     8-Day              1000</span>
-<span class="co">#&gt; 5    16-Day               250</span>
-<span class="co">#&gt; 6     8-Day               500</span></code></pre></div>
+<p>To list all available products use the mt_products() function.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">products &lt;-<span class="st"> </span><span class="kw"><a href="reference/mt_products.html">mt_products</a></span>()</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">head</span>(products)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;    product</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; 1 MCD15A2H</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 2 MCD15A3H</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 3  MOD09A1</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 4  MOD11A2</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 5  MOD13Q1</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 6 MOD15A2H</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;                                                                               description</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 1        MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR)  8-Day L4 Global 500 m SIN Grid</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; 2         MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR) 4-Day L4 Global 500 m SIN Grid</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; 3                    MODIS/Terra Surface Reflectance (SREF) 8-Day L3 Global 500m SIN Grid</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 4 MODIS/Terra Land Surface Temperature and Emissivity (LST) 8-Day L3 Global 1 km SIN Grid</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 5                MODIS/Terra Vegetation Indices (NDVI/EVI) 16-Day L3 Global 250m SIN Grid</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 6              MODIS/Terra Leaf Area Index/FPAR (LAI/FPAR) 8-Day L4 Global 500 m SIN Grid</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt;   frequency resolution_meters</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 1     8-Day               500</span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt; 2     4-Day               500</span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; 3     8-Day               500</span></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; 4     8-Day              1000</span></a>
+<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt; 5    16-Day               250</span></a>
+<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">#&gt; 6     8-Day               500</span></a></code></pre></div>
 </div>
 <div id="listing-bands" class="section level3">
 <h3 class="hasAnchor">
 <a href="#listing-bands" class="anchor"></a>Listing bands</h3>
-<p>To list all available bands for a given product use the list_bands() function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bands &lt;-<span class="st"> </span><span class="kw"><a href="reference/list_bands.html">list_bands</a></span>(<span class="dt">product =</span> <span class="st">"MOD11A2"</span>)
-<span class="kw">head</span>(bands)
-<span class="co">#&gt; [1] "Clear_sky_days"   "Clear_sky_nights" "Day_view_angl"   </span>
-<span class="co">#&gt; [4] "Day_view_time"    "Emis_31"          "Emis_32"</span></code></pre></div>
+<p>To list all available bands for a given product use the mt_bands() function.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">bands &lt;-<span class="st"> </span><span class="kw"><a href="reference/mt_bands.html">mt_bands</a></span>(<span class="dt">product =</span> <span class="st">"MOD11A2"</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">head</span>(bands)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; [1] "Clear_sky_days"   "Clear_sky_nights" "Day_view_angl"   </span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; [4] "Day_view_time"    "Emis_31"          "Emis_32"</span></a></code></pre></div>
 </div>
 <div id="listing-dates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#listing-dates" class="anchor"></a>listing dates</h3>
-<p>To list all available dates (temporal coverage) for a given product and location use the list_dates() function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dates &lt;-<span class="st"> </span><span class="kw"><a href="reference/list_dates.html">list_dates</a></span>(<span class="dt">product =</span> <span class="st">"MOD11A2"</span>, <span class="dt">lat =</span> <span class="dv">42</span>, <span class="dt">lon =</span> <span class="op">-</span><span class="dv">110</span>)
-<span class="kw">head</span>(dates)
-<span class="co">#&gt;   modis_date calendar_date</span>
-<span class="co">#&gt; 1   A2000049    2000-02-18</span>
-<span class="co">#&gt; 2   A2000057    2000-02-26</span>
-<span class="co">#&gt; 3   A2000065    2000-03-05</span>
-<span class="co">#&gt; 4   A2000073    2000-03-13</span>
-<span class="co">#&gt; 5   A2000081    2000-03-21</span>
-<span class="co">#&gt; 6   A2000089    2000-03-29</span></code></pre></div>
+<p>To list all available dates (temporal coverage) for a given product and location use the mt_dates() function.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">dates &lt;-<span class="st"> </span><span class="kw"><a href="reference/mt_dates.html">mt_dates</a></span>(<span class="dt">product =</span> <span class="st">"MOD11A2"</span>, <span class="dt">lat =</span> <span class="dv">42</span>, <span class="dt">lon =</span> <span class="dv">-110</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">head</span>(dates)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;   modis_date calendar_date</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; 1   A2000049    2000-02-18</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; 2   A2000057    2000-02-26</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 3   A2000065    2000-03-05</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 4   A2000073    2000-03-13</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 5   A2000081    2000-03-21</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 6   A2000089    2000-03-29</span></a></code></pre></div>
 </div>
 <div id="reading-and-writing-data-from-to-file" class="section level3">
 <h3 class="hasAnchor">
 <a href="#reading-and-writing-data-from-to-file" class="anchor"></a>Reading and writing data from / to file</h3>
-<p>Data can be written to file using the write_subset() function which uses the following file format:</p>
+<p>Data can be written to file using the mt_write() function which uses the following file format:</p>
 <pre><code>[site_name]_[product]_[start]_[end].csv</code></pre>
-<p>The data can be read back into the original nested structed using read_subset().</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># write the above file to disk</span>
-<span class="kw"><a href="reference/write_subset.html">write_subset</a></span>(<span class="dt">df =</span> subset,
-             <span class="dt">out_dir =</span> <span class="kw">tempdir</span>())
-
-<span class="co"># read the data back in</span>
-subset_disk &lt;-<span class="st"> </span><span class="kw"><a href="reference/read_subset.html">read_subset</a></span>(<span class="kw">paste0</span>(<span class="kw">tempdir</span>(),
-                  <span class="st">"/testsite_MOD11A2_2004-01-01_2004-02-01.csv"</span>))
-
-<span class="co"># compare original to read from disk</span>
-<span class="kw">identical</span>(subset, subset_disk)
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<p>The data can be read back into the original nested structed using mt_read().</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># write the above file to disk</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="reference/mt_write.html">mt_write</a></span>(<span class="dt">df =</span> subset,</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">             <span class="dt">out_dir =</span> <span class="kw">tempdir</span>())</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co"># read the data back in</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">subset_disk &lt;-<span class="st"> </span><span class="kw"><a href="reference/mt_read.html">mt_read</a></span>(<span class="kw">paste0</span>(<span class="kw">tempdir</span>(),</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">                  <span class="st">"/testsite_MOD11A2_2004-01-01_2004-02-01.csv"</span>))</a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co"># compare original to read from disk</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="kw">identical</span>(subset, subset_disk)</a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
 </div>
+</div>
+<div id="references" class="section level2">
+<h2 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h2>
+<p>Tuck et al. (2014). <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.1273">MODISTools - downloading and processing MODIS remotely sensed data in R Ecology &amp; Evolution</a>, 4(24), 4658 - 4668.</p>
+</div>
+<div id="acknowledgements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
+<p>Original development was supported by the UK Natural Environment Research Council (NERC; grants NE/K500811/1 and NE/J011193/1), and the Hans Rausing Scholarship. Refactoring was supported through the Belgian Science Policy office COBECORE project (BELSPO; grant BR/175/A3/COBECORE).</p>
 </div>
 </div>
   </div>
@@ -388,10 +396,16 @@ subset_disk &lt;-<span class="st"> </span><span class="kw"><a href="reference/re
 <li><a href="https://www.r-project.org/Licenses/AGPL-3">AGPL-3</a></li>
 </ul>
 </div>
+<div class="citation">
+<h2>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html">Citing MODISTools</a></li>
+</ul>
+</div>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Hufkens Koen <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Hufkens Koen <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5070-8109" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" height="16"></a> </li>
 </ul>
 </div>
 
