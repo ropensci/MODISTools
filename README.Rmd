@@ -156,7 +156,7 @@ mt_write(df = subset,
              out_dir = tempdir())
 
 # read the data back in
-subset_disk <- read_subset(paste0(tempdir(),
+subset_disk <- mt_read(paste0(tempdir(),
                   "/testsite_MOD11A2_2004-01-01_2004-02-01.csv"))
 
 # compare original to read from disk
