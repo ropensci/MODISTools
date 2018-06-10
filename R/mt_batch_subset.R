@@ -123,6 +123,10 @@ mt_batch_subset <- function(df = NULL,
   names(output) <- df$site_name
 
   # return data
-  return(output)
+  if(internal){
+    return(output)
+  } else {
+    invisible(NULL)
+  }
 }
 
