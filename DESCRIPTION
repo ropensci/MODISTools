@@ -1,6 +1,6 @@
 Package: MODISTools
 Title: Interface to the 'MODIS Land Products Subsets' Web Services
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: person("Hufkens","Koen",
 		  email="koen.hufkens@gmail.com",
 		  role=c("aut", "cre"))
@@ -26,6 +26,5 @@ Suggests:
     knitr,
     rmarkdown,
     covr,
-    testthat,
-    ggplot2
+    testthat
 VignetteBuilder: knitr
