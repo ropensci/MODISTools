@@ -105,8 +105,7 @@ subsets <- mt_batch_subset(df = df,
                      band = "LST_Day_1km",
                      internal = TRUE,
                      start = "2004-01-01",
-                     end = "2004-02-01",
-                     out_dir = "~")
+                     end = "2004-02-01")
 
 print(str(subsets))
 ```

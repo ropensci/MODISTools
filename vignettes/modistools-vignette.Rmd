@@ -49,7 +49,7 @@ head(dates)
 
 ### Downloading MODIS time series
 
-Once you decide on which data to download using the above functions you can use these parameters to download a time series using the mt_subset() function. The below query downloads MOD11A2 based daytime lands surface temperatures. The location is named 'testsite' and only covers the first month of 2004. The output is saved to a variable called subset in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file).
+Once you decide on which data to download using the above functions you can use these parameters to download a time series using the mt_subset() function. The below query downloads MOD11A2 based daytime lands surface temperatures. The location is named 'testsite' and only covers the first six months of 2004. The output is saved to a variable called subset in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file).
 
 ```{r eval = TRUE}
 # download data
@@ -58,24 +58,41 @@ subset <- mt_subset(product = "MOD11A2",
                     lon = -110,
                     band = "LST_Day_1km",
                     start = "2004-01-01",
-                    end = "2004-02-01",
-                    km_lr = 1,
-                    km_ab = 1,
+                    end = "2004-06-01",
+                    km_lr = 0,
+                    km_ab = 0,
                     site_name = "testsite",
                     internal = TRUE)
 head(subset)
+
 ```
 
 The output format is a nested list with the true data provided as a *tidy* data frame, as shown above. When witten to a csv, when the parameter 'internal' is set to FALSE, the same information is retained. Data can be read back into the same format with the included mt_read() function (see below).
 
 Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the 'pixel' column in the data frame containing the time series data. The remote sensing values are listed in the 'data' column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values. 
 
+An example plot, below, of the downloaded daytime land surface temperature is given below. The data is first converted with the appropriate multiplier (see header info) and the fill values removed. The data shows the gradual increase in temperature from winter into summer (in the northern hemisphere).
+
+```{r fig.width = 7, fig.height=3}
+# create a plot of the data (i.e. daytime land surface temperature, LST)
+# the data has a multiplier of 0.02 in order to convert stored values
+# you can extract the multiplier (if applicable) from the data header
+date <- as.Date(subset$data$calendar_date)
+temperature <- subset$data$data * as.double(subset$header$scale)
+temperature[temperature == 0] <- NA
+
+plot(date,
+     temperature,
+     xlab = "Date",
+     ylab = expression("LST temperature (" * degree * "K)"))
+```
+
 When a large selection of locations is needed you might benefit from using the batch download function batch_subset(), which provides a wrapper around the mt_subset() function in order to speed up large download batches. This function has a similar syntax to mt_subset() but requires a data frame defining site names (site_name) and locations (lat / lon) (or a comma delimited file with the same structure) to specify a list of download locations.
 
 ```{r eval = TRUE}
 # create data frame with a site_name, lat and lon column
 # holding the respective names of sites and their location
-df <- data.frame("site_name" = paste("test",1:2))
+df <- data.frame("site_name" = paste("test",1:2), stringsAsFactors = FALSE)
 df$lat <- 40
 df$lon <- -110
 
@@ -88,11 +105,12 @@ subsets <- mt_batch_subset(df = df,
                      band = "LST_Day_1km",
                      internal = TRUE,
                      start = "2004-01-01",
-                     end = "2004-03-31",
+                     end = "2004-02-28",
                      out_dir = "~")
 
 print(str(subsets))
 ```
+
 
 ### Reading and writing data from / to file
 
@@ -111,7 +129,7 @@ mt_write(df = subset,
 
 # read the data back in
 subset_disk <- mt_read(paste0(tempdir(),
-                  "/testsite_MOD11A2_2004-01-01_2004-02-01.csv"))
+                  "/testsite_MOD11A2_2004-01-01_2004-06-01.csv"))
 
 # compare original to read from disk
 identical(subset, subset_disk)
