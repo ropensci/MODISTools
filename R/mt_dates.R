@@ -19,13 +19,13 @@
 #' print(bands)
 #'}
 
-list_dates <- function(product = NULL,
+mt_dates <- function(product = NULL,
                        lat = NULL,
                        lon = NULL,
                        site_id = NULL){
 
   # load all products
-  products <- MODISTools::list_products()$product
+  products <- MODISTools::mt_products()$product
 
   # error trap
   if (is.null(product) | !(product %in% products) ){

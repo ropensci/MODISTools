@@ -29,7 +29,7 @@
 #' identical(subset, subset_disk)
 #' }
 
-write_subset <- function(df = NULL,
+mt_write <- function(df = NULL,
                            out_dir = tempdir()){
 
   if(class(df)!="MODISTools" | is.null(df)){

@@ -31,7 +31,7 @@
 #' print(df)
 #'
 #' # test batch download
-#' subsets <- batch_subset(df = df,
+#' subsets <- mt_batch_subset(df = df,
 #'                         product = "MOD11A2",
 #'                         band = "LST_Day_1km",
 #'                         internal = TRUE,
@@ -43,7 +43,7 @@
 #'
 #'}
 
-batch_subset <- function(df = NULL,
+mt_batch_subset <- function(df = NULL,
                          product = NULL,
                          band = NULL,
                          start = "2000-01-01",
@@ -59,7 +59,7 @@ batch_subset <- function(df = NULL,
   }
 
   # load all products
-  products <- MODISTools::list_products()$product
+  products <- MODISTools::mt_products()$product
 
   # error trap
   if (is.null(product) | !(product %in% products) ){

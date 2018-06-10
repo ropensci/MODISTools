@@ -27,7 +27,7 @@
 #' \donttest{
 #' # list all available MODIS Land Products Subsets products
 #' # download data
-#' subset <- get_subset(product = "MOD11A2",
+#' subset <- mt_subset(product = "MOD11A2",
 #'                         lat = 40,
 #'                         lon = -110,
 #'                         band = "LST_Day_1km",
@@ -36,7 +36,7 @@
 #'  print(str(subset))
 #'}
 
-get_subset <- function(product = NULL,
+mt_subset <- function(product = NULL,
                        band = NULL,
                        lat = NULL,
                        lon = NULL,
@@ -50,7 +50,7 @@ get_subset <- function(product = NULL,
                        internal = TRUE){
 
   # load all products
-  products <- MODISTools::list_products()$product
+  products <- MODISTools::mt_products()$product
 
   # error trap
   if (is.null(product) | !(product %in% products) ){
@@ -74,7 +74,7 @@ get_subset <- function(product = NULL,
   }
 
   # get date range convert format
-  dates <- MODISTools::list_dates(product = product,
+  dates <- MODISTools::mt_dates(product = product,
                       lat = lat,
                       lon = lon)
 
@@ -186,7 +186,7 @@ get_subset <- function(product = NULL,
   if (internal){
     return(subset_data)
   } else {
-    write_subset(subset_data,
+    mt_write(subset_data,
                  out_dir = out_dir)
   }
 }

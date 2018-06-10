@@ -11,15 +11,15 @@
 #'
 #' \donttest{
 #' # list all available MODIS Land Products Subsets products
-#' bands <- list_bands(product = "MOD11A2")
+#' bands <- mt_bands(product = "MOD11A2")
 #' print(bands)
 #'
 #'}
 
-list_bands <- function(product = NULL){
+mt_bands <- function(product = NULL){
 
   # load all products
-  products <- MODISTools::list_products()$product
+  products <- MODISTools::mt_products()$product
 
   # error trap
   if (is.null(product) | !(product %in% products)){

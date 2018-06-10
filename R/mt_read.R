@@ -25,7 +25,7 @@
 #' print(df)
 #' }
 
-read_subset <- function(filename){
+mt_read <- function(filename){
 
   # read and format header, read past the header (should the length)
   # change in the future with a few lines this then does not break
