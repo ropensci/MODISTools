@@ -41,7 +41,7 @@ library("MODISTools")
 
 ### Downloading MODIS time series
 
-To extract a time series of modis data for a given location and its direct environment use the get_subset() function.
+To extract a time series of modis data for a given location and its direct environment use the mt_subset() function.
 
 <details><summary>detailed parameter description (click to expand)</summary>
 <p>
@@ -69,7 +69,7 @@ site_id | a site_id for predefined locations (not required)
 library(MODISTools)
 
 # download data
-subset <- get_subset(product = "MOD11A2",
+subset <- mt_subset(product = "MOD11A2",
                     lat = 40,
                     lon = -110,
                     band = "LST_Day_1km",
@@ -82,7 +82,7 @@ subset <- get_subset(product = "MOD11A2",
 print(str(subset))
 ```
 
-The output format is a nested list with the true data provided as a *tidy* data frame, as shown above. When witten to a csv, when the parameter 'internal' is set to FALSE, the same information is retained. Data can be read back into the same format with the included read_subset() function (see below).
+The output format is a nested list with the true data provided as a *tidy* data frame, as shown above. When witten to a csv, when the parameter 'internal' is set to FALSE, the same information is retained. Data can be read back into the same format with the included mt_read() function (see below).
 
 Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the 'pixel' column in the data frame containing the time series data. The remote sensing values are listed in the 'data' column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values. 
 
@@ -100,13 +100,12 @@ df$lat <- 40
 df$lon <- -110
   
 # test batch download
-subsets <- batch_subset(df = df,
+subsets <- mt_batch_subset(df = df,
                      product = "MOD11A2",
                      band = "LST_Day_1km",
                      internal = TRUE,
                      start = "2004-01-01",
-                     end = "2004-02-01",
-                     out_dir = "~")
+                     end = "2004-02-01")
 
 print(str(subsets))
 ```
@@ -114,49 +113,49 @@ print(str(subsets))
 
 ### Listing products
 
-To list all available products use the list_products() function.
+To list all available products use the mt_products() function.
 
 ```{r eval = TRUE}
-products <- list_products()
+products <- mt_products()
 head(products)
 ```
 
 
 ### Listing bands
 
-To list all available bands for a given product use the list_bands() function.
+To list all available bands for a given product use the mt_bands() function.
 
 ```{r eval = TRUE}
-bands <- list_bands(product = "MOD11A2")
+bands <- mt_bands(product = "MOD11A2")
 head(bands)
 ```
 
 ### listing dates
 
-To list all available dates (temporal coverage) for a given product and location use the list_dates() function.
+To list all available dates (temporal coverage) for a given product and location use the mt_dates() function.
 
 ```{r eval = TRUE}
-dates <- list_dates(product = "MOD11A2", lat = 42, lon = -110)
+dates <- mt_dates(product = "MOD11A2", lat = 42, lon = -110)
 head(dates)
 ```
 
 ### Reading and writing data from / to file
 
-Data can be written to file using the write_subset() function which uses the following file format:
+Data can be written to file using the mt_write() function which uses the following file format:
 
 ```
 [site_name]_[product]_[start]_[end].csv
 ```
 
-The data can be read back into the original nested structed using read_subset().
+The data can be read back into the original nested structed using mt_read().
 
 ```{r eval = TRUE}
 # write the above file to disk
-write_subset(df = subset,
+mt_write(df = subset,
              out_dir = tempdir())
 
 # read the data back in
-subset_disk <- read_subset(paste0(tempdir(),
+subset_disk <- mt_read(paste0(tempdir(),
                   "/testsite_MOD11A2_2004-01-01_2004-02-01.csv"))
 
 # compare original to read from disk

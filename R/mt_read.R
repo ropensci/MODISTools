@@ -25,7 +25,7 @@
 #' print(df)
 #' }
 
-read_subset <- function(filename){
+mt_read <- function(filename){
 
   # read and format header, read past the header (should the length)
   # change in the future with a few lines this then does not break
@@ -70,13 +70,13 @@ read_subset <- function(filename){
                            sep = ",",
                            stringsAsFactors = FALSE)
 
-  # convert data to match get_subset() routine (consistency)
+  # convert data to match mt_subset() routine (consistency)
   data$proc_date <- as.character(data$proc_date)
   data$pixel <- as.character(data$pixel)
   header$ncols <- as.integer(header$ncols)
   header$nrows <- as.integer(header$nrows)
-  header$latitude <- as.numeric(header$latitude)
-  header$longitude <- as.numeric(header$longitude)
+  header$latitude <- as.double(header$latitude)
+  header$longitude <- as.double(header$longitude)
   header$complete <- as.logical(header$complete)
 
   # format final output as a nested list of class phenocamr

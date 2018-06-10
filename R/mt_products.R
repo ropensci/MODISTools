@@ -9,11 +9,11 @@
 #'
 #' \donttest{
 #' # list all available MODIS Land Products Subsets products
-#' products <- list_products()
+#' products <- mt_products()
 #' print(products)
 #'}
 
-list_products <- function(){
+mt_products <- function(){
 
   # define server settings (main server should become global
   # as in not specified in every function)

@@ -1,9 +1,10 @@
 Package: MODISTools
 Title: Interface to the 'MODIS Land Products Subsets' Web Services
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: person("Hufkens","Koen",
 		  email="koen.hufkens@gmail.com",
-		  role=c("aut", "cre"))
+		  role=c("aut", "cre"),
+		  comment = c(ORCID = "0000-0002-5070-8109"))
 Description: Programmatic interface to the 'MODIS Land Products Subsets'
     web services (<https://modis.ornl.gov/data/modis_webservice.html>).
     Allows for easy downloads of 'MODIS' time series directly to your R 
@@ -26,6 +27,5 @@ Suggests:
     knitr,
     rmarkdown,
     covr,
-    testthat,
-    ggplot2
+    testthat
 VignetteBuilder: knitr
