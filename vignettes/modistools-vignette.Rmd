@@ -66,7 +66,7 @@ subset <- mt_subset(product = "MOD11A2",
 head(subset)
 ```
 
-The output format is a nested list with the true data provided as a *tidy* data frame, as shown above. When witten to a csv, when the parameter 'internal' is set to FALSE, the same information is retained. Data can be read back into the same format with the included read_subset() function (see below).
+The output format is a nested list with the true data provided as a *tidy* data frame, as shown above. When witten to a csv, when the parameter 'internal' is set to FALSE, the same information is retained. Data can be read back into the same format with the included mt_read() function (see below).
 
 Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the 'pixel' column in the data frame containing the time series data. The remote sensing values are listed in the 'data' column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values. 
 
@@ -96,13 +96,13 @@ print(str(subsets))
 
 ### Reading and writing data from / to file
 
-In both download functions data can be written to a csv file in a particular directory using the 'internal' and 'out_dir' function options. The read_subset() function allows you to read in these csv files easily and into the same data structure as used when downloading directy into your R workspace.
+In both download functions data can be written to a csv file in a particular directory using the 'internal' and 'out_dir' function options. The mt_read() function allows you to read in these csv files easily and into the same data structure as used when downloading directy into your R workspace.
 
 ```
 [site_name]_[product]_[start]_[end].csv
 ```
 
-The data can be read back into the original nested structed using read_subset().
+The data can be read back into the original nested structed using mt_read().
 
 ```{r eval = TRUE}
 # write the above file to disk
