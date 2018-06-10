@@ -103,7 +103,7 @@ mt_batch_subset <- function(df = NULL,
   cl <- parallel::makeCluster(ncores)
 
   output <- parallel::parRapply(cl, df, function(x){
-    MODISTools::get_subset(site_name = as.character(x['site_name']),
+    MODISTools::mt_subset(site_name = as.character(x['site_name']),
                            product = as.character(x['product']),
                            band = as.character(x['band']),
                            lat = as.numeric(x['lat']),

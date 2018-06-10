@@ -24,23 +24,23 @@ The MODISTools package has as goal to facilitate the interface between R and the
 
 ### Listing products / bands / dates
 
-In order to assess which products are available, which product bands are provided and which temporal range is covered one has to list these ancillary data. All these options can be queried using the list_*() functions.
+In order to assess which products are available, which product bands are provided and which temporal range is covered one has to list these ancillary data. All these options can be queried using the mt_*() functions.
 
-To list all available products use the list_products() function.
+To list all available products use the mt_products() function.
 
 ```{r eval = TRUE}
 products <- mt_products()
 head(products)
 ```
 
-To list all available bands for a given product use the list_bands() function.
+To list all available bands for a given product use the mt_bands() function.
 
 ```{r eval = TRUE}
 bands <- mt_bands(product = "MOD11A2")
 head(bands)
 ```
 
-To list all available dates (temporal coverage) for a given product and location use the list_dates() function.
+To list all available dates (temporal coverage) for a given product and location use the mt_dates() function.
 
 ```{r eval = TRUE}
 dates <- mt_dates(product = "MOD11A2", lat = 42, lon = -110)
@@ -49,12 +49,9 @@ head(dates)
 
 ### Downloading MODIS time series
 
-Once you decide on which data to download using the above functions you can use these parameters to download a time series using the get_subset() function. The below query downloads MOD11A2 based daytime lands surface temperatures. The location is named 'testsite' and only covers the first month of 2004. The output is saved to a variable called subset in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file).
+Once you decide on which data to download using the above functions you can use these parameters to download a time series using the mt_subset() function. The below query downloads MOD11A2 based daytime lands surface temperatures. The location is named 'testsite' and only covers the first month of 2004. The output is saved to a variable called subset in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file).
 
 ```{r eval = TRUE}
-# load the library
-library(MODISTools)
-
 # download data
 subset <- mt_subset(product = "MOD11A2",
                     lat = 40,
@@ -73,7 +70,7 @@ The output format is a nested list with the true data provided as a *tidy* data 
 
 Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the 'pixel' column in the data frame containing the time series data. The remote sensing values are listed in the 'data' column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values. 
 
-When a large selection of locations is needed you might benefit from using the batch download function batch_subset(), which provides a wrapper around the get_subset() function in order to speed up large download batches. This function has a similar syntax to get_subset() but requires a data frame defining site names (site_name) and locations (lat / lon) (or a comma delimited file with the same structure) to specify a list of download locations.
+When a large selection of locations is needed you might benefit from using the batch download function batch_subset(), which provides a wrapper around the mt_subset() function in order to speed up large download batches. This function has a similar syntax to mt_subset() but requires a data frame defining site names (site_name) and locations (lat / lon) (or a comma delimited file with the same structure) to specify a list of download locations.
 
 ```{r eval = TRUE}
 # create data frame with a site_name, lat and lon column
