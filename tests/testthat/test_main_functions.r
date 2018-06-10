@@ -12,6 +12,17 @@ test_that("test mt_products()",{
   expect_true(check)
 })
 
+test_that("test mt_sites()",{
+
+  # test listing all products
+  products <- try(mt_sites())
+
+  # see if any of the runs failed
+  check = !inherits(products, "try-error")
+
+  # check if no error occured
+  expect_true(check)
+})
 
 test_that("test mt_bands()",{
 
@@ -43,8 +54,15 @@ test_that("test mt_dates()",{
                               lat = NULL,
                               lon = -110))
 
+  # grab a random site_id for a pre-processed site
+  id <- mt_sites()$siteid[1]
+
+  dates_site_id <- try(mt_dates(product = "MOD11A2",
+                                site_id = id))
+
   # see if any of the runs failed
   check = !inherits(dates, "try-error") &
+    !inherits(dates_site_id, "try-error") &
     inherits(dates_err, "try-error") &
     inherits(dates_coord_err, "try-error")
 
