@@ -10,6 +10,15 @@ Programmatic interface to the ['MODIS Land Products Subsets' web services](https
 Installation
 ------------
 
+### stable release
+
+To install the current stable release use a CRAN repository:
+
+``` r
+install.packages("MODISTools")
+library("MODISTools")
+```
+
 ### development release
 
 To install the development releases of the package run the following commands:
