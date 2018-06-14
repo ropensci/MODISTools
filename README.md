@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools) [![codecov](https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/khufkens/MODISTools)
+[![Build Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools) [![codecov](https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/khufkens/MODISTools) ![Status](https://www.r-pkg.org/badges/version/MODISTools) ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/MODISTools)
 
 MODISTools
 ==========
@@ -123,7 +123,7 @@ print(str(subset))
 #>  $ header:List of 15
 #>   ..$ xllcorner: chr "-9370962.97"
 #>   ..$ yllcorner: chr "4446875.49"
-#>   ..$ cellsize : chr "926.62543305583381"
+#>   ..$ cellsize : num 927
 #>   ..$ nrows    : int 3
 #>   ..$ ncols    : int 3
 #>   ..$ band     : chr "LST_Day_1km"
@@ -171,8 +171,7 @@ subsets <- mt_batch_subset(df = df,
                      band = "LST_Day_1km",
                      internal = TRUE,
                      start = "2004-01-01",
-                     end = "2004-02-01",
-                     out_dir = "~")
+                     end = "2004-02-01")
 
 print(str(subsets))
 #> List of 2
@@ -180,7 +179,7 @@ print(str(subsets))
 #>   ..$ header:List of 15
 #>   .. ..$ xllcorner: chr "-9370036.39"
 #>   .. ..$ yllcorner: chr "4447802.08"
-#>   .. ..$ cellsize : chr "926.62543305583381"
+#>   .. ..$ cellsize : num 927
 #>   .. ..$ nrows    : int 1
 #>   .. ..$ ncols    : int 1
 #>   .. ..$ band     : chr "LST_Day_1km"
@@ -206,7 +205,7 @@ print(str(subsets))
 #>   ..$ header:List of 15
 #>   .. ..$ xllcorner: chr "-9370036.39"
 #>   .. ..$ yllcorner: chr "4447802.08"
-#>   .. ..$ cellsize : chr "926.62543305583381"
+#>   .. ..$ cellsize : num 927
 #>   .. ..$ nrows    : int 1
 #>   .. ..$ ncols    : int 1
 #>   .. ..$ band     : chr "LST_Day_1km"
@@ -239,26 +238,26 @@ To list all available products use the mt\_products() function.
 products <- mt_products()
 head(products)
 #>    product
-#> 1 MCD15A2H
-#> 2 MCD15A3H
-#> 3  MOD09A1
-#> 4  MOD11A2
-#> 5  MOD13Q1
-#> 6 MOD15A2H
+#> 1  MCD12Q1
+#> 2 MCD15A2H
+#> 3 MCD15A3H
+#> 4  MOD09A1
+#> 5  MOD11A2
+#> 6  MOD13Q1
 #>                                                                               description
-#> 1        MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR)  8-Day L4 Global 500 m SIN Grid
-#> 2         MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR) 4-Day L4 Global 500 m SIN Grid
-#> 3                    MODIS/Terra Surface Reflectance (SREF) 8-Day L3 Global 500m SIN Grid
-#> 4 MODIS/Terra Land Surface Temperature and Emissivity (LST) 8-Day L3 Global 1 km SIN Grid
-#> 5                MODIS/Terra Vegetation Indices (NDVI/EVI) 16-Day L3 Global 250m SIN Grid
-#> 6              MODIS/Terra Leaf Area Index/FPAR (LAI/FPAR) 8-Day L4 Global 500 m SIN Grid
+#> 1                   MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid
+#> 2        MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR)  8-Day L4 Global 500 m SIN Grid
+#> 3         MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR) 4-Day L4 Global 500 m SIN Grid
+#> 4                    MODIS/Terra Surface Reflectance (SREF) 8-Day L3 Global 500m SIN Grid
+#> 5 MODIS/Terra Land Surface Temperature and Emissivity (LST) 8-Day L3 Global 1 km SIN Grid
+#> 6                MODIS/Terra Vegetation Indices (NDVI/EVI) 16-Day L3 Global 250m SIN Grid
 #>   frequency resolution_meters
-#> 1     8-Day               500
-#> 2     4-Day               500
-#> 3     8-Day               500
-#> 4     8-Day              1000
-#> 5    16-Day               250
-#> 6     8-Day               500
+#> 1    Yearly               500
+#> 2     8-Day               500
+#> 3     4-Day               500
+#> 4     8-Day               500
+#> 5     8-Day              1000
+#> 6    16-Day               250
 ```
 
 ### Listing bands
@@ -268,8 +267,20 @@ To list all available bands for a given product use the mt\_bands() function.
 ``` r
 bands <- mt_bands(product = "MOD11A2")
 head(bands)
-#> [1] "Clear_sky_days"   "Clear_sky_nights" "Day_view_angl"   
-#> [4] "Day_view_time"    "Emis_31"          "Emis_32"
+#>            band                          description  units   valid_range
+#> 1 Day_view_angl View zenith angle of day observation degree      0 to 130
+#> 2       Emis_32                   Band 32 emissivity   <NA>      1 to 255
+#> 3       Emis_31                   Band 31 emissivity   <NA>      1 to 255
+#> 4      QC_Night     Nighttime LST Quality indicators   <NA>      0 to 255
+#> 5 Day_view_time        Local time of day observation    hrs      0 to 240
+#> 6   LST_Day_1km     Daytime Land Surface Temperature Kelvin 7500 to 65535
+#>   fill_value
+#> 1        255
+#> 2          0
+#> 3          0
+#> 4       <NA>
+#> 5        255
+#> 6          0
 ```
 
 ### listing dates
@@ -307,7 +318,7 @@ subset_disk <- mt_read(paste0(tempdir(),
 
 # compare original to read from disk
 identical(subset, subset_disk)
-#> [1] TRUE
+#> [1] FALSE
 ```
 
 References
