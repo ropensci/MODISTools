@@ -27,7 +27,7 @@ at a particular location.
 
 \donttest{
 # list all available MODIS Land Products Subsets products
-bands <- list_dates(product = "MOD11A2", lat = 40, lon = -110)
+bands <- mt_dates(product = "MOD11A2", lat = 40, lon = -110)
 print(bands)
 }
 }

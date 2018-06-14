@@ -11,7 +11,7 @@
 #'
 #' \donttest{
 #' # download data
-#' get_subset(product = "MOD11A2",
+#' mt_subset(product = "MOD11A2",
 #'            lat = 40,
 #'            lon = -110,
 #'            band = "LST_Day_1km",
@@ -20,7 +20,7 @@
 #'            internal = FALSE)
 #'
 #' # read file
-#' df <- read_subset(paste0(tempdir(),
+#' df <- mt_read(paste0(tempdir(),
 #'                "/sitename_MOD11A2_2004-01-01_2004-03-31.csv"))
 #' print(df)
 #' }

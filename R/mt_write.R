@@ -11,18 +11,18 @@
 #'
 #' \donttest{
 #' # download data
-#' subset <- get_subset(product = "MOD11A2",
+#' subset <- mt_subset(product = "MOD11A2",
 #'                         lat = 40,
 #'                         lon = -110,
 #'                         band = "LST_Day_1km",
 #'                         start = "2004-01-01",
 #'                         end = "2004-02-01")
 #' # write the above file to disk
-#' write_subset(df = subset,
+#' mt_write(df = subset,
 #'              out_dir = tempdir())
 #'
 #' # read the data back in
-#' subset_disk <- read_subset(paste0(tempdir(),
+#' subset_disk <- mt_read(paste0(tempdir(),
 #'                "/sitename_MOD11A2_2004-01-01_2004-02-01.csv"))
 #'
 #' # compare original to read from disk
