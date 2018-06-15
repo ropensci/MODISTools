@@ -78,6 +78,7 @@ mt_read <- function(filename){
   header$latitude <- as.double(header$latitude)
   header$longitude <- as.double(header$longitude)
   header$complete <- as.logical(header$complete)
+  header$cellsize <- as.character(header$cellsize)
 
   # format final output as a nested list of class phenocamr
   output = list(

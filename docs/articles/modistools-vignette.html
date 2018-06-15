@@ -82,7 +82,7 @@
       <h1>MODISTools</h1>
                         <h4 class="author">Koen Hufkens</h4>
             
-            <h4 class="date">2018-06-14</h4>
+            <h4 class="date">2018-06-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/khufkens/MODISTools/blob/master/vignettes/modistools-vignette.Rmd"><code>vignettes/modistools-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>modistools-vignette.Rmd</code></div>
@@ -172,7 +172,7 @@ subset &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_s
 <span class="co">#&gt; [1] "4447802.08"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $header$cellsize</span>
-<span class="co">#&gt; [1] 926.6254</span>
+<span class="co">#&gt; [1] "926.625433055834"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $header$nrows</span>
 <span class="co">#&gt; [1] 1</span>
@@ -276,7 +276,7 @@ subsets &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_
 <span class="co">#&gt;   ..$ header:List of 15</span>
 <span class="co">#&gt;   .. ..$ xllcorner: chr "-9370036.39"</span>
 <span class="co">#&gt;   .. ..$ yllcorner: chr "4447802.08"</span>
-<span class="co">#&gt;   .. ..$ cellsize : num 927</span>
+<span class="co">#&gt;   .. ..$ cellsize : chr "926.625433055834"</span>
 <span class="co">#&gt;   .. ..$ nrows    : int 1</span>
 <span class="co">#&gt;   .. ..$ ncols    : int 1</span>
 <span class="co">#&gt;   .. ..$ band     : chr "LST_Day_1km"</span>
@@ -302,7 +302,7 @@ subsets &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_
 <span class="co">#&gt;   ..$ header:List of 15</span>
 <span class="co">#&gt;   .. ..$ xllcorner: chr "-9370036.39"</span>
 <span class="co">#&gt;   .. ..$ yllcorner: chr "4447802.08"</span>
-<span class="co">#&gt;   .. ..$ cellsize : num 927</span>
+<span class="co">#&gt;   .. ..$ cellsize : chr "926.625433055834"</span>
 <span class="co">#&gt;   .. ..$ nrows    : int 1</span>
 <span class="co">#&gt;   .. ..$ ncols    : int 1</span>
 <span class="co">#&gt;   .. ..$ band     : chr "LST_Day_1km"</span>
@@ -342,7 +342,7 @@ subset_disk &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 
 <span class="co"># compare original to read from disk</span>
 <span class="kw">identical</span>(subset, subset_disk)
-<span class="co">#&gt; [1] FALSE</span></code></pre></div>
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
 </div>
   </div>
 

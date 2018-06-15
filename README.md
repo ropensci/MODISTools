@@ -132,7 +132,7 @@ print(str(subset))
 #>  $ header:List of 15
 #>   ..$ xllcorner: chr "-9370962.97"
 #>   ..$ yllcorner: chr "4446875.49"
-#>   ..$ cellsize : num 927
+#>   ..$ cellsize : chr "926.625433055834"
 #>   ..$ nrows    : int 3
 #>   ..$ ncols    : int 3
 #>   ..$ band     : chr "LST_Day_1km"
@@ -188,7 +188,7 @@ print(str(subsets))
 #>   ..$ header:List of 15
 #>   .. ..$ xllcorner: chr "-9370036.39"
 #>   .. ..$ yllcorner: chr "4447802.08"
-#>   .. ..$ cellsize : num 927
+#>   .. ..$ cellsize : chr "926.625433055834"
 #>   .. ..$ nrows    : int 1
 #>   .. ..$ ncols    : int 1
 #>   .. ..$ band     : chr "LST_Day_1km"
@@ -214,7 +214,7 @@ print(str(subsets))
 #>   ..$ header:List of 15
 #>   .. ..$ xllcorner: chr "-9370036.39"
 #>   .. ..$ yllcorner: chr "4447802.08"
-#>   .. ..$ cellsize : num 927
+#>   .. ..$ cellsize : chr "926.625433055834"
 #>   .. ..$ nrows    : int 1
 #>   .. ..$ ncols    : int 1
 #>   .. ..$ band     : chr "LST_Day_1km"
@@ -327,7 +327,7 @@ subset_disk <- mt_read(paste0(tempdir(),
 
 # compare original to read from disk
 identical(subset, subset_disk)
-#> [1] FALSE
+#> [1] TRUE
 ```
 
 References

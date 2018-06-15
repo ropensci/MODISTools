@@ -148,6 +148,7 @@ mt_subset <- function(product = NULL,
   header$product <- product
   header$start <- start
   header$end <- end
+  header$cellsize <- as.character(header$cellsize)
 
   # This is a check on the complete nature of the retrieved data
   # the process will not stall on errors occur in the download

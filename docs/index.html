@@ -86,7 +86,7 @@
     
     
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
+<p><a href="https://travis-ci.org/khufkens/MODISTools"><img src="https://travis-ci.org/khufkens/MODISTools.svg" alt="Build Status"></a> <a href="https://codecov.io/gh/khufkens/MODISTools"><img src="https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg" alt="codecov"></a> <img src="https://www.r-pkg.org/badges/version/MODISTools" alt="Status"><img src="https://cranlogs.r-pkg.org/badges/grand-total/MODISTools" alt="Downloads"></p>
 <div id="modistools" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#modistools" class="anchor"></a>MODISTools</h1></div>
@@ -94,6 +94,13 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
+<div id="stable-release" class="section level3">
+<h3 class="hasAnchor">
+<a href="#stable-release" class="anchor"></a>stable release</h3>
+<p>To install the current stable release use a CRAN repository:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"MODISTools"</span>)
+<span class="kw">library</span>(<span class="st">"MODISTools"</span>)</code></pre></div>
+</div>
 <div id="development-release" class="section level3">
 <h3 class="hasAnchor">
 <a href="#development-release" class="anchor"></a>development release</h3>
@@ -195,7 +202,7 @@ subset &lt;-<span class="st"> </span><span class="kw"><a href="reference/mt_subs
 <span class="co">#&gt;  $ header:List of 15</span>
 <span class="co">#&gt;   ..$ xllcorner: chr "-9370962.97"</span>
 <span class="co">#&gt;   ..$ yllcorner: chr "4446875.49"</span>
-<span class="co">#&gt;   ..$ cellsize : num 927</span>
+<span class="co">#&gt;   ..$ cellsize : chr "926.625433055834"</span>
 <span class="co">#&gt;   ..$ nrows    : int 3</span>
 <span class="co">#&gt;   ..$ ncols    : int 3</span>
 <span class="co">#&gt;   ..$ band     : chr "LST_Day_1km"</span>
@@ -246,7 +253,7 @@ subsets &lt;-<span class="st"> </span><span class="kw"><a href="reference/mt_bat
 <span class="co">#&gt;   ..$ header:List of 15</span>
 <span class="co">#&gt;   .. ..$ xllcorner: chr "-9370036.39"</span>
 <span class="co">#&gt;   .. ..$ yllcorner: chr "4447802.08"</span>
-<span class="co">#&gt;   .. ..$ cellsize : num 927</span>
+<span class="co">#&gt;   .. ..$ cellsize : chr "926.625433055834"</span>
 <span class="co">#&gt;   .. ..$ nrows    : int 1</span>
 <span class="co">#&gt;   .. ..$ ncols    : int 1</span>
 <span class="co">#&gt;   .. ..$ band     : chr "LST_Day_1km"</span>
@@ -272,7 +279,7 @@ subsets &lt;-<span class="st"> </span><span class="kw"><a href="reference/mt_bat
 <span class="co">#&gt;   ..$ header:List of 15</span>
 <span class="co">#&gt;   .. ..$ xllcorner: chr "-9370036.39"</span>
 <span class="co">#&gt;   .. ..$ yllcorner: chr "4447802.08"</span>
-<span class="co">#&gt;   .. ..$ cellsize : num 927</span>
+<span class="co">#&gt;   .. ..$ cellsize : chr "926.625433055834"</span>
 <span class="co">#&gt;   .. ..$ nrows    : int 1</span>
 <span class="co">#&gt;   .. ..$ ncols    : int 1</span>
 <span class="co">#&gt;   .. ..$ band     : chr "LST_Day_1km"</span>
@@ -375,7 +382,7 @@ subset_disk &lt;-<span class="st"> </span><span class="kw"><a href="reference/mt
 
 <span class="co"># compare original to read from disk</span>
 <span class="kw">identical</span>(subset, subset_disk)
-<span class="co">#&gt; [1] FALSE</span></code></pre></div>
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
 </div>
 </div>
 <div id="references" class="section level2">
@@ -422,14 +429,7 @@ subset_disk &lt;-<span class="st"> </span><span class="kw"><a href="reference/mt
 </ul>
 </div>
 
-      <div class="dev-status">
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://travis-ci.org/khufkens/MODISTools"><img src="https://travis-ci.org/khufkens/MODISTools.svg" alt="Build Status"></a></li>
-<li><a href="https://codecov.io/gh/khufkens/MODISTools"><img src="https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg" alt="codecov"></a></li>
-</ul>
-</div>
-</div>
+      </div>
 
 </div>
 
