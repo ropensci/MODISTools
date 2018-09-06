@@ -21,7 +21,7 @@ Imports:
 License: AGPL-3
 LazyData: true
 ByteCompile: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Suggests:
     knitr,
     rmarkdown,
