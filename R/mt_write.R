@@ -32,12 +32,12 @@
 mt_write <- function(df = NULL,
                            out_dir = tempdir()){
 
-  if(class(df)!="MODISTools" | is.null(df)){
+  if(class(df) != "MODISTools" | is.null(df)){
     stop("not a MODISTools dataset or no dataset provided")
   }
 
   # format filename
-  filename = sprintf("%s/%s_%s_%s_%s.csv",
+  filename <- sprintf("%s/%s_%s_%s_%s.csv",
                      path.expand(out_dir),
                      df$header$site,
                      df$header$product,
@@ -45,14 +45,14 @@ mt_write <- function(df = NULL,
                      df$header$end)
 
   # collapse named vector into a matrix
-  header = apply(cbind(names(df$header),
+  header <- apply(cbind(names(df$header),
                        df$header),
                  1,
                  function(x)sprintf("# %s",
                                     paste(x,collapse=": ")))
 
   # fix collated empty lines and add trailing #
-  header = gsub(": NA", "", header)
+  header <- gsub(": NA", "", header)
 
   # writing the final data frame to file, retaining the original header
   utils::write.table(

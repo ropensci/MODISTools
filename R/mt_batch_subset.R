@@ -69,7 +69,7 @@ mt_batch_subset <- function(df = NULL,
   # check data frame
   if (!is.data.frame(df)){
     if(file.exists(df)){
-      df = utils::read.table(df,
+      df <- utils::read.table(df,
                       header = TRUE,
                       sep = ",",
                       stringsAsFactors = FALSE)

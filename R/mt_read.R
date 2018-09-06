@@ -30,20 +30,20 @@ mt_read <- function(filename){
   # read and format header, read past the header (should the length)
   # change in the future with a few lines this then does not break
   # the script
-  header = try(readLines(filename, n = 30), silent = TRUE)
-  header = header[grepl("#", header)]
-  header = strsplit(header, ":")
+  header <- try(readLines(filename, n = 30), silent = TRUE)
+  header <- header[grepl("#", header)]
+  header <- strsplit(header, ":")
 
   # read in descriptor fields
-  descriptor = unlist(lapply(header, function(x){
+  descriptor <- unlist(lapply(header, function(x){
     x[1]
   }))
 
   # remove leading #
-  descriptor = gsub("# ","", descriptor)
+  descriptor <- gsub("# ","", descriptor)
 
   # read in data values
-  values = unlist(lapply(header, function(x){
+  values <- unlist(lapply(header, function(x){
     x <- unlist(x)
     if(length(x)<=1){
       return(NA)
@@ -56,16 +56,16 @@ mt_read <- function(filename){
   }))
 
   # remove leading space
-  values = gsub(" ","",values)
+  values <- gsub(" ","",values)
 
   # assign names to values
-  names(values) = descriptor
+  names(values) <- descriptor
 
   # overwrite original header with final copy
-  header = lapply(values, function(x){x})
+  header <- lapply(values, function(x){x})
 
   # read the time series data
-  data = utils::read.table(filename,
+  data <- utils::read.table(filename,
                            header = TRUE,
                            sep = ",",
                            stringsAsFactors = FALSE)
@@ -81,12 +81,13 @@ mt_read <- function(filename){
   header$cellsize <- as.character(header$cellsize)
 
   # format final output as a nested list of class phenocamr
-  output = list(
+  output <- list(
     "header" = header,
     "data" = data)
 
   # set proper phenocamr class
-  class(output) = "MODISTools"
+  class(output) <- "MODISTools"
 
+  # return formatted data
   return(output)
 }

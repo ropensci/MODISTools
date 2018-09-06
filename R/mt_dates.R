@@ -55,23 +55,23 @@ mt_dates <- function(product = NULL,
   }
 
   # try to download the data
-  resp = try(httr::GET(url = url,
+  json_dates <- try(httr::GET(url = url,
                         query = query,
                         httr::write_memory()))
 
   # trap errors on download, return a general error statement
   # with the most common causes
-  if (httr::http_error(resp) | inherits(resp, "try-error")){
+  if (httr::http_error(json_dates) | inherits(json_dates, "try-error")){
     stop("Your requested timed out or the server is unreachable")
   }
 
-  # check the content of the response
-  if (httr::http_type(resp) != "application/json") {
+  # check the content of the json_dates
+  if (httr::http_type(json_dates) != "application/json") {
     stop("API did not return json", call. = FALSE)
   }
 
   # grab content
-  dates <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"),
+  dates <- jsonlite::fromJSON(httr::content(json_dates, "text", encoding = "UTF-8"),
                               simplifyVector = TRUE)$dates
 
   # return a data frame with all dates

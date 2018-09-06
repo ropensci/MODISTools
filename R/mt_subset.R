@@ -86,14 +86,14 @@ mt_subset <- function(product = NULL,
            dates$calendar_date >= as.Date(start)),]
 
   # check if something remains
-  if (nrow(dates)==0){
+  if (nrow(dates) == 0){
     stop("No data points exist for the selected date range...")
   }
 
-  # list breaks
-  breaks <- seq(1,nrow(dates),10)
+  # list breaks, for downloads in chunks
+  breaks <- seq(1, nrow(dates), 10)
 
-  subset_data = lapply(breaks, function(b){
+  subset_data <- lapply(breaks, function(b){
 
     # grab last date for subset
     if(b == breaks[length(breaks)]){
@@ -112,25 +112,25 @@ mt_subset <- function(product = NULL,
                   "kmLeftRight" = km_lr)
 
     # try to download the data
-    resp = httr::GET(url = url,
+    json_chunk <- httr::GET(url = url,
                          query = query,
                          httr::write_memory())
 
     # trap errors on download, return a general error statement
     # with the most common causes
-    if (httr::http_error(resp)){
+    if (httr::http_error(json_chunk)){
       warning("Your requested timed out or the server is unreachable")
       return(NULL)
     }
 
     # check the content of the response
-    if (httr::http_type(resp) != "application/json") {
+    if (httr::http_type(json_chunk) != "application/json") {
       warning("API did not return json", call. = FALSE)
       return(NULL)
     }
 
     # grab content
-    chunk <- jsonlite::fromJSON(httr::content(resp, "text",
+    chunk <- jsonlite::fromJSON(httr::content(json_chunk, "text",
                                               encoding = "UTF-8"),
                                 simplifyVector = TRUE)
 
@@ -164,7 +164,7 @@ mt_subset <- function(product = NULL,
                                 function(x)x$subset))
   pixels <- do.call("rbind",
                     subset_data$data)
-  colnames(pixels) <- 1:ncol(pixels)
+  colnames(pixels) <- seq_len(ncol(pixels))
 
   # remove old nested list data and substitute with columns
   subset_data <- cbind(subset_data[,!(names(subset_data) %in% "data")],
@@ -180,7 +180,7 @@ mt_subset <- function(product = NULL,
   subset_data <- list("header" = header,
                       "data" = subset_data)
   # attach class
-  class(subset_data) = "MODISTools"
+  class(subset_data) <- "MODISTools"
 
   # return a nested list with all data
   # to workspace or to file
