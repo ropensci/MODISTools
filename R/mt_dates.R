@@ -37,20 +37,33 @@ mt_dates <- function(product = NULL,
     stop("please specify coordinates...")
   }
 
+  # check if site_id is valid
+  if(!is.null(site_id)){
+
+    # load all sites
+    sites <- MODISTools::mt_sites()
+
+    # check if the site id is valid
+    if (!length(site_id %in% sites$siteid)){
+      stop("please specify a valid site id...")
+    }
+  }
+
   # define server settings (main server should become global
   # as in not specified in every function)
-  server <- "https://modis.ornl.gov/rst/"
+  server <- "https://modis.ornl.gov/rst/api/"
+  version <- "v1"
 
   # switch url in case of siteid
   if (is.null(site_id)){
-    url <- paste0(server,"api/v1/",product,"/dates")
+    url <- paste0(server,version,"/",product,"/dates")
 
     # construct the query to be served to the server
     query <- list("latitude" = lat,
                   "longitude" = lon)
 
   } else {
-    url <- paste0(server,"api/v1/",product,"/",site_id,"/dates")
+    url <- paste0(server,version,"/",product,"/",site_id,"/dates")
     query <- NULL
   }
 
