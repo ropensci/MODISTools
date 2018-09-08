@@ -59,24 +59,38 @@ mt_subset <- function(product = NULL,
 
   # error trap
   if (is.null(site_id) & (is.null(lat) | is.null(lon)) ){
-    stop("please specify coordinates...")
+    stop("please specify coordinates, or a valid site ID...")
+  }
+
+  # check if site_id is valid
+  if(!is.null(site_id)){
+
+    # load all sites
+    sites <- MODISTools::mt_sites()
+
+    # check if the site id is valid
+    if (!length(site_id %in% sites$siteid)){
+      stop("please specify a valid site id...")
+    }
   }
 
   # define server settings (main server should become global
   # as in not specified in every function)
-  server <- "https://modis.ornl.gov/rst/"
+  server <- "https://modis.ornl.gov/rst/api/"
+  version <-"v1"
 
   # switch url in case of siteid
   if (is.null(site_id)){
-    url <- paste0(server,"api/v1/",product,"/subset")
+    url <- paste0(server,version,"/",product,"/subset")
   } else {
-    url <- paste0(server,"api/v1/",product,"/",site_id,"/subset")
+    url <- paste0(server,version,"/",product,"/",site_id,"/subset")
   }
 
   # get date range convert format
   dates <- MODISTools::mt_dates(product = product,
                       lat = lat,
-                      lon = lon)
+                      lon = lon,
+                      site_id = site_id)
 
   # convert to date object for easier handling
   dates$calendar_date <- as.Date(dates$calendar_date)
