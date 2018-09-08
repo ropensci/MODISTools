@@ -81,6 +81,20 @@ test_that("test mt_subset()",{
                     end = "2004-03-31"))
 
   # download data
+  subset_no_loc = try(mt_subset(product = "MOD11A2",
+                         lat = 40,
+                         band = "LST_Day_1km",
+                         start = "2004-01-01",
+                         end = "2004-03-31"))
+
+  # download data
+  subset_site_id = try(mt_subset(product = "MOD11A2",
+                                 site_id = "us_tennessee_neon_ornl",
+                                 band = "LST_Day_1km",
+                                 start = "2004-01-01",
+                                 end = "2004-03-31"))
+
+  # download data
   subset_disk = try(mt_subset(product = "MOD11A2",
                           lat = 40,
                           lon = -110,
@@ -91,7 +105,8 @@ test_that("test mt_subset()",{
 
   # see if any of the runs failed
   check = !inherits(subset, "try-error") &
-          !inherits(subset_disk, "try-error")
+          !inherits(subset_disk, "try-error") &
+          inherits(subset_no_loc, "try-error")
 
   # check if no error occured
   expect_true(check)
