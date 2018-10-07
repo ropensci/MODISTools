@@ -20,6 +20,8 @@
 #' \code{TRUE} or \code{FALSE} (default = \code{TRUE})
 #' @return A nested list containing the downloaded data and a descriptive
 #' header with meta-data.
+#' @seealso [mt_products()] [mt_bands()] [mt_sites()] [mt_batch_subset()]
+#' [mt_dates()]
 #' @keywords MODIS Land Products Subsets, products, meta-data
 #' @export
 #' @examples
@@ -36,15 +38,15 @@
 #'  print(str(subset))
 #'}
 
-mt_subset <- function(product = NULL,
-                       band = NULL,
-                       lat = NULL,
-                       lon = NULL,
+mt_subset <- function(product,
+                       band,
+                       lat,
+                       lon,
                        start = "2000-01-01",
                        end = format(Sys.time(),"%Y-%m-%d"),
                        km_lr = 0,
                        km_ab = 0,
-                       site_id = NULL,
+                       site_id,
                        site_name = "sitename",
                        out_dir = tempdir(),
                        internal = TRUE){
@@ -53,17 +55,17 @@ mt_subset <- function(product = NULL,
   products <- MODISTools::mt_products()$product
 
   # error trap
-  if (is.null(product) | !(product %in% products) ){
+  if (missing(product) | !(product %in% products) ){
     stop("please specify a product, or check your product name...")
   }
 
   # error trap
-  if (is.null(site_id) & (is.null(lat) | is.null(lon)) ){
+  if (missing(site_id) & (missing(lat) | missing(lon)) ){
     stop("please specify coordinates, or a valid site ID...")
   }
 
   # check if site_id is valid
-  if(!is.null(site_id)){
+  if(!missing(site_id)){
 
     # load all sites
     sites <- MODISTools::mt_sites()
@@ -80,7 +82,7 @@ mt_subset <- function(product = NULL,
   version <-"v1"
 
   # switch url in case of siteid
-  if (is.null(site_id)){
+  if (missing(site_id)){
     url <- paste0(server,version,"/",product,"/subset")
   } else {
     url <- paste0(server,version,"/",product,"/",site_id,"/subset")
@@ -156,7 +158,7 @@ mt_subset <- function(product = NULL,
   # additional ancillary data
   header <- subset_data[[1]][!(names(subset_data[[1]]) %in%
                                    c("header","subset"))]
-  header$site <- ifelse(is.null(site_id),
+  header$site <- ifelse(missing(site_id),
                           site_name,
                           site_id)
   header$product <- product
