@@ -16,13 +16,13 @@
 #'
 #'}
 
-mt_bands <- function(product = NULL){
+mt_bands <- function(product){
 
   # load all products
   products <- MODISTools::mt_products()$product
 
   # error trap
-  if (is.null(product) | !(product %in% products)){
+  if (missing(product) | !(product %in% products)){
     stop("please specify a product, or check your product name...")
   }
 

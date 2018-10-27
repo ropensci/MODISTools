@@ -4,10 +4,9 @@
 \alias{mt_batch_subset}
 \title{Batch download MODIS Land Products subsets}
 \usage{
-mt_batch_subset(df = NULL, product = NULL, band = NULL,
-  start = "2000-01-01", end = format(Sys.time(), "\%Y-\%m-\%d"),
-  km_lr = 0, km_ab = 0, out_dir = tempdir(), internal = TRUE,
-  ncores = "auto")
+mt_batch_subset(df, product, band, start = "2000-01-01",
+  end = format(Sys.time(), "\%Y-\%m-\%d"), km_lr = 0, km_ab = 0,
+  out_dir = tempdir(), internal = TRUE, ncores = "auto")
 }
 \arguments{
 \item{df}{a file holding locations and their sitenames to batch process}

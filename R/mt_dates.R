@@ -19,26 +19,26 @@
 #' print(bands)
 #'}
 
-mt_dates <- function(product = NULL,
-                       lat = NULL,
-                       lon = NULL,
-                       site_id = NULL){
+mt_dates <- function(product,
+                       lat,
+                       lon,
+                       site_id){
 
   # load all products
   products <- MODISTools::mt_products()$product
 
   # error trap
-  if (is.null(product) | !(product %in% products) ){
+  if (missing(product) | !(product %in% products) ){
     stop("please specify a product, or check your product name...")
   }
 
   # error trap
-  if (is.null(site_id) & (is.null(lat) | is.null(lon)) ){
+  if (missing(site_id) & (missing(lat) | missing(lon)) ){
     stop("please specify coordinates...")
   }
 
   # check if site_id is valid
-  if(!is.null(site_id)){
+  if(!missing(site_id)){
 
     # load all sites
     sites <- MODISTools::mt_sites()
@@ -55,7 +55,7 @@ mt_dates <- function(product = NULL,
   version <- "v1"
 
   # switch url in case of siteid
-  if (is.null(site_id)){
+  if (missing(site_id)){
     url <- paste0(server,version,"/",product,"/dates")
 
     # construct the query to be served to the server
@@ -68,19 +68,19 @@ mt_dates <- function(product = NULL,
   }
 
   # try to download the data
-  json_dates <- try(httr::GET(url = url,
-                        query = query,
-                        httr::write_memory()))
+  json_dates <- httr::GET(url = url,
+                          query = query,
+                          httr::write_memory())
 
   # trap errors on download, return a general error statement
-  # with the most common causes
-  if (httr::http_error(json_dates) | inherits(json_dates, "try-error")){
+  # with the most common causes.
+  if (httr::http_error(json_dates)){
     stop("Your requested timed out or the server is unreachable")
   }
 
-  # check the content of the json_dates
+  # check the content of the json_dates, stop if not json
   if (httr::http_type(json_dates) != "application/json") {
-    stop("API did not return json", call. = FALSE)
+    stop("API did not return proper json data.", call. = FALSE)
   }
 
   # grab content

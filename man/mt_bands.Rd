@@ -4,7 +4,7 @@
 \alias{mt_bands}
 \title{Download all available bands}
 \usage{
-mt_bands(product = NULL)
+mt_bands(product)
 }
 \arguments{
 \item{product}{a valid MODIS product name}
