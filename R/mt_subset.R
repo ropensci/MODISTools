@@ -205,3 +205,43 @@ mt_subset <- function(product = NULL,
                  out_dir = out_dir)
   }
 }
+
+corner_to_coord <- function (x) {
+  as.numeric(x) * 1e-5
+}
+
+mt_tidy <- function(x) {
+  tibble::as_tibble(x$header) %>%
+    dplyr::mutate(data = list(x$data))
+}
+
+corner_to_square <- function(x = 0, y = 0, res = c(0.05, 0.05)) {
+  if (length(x) > 1) {
+    return(purrr::map2(x, y, .corner_to_square))
+  }
+  list(.corner_to_square(x, y, res))
+}
+
+.corner_to_square <- function(x = 0, y = 0, res = c(0.05, 0.05)) {
+  trans <- c(
+    0, 0,
+    0, 1,
+    1, 1,
+    1, 0,
+    0, 0
+  )
+  matrix(res * trans + c(x, y), 5, 2, byrow = TRUE)
+}
+
+to_poly <- function(x) {
+  x %>%
+    sf::st_linestring() %>%
+    sf::st_cast("POLYGON")
+}
+
+corner_to_sfc <- function(x, y) {
+  corner_to_square(x, y) %>%
+    purrr::map(to_poly) %>%
+    sf::st_sfc(crs = 4326)
+}
+
