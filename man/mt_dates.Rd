@@ -4,7 +4,7 @@
 \alias{mt_dates}
 \title{Download all available dates}
 \usage{
-mt_dates(product = NULL, lat = NULL, lon = NULL, site_id = NULL)
+mt_dates(product, lat, lon, site_id)
 }
 \arguments{
 \item{product}{a valid MODIS product name}

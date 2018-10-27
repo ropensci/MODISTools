@@ -4,10 +4,10 @@
 \alias{mt_subset}
 \title{Download MODIS Land Products subsets}
 \usage{
-mt_subset(product = NULL, band = NULL, lat = NULL, lon = NULL,
-  start = "2000-01-01", end = format(Sys.time(), "\%Y-\%m-\%d"),
-  km_lr = 0, km_ab = 0, site_id = NULL, site_name = "sitename",
-  out_dir = tempdir(), internal = TRUE)
+mt_subset(product, band, lat, lon, start = "2000-01-01",
+  end = format(Sys.time(), "\%Y-\%m-\%d"), km_lr = 0, km_ab = 0,
+  site_id, site_name = "sitename", out_dir = tempdir(),
+  internal = TRUE)
 }
 \arguments{
 \item{product}{a valid MODIS product name}
@@ -58,6 +58,10 @@ subset <- mt_subset(product = "MOD11A2",
                         end = "2004-03-31")
  print(str(subset))
 }
+}
+\seealso{
+[mt_products()] [mt_bands()] [mt_sites()] [mt_batch_subset()]
+[mt_dates()]
 }
 \keyword{Land}
 \keyword{MODIS}

@@ -43,9 +43,9 @@
 #'
 #'}
 
-mt_batch_subset <- function(df = NULL,
-                         product = NULL,
-                         band = NULL,
+mt_batch_subset <- function(df,
+                         product,
+                         band,
                          start = "2000-01-01",
                          end = format(Sys.time(),"%Y-%m-%d"),
                          km_lr = 0,
@@ -54,7 +54,7 @@ mt_batch_subset <- function(df = NULL,
                          internal = TRUE,
                          ncores = "auto"){
   # error trap
-  if (is.null(df)){
+  if (missing(df)){
     stop("please specify a batch file...")
   }
 
@@ -62,7 +62,7 @@ mt_batch_subset <- function(df = NULL,
   products <- MODISTools::mt_products()$product
 
   # error trap
-  if (is.null(product) | !(product %in% products) ){
+  if (missing(product) | !(product %in% products) ){
     stop("please specify a product, or check your product name...")
   }
 
@@ -81,7 +81,7 @@ mt_batch_subset <- function(df = NULL,
   # construct the data frame over which we will
   # loop to process all the data
   df$product <- product
-  df$band <- ifelse(is.null(band),"",band)
+  df$band <- ifelse(missing(band),"",band)
   df$start <- start
   df$end <- end
   df$km_lr <- km_lr

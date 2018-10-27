@@ -70,7 +70,7 @@ mt_dates <- function(product,
   # try to download the data
   json_dates <- httr::GET(url = url,
                           query = query,
-                          httr::write_memory()))
+                          httr::write_memory())
 
   # trap errors on download, return a general error statement
   # with the most common causes.
