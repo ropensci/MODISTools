@@ -18,9 +18,9 @@ mt_sites <- function(){
 
   # define server settings (main server should become global
   # as in not specified in every function)
-  server <- "https://modis.ornl.gov/rst/"
-  end_point <- "api/v1/sites"
-  url <- paste0(server,end_point)
+  url <- paste0(.Options$mt_server,
+                .Options$mt_api_versions,
+                "/sites")
 
   # try to download the data
   sites <- try(jsonlite::fromJSON(url))

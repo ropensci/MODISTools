@@ -28,8 +28,11 @@ mt_bands <- function(product){
 
   # define server settings (main server should become global
   # as in not specified in every function)
-  server <- "https://modis.ornl.gov/rst/"
-  url <- paste0(server,"api/v1/",product,"/bands")
+  url <- paste0(.Options$mt_server,
+                .Options$mt_api_version,
+                "/",
+                product,
+                "/bands")
 
   # try to download the data
   bands <- try(jsonlite::fromJSON(url))

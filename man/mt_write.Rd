@@ -4,7 +4,7 @@
 \alias{mt_write}
 \title{Write a MODISTools data structure to file}
 \usage{
-mt_write(df = NULL, out_dir = tempdir())
+mt_write(df, out_dir = tempdir())
 }
 \arguments{
 \item{df}{a nested data structure of class MODISTools}

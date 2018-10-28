@@ -78,14 +78,22 @@ mt_subset <- function(product,
 
   # define server settings (main server should become global
   # as in not specified in every function)
-  server <- "https://modis.ornl.gov/rst/api/"
-  version <-"v1"
 
   # switch url in case of siteid
   if (missing(site_id)){
-    url <- paste0(server,version,"/",product,"/subset")
+    url <- paste0(.Options$mt_server,
+                  .Options$mt_api_version,
+                  "/",
+                  product,
+                  "/subset")
   } else {
-    url <- paste0(server,version,"/",product,"/",site_id,"/subset")
+    url <- paste0(.Options$mt_server,
+                  .Options$mt_api_version,
+                  "/",
+                  product,
+                  "/",
+                  site_id,
+                  "/subset")
   }
 
   # get date range convert format
@@ -98,7 +106,7 @@ mt_subset <- function(product,
   dates$calendar_date <- as.Date(dates$calendar_date)
 
   # subset the dates
-  dates <- dates[which( dates$calendar_date <= as.Date(end) &
+  dates <- dates[which(dates$calendar_date <= as.Date(end) &
            dates$calendar_date >= as.Date(start)),]
 
   # check if something remains

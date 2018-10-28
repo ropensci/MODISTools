@@ -85,7 +85,7 @@ mt_read <- function(filename){
     "header" = header,
     "data" = data)
 
-  # set proper phenocamr class
+  # set proper class
   class(output) <- "MODISTools"
 
   # return formatted data

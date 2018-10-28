@@ -17,9 +17,9 @@ mt_products <- function(){
 
   # define server settings (main server should become global
   # as in not specified in every function)
-  server <- "https://modis.ornl.gov/rst/"
-  end_point <- "api/v1/products"
-  url <- paste0(server,end_point)
+  url <- paste0(.Options$mt_server,
+                .Options$mt_api_version,
+                "/products")
 
   # try to download the data
   products <- try(jsonlite::fromJSON(url))

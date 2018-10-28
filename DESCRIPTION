@@ -17,6 +17,10 @@ Imports:
     httr,
     utils,
     tidyr,
+    dplyr,
+    purrr,
+    tibble,
+    sf,
     jsonlite
 License: AGPL-3
 LazyData: true

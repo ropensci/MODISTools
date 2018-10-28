@@ -29,10 +29,10 @@
 #' identical(subset, subset_disk)
 #' }
 
-mt_write <- function(df = NULL,
-                           out_dir = tempdir()){
+mt_write <- function(df,
+                     out_dir = tempdir()){
 
-  if(class(df) != "MODISTools" | is.null(df)){
+  if(class(df) != "MODISTools" | missing(df)){
     stop("not a MODISTools dataset or no dataset provided")
   }
 
