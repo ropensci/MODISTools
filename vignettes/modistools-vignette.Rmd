@@ -24,7 +24,7 @@ The MODISTools package has as goal to facilitate the interface between R and the
 
 ### Listing products / bands / dates
 
-In order to assess which products are available, which product bands are provided and which temporal range is covered one has to list these ancillary data. All these options can be queried using the mt_*() functions.
+In order to assess which products are available, which product bands are provided and which temporal range is covered one has to list these ancillary data. All these options can be queried using the `mt_*()` functions.
 
 To list all available products use the mt_products() function.
 
@@ -36,29 +36,29 @@ head(products)
 To list all available bands for a given product use the mt_bands() function.
 
 ```{r eval = TRUE}
-bands <- mt_bands(product = "MOD11A2")
+bands <- mt_bands(product = "MOD13Q1")
 head(bands)
 ```
 
 To list all available dates (temporal coverage) for a given product and location use the mt_dates() function.
 
 ```{r eval = TRUE}
-dates <- mt_dates(product = "MOD11A2", lat = 42, lon = -110)
+dates <- mt_dates(product = "MOD13Q1", lat = 42, lon = -110)
 head(dates)
 ```
 
 ### Downloading MODIS time series
 
-Once you decide on which data to download using the above functions you can use these parameters to download a time series using the mt_subset() function. The below query downloads MOD11A2 based daytime lands surface temperatures. The location is named 'testsite' and only covers the first six months of 2004. The output is saved to a variable called subset in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file).
+Once you decide on which data to download using the above functions you can use these parameters to download a time series using the `mt_subset()` function. The below query downloads MOD11A2 based daytime lands surface temperatures. The location is named 'testsite' and only covers the first six months of 2004. The output is saved to a variable called subset in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file).
 
 ```{r eval = TRUE}
 # download data
-subset <- mt_subset(product = "MOD11A2",
-                    lat = 40,
-                    lon = -110,
-                    band = "LST_Day_1km",
+subset <- mt_subset(product = "MOD13Q1",
+                    lat = 42.534171,
+                    lon = -72.179003,
+                    band = "250m_16_days_NDVI",
                     start = "2004-01-01",
-                    end = "2004-06-01",
+                    end = "2008-12-30",
                     km_lr = 0,
                     km_ab = 0,
                     site_name = "testsite",
@@ -67,27 +67,11 @@ head(subset)
 
 ```
 
-The output format is a nested list with the true data provided as a *tidy* data frame, as shown above. When witten to a csv, when the parameter 'internal' is set to FALSE, the same information is retained. Data can be read back into the same format with the included mt_read() function (see below).
+The output format is a *tidy* data frame, as shown above. When witten to a csv with the parameter `internal = FALSE` this will result in a flat file on disk.
 
-Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the 'pixel' column in the data frame containing the time series data. The remote sensing values are listed in the 'data' column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values. 
+Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the `pixel` column in the data frame containing the time series data. The remote sensing values are listed in the `value` column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values. 
 
-An example plot, below, of the downloaded daytime land surface temperature is given below. The data is first converted with the appropriate multiplier (see header info) and the fill values removed. The data shows the gradual increase in temperature from winter into summer (in the northern hemisphere).
-
-```{r fig.width = 7, fig.height=3}
-# create a plot of the data (i.e. daytime land surface temperature, LST)
-# the data has a multiplier of 0.02 in order to convert stored values
-# you can extract the multiplier (if applicable) from the data header
-date <- as.Date(subset$data$calendar_date)
-temperature <- subset$data$data * as.double(subset$header$scale)
-temperature[temperature == 0] <- NA
-
-plot(date,
-     temperature,
-     xlab = "Date",
-     ylab = expression("LST temperature (" * degree * "K)"))
-```
-
-When a large selection of locations is needed you might benefit from using the batch download function batch_subset(), which provides a wrapper around the mt_subset() function in order to speed up large download batches. This function has a similar syntax to mt_subset() but requires a data frame defining site names (site_name) and locations (lat / lon) (or a comma delimited file with the same structure) to specify a list of download locations.
+When a large selection of locations is needed you might benefit from using the batch download function `mt_batch_subset()`, which provides a wrapper around the `mt_subset()` function in order to speed up large download batches. This function has a similar syntax to `mt_subset()` but requires a data frame defining site names (site_name) and locations (lat / lon) (or a comma delimited file with the same structure) to specify a list of download locations.
 
 ```{r eval = TRUE}
 # create data frame with a site_name, lat and lon column
@@ -108,31 +92,24 @@ subsets <- mt_batch_subset(df = df,
                      end = "2004-02-28",
                      out_dir = "~")
 
-print(str(subsets))
+head(subsets)
 ```
 
 
-### Reading and writing data from / to file
+### Worked example using NDVI values
 
-In both download functions data can be written to a csv file in a particular directory using the 'internal' and 'out_dir' function options. The mt_read() function allows you to read in these csv files easily and into the same data structure as used when downloading directy into your R workspace.
+The above downloaded subset shows normalized difference vegetation index (NDVI), and [an indicator of plant health, density and or complexity](https://earthobservatory.nasa.gov/Features/MeasuringVegetation/measuring_vegetation_2.php) for the experimental [Harvard Forest](https://harvardforest.fas.harvard.edu/) site. When plotted the yearly pattern of rising and falling NDVI values shows vegetation growth in spring, and senescence or leaf drop in fall. Values lower than ~0.4 are contaminated by snow or clouds.
 
+```{r fig.width = 7, fig.height=3}
+# create a plot of the data - accounting for the multiplier (scale) component
+date <- as.Date(subset$calendar_date)
+temperature <- subset$value * as.double(subset$scale)
+temperature[temperature == 0] <- NA
+
+plot(date,
+     temperature,
+     xlab = "Date",
+     ylab = "NDVI",
+     ylim = c(0,1),
+     type = "l")
 ```
-[site_name]_[product]_[start]_[end].csv
-```
-
-The data can be read back into the original nested structed using mt_read().
-
-```{r eval = TRUE}
-# write the above file to disk
-mt_write(df = subset,
-             out_dir = tempdir())
-
-# read the data back in
-subset_disk <- mt_read(paste0(tempdir(),
-                  "/testsite_MOD11A2_2004-01-01_2004-06-01.csv"))
-
-# compare original to read from disk
-identical(subset, subset_disk)
-```
-
-
