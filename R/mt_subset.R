@@ -24,6 +24,7 @@
 #' [mt_dates()]
 #' @keywords MODIS Land Products Subsets, products, meta-data
 #' @export
+#' @importFrom magrittr %>%
 #' @examples
 #'
 #' \donttest{
@@ -51,12 +52,19 @@ mt_subset <- function(product,
                        out_dir = tempdir(),
                        internal = TRUE){
 
-  # load all products
+  # load all products and bands to check
+  # valid combinations
   products <- MODISTools::mt_products()$product
+  bands <- mt_bands(product)
 
-  # error trap
+  # error trap product
   if (missing(product) | !(product %in% products) ){
     stop("please specify a product, or check your product name...")
+  }
+
+  # error trap band
+  if (missing(band) | !(band %in% bands$band) ){
+    stop("please specify a band, or check your product band combination ...")
   }
 
   # error trap
@@ -76,31 +84,30 @@ mt_subset <- function(product,
     }
   }
 
-  # define server settings (main server should become global
-  # as in not specified in every function)
-
   # switch url in case of siteid
   if (missing(site_id)){
-    url <- paste0(.Options$mt_server,
-                  .Options$mt_api_version,
-                  "/",
+    url <- paste(.Options$mt_server,
                   product,
-                  "/subset")
-  } else {
-    url <- paste0(.Options$mt_server,
-                  .Options$mt_api_version,
-                  "/",
-                  product,
-                  "/",
-                  site_id,
-                  "/subset")
-  }
+                  "subset",
+                 sep = "/")
 
-  # get date range convert format
-  dates <- MODISTools::mt_dates(product = product,
-                      lat = lat,
-                      lon = lon,
-                      site_id = site_id)
+    # grab all available dates
+    dates <- MODISTools::mt_dates(product = product,
+                                  lat = lat,
+                                  lon = lon)
+  } else {
+    url <- paste(.Options$mt_server,
+                  product,
+                  site_id,
+                  "subset",
+                 sep = "/")
+
+    # grab all available dates
+    dates <- MODISTools::mt_dates(product = product,
+                                  site_id = site_id)
+    lat <- NULL
+    lon <- NULL
+  }
 
   # convert to date object for easier handling
   dates$calendar_date <- as.Date(dates$calendar_date)
@@ -117,6 +124,7 @@ mt_subset <- function(product,
   # list breaks, for downloads in chunks
   breaks <- seq(1, nrow(dates), 10)
 
+  # loop over all 10 value breaks
   subset_data <- lapply(breaks, function(b){
 
     # grab last date for subset
@@ -197,61 +205,41 @@ mt_subset <- function(product,
   # create tidy data frame
   subset_data <- tidyr::gather(subset_data,
          key = "pixel",
-         value = "data",
+         value = "value",
          grep("[0-9]",names(subset_data)))
 
-  # re-structure by addint a header
-  subset_data <- list("header" = header,
-                      "data" = subset_data)
-  # attach class
-  class(subset_data) <- "MODISTools"
+  # combine header with the data, this repeats
+  # some meta-data but makes file handling easier
+  subset_data <- data.frame(header, subset_data,
+                            stringsAsFactors = FALSE)
+
+  # drop duplicate column
+  subset_data <- subset_data %>%
+    dplyr::select(-"band.1")
+
+  # assign a class label, mostly for checks
+  class(subset_data) <- c(class(subset_data), "MODISTools")
 
   # return a nested list with all data
   # to workspace or to file
   if (internal){
     return(subset_data)
   } else {
-    mt_write(subset_data,
-                 out_dir = out_dir)
+    # format filename
+    filename <- sprintf("%s/%s_%s_%s_%s%s.csv",
+                        path.expand(out_dir),
+                        header$site,
+                        header$product,
+                        header$band,
+                        header$start,
+                        header$end)
+
+    # write file to disk
+    utils::write.table(subset_data,
+                       filename,
+                       quote = FALSE,
+                       row.names = FALSE,
+                       col.names = TRUE,
+                       sep = ",")
   }
 }
-
-corner_to_coord <- function (x) {
-  as.numeric(x) * 1e-5
-}
-
-mt_tidy <- function(x) {
-  tibble::as_tibble(x$header) %>%
-    dplyr::mutate(data = list(x$data))
-}
-
-corner_to_square <- function(x = 0, y = 0, res = c(0.05, 0.05)) {
-  if (length(x) > 1) {
-    return(purrr::map2(x, y, .corner_to_square))
-  }
-  list(.corner_to_square(x, y, res))
-}
-
-.corner_to_square <- function(x = 0, y = 0, res = c(0.05, 0.05)) {
-  trans <- c(
-    0, 0,
-    0, 1,
-    1, 1,
-    1, 0,
-    0, 0
-  )
-  matrix(res * trans + c(x, y), 5, 2, byrow = TRUE)
-}
-
-to_poly <- function(x) {
-  x %>%
-    sf::st_linestring() %>%
-    sf::st_cast("POLYGON")
-}
-
-corner_to_sfc <- function(x, y) {
-  corner_to_square(x, y) %>%
-    purrr::map(to_poly) %>%
-    sf::st_sfc(crs = 4326)
-}
-

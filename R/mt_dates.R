@@ -40,30 +40,25 @@ mt_dates <- function(product,
   # check if site_id is valid
   if(!missing(site_id)){
 
-    # load all sites
-    sites <- MODISTools::mt_sites()
+      # load all sites
+      sites <- MODISTools::mt_sites()
 
-    # check if the site id is valid
-    if (!length(site_id %in% sites$siteid)){
-      stop("please specify a valid site id...")
-    }
+      # check if the site id is valid
+      if (!length(site_id %in% sites$siteid)){
+        stop("please specify a valid site id...")
+      }
   }
-
-  # define server settings (main server should become global
-  # as in not specified in every function)
-  server <- "https://modis.ornl.gov/rst/api/"
-  version <- "v1"
 
   # switch url in case of siteid
   if (missing(site_id)){
-    url <- paste0(server,version,"/",product,"/dates")
+    url <- paste(.Options$mt_server, product, "dates", sep = "/")
 
     # construct the query to be served to the server
     query <- list("latitude" = lat,
                   "longitude" = lon)
 
   } else {
-    url <- paste0(server,version,"/",product,"/",site_id,"/dates")
+    url <- paste(.Options$mt_server, product, site_id, "dates", sep = "/")
     query <- NULL
   }
 
@@ -75,7 +70,8 @@ mt_dates <- function(product,
   # trap errors on download, return a general error statement
   # with the most common causes.
   if (httr::http_error(json_dates)){
-    stop("Your requested timed out or the server is unreachable")
+    stop("Your requested timed out or the server is unreachable",
+         call. = FALSE)
   }
 
   # check the content of the json_dates, stop if not json
@@ -84,7 +80,8 @@ mt_dates <- function(product,
   }
 
   # grab content
-  dates <- jsonlite::fromJSON(httr::content(json_dates, "text", encoding = "UTF-8"),
+  dates <- jsonlite::fromJSON(httr::content(json_dates, "text",
+                                            encoding = "UTF-8"),
                               simplifyVector = TRUE)$dates
 
   # return a data frame with all dates

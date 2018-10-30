@@ -3,7 +3,10 @@
 #' Lists all available dates for a MODIS Land Products Subset product
 #' at a particular location.
 #'
-#' @param df a file holding locations and their sitenames to batch process
+#' @param df a CSV file or data frame holding locations and their sitenames to
+#' batch process with column names site_name, lat, lon holding the respective
+#' sitenames, latitude and longitude. When providing a CSV make sure that the
+#' data are comma separated.
 #' @param product a valid MODIS product name
 #' @param band band to download (default = \code{NULL}, all bands)
 #' @param start start date
@@ -102,18 +105,20 @@ mt_batch_subset <- function(df,
   # Initiate cluster
   cl <- parallel::makeCluster(ncores)
 
+  # paralllel loop (if requested)
   output <- parallel::parRapply(cl, df, function(x){
-    MODISTools::mt_subset(site_name = as.character(x['site_name']),
-                           product = as.character(x['product']),
-                           band = as.character(x['band']),
-                           lat = as.numeric(x['lat']),
-                           lon = as.numeric(x['lon']),
-                           km_lr = as.numeric(x['km_lr']),
-                           km_ab = as.numeric(x['km_ab']),
-                           start = as.character(x['start']),
-                           end = as.character(x['end']),
-                           out_dir = x['out_dir'],
-                           internal = x['internal'])
+    MODISTools::mt_subset(
+      site_name = as.character(x['site_name']),
+      product = as.character(x['product']),
+      band = as.character(x['band']),
+      lat = as.numeric(x['lat']),
+      lon = as.numeric(x['lon']),
+      km_lr = as.numeric(x['km_lr']),
+      km_ab = as.numeric(x['km_ab']),
+      start = as.character(x['start']),
+      end = as.character(x['end']),
+      out_dir = x['out_dir'],
+      internal = x['internal'])
   })
 
   # stop cluster
@@ -121,13 +126,12 @@ mt_batch_subset <- function(df,
 
   # return data
   if(internal){
-
-    # add site names to list
-    names(output) <- df$site_name
+    # row bind the nested list output
+    output <- do.call("rbind", output)
 
     return(output)
   } else {
-    invisible(NULL)
+    invisible()
   }
 }
 

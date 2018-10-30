@@ -4,6 +4,7 @@
 * replaced NULL parameters with missing()
 * output a tidy data frame (tibble)
 * include the coordinates of the pixel(s) as an sf object
+* pkgdown documentation generation
 
 ## MODISTools 1.0.0
 

@@ -19,8 +19,11 @@ Imports:
     tidyr,
     dplyr,
     purrr,
+    magrittr,
+    lubridate,
     tibble,
     sf,
+    memoise,
     jsonlite
 License: AGPL-3
 LazyData: true

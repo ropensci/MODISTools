@@ -14,13 +14,10 @@
 #' print(head(sites))
 #'}
 
-mt_sites <- function(){
+mt_sites <- memoise::memoise(function(){
 
-  # define server settings (main server should become global
-  # as in not specified in every function)
-  url <- paste0(.Options$mt_server,
-                .Options$mt_api_versions,
-                "/sites")
+  # define server settings
+  url <- paste(.Options$mt_server, "sites", sep = "/")
 
   # try to download the data
   sites <- try(jsonlite::fromJSON(url))
@@ -32,4 +29,4 @@ mt_sites <- function(){
 
   # return a data frame with all products and their details
   return(sites$sites)
-}
+})

@@ -16,7 +16,7 @@
 #'
 #'}
 
-mt_bands <- function(product){
+mt_bands <- memoise::memoise(function(product){
 
   # load all products
   products <- MODISTools::mt_products()$product
@@ -26,13 +26,8 @@ mt_bands <- function(product){
     stop("please specify a product, or check your product name...")
   }
 
-  # define server settings (main server should become global
-  # as in not specified in every function)
-  url <- paste0(.Options$mt_server,
-                .Options$mt_api_version,
-                "/",
-                product,
-                "/bands")
+  # define url
+  url <- paste(.Options$mt_server, product, "bands", sep = "/")
 
   # try to download the data
   bands <- try(jsonlite::fromJSON(url))
@@ -44,4 +39,4 @@ mt_bands <- function(product){
 
   # return a data frame with all bands
   return(bands$bands)
-}
+})

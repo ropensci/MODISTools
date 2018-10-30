@@ -9,7 +9,10 @@ mt_batch_subset(df, product, band, start = "2000-01-01",
   out_dir = tempdir(), internal = TRUE, ncores = "auto")
 }
 \arguments{
-\item{df}{a file holding locations and their sitenames to batch process}
+\item{df}{a CSV file or data frame holding locations and their sitenames to
+batch process with column names site_name, lat, lon holding the respective
+sitenames, latitude and longitude. When providing a CSV make sure that the
+data are comma separated.}
 
 \item{product}{a valid MODIS product name}
 
