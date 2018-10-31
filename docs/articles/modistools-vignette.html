@@ -8,8 +8,8 @@
 <title>MODISTools • MODISTools</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="MODISTools">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><meta property="og:title" content="MODISTools">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODISTools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.1.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
       <h1>MODISTools</h1>
                         <h4 class="author">Koen Hufkens</h4>
             
-            <h4 class="date">2018-06-15</h4>
+            <h4 class="date">2018-10-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/khufkens/MODISTools/blob/master/vignettes/modistools-vignette.Rmd"><code>vignettes/modistools-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>modistools-vignette.Rmd</code></div>
@@ -95,254 +95,226 @@
 <div id="listing-products-bands-dates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#listing-products-bands-dates" class="anchor"></a>Listing products / bands / dates</h3>
-<p>In order to assess which products are available, which product bands are provided and which temporal range is covered one has to list these ancillary data. All these options can be queried using the mt_*() functions.</p>
+<p>In order to assess which products are available, which product bands are provided and which temporal range is covered one has to list these ancillary data. All these options can be queried using the <code>mt_*()</code> functions.</p>
 <p>To list all available products use the mt_products() function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">products &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_products.html">mt_products</a></span>()
-<span class="kw">head</span>(products)
-<span class="co">#&gt;    product</span>
-<span class="co">#&gt; 1  MCD12Q1</span>
-<span class="co">#&gt; 2 MCD15A2H</span>
-<span class="co">#&gt; 3 MCD15A3H</span>
-<span class="co">#&gt; 4  MOD09A1</span>
-<span class="co">#&gt; 5  MOD11A2</span>
-<span class="co">#&gt; 6  MOD13Q1</span>
-<span class="co">#&gt;                                                                               description</span>
-<span class="co">#&gt; 1                   MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid</span>
-<span class="co">#&gt; 2        MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR)  8-Day L4 Global 500 m SIN Grid</span>
-<span class="co">#&gt; 3         MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR) 4-Day L4 Global 500 m SIN Grid</span>
-<span class="co">#&gt; 4                    MODIS/Terra Surface Reflectance (SREF) 8-Day L3 Global 500m SIN Grid</span>
-<span class="co">#&gt; 5 MODIS/Terra Land Surface Temperature and Emissivity (LST) 8-Day L3 Global 1 km SIN Grid</span>
-<span class="co">#&gt; 6                MODIS/Terra Vegetation Indices (NDVI/EVI) 16-Day L3 Global 250m SIN Grid</span>
-<span class="co">#&gt;   frequency resolution_meters</span>
-<span class="co">#&gt; 1    Yearly               500</span>
-<span class="co">#&gt; 2     8-Day               500</span>
-<span class="co">#&gt; 3     4-Day               500</span>
-<span class="co">#&gt; 4     8-Day               500</span>
-<span class="co">#&gt; 5     8-Day              1000</span>
-<span class="co">#&gt; 6    16-Day               250</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">products &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_products.html">mt_products</a></span>()</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">head</span>(products)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co">#&gt;    product</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co">#&gt; 1   Daymet</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="co">#&gt; 2  MCD12Q1</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co">#&gt; 3  MCD12Q2</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co">#&gt; 4 MCD15A2H</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">#&gt; 5 MCD15A3H</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">#&gt; 6  MCD19A3</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="co">#&gt;                                                                        description</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="co">#&gt; 1  Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 3</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="co">#&gt; 2            MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="co">#&gt; 3       MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="co">#&gt; 4 MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR)  8-Day L4 Global 500 m SIN Grid</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="co">#&gt; 5  MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR) 4-Day L4 Global 500 m SIN Grid</span></a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="co">#&gt; 6     MODIS/Terra+Aqua BRDF Model Parameters (MAIAC) 8-Day L3 Global 1 km SIN Grid</span></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="co">#&gt;   frequency resolution_meters</span></a>
+<a class="sourceLine" id="cb1-18" title="18"><span class="co">#&gt; 1     1 day              1000</span></a>
+<a class="sourceLine" id="cb1-19" title="19"><span class="co">#&gt; 2    1 year               500</span></a>
+<a class="sourceLine" id="cb1-20" title="20"><span class="co">#&gt; 3    1 year               500</span></a>
+<a class="sourceLine" id="cb1-21" title="21"><span class="co">#&gt; 4     8 day               500</span></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="co">#&gt; 5     4 day               500</span></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="co">#&gt; 6     8 day              1000</span></a></code></pre></div>
 <p>To list all available bands for a given product use the mt_bands() function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bands &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_bands.html">mt_bands</a></span>(<span class="dt">product =</span> <span class="st">"MOD11A2"</span>)
-<span class="kw">head</span>(bands)
-<span class="co">#&gt;            band                          description  units   valid_range</span>
-<span class="co">#&gt; 1 Day_view_angl View zenith angle of day observation degree      0 to 130</span>
-<span class="co">#&gt; 2       Emis_32                   Band 32 emissivity   &lt;NA&gt;      1 to 255</span>
-<span class="co">#&gt; 3       Emis_31                   Band 31 emissivity   &lt;NA&gt;      1 to 255</span>
-<span class="co">#&gt; 4      QC_Night     Nighttime LST Quality indicators   &lt;NA&gt;      0 to 255</span>
-<span class="co">#&gt; 5 Day_view_time        Local time of day observation    hrs      0 to 240</span>
-<span class="co">#&gt; 6   LST_Day_1km     Daytime Land Surface Temperature Kelvin 7500 to 65535</span>
-<span class="co">#&gt;   fill_value</span>
-<span class="co">#&gt; 1        255</span>
-<span class="co">#&gt; 2          0</span>
-<span class="co">#&gt; 3          0</span>
-<span class="co">#&gt; 4       &lt;NA&gt;</span>
-<span class="co">#&gt; 5        255</span>
-<span class="co">#&gt; 6          0</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">bands &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_bands.html">mt_bands</a></span>(<span class="dt">product =</span> <span class="st">"MOD13Q1"</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">head</span>(bands)</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt;                             band                     description</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co">#&gt; 1        250m_16_days_VI_Quality           VI quality indicators</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt; 2  250m_16_days_blue_reflectance      Surface Reflectance Band 3</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt; 3 250m_16_days_pixel_reliability Quality reliability of VI pixel</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt; 4   250m_16_days_NIR_reflectance      Surface Reflectance Band 2</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt; 5   250m_16_days_MIR_reflectance      Surface Reflectance Band 7</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt; 6              250m_16_days_NDVI             16 day NDVI average</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt;                   units    valid_range fill_value</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; 1             bit field     0 to 65534         -1</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; 2           reflectance     0 to 10000      -1000</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt; 3                  rank         0 to 3         -1</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; 4           reflectance     0 to 10000      -1000</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; 5           reflectance     0 to 10000      -1000</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; 6 NDVI ratio - No units -2000 to 10000      -3000</span></a></code></pre></div>
 <p>To list all available dates (temporal coverage) for a given product and location use the mt_dates() function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_dates.html">mt_dates</a></span>(<span class="dt">product =</span> <span class="st">"MOD11A2"</span>, <span class="dt">lat =</span> <span class="dv">42</span>, <span class="dt">lon =</span> <span class="op">-</span><span class="dv">110</span>)
-<span class="kw">head</span>(dates)
-<span class="co">#&gt;   modis_date calendar_date</span>
-<span class="co">#&gt; 1   A2000049    2000-02-18</span>
-<span class="co">#&gt; 2   A2000057    2000-02-26</span>
-<span class="co">#&gt; 3   A2000065    2000-03-05</span>
-<span class="co">#&gt; 4   A2000073    2000-03-13</span>
-<span class="co">#&gt; 5   A2000081    2000-03-21</span>
-<span class="co">#&gt; 6   A2000089    2000-03-29</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">dates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_dates.html">mt_dates</a></span>(<span class="dt">product =</span> <span class="st">"MOD13Q1"</span>, <span class="dt">lat =</span> <span class="dv">42</span>, <span class="dt">lon =</span> <span class="dv">-110</span>)</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">head</span>(dates)</a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt;   modis_date calendar_date</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt; 1   A2000049    2000-02-18</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; 2   A2000065    2000-03-05</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt; 3   A2000081    2000-03-21</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt; 4   A2000097    2000-04-06</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt; 5   A2000113    2000-04-22</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt; 6   A2000129    2000-05-08</span></a></code></pre></div>
 </div>
 <div id="downloading-modis-time-series" class="section level3">
 <h3 class="hasAnchor">
 <a href="#downloading-modis-time-series" class="anchor"></a>Downloading MODIS time series</h3>
-<p>Once you decide on which data to download using the above functions you can use these parameters to download a time series using the mt_subset() function. The below query downloads MOD11A2 based daytime lands surface temperatures. The location is named ‘testsite’ and only covers the first six months of 2004. The output is saved to a variable called subset in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># download data</span>
-subset &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_subset.html">mt_subset</a></span>(<span class="dt">product =</span> <span class="st">"MOD11A2"</span>,
-                    <span class="dt">lat =</span> <span class="dv">40</span>,
-                    <span class="dt">lon =</span> <span class="op">-</span><span class="dv">110</span>,
-                    <span class="dt">band =</span> <span class="st">"LST_Day_1km"</span>,
-                    <span class="dt">start =</span> <span class="st">"2004-01-01"</span>,
-                    <span class="dt">end =</span> <span class="st">"2004-06-01"</span>,
-                    <span class="dt">km_lr =</span> <span class="dv">0</span>,
-                    <span class="dt">km_ab =</span> <span class="dv">0</span>,
-                    <span class="dt">site_name =</span> <span class="st">"testsite"</span>,
-                    <span class="dt">internal =</span> <span class="ot">TRUE</span>)
-<span class="kw">head</span>(subset)
-<span class="co">#&gt; $header</span>
-<span class="co">#&gt; $header$xllcorner</span>
-<span class="co">#&gt; [1] "-9370036.39"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$yllcorner</span>
-<span class="co">#&gt; [1] "4447802.08"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$cellsize</span>
-<span class="co">#&gt; [1] "926.625433055834"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$nrows</span>
-<span class="co">#&gt; [1] 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$ncols</span>
-<span class="co">#&gt; [1] 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$band</span>
-<span class="co">#&gt; [1] "LST_Day_1km"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$units</span>
-<span class="co">#&gt; [1] "Kelvin"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$scale</span>
-<span class="co">#&gt; [1] "0.02"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$latitude</span>
-<span class="co">#&gt; [1] 40</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$longitude</span>
-<span class="co">#&gt; [1] -110</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$site</span>
-<span class="co">#&gt; [1] "testsite"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$product</span>
-<span class="co">#&gt; [1] "MOD11A2"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$start</span>
-<span class="co">#&gt; [1] "2004-01-01"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$end</span>
-<span class="co">#&gt; [1] "2004-06-01"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $header$complete</span>
-<span class="co">#&gt; [1] TRUE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $data</span>
-<span class="co">#&gt;    modis_date calendar_date        band   tile     proc_date pixel  data</span>
-<span class="co">#&gt; 1    A2004001    2004-01-01 LST_Day_1km h09v05 2015212185706     1 13098</span>
-<span class="co">#&gt; 2    A2004009    2004-01-09 LST_Day_1km h09v05 2015212201022     1 13062</span>
-<span class="co">#&gt; 3    A2004017    2004-01-17 LST_Day_1km h09v05 2015212213103     1 13297</span>
-<span class="co">#&gt; 4    A2004025    2004-01-25 LST_Day_1km h09v05 2015213005429     1 13323</span>
-<span class="co">#&gt; 5    A2004033    2004-02-02 LST_Day_1km h09v05 2015213090158     1 13315</span>
-<span class="co">#&gt; 6    A2004041    2004-02-10 LST_Day_1km h09v05 2015213165253     1 13227</span>
-<span class="co">#&gt; 7    A2004049    2004-02-18 LST_Day_1km h09v05 2015216182840     1 13739</span>
-<span class="co">#&gt; 8    A2004057    2004-02-26 LST_Day_1km h09v05 2015217020635     1 13783</span>
-<span class="co">#&gt; 9    A2004065    2004-03-05 LST_Day_1km h09v05 2015217091316     1 14748</span>
-<span class="co">#&gt; 10   A2004073    2004-03-13 LST_Day_1km h09v05 2015217164857     1 15105</span>
-<span class="co">#&gt; 11   A2004081    2004-03-21 LST_Day_1km h09v05 2015217230030     1 15290</span>
-<span class="co">#&gt; 12   A2004089    2004-03-29 LST_Day_1km h09v05 2015218055617     1 15410</span>
-<span class="co">#&gt; 13   A2004097    2004-04-06 LST_Day_1km h09v05 2015218215903     1 15330</span>
-<span class="co">#&gt; 14   A2004105    2004-04-14 LST_Day_1km h09v05 2015219063436     1     0</span>
-<span class="co">#&gt; 15   A2004113    2004-04-22 LST_Day_1km h09v05 2015219140857     1 15463</span>
-<span class="co">#&gt; 16   A2004121    2004-04-30 LST_Day_1km h09v05 2015219231453     1 15649</span>
-<span class="co">#&gt; 17   A2004129    2004-05-08 LST_Day_1km h09v05 2015220070159     1 15612</span>
-<span class="co">#&gt; 18   A2004137    2004-05-16 LST_Day_1km h09v05 2015220154043     1 15418</span>
-<span class="co">#&gt; 19   A2004145    2004-05-24 LST_Day_1km h09v05 2015220231431     1 15375</span>
-<span class="co">#&gt; 20   A2004153    2004-06-01 LST_Day_1km h09v05 2015223193116     1 16052</span></code></pre></div>
-<p>The output format is a nested list with the true data provided as a <em>tidy</em> data frame, as shown above. When witten to a csv, when the parameter ‘internal’ is set to FALSE, the same information is retained. Data can be read back into the same format with the included mt_read() function (see below).</p>
-<p>Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the ‘pixel’ column in the data frame containing the time series data. The remote sensing values are listed in the ‘data’ column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values.</p>
-<p>An example plot, below, of the downloaded daytime land surface temperature is given below. The data is first converted with the appropriate multiplier (see header info) and the fill values removed. The data shows the gradual increase in temperature from winter into summer (in the northern hemisphere).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a plot of the data (i.e. daytime land surface temperature, LST)</span>
-<span class="co"># the data has a multiplier of 0.02 in order to convert stored values</span>
-<span class="co"># you can extract the multiplier (if applicable) from the data header</span>
-date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(subset<span class="op">$</span>data<span class="op">$</span>calendar_date)
-temperature &lt;-<span class="st"> </span>subset<span class="op">$</span>data<span class="op">$</span>data <span class="op">*</span><span class="st"> </span><span class="kw">as.double</span>(subset<span class="op">$</span>header<span class="op">$</span>scale)
-temperature[temperature <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
-
-<span class="kw">plot</span>(date,
-     temperature,
-     <span class="dt">xlab =</span> <span class="st">"Date"</span>,
-     <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="st">"LST temperature ("</span> <span class="op">*</span><span class="st"> </span>degree <span class="op">*</span><span class="st"> "K)"</span>))</code></pre></div>
-<p><img src="modistools-vignette_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
-<p>When a large selection of locations is needed you might benefit from using the batch download function batch_subset(), which provides a wrapper around the mt_subset() function in order to speed up large download batches. This function has a similar syntax to mt_subset() but requires a data frame defining site names (site_name) and locations (lat / lon) (or a comma delimited file with the same structure) to specify a list of download locations.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create data frame with a site_name, lat and lon column</span>
-<span class="co"># holding the respective names of sites and their location</span>
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">"site_name"</span> =<span class="st"> </span><span class="kw">paste</span>(<span class="st">"test"</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>), <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
-df<span class="op">$</span>lat &lt;-<span class="st"> </span><span class="dv">40</span>
-df<span class="op">$</span>lon &lt;-<span class="st"> </span><span class="op">-</span><span class="dv">110</span>
-
-<span class="co"># an example batch download data frame</span>
-<span class="kw">print</span>(df)
-<span class="co">#&gt;   site_name lat  lon</span>
-<span class="co">#&gt; 1    test 1  40 -110</span>
-<span class="co">#&gt; 2    test 2  40 -110</span>
-
-<span class="co"># test batch download</span>
-subsets &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_batch_subset.html">mt_batch_subset</a></span>(<span class="dt">df =</span> df,
-                     <span class="dt">product =</span> <span class="st">"MOD11A2"</span>,
-                     <span class="dt">band =</span> <span class="st">"LST_Day_1km"</span>,
-                     <span class="dt">internal =</span> <span class="ot">TRUE</span>,
-                     <span class="dt">start =</span> <span class="st">"2004-01-01"</span>,
-                     <span class="dt">end =</span> <span class="st">"2004-02-28"</span>,
-                     <span class="dt">out_dir =</span> <span class="st">"~"</span>)
-
-<span class="kw">print</span>(<span class="kw">str</span>(subsets))
-<span class="co">#&gt; List of 2</span>
-<span class="co">#&gt;  $ test 1:List of 2</span>
-<span class="co">#&gt;   ..$ header:List of 15</span>
-<span class="co">#&gt;   .. ..$ xllcorner: chr "-9370036.39"</span>
-<span class="co">#&gt;   .. ..$ yllcorner: chr "4447802.08"</span>
-<span class="co">#&gt;   .. ..$ cellsize : chr "926.625433055834"</span>
-<span class="co">#&gt;   .. ..$ nrows    : int 1</span>
-<span class="co">#&gt;   .. ..$ ncols    : int 1</span>
-<span class="co">#&gt;   .. ..$ band     : chr "LST_Day_1km"</span>
-<span class="co">#&gt;   .. ..$ units    : chr "Kelvin"</span>
-<span class="co">#&gt;   .. ..$ scale    : chr "0.02"</span>
-<span class="co">#&gt;   .. ..$ latitude : num 40</span>
-<span class="co">#&gt;   .. ..$ longitude: num -110</span>
-<span class="co">#&gt;   .. ..$ site     : chr "test 1"</span>
-<span class="co">#&gt;   .. ..$ product  : chr "MOD11A2"</span>
-<span class="co">#&gt;   .. ..$ start    : chr "2004-01-01"</span>
-<span class="co">#&gt;   .. ..$ end      : chr "2004-02-28"</span>
-<span class="co">#&gt;   .. ..$ complete : logi TRUE</span>
-<span class="co">#&gt;   ..$ data  :'data.frame':   8 obs. of  7 variables:</span>
-<span class="co">#&gt;   .. ..$ modis_date   : chr [1:8] "A2004001" "A2004009" "A2004017" "A2004025" ...</span>
-<span class="co">#&gt;   .. ..$ calendar_date: chr [1:8] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...</span>
-<span class="co">#&gt;   .. ..$ band         : chr [1:8] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" ...</span>
-<span class="co">#&gt;   .. ..$ tile         : chr [1:8] "h09v05" "h09v05" "h09v05" "h09v05" ...</span>
-<span class="co">#&gt;   .. ..$ proc_date    : chr [1:8] "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...</span>
-<span class="co">#&gt;   .. ..$ pixel        : chr [1:8] "1" "1" "1" "1" ...</span>
-<span class="co">#&gt;   .. ..$ data         : int [1:8] 13098 13062 13297 13323 13315 13227 13739 13783</span>
-<span class="co">#&gt;   ..- attr(*, "class")= chr "MODISTools"</span>
-<span class="co">#&gt;  $ test 2:List of 2</span>
-<span class="co">#&gt;   ..$ header:List of 15</span>
-<span class="co">#&gt;   .. ..$ xllcorner: chr "-9370036.39"</span>
-<span class="co">#&gt;   .. ..$ yllcorner: chr "4447802.08"</span>
-<span class="co">#&gt;   .. ..$ cellsize : chr "926.625433055834"</span>
-<span class="co">#&gt;   .. ..$ nrows    : int 1</span>
-<span class="co">#&gt;   .. ..$ ncols    : int 1</span>
-<span class="co">#&gt;   .. ..$ band     : chr "LST_Day_1km"</span>
-<span class="co">#&gt;   .. ..$ units    : chr "Kelvin"</span>
-<span class="co">#&gt;   .. ..$ scale    : chr "0.02"</span>
-<span class="co">#&gt;   .. ..$ latitude : num 40</span>
-<span class="co">#&gt;   .. ..$ longitude: num -110</span>
-<span class="co">#&gt;   .. ..$ site     : chr "test 2"</span>
-<span class="co">#&gt;   .. ..$ product  : chr "MOD11A2"</span>
-<span class="co">#&gt;   .. ..$ start    : chr "2004-01-01"</span>
-<span class="co">#&gt;   .. ..$ end      : chr "2004-02-28"</span>
-<span class="co">#&gt;   .. ..$ complete : logi TRUE</span>
-<span class="co">#&gt;   ..$ data  :'data.frame':   8 obs. of  7 variables:</span>
-<span class="co">#&gt;   .. ..$ modis_date   : chr [1:8] "A2004001" "A2004009" "A2004017" "A2004025" ...</span>
-<span class="co">#&gt;   .. ..$ calendar_date: chr [1:8] "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...</span>
-<span class="co">#&gt;   .. ..$ band         : chr [1:8] "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" "LST_Day_1km" ...</span>
-<span class="co">#&gt;   .. ..$ tile         : chr [1:8] "h09v05" "h09v05" "h09v05" "h09v05" ...</span>
-<span class="co">#&gt;   .. ..$ proc_date    : chr [1:8] "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...</span>
-<span class="co">#&gt;   .. ..$ pixel        : chr [1:8] "1" "1" "1" "1" ...</span>
-<span class="co">#&gt;   .. ..$ data         : int [1:8] 13098 13062 13297 13323 13315 13227 13739 13783</span>
-<span class="co">#&gt;   ..- attr(*, "class")= chr "MODISTools"</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
+<p>Once you decide on which data to download using the above functions you can use these parameters to download a time series using the <code><a href="../reference/mt_subset.html">mt_subset()</a></code> function. The below query downloads MOD11A2 based daytime lands surface temperatures. The location is named ‘testsite’ and only covers the first six months of 2004. The output is saved to a variable called subset in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># download data</span></a>
+<a class="sourceLine" id="cb4-2" title="2">subset &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_subset.html">mt_subset</a></span>(<span class="dt">product =</span> <span class="st">"MOD13Q1"</span>,</a>
+<a class="sourceLine" id="cb4-3" title="3">                    <span class="dt">lat =</span> <span class="fl">42.534171</span>,</a>
+<a class="sourceLine" id="cb4-4" title="4">                    <span class="dt">lon =</span> <span class="fl">-72.179003</span>,</a>
+<a class="sourceLine" id="cb4-5" title="5">                    <span class="dt">band =</span> <span class="st">"250m_16_days_NDVI"</span>,</a>
+<a class="sourceLine" id="cb4-6" title="6">                    <span class="dt">start =</span> <span class="st">"2004-01-01"</span>,</a>
+<a class="sourceLine" id="cb4-7" title="7">                    <span class="dt">end =</span> <span class="st">"2008-12-30"</span>,</a>
+<a class="sourceLine" id="cb4-8" title="8">                    <span class="dt">km_lr =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb4-9" title="9">                    <span class="dt">km_ab =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb4-10" title="10">                    <span class="dt">site_name =</span> <span class="st">"testsite"</span>,</a>
+<a class="sourceLine" id="cb4-11" title="11">                    <span class="dt">internal =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb4-12" title="12">                    <span class="dt">progress =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="kw">head</span>(subset)</a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt;       xllcorner  yllcorner      cellsize nrows ncols              band</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt; 1.1 -5914186.84 4729496.17 231.656358264     1     1 250m_16_days_NDVI</span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; 2.1 -5914186.84 4729496.17 231.656358264     1     1 250m_16_days_NDVI</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; 3.1 -5914186.84 4729496.17 231.656358264     1     1 250m_16_days_NDVI</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; 4.1 -5914186.84 4729496.17 231.656358264     1     1 250m_16_days_NDVI</span></a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; 5.1 -5914186.84 4729496.17 231.656358264     1     1 250m_16_days_NDVI</span></a>
+<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; 6.1 -5914186.84 4729496.17 231.656358264     1     1 250m_16_days_NDVI</span></a>
+<a class="sourceLine" id="cb4-21" title="21"><span class="co">#&gt;                     units  scale latitude longitude     site product</span></a>
+<a class="sourceLine" id="cb4-22" title="22"><span class="co">#&gt; 1.1 NDVI ratio - No units 0.0001 42.53417   -72.179 testsite MOD13Q1</span></a>
+<a class="sourceLine" id="cb4-23" title="23"><span class="co">#&gt; 2.1 NDVI ratio - No units 0.0001 42.53417   -72.179 testsite MOD13Q1</span></a>
+<a class="sourceLine" id="cb4-24" title="24"><span class="co">#&gt; 3.1 NDVI ratio - No units 0.0001 42.53417   -72.179 testsite MOD13Q1</span></a>
+<a class="sourceLine" id="cb4-25" title="25"><span class="co">#&gt; 4.1 NDVI ratio - No units 0.0001 42.53417   -72.179 testsite MOD13Q1</span></a>
+<a class="sourceLine" id="cb4-26" title="26"><span class="co">#&gt; 5.1 NDVI ratio - No units 0.0001 42.53417   -72.179 testsite MOD13Q1</span></a>
+<a class="sourceLine" id="cb4-27" title="27"><span class="co">#&gt; 6.1 NDVI ratio - No units 0.0001 42.53417   -72.179 testsite MOD13Q1</span></a>
+<a class="sourceLine" id="cb4-28" title="28"><span class="co">#&gt;          start        end complete modis_date calendar_date   tile</span></a>
+<a class="sourceLine" id="cb4-29" title="29"><span class="co">#&gt; 1.1 2004-01-01 2008-12-30     TRUE   A2004001    2004-01-01 h12v04</span></a>
+<a class="sourceLine" id="cb4-30" title="30"><span class="co">#&gt; 2.1 2004-01-01 2008-12-30     TRUE   A2004017    2004-01-17 h12v04</span></a>
+<a class="sourceLine" id="cb4-31" title="31"><span class="co">#&gt; 3.1 2004-01-01 2008-12-30     TRUE   A2004033    2004-02-02 h12v04</span></a>
+<a class="sourceLine" id="cb4-32" title="32"><span class="co">#&gt; 4.1 2004-01-01 2008-12-30     TRUE   A2004049    2004-02-18 h12v04</span></a>
+<a class="sourceLine" id="cb4-33" title="33"><span class="co">#&gt; 5.1 2004-01-01 2008-12-30     TRUE   A2004065    2004-03-05 h12v04</span></a>
+<a class="sourceLine" id="cb4-34" title="34"><span class="co">#&gt; 6.1 2004-01-01 2008-12-30     TRUE   A2004081    2004-03-21 h12v04</span></a>
+<a class="sourceLine" id="cb4-35" title="35"><span class="co">#&gt;         proc_date pixel value</span></a>
+<a class="sourceLine" id="cb4-36" title="36"><span class="co">#&gt; 1.1 2015154120947     1 -3000</span></a>
+<a class="sourceLine" id="cb4-37" title="37"><span class="co">#&gt; 2.1 2015154121734     1  5108</span></a>
+<a class="sourceLine" id="cb4-38" title="38"><span class="co">#&gt; 3.1 2015154122102     1  3286</span></a>
+<a class="sourceLine" id="cb4-39" title="39"><span class="co">#&gt; 4.1 2015154125157     1  2115</span></a>
+<a class="sourceLine" id="cb4-40" title="40"><span class="co">#&gt; 5.1 2015154125222     1  4775</span></a>
+<a class="sourceLine" id="cb4-41" title="41"><span class="co">#&gt; 6.1 2015154125302     1  5687</span></a></code></pre></div>
+<p>The output format is a <em>tidy</em> data frame, as shown above. When witten to a csv with the parameter <code>internal = FALSE</code> this will result in a flat file on disk.</p>
+<p>Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the <code>pixel</code> column in the data frame containing the time series data. The remote sensing values are listed in the <code>value</code> column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values.</p>
+<p>When a large selection of locations is needed you might benefit from using the batch download function <code><a href="../reference/mt_batch_subset.html">mt_batch_subset()</a></code>, which provides a wrapper around the <code><a href="../reference/mt_subset.html">mt_subset()</a></code> function in order to speed up large download batches. This function has a similar syntax to <code><a href="../reference/mt_subset.html">mt_subset()</a></code> but requires a data frame defining site names (site_name) and locations (lat / lon) (or a comma delimited file with the same structure) to specify a list of download locations.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># create data frame with a site_name, lat and lon column</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="co"># holding the respective names of sites and their location</span></a>
+<a class="sourceLine" id="cb5-3" title="3">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">"site_name"</span> =<span class="st"> </span><span class="kw">paste</span>(<span class="st">"test"</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>), <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb5-4" title="4">df<span class="op">$</span>lat &lt;-<span class="st"> </span><span class="dv">40</span></a>
+<a class="sourceLine" id="cb5-5" title="5">df<span class="op">$</span>lon &lt;-<span class="st"> </span><span class="dv">-110</span></a>
+<a class="sourceLine" id="cb5-6" title="6"></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="co"># an example batch download data frame</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="kw">print</span>(df)</a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt;   site_name lat  lon</span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; 1    test 1  40 -110</span></a>
+<a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt; 2    test 2  40 -110</span></a>
+<a class="sourceLine" id="cb5-12" title="12"></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="co"># test batch download</span></a>
+<a class="sourceLine" id="cb5-14" title="14">subsets &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_batch_subset.html">mt_batch_subset</a></span>(<span class="dt">df =</span> df,</a>
+<a class="sourceLine" id="cb5-15" title="15">                     <span class="dt">product =</span> <span class="st">"MOD11A2"</span>,</a>
+<a class="sourceLine" id="cb5-16" title="16">                     <span class="dt">band =</span> <span class="st">"LST_Day_1km"</span>,</a>
+<a class="sourceLine" id="cb5-17" title="17">                     <span class="dt">internal =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb5-18" title="18">                     <span class="dt">start =</span> <span class="st">"2004-01-01"</span>,</a>
+<a class="sourceLine" id="cb5-19" title="19">                     <span class="dt">end =</span> <span class="st">"2004-02-28"</span>,</a>
+<a class="sourceLine" id="cb5-20" title="20">                     <span class="dt">out_dir =</span> <span class="st">"~"</span>)</a>
+<a class="sourceLine" id="cb5-21" title="21"></a>
+<a class="sourceLine" id="cb5-22" title="22"><span class="kw">head</span>(subsets)</a>
+<a class="sourceLine" id="cb5-23" title="23"><span class="co">#&gt;         xllcorner  yllcorner         cellsize nrows ncols        band</span></a>
+<a class="sourceLine" id="cb5-24" title="24"><span class="co">#&gt; 1.1.1 -9370036.39 4447802.08 926.625433055834     1     1 LST_Day_1km</span></a>
+<a class="sourceLine" id="cb5-25" title="25"><span class="co">#&gt; 1.2.1 -9370036.39 4447802.08 926.625433055834     1     1 LST_Day_1km</span></a>
+<a class="sourceLine" id="cb5-26" title="26"><span class="co">#&gt; 1.3.1 -9370036.39 4447802.08 926.625433055834     1     1 LST_Day_1km</span></a>
+<a class="sourceLine" id="cb5-27" title="27"><span class="co">#&gt; 1.4.1 -9370036.39 4447802.08 926.625433055834     1     1 LST_Day_1km</span></a>
+<a class="sourceLine" id="cb5-28" title="28"><span class="co">#&gt; 1.5.1 -9370036.39 4447802.08 926.625433055834     1     1 LST_Day_1km</span></a>
+<a class="sourceLine" id="cb5-29" title="29"><span class="co">#&gt; 1.6.1 -9370036.39 4447802.08 926.625433055834     1     1 LST_Day_1km</span></a>
+<a class="sourceLine" id="cb5-30" title="30"><span class="co">#&gt;        units scale latitude longitude   site product      start        end</span></a>
+<a class="sourceLine" id="cb5-31" title="31"><span class="co">#&gt; 1.1.1 Kelvin  0.02       40      -110 test 1 MOD11A2 2004-01-01 2004-02-28</span></a>
+<a class="sourceLine" id="cb5-32" title="32"><span class="co">#&gt; 1.2.1 Kelvin  0.02       40      -110 test 1 MOD11A2 2004-01-01 2004-02-28</span></a>
+<a class="sourceLine" id="cb5-33" title="33"><span class="co">#&gt; 1.3.1 Kelvin  0.02       40      -110 test 1 MOD11A2 2004-01-01 2004-02-28</span></a>
+<a class="sourceLine" id="cb5-34" title="34"><span class="co">#&gt; 1.4.1 Kelvin  0.02       40      -110 test 1 MOD11A2 2004-01-01 2004-02-28</span></a>
+<a class="sourceLine" id="cb5-35" title="35"><span class="co">#&gt; 1.5.1 Kelvin  0.02       40      -110 test 1 MOD11A2 2004-01-01 2004-02-28</span></a>
+<a class="sourceLine" id="cb5-36" title="36"><span class="co">#&gt; 1.6.1 Kelvin  0.02       40      -110 test 1 MOD11A2 2004-01-01 2004-02-28</span></a>
+<a class="sourceLine" id="cb5-37" title="37"><span class="co">#&gt;       complete modis_date calendar_date   tile     proc_date pixel value</span></a>
+<a class="sourceLine" id="cb5-38" title="38"><span class="co">#&gt; 1.1.1     TRUE   A2004001    2004-01-01 h09v05 2015212185706     1 13098</span></a>
+<a class="sourceLine" id="cb5-39" title="39"><span class="co">#&gt; 1.2.1     TRUE   A2004009    2004-01-09 h09v05 2015212201022     1 13062</span></a>
+<a class="sourceLine" id="cb5-40" title="40"><span class="co">#&gt; 1.3.1     TRUE   A2004017    2004-01-17 h09v05 2015212213103     1 13297</span></a>
+<a class="sourceLine" id="cb5-41" title="41"><span class="co">#&gt; 1.4.1     TRUE   A2004025    2004-01-25 h09v05 2015213005429     1 13323</span></a>
+<a class="sourceLine" id="cb5-42" title="42"><span class="co">#&gt; 1.5.1     TRUE   A2004033    2004-02-02 h09v05 2015213090158     1 13315</span></a>
+<a class="sourceLine" id="cb5-43" title="43"><span class="co">#&gt; 1.6.1     TRUE   A2004041    2004-02-10 h09v05 2015213165253     1 13227</span></a></code></pre></div>
 </div>
-<div id="reading-and-writing-data-from-to-file" class="section level3">
+<div id="worked-example-using-ndvi-values" class="section level3">
 <h3 class="hasAnchor">
-<a href="#reading-and-writing-data-from-to-file" class="anchor"></a>Reading and writing data from / to file</h3>
-<p>In both download functions data can be written to a csv file in a particular directory using the ‘internal’ and ‘out_dir’ function options. The mt_read() function allows you to read in these csv files easily and into the same data structure as used when downloading directy into your R workspace.</p>
-<pre><code>[site_name]_[product]_[start]_[end].csv</code></pre>
-<p>The data can be read back into the original nested structed using mt_read().</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># write the above file to disk</span>
-<span class="kw"><a href="../reference/mt_write.html">mt_write</a></span>(<span class="dt">df =</span> subset,
-             <span class="dt">out_dir =</span> <span class="kw">tempdir</span>())
-
-<span class="co"># read the data back in</span>
-subset_disk &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_read.html">mt_read</a></span>(<span class="kw">paste0</span>(<span class="kw">tempdir</span>(),
-                  <span class="st">"/testsite_MOD11A2_2004-01-01_2004-06-01.csv"</span>))
-
-<span class="co"># compare original to read from disk</span>
-<span class="kw">identical</span>(subset, subset_disk)
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<a href="#worked-example-using-ndvi-values" class="anchor"></a>Worked example using NDVI values</h3>
+<p>The above downloaded subset shows normalized difference vegetation index (NDVI), and <a href="https://earthobservatory.nasa.gov/Features/MeasuringVegetation/measuring_vegetation_2.php">an indicator of plant health, density and or complexity</a> for the experimental <a href="https://harvardforest.fas.harvard.edu/">Harvard Forest</a> site. When plotted the yearly pattern of rising and falling NDVI values shows vegetation growth in spring, and senescence or leaf drop in fall. Values lower than ~0.4 are contaminated by snow or clouds.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># create a plot of the data - accounting for the multiplier (scale) component</span></a>
+<a class="sourceLine" id="cb6-2" title="2">date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(subset<span class="op">$</span>calendar_date)</a>
+<a class="sourceLine" id="cb6-3" title="3">temperature &lt;-<span class="st"> </span>subset<span class="op">$</span>value <span class="op">*</span><span class="st"> </span><span class="kw">as.double</span>(subset<span class="op">$</span>scale)</a>
+<a class="sourceLine" id="cb6-4" title="4">temperature[temperature <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb6-5" title="5"></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="kw">plot</span>(date,</a>
+<a class="sourceLine" id="cb6-7" title="7">     temperature,</a>
+<a class="sourceLine" id="cb6-8" title="8">     <span class="dt">xlab =</span> <span class="st">"Date"</span>,</a>
+<a class="sourceLine" id="cb6-9" title="9">     <span class="dt">ylab =</span> <span class="st">"NDVI"</span>,</a>
+<a class="sourceLine" id="cb6-10" title="10">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb6-11" title="11">     <span class="dt">type =</span> <span class="st">"l"</span>)</a></code></pre></div>
+<p><img src="modistools-vignette_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+</div>
+<div id="conversion-of-corner-coordinates" class="section level3">
+<h3 class="hasAnchor">
+<a href="#conversion-of-corner-coordinates" class="anchor"></a>Conversion of corner coordinates</h3>
+<p>Corner coordinates of the pixel area extracted are provided, these can be used to calculate the coverage of the extracted area. Coordinates are provided in the original sinusoidal grid coordinates and first have to be transformed into latitude longitude (for convenience).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># convert the coordinates</span></a>
+<a class="sourceLine" id="cb7-2" title="2">lat_lon &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sin_to_ll.html">sin_to_ll</a></span>(subset<span class="op">$</span>xllcorner, subset<span class="op">$</span>yllcorner)</a>
+<a class="sourceLine" id="cb7-3" title="3"></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co"># bind with the original dataframe</span></a>
+<a class="sourceLine" id="cb7-5" title="5">subset &lt;-<span class="st"> </span><span class="kw">cbind</span>(subset, lat_lon)</a>
+<a class="sourceLine" id="cb7-6" title="6"></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="kw">head</span>(subset)</a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt;       xllcorner  yllcorner      cellsize nrows ncols              band</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; 1.1 -5914186.84 4729496.17 231.656358264     1     1 250m_16_days_NDVI</span></a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt; 2.1 -5914186.84 4729496.17 231.656358264     1     1 250m_16_days_NDVI</span></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt; 3.1 -5914186.84 4729496.17 231.656358264     1     1 250m_16_days_NDVI</span></a>
+<a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt; 4.1 -5914186.84 4729496.17 231.656358264     1     1 250m_16_days_NDVI</span></a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt; 5.1 -5914186.84 4729496.17 231.656358264     1     1 250m_16_days_NDVI</span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt; 6.1 -5914186.84 4729496.17 231.656358264     1     1 250m_16_days_NDVI</span></a>
+<a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt;                     units  scale latitude longitude     site product</span></a>
+<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt; 1.1 NDVI ratio - No units 0.0001 42.53417   -72.179 testsite MOD13Q1</span></a>
+<a class="sourceLine" id="cb7-17" title="17"><span class="co">#&gt; 2.1 NDVI ratio - No units 0.0001 42.53417   -72.179 testsite MOD13Q1</span></a>
+<a class="sourceLine" id="cb7-18" title="18"><span class="co">#&gt; 3.1 NDVI ratio - No units 0.0001 42.53417   -72.179 testsite MOD13Q1</span></a>
+<a class="sourceLine" id="cb7-19" title="19"><span class="co">#&gt; 4.1 NDVI ratio - No units 0.0001 42.53417   -72.179 testsite MOD13Q1</span></a>
+<a class="sourceLine" id="cb7-20" title="20"><span class="co">#&gt; 5.1 NDVI ratio - No units 0.0001 42.53417   -72.179 testsite MOD13Q1</span></a>
+<a class="sourceLine" id="cb7-21" title="21"><span class="co">#&gt; 6.1 NDVI ratio - No units 0.0001 42.53417   -72.179 testsite MOD13Q1</span></a>
+<a class="sourceLine" id="cb7-22" title="22"><span class="co">#&gt;          start        end complete modis_date calendar_date   tile</span></a>
+<a class="sourceLine" id="cb7-23" title="23"><span class="co">#&gt; 1.1 2004-01-01 2008-12-30     TRUE   A2004001    2004-01-01 h12v04</span></a>
+<a class="sourceLine" id="cb7-24" title="24"><span class="co">#&gt; 2.1 2004-01-01 2008-12-30     TRUE   A2004017    2004-01-17 h12v04</span></a>
+<a class="sourceLine" id="cb7-25" title="25"><span class="co">#&gt; 3.1 2004-01-01 2008-12-30     TRUE   A2004033    2004-02-02 h12v04</span></a>
+<a class="sourceLine" id="cb7-26" title="26"><span class="co">#&gt; 4.1 2004-01-01 2008-12-30     TRUE   A2004049    2004-02-18 h12v04</span></a>
+<a class="sourceLine" id="cb7-27" title="27"><span class="co">#&gt; 5.1 2004-01-01 2008-12-30     TRUE   A2004065    2004-03-05 h12v04</span></a>
+<a class="sourceLine" id="cb7-28" title="28"><span class="co">#&gt; 6.1 2004-01-01 2008-12-30     TRUE   A2004081    2004-03-21 h12v04</span></a>
+<a class="sourceLine" id="cb7-29" title="29"><span class="co">#&gt;         proc_date pixel value longitude_ll latitude_ll</span></a>
+<a class="sourceLine" id="cb7-30" title="30"><span class="co">#&gt; 1.1 2015154120947     1 -3000    -72.17891    42.53333</span></a>
+<a class="sourceLine" id="cb7-31" title="31"><span class="co">#&gt; 2.1 2015154121734     1  5108    -72.17891    42.53333</span></a>
+<a class="sourceLine" id="cb7-32" title="32"><span class="co">#&gt; 3.1 2015154122102     1  3286    -72.17891    42.53333</span></a>
+<a class="sourceLine" id="cb7-33" title="33"><span class="co">#&gt; 4.1 2015154125157     1  2115    -72.17891    42.53333</span></a>
+<a class="sourceLine" id="cb7-34" title="34"><span class="co">#&gt; 5.1 2015154125222     1  4775    -72.17891    42.53333</span></a>
+<a class="sourceLine" id="cb7-35" title="35"><span class="co">#&gt; 6.1 2015154125302     1  5687    -72.17891    42.53333</span></a></code></pre></div>
+<p>Together with meta-data regarding cell size, number of columns and rows the bounding box of the extracted data can be calculated.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># convert to bounding box</span></a>
+<a class="sourceLine" id="cb8-2" title="2">bb &lt;-<span class="st"> </span><span class="kw">apply</span>(subset, <span class="dv">1</span>, <span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="kw"><a href="../reference/ll_to_bb.html">ll_to_bb</a></span>(<span class="dt">lon =</span> x[<span class="st">'longitude_ll'</span>],</a>
+<a class="sourceLine" id="cb8-4" title="4">           <span class="dt">lat =</span> x[<span class="st">'latitude_ll'</span>],</a>
+<a class="sourceLine" id="cb8-5" title="5">           <span class="dt">cell_size =</span> x[<span class="st">'cellsize'</span>],</a>
+<a class="sourceLine" id="cb8-6" title="6">           <span class="dt">nrows =</span> x[<span class="st">'nrows'</span>],</a>
+<a class="sourceLine" id="cb8-7" title="7">           <span class="dt">ncols =</span> x[<span class="st">'ncols'</span>])</a>
+<a class="sourceLine" id="cb8-8" title="8">})</a>
+<a class="sourceLine" id="cb8-9" title="9"></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co"># plot one bounding box</span></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="kw">plot</span>(bb[[<span class="dv">1</span>]])</a>
+<a class="sourceLine" id="cb8-12" title="12"></a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="co"># add the location of the queried coordinate within the polygon</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="kw">points</span>(subset<span class="op">$</span>longitude[<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb8-15" title="15">       subset<span class="op">$</span>latitude[<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb8-16" title="16">       <span class="dt">pch =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb8-17" title="17">       <span class="dt">col =</span> <span class="st">"red"</span>)</a></code></pre></div>
+<p><img src="modistools-vignette_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
   </div>
 
