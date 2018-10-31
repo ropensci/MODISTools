@@ -3,6 +3,9 @@ sudo: required
 cache: packages
 warnings_are_errors: true
 
+before_install:
+  - sudo apt-get install -y libudunits2-dev
+
 r:
   - release
   - devel
