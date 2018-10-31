@@ -2,8 +2,8 @@
 
 * ropensci code review
 * replaced NULL parameters with missing()
-* output a tidy data frame (tibble)
-* include the coordinates of the pixel(s) as an sf object
+* output a tidy data frame
+* include coordinate transform functions to sf objects
 * pkgdown documentation generation
 
 ## MODISTools 1.0.0

@@ -12,6 +12,8 @@ knitr::opts_chunk$set(
 ```
 
 [![Build Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools) [![codecov](https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/khufkens/MODISTools) ![Status](https://www.r-pkg.org/badges/version/MODISTools) ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/MODISTools)
+<a href="https://www.buymeacoffee.com/H2wlgqCLO" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" height="21px" ></a>
+<a href="https://liberapay.com/khufkens/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg" height="21px"></a>
 
 # MODISTools
 
@@ -87,17 +89,18 @@ subset <- mt_subset(product = "MOD11A2",
                     km_lr = 1,
                     km_ab = 1,
                     site_name = "testsite",
-                    internal = TRUE)
+                    internal = TRUE,
+                    progress = FALSE)
 print(str(subset))
 ```
 
-The output format is a nested list with the true data provided as a *tidy* data frame, as shown above. When witten to a csv, when the parameter 'internal' is set to FALSE, the same information is retained. Data can be read back into the same format with the included mt_read() function (see below).
+The output format is a *tidy* data frame, as shown above. When witten to a csv with the parameter `internal = FALSE` this will result in a flat file on disk.
 
-Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the 'pixel' column in the data frame containing the time series data. The remote sensing values are listed in the 'data' column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values. 
-
-To list all available products, bands for particular products and temporal coverage see function descriptions below.
+Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the `pixel` column in the data frame containing the time series data. The remote sensing values are listed in the `value` column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values. To list all available products, bands for particular products and temporal coverage see function descriptions below.
 
 ### Batch downloading MODIS time series
+
+When a large selection of locations is needed you might benefit from using the batch download function `mt_batch_subset()`, which provides a wrapper around the `mt_subset()` function in order to speed up large download batches. This function has a similar syntax to `mt_subset()` but requires a data frame defining site names (site_name) and locations (lat / lon) (or a comma delimited file with the same structure) to specify a list of download locations.
 
 Below an example is provided on how to batch download data for a data frame of given site names and locations (lat / lon).
 
@@ -119,7 +122,6 @@ subsets <- mt_batch_subset(df = df,
 print(str(subsets))
 ```
 
-
 ### Listing products
 
 To list all available products use the mt_products() function.
@@ -128,7 +130,6 @@ To list all available products use the mt_products() function.
 products <- mt_products()
 head(products)
 ```
-
 
 ### Listing bands
 
@@ -146,29 +147,6 @@ To list all available dates (temporal coverage) for a given product and location
 ```{r eval = TRUE}
 dates <- mt_dates(product = "MOD11A2", lat = 42, lon = -110)
 head(dates)
-```
-
-### Reading and writing data from / to file
-
-Data can be written to file using the mt_write() function which uses the following file format:
-
-```
-[site_name]_[product]_[start]_[end].csv
-```
-
-The data can be read back into the original nested structed using mt_read().
-
-```{r eval = TRUE}
-# write the above file to disk
-mt_write(df = subset,
-             out_dir = tempdir())
-
-# read the data back in
-subset_disk <- mt_read(paste0(tempdir(),
-                  "/testsite_MOD11A2_2004-01-01_2004-02-01.csv"))
-
-# compare original to read from disk
-identical(subset, subset_disk)
 ```
 
 ## References
