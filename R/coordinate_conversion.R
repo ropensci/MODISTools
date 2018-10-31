@@ -5,7 +5,6 @@
 #' @seealso [latlon_to_square()] [square_to_poly()]
 #' @keywords MODIS Land Products Subsets, products, meta-data
 #' @export
-#' @importFrom magrittr %>%
 #' @examples
 #'
 #' \donttest{
@@ -51,7 +50,6 @@ sin_to_ll <- function(x, y){
 #' @seealso [sin_to_ll()]
 #' @keywords MODIS Land Products Subsets, products, meta-data
 #' @export
-#' @importFrom magrittr %>%
 #' @examples
 #'
 #' \donttest{
@@ -75,17 +73,18 @@ ll_to_bb <- function(
   lat,
   lon,
   cell_size,
-  nrow,
-  ncol
+  nrows,
+  ncols
   ){
 
   # check parameters
-  if(missing(res)){
+  if(missing(cell_size) | missing(lat) | missing(lon) | missing(nrows) |
+     missing(ncols)){
     stop("missing parameter, all parameters are required")
-    }
+  }
 
   # meters to a degree
-  m_deg = (0.00001/1.1132)
+  m_deg <- (0.00001/1.1132)
 
   # transform matrix
   trans <- c(
@@ -97,12 +96,17 @@ ll_to_bb <- function(
   )
 
   # create coordinate matrix
-  m <- c(-cell_size * ncols * m_deg, cell_size * nrows * m_deg) * trans + c(lon, lat)
+  m <- c(-as.numeric(cell_size) * as.numeric(ncols) * m_deg,
+         as.numeric(cell_size) * as.numeric(nrows) * m_deg) * trans +
+    c(as.numeric(lon), as.numeric(lat))
   m <- matrix(m, 5, 2, byrow = TRUE)
 
-  # convert to a sf polygon
-  m %>%
-    sf::st_linestring() %>%
-    sf::st_cast("POLYGON") %>%
-    sf::st_sfc(crs = 4326)
+  # convert to a sf polygon, with the proper
+  # projection etc.
+  p <- sf::st_linestring(m)
+  p <- sf::st_cast(p, "POLYGON")
+  p <- sf::st_sfc(p, crs = 4326)
+
+  # return the polygons
+  return(p)
 }

@@ -64,7 +64,8 @@ test_that("test mt_subset()",{
                           band = "LST_Day_1km",
                           start = "2004-01-01",
                           end = "2004-03-31",
-                          internal = FALSE))
+                          internal = FALSE,
+                          progress = FALSE))
 })
 
 # create data frame with a site_name, lat and lon column
