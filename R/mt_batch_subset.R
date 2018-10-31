@@ -118,7 +118,8 @@ mt_batch_subset <- function(df,
       start = as.character(x['start']),
       end = as.character(x['end']),
       out_dir = x['out_dir'],
-      internal = x['internal'])
+      internal = x['internal'],
+      progress = FALSE)
   })
 
   # stop cluster
