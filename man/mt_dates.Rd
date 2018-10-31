@@ -32,7 +32,7 @@ head(bands)
 }
 }
 \seealso{
-\code{\link[MODISTools]{mt_product}}
+\code{\link[MODISTools]{mt_products}}
 \code{\link[MODISTools]{mt_sites}} \code{\link[MODISTools]{mt_bands}}
 }
 \keyword{Land}

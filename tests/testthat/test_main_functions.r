@@ -13,6 +13,7 @@ test_that("test mt_bands()",{
   expect_error(mt_bands(product = "MOD11A6"))
 })
 
+# download tests
 test_that("test mt_dates()",{
 
   # check dates
@@ -242,4 +243,54 @@ test_that("test mt_batch_subset()",{
       end = "2004-03-31"
     )
   )
+})
+
+# test coordinate conversions
+
+
+
+
+test_that("test mt_batch_subset()",{
+
+  subset <- mt_subset(
+    product = "MOD11A2",
+    lat = 40,
+    lon = -110,
+    band = "LST_Day_1km",
+    start = "2004-01-01",
+    end = "2004-03-31",
+    progress = FALSE
+  )
+
+  # bind with the original dataframe
+  subset <- cbind(subset, lat_lon)
+
+  # test conversion
+  expect_is(
+    sin_to_ll(subset$xllcorner, subset$yllcorner)
+    ,
+    "data.frame"
+  )
+
+  # test conversion
+  expect_is(
+    sin_to_ll(subset$xllcorner, subset$yllcorner)
+    ,
+    "data.frame"
+  )
+
+  # test sf bounding box conversion
+  expect_is(
+  apply(
+    cbind(subset, sin_to_ll(subset$xllcorner, subset$yllcorner)),
+    1, function(x){
+    ll_to_bb(lon = x['longitude_ll'],
+             lat = x['latitude_ll'],
+             cell_size = x['cellsize'],
+             nrows = x['nrows'],
+             ncols = x['ncols'])[[1]]
+  }),
+  "sfc"
+  )
+
 })

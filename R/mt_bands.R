@@ -6,7 +6,7 @@
 #' @return A data frame of all available bands for a MODIS Land
 #' Products Subsets products
 #' @keywords MODIS Land Products Subsets, products, meta-data
-#' @seealso \code{\link[MODISTools]{mt_product}}
+#' @seealso \code{\link[MODISTools]{mt_products}}
 #' \code{\link[MODISTools]{mt_sites}} \code{\link[MODISTools]{mt_dates}}
 #' @export
 #' @examples

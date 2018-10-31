@@ -22,7 +22,7 @@ print(head(sites))
 }
 }
 \seealso{
-\code{\link[MODISTools]{mt_product}}
+\code{\link[MODISTools]{mt_products}}
 \code{\link[MODISTools]{mt_bands}} \code{\link[MODISTools]{mt_dates}}
 }
 \keyword{Land}
