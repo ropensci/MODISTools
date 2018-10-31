@@ -4,19 +4,21 @@
 #'
 #' @return A data frame of all available MODIS Land Products Subsets products
 #' @keywords MODIS Land Products Subsets, products, meta-data
+#' @seealso \code{\link[MODISTools]{mt_bands}}
+#' \code{\link[MODISTools]{mt_sites}} \code{\link[MODISTools]{mt_dates}}
 #' @export
 #' @examples
 #'
 #' \donttest{
 #' # list all available MODIS Land Products Subsets products
 #' products <- mt_products()
-#' print(products)
+#' head(products)
 #'}
 
 mt_products <- memoise::memoise(function(){
 
   # define url
-  url <- paste(.Options$mt_server, "products", sep = "/")
+  url <- paste(mt_server(), "products", sep = "/")
 
   # try to download the data
   products <- try(jsonlite::fromJSON(url))$products

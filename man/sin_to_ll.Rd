@@ -23,16 +23,19 @@ subset <- mt_subset(product = "MOD11A2",
                         lon = -110,
                         band = "LST_Day_1km",
                         start = "2004-01-01",
-                        end = "2004-03-31")
+                        end = "2004-03-31",
+                        progress = FALSE)
 
 # convert sinusoidal to lat / lon
-subset <- subset \%>\%
-    mutate(result = map2(xllcorner, yllcorner, sin_to_ll)) \%>\%
-    unnest()
+lat_lon <- sin_to_ll(subset$xllcorner, subset$yllcorner)
+
+# bind with the original dataframe
+subset <- cbind(subset, lat_lon)
+head(subset)
 }
 }
 \seealso{
-[latlon_to_square()] [square_to_poly()]
+\code{\link[MODISTools]{ll_to_bb}}
 }
 \keyword{Land}
 \keyword{MODIS}

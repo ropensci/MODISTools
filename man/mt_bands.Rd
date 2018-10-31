@@ -21,9 +21,13 @@ Lists all available bands for a MODIS Land Products Subset product.
 \donttest{
 # list all available MODIS Land Products Subsets products
 bands <- mt_bands(product = "MOD11A2")
-print(bands)
+head(bands)
 
 }
+}
+\seealso{
+\code{\link[MODISTools]{mt_product}}
+\code{\link[MODISTools]{mt_sites}} \code{\link[MODISTools]{mt_dates}}
 }
 \keyword{Land}
 \keyword{MODIS}

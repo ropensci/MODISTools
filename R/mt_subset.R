@@ -4,7 +4,7 @@
 #' at a particular location.
 #'
 #' @param product a valid MODIS product name
-#' @param band band to download (default = \code{NULL}, all bands)
+#' @param band band to download
 #' @param lat latitude in decimal degrees
 #' @param lon longitude in decimal degrees
 #' @param start start date
@@ -19,11 +19,12 @@
 #' @param internal should the data be returned as an internal data structure
 #' \code{TRUE} or \code{FALSE} (default = \code{TRUE})
 #' @param progress show download progress
-#' @return A nested list containing the downloaded data and a descriptive
-#' header with meta-data.
-#' @seealso [mt_products()] [mt_bands()] [mt_sites()] [mt_batch_subset()]
-#' [mt_dates()]
+#' @return A data frame combining meta-data and actual data values.
 #' @keywords MODIS Land Products Subsets, products, meta-data
+#' @seealso \code{\link[MODISTools]{mt_sites}}
+#' \code{\link[MODISTools]{mt_dates}} \code{\link[MODISTools]{mt_bands}}
+#' \code{\link[MODISTools]{mt_products}}
+#' \code{\link[MODISTools]{mt_batch_subset}}
 #' @export
 #' @examples
 #'
@@ -35,8 +36,9 @@
 #'                         lon = -110,
 #'                         band = "LST_Day_1km",
 #'                         start = "2004-01-01",
-#'                         end = "2004-03-31")
-#'  print(str(subset))
+#'                         end = "2004-03-31",
+#'                         progress = FALSE)
+#'  head(subset)
 #'}
 
 mt_subset <- function(product,
@@ -53,22 +55,7 @@ mt_subset <- function(product,
                        internal = TRUE,
                        progress = TRUE){
 
-  # load all products and bands to check
-  # valid combinations
-  products <- MODISTools::mt_products()$product
-  bands <- mt_bands(product)
-
-  # error trap product
-  if (missing(product) | !(product %in% products) ){
-    stop("please specify a product, or check your product name...")
-  }
-
-  # error trap band
-  if (missing(band) | !(band %in% bands$band) ){
-    stop("please specify a band, or check your product band combination ...")
-  }
-
-  # error trap
+  # error trap missing coordinates or site id
   if (missing(site_id) & (missing(lat) | missing(lon)) ){
     stop("please specify coordinates, or a valid site ID...")
   }
@@ -80,14 +67,30 @@ mt_subset <- function(product,
     sites <- MODISTools::mt_sites()
 
     # check if the site id is valid
-    if (!length(site_id %in% sites$siteid)){
+    if (!(site_id %in% sites$siteid)){
       stop("please specify a valid site id...")
     }
   }
 
+  # load all products
+  products <- MODISTools::mt_products()$product
+
+  # error trap product
+  if (missing(product) | !(product %in% products) ){
+    stop("please specify a product, or check your product name...")
+  }
+
+  # load all bands for product
+  bands <- mt_bands(product)
+
+  # error trap band
+  if (missing(band) | !(band %in% bands$band) ){
+    stop("please specify a band, or check your product band combination ...")
+  }
+
   # switch url in case of siteid
   if (missing(site_id)){
-    url <- paste(.Options$mt_server,
+    url <- paste(mt_server(),
                   product,
                   "subset",
                  sep = "/")
@@ -97,7 +100,7 @@ mt_subset <- function(product,
                                   lat = lat,
                                   lon = lon)
   } else {
-    url <- paste(.Options$mt_server,
+    url <- paste(mt_server(),
                   product,
                   site_id,
                   "subset",
@@ -243,9 +246,6 @@ mt_subset <- function(product,
 
   # drop duplicate band column
   subset_data <- subset_data[ , !(names(subset_data) %in% "band.1")]
-
-  # assign a class label, mostly for checks
-  class(subset_data) <- c(class(subset_data), "MODISTools")
 
   # return a nested list with all data
   # to workspace or to file

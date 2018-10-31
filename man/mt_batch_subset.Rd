@@ -16,7 +16,7 @@ data are comma separated.}
 
 \item{product}{a valid MODIS product name}
 
-\item{band}{band to download (default = \code{NULL}, all bands)}
+\item{band}{band to download}
 
 \item{start}{start date}
 
@@ -35,8 +35,9 @@ data are comma separated.}
 (auto will select the all cpu cores - 1)}
 }
 \value{
-A nested list containing the downloaded data and a descriptive
-header with meta-data.
+A data frame combining meta-data and actual data values, data from
+different sites is concatenated into one large dataframe. Subsets can be
+created by searching on sitename.
 }
 \description{
 Lists all available dates for a MODIS Land Products Subset product
@@ -59,12 +60,16 @@ subsets <- mt_batch_subset(df = df,
                         band = "LST_Day_1km",
                         internal = TRUE,
                         start = "2004-01-01",
-                        end = "2004-03-31",
-                        out_dir = "~")
+                        end = "2004-03-31")
 
-print(str(subsets))
-
+head(subsets)
 }
+}
+\seealso{
+\code{\link[MODISTools]{mt_sites}}
+\code{\link[MODISTools]{mt_dates}} \code{\link[MODISTools]{mt_bands}}
+\code{\link[MODISTools]{mt_products}}
+\code{\link[MODISTools]{mt_subset}}
 }
 \keyword{Land}
 \keyword{MODIS}

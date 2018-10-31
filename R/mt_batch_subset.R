@@ -8,7 +8,7 @@
 #' sitenames, latitude and longitude. When providing a CSV make sure that the
 #' data are comma separated.
 #' @param product a valid MODIS product name
-#' @param band band to download (default = \code{NULL}, all bands)
+#' @param band band to download
 #' @param start start date
 #' @param end end date
 #' @param km_lr km left-right to sample
@@ -18,9 +18,14 @@
 #' (auto will select the all cpu cores - 1)
 #' @param internal should the data be returned as an internal data structure
 #' \code{TRUE} or \code{FALSE} (default = \code{TRUE})
-#' @return A nested list containing the downloaded data and a descriptive
-#' header with meta-data.
+#' @return A data frame combining meta-data and actual data values, data from
+#' different sites is concatenated into one large dataframe. Subsets can be
+#' created by searching on sitename.
 #' @keywords MODIS Land Products Subsets, products, meta-data
+#' @seealso \code{\link[MODISTools]{mt_sites}}
+#' \code{\link[MODISTools]{mt_dates}} \code{\link[MODISTools]{mt_bands}}
+#' \code{\link[MODISTools]{mt_products}}
+#' \code{\link[MODISTools]{mt_subset}}
 #' @export
 #' @examples
 #'
@@ -39,11 +44,9 @@
 #'                         band = "LST_Day_1km",
 #'                         internal = TRUE,
 #'                         start = "2004-01-01",
-#'                         end = "2004-03-31",
-#'                         out_dir = "~")
+#'                         end = "2004-03-31")
 #'
-#' print(str(subsets))
-#'
+#' head(subsets)
 #'}
 
 mt_batch_subset <- function(df,
@@ -61,30 +64,38 @@ mt_batch_subset <- function(df,
     stop("please specify a batch file...")
   }
 
-  # load all products
-  products <- MODISTools::mt_products()$product
-
-  # error trap
-  if (missing(product) | !(product %in% products) ){
-    stop("please specify a product, or check your product name...")
-  }
-
   # check data frame
   if (!is.data.frame(df)){
     if(file.exists(df)){
       df <- utils::read.table(df,
-                      header = TRUE,
-                      sep = ",",
-                      stringsAsFactors = FALSE)
+                              header = TRUE,
+                              sep = ",",
+                              stringsAsFactors = FALSE)
     } else {
-     stop("specified batch file does not exist")
+      stop("specified batch file does not exist")
     }
   }
 
-  # construct the data frame over which we will
+  # load products
+  products <- MODISTools::mt_products()$product
+
+  # error trap products
+  if (missing(product) | !(product %in% products) ){
+    stop("please specify a product, or check your product name...")
+  }
+
+  # load bands for product
+  bands <- mt_bands(product)
+
+  # error trap band
+  if (missing(band) | !(band %in% bands$band) ){
+    stop("please specify a band, or check your product band combination ...")
+  }
+
+  # If all tests pass construct the data frame over which we will
   # loop to process all the data
   df$product <- product
-  df$band <- ifelse(missing(band),"",band)
+  df$band <- band
   df$start <- start
   df$end <- end
   df$km_lr <- km_lr

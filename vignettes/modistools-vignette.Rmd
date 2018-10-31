@@ -62,7 +62,8 @@ subset <- mt_subset(product = "MOD13Q1",
                     km_lr = 0,
                     km_ab = 0,
                     site_name = "testsite",
-                    internal = TRUE)
+                    internal = TRUE,
+                    progress = FALSE)
 head(subset)
 
 ```

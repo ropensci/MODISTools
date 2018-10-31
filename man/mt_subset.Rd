@@ -12,7 +12,7 @@ mt_subset(product, band, lat, lon, start = "2000-01-01",
 \arguments{
 \item{product}{a valid MODIS product name}
 
-\item{band}{band to download (default = \code{NULL}, all bands)}
+\item{band}{band to download}
 
 \item{lat}{latitude in decimal degrees}
 
@@ -40,8 +40,7 @@ mt_subset(product, band, lat, lon, start = "2000-01-01",
 \item{progress}{show download progress}
 }
 \value{
-A nested list containing the downloaded data and a descriptive
-header with meta-data.
+A data frame combining meta-data and actual data values.
 }
 \description{
 Lists all available dates for a MODIS Land Products Subset product
@@ -57,13 +56,16 @@ subset <- mt_subset(product = "MOD11A2",
                         lon = -110,
                         band = "LST_Day_1km",
                         start = "2004-01-01",
-                        end = "2004-03-31")
- print(str(subset))
+                        end = "2004-03-31",
+                        progress = FALSE)
+ head(subset)
 }
 }
 \seealso{
-[mt_products()] [mt_bands()] [mt_sites()] [mt_batch_subset()]
-[mt_dates()]
+\code{\link[MODISTools]{mt_sites}}
+\code{\link[MODISTools]{mt_dates}} \code{\link[MODISTools]{mt_bands}}
+\code{\link[MODISTools]{mt_products}}
+\code{\link[MODISTools]{mt_batch_subset}}
 }
 \keyword{Land}
 \keyword{MODIS}

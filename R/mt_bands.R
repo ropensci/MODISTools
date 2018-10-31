@@ -6,13 +6,15 @@
 #' @return A data frame of all available bands for a MODIS Land
 #' Products Subsets products
 #' @keywords MODIS Land Products Subsets, products, meta-data
+#' @seealso \code{\link[MODISTools]{mt_product}}
+#' \code{\link[MODISTools]{mt_sites}} \code{\link[MODISTools]{mt_dates}}
 #' @export
 #' @examples
 #'
 #' \donttest{
 #' # list all available MODIS Land Products Subsets products
 #' bands <- mt_bands(product = "MOD11A2")
-#' print(bands)
+#' head(bands)
 #'
 #'}
 
@@ -27,7 +29,7 @@ mt_bands <- memoise::memoise(function(product){
   }
 
   # define url
-  url <- paste(.Options$mt_server, product, "bands", sep = "/")
+  url <- paste(mt_server(), product, "bands", sep = "/")
 
   # try to download the data
   bands <- try(jsonlite::fromJSON(url))

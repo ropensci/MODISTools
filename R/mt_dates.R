@@ -10,13 +10,15 @@
 #' @return A data frame of all available dates for a MODIS Land
 #' Products Subsets products at the given location.
 #' @keywords MODIS Land Products Subsets, products, meta-data
+#' @seealso \code{\link[MODISTools]{mt_product}}
+#' \code{\link[MODISTools]{mt_sites}} \code{\link[MODISTools]{mt_bands}}
 #' @export
 #' @examples
 #'
 #' \donttest{
 #' # list all available MODIS Land Products Subsets products
 #' bands <- mt_dates(product = "MOD11A2", lat = 40, lon = -110)
-#' print(bands)
+#' head(bands)
 #'}
 
 mt_dates <- function(product,
@@ -44,21 +46,21 @@ mt_dates <- function(product,
       sites <- MODISTools::mt_sites()
 
       # check if the site id is valid
-      if (!length(site_id %in% sites$siteid)){
+      if (!(site_id %in% sites$siteid)){
         stop("please specify a valid site id...")
       }
   }
 
   # switch url in case of siteid
   if (missing(site_id)){
-    url <- paste(.Options$mt_server, product, "dates", sep = "/")
+    url <- paste(mt_server(), product, "dates", sep = "/")
 
     # construct the query to be served to the server
     query <- list("latitude" = lat,
                   "longitude" = lon)
 
   } else {
-    url <- paste(.Options$mt_server, product, site_id, "dates", sep = "/")
+    url <- paste(mt_server(), product, site_id, "dates", sep = "/")
     query <- NULL
   }
 

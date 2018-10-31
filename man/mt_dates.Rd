@@ -28,8 +28,12 @@ at a particular location.
 \donttest{
 # list all available MODIS Land Products Subsets products
 bands <- mt_dates(product = "MOD11A2", lat = 40, lon = -110)
-print(bands)
+head(bands)
 }
+}
+\seealso{
+\code{\link[MODISTools]{mt_product}}
+\code{\link[MODISTools]{mt_sites}} \code{\link[MODISTools]{mt_bands}}
 }
 \keyword{Land}
 \keyword{MODIS}

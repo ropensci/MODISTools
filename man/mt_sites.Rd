@@ -21,6 +21,10 @@ sites <- mt_sites()
 print(head(sites))
 }
 }
+\seealso{
+\code{\link[MODISTools]{mt_product}}
+\code{\link[MODISTools]{mt_bands}} \code{\link[MODISTools]{mt_dates}}
+}
 \keyword{Land}
 \keyword{MODIS}
 \keyword{Products}
