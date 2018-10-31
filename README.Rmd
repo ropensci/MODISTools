@@ -71,6 +71,7 @@ km_lr | force "out of temporal range" downloads (integer)
 km_ab | suppress the verbose output (integer)
 site_name | a site identifier
 site_id | a site_id for predefined locations (not required)
+progress | logical, TRUE or FALSE (show download progress)
 
 </p>
 </details>
