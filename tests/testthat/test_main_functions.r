@@ -75,6 +75,19 @@ test_that("test mt_subset()",{
     "data.frame"
   )
 
+  # dates out of range
+  expect_error(
+    mt_subset(
+      product = "MOD11A2",
+      lat = 40,
+      lon = -110,
+      band = "LST_Day_1km",
+      start = "2000-01-01",
+      end = "2000-02-29",
+      progress = FALSE
+    )
+  )
+
   # missing coordinate
   expect_error(
     mt_subset(
@@ -196,7 +209,7 @@ test_that("test mt_batch_subset()",{
     )
   )
 
-  # test batch download
+  # test batch download from csv
   expect_is(
     mt_batch_subset(
       df = paste0(tempdir(), "/batch.csv"),
@@ -232,12 +245,23 @@ test_that("test mt_batch_subset()",{
     )
   )
 
+  # error missing product
+  expect_error(
+    mt_batch_subset(
+      df = df,
+      band = "LST_Day_1km",
+      internal = TRUE,
+      start = "2004-01-01",
+      end = "2004-03-31"
+    )
+  )
+
   # error bad band name
   expect_error(
     mt_batch_subset(
-      df = paste0(tempdir(), "/batch.csv"),
+      df = df,
       product = "MOD11A2",
-      band = "LST_Day_2km",
+      band = "LST_Day_0km",
       internal = TRUE,
       start = "2004-01-01",
       end = "2004-03-31"
@@ -246,7 +270,6 @@ test_that("test mt_batch_subset()",{
 })
 
 # test coordinate conversions
-
 test_that("test coordinate transforms",{
 
   subset <- mt_subset(
