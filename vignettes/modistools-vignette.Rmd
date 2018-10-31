@@ -113,3 +113,21 @@ plot(date,
      ylim = c(0,1),
      type = "l")
 ```
+
+### Conversion of corner coordinates
+
+Corner coordinates of the pixel area extracted are provided, these can be used to calculate the coverage of the extracted area. Coordinates are provided in the original sinusoidal grid coordinates and first have to be transformed into latitude longitude (for convenience).
+
+``` {r}
+# convert the coordinates
+subset <- subset %>%
+  mutate(result = map2(xllcorner, yllcorner, sin_to_ll)) %>%
+  unnest()
+```
+
+Together with meta-data regarding cell size, number of columns and rows the bounding box of the extracted data can be calculated.
+
+``` {r eval = FALSE}
+# convert the bounding box
+subset <- subset %>% TODO
+```
