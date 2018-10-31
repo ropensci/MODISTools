@@ -26,6 +26,13 @@
 #'}
 
 sin_to_ll <- function(x, y){
+
+  # check parameters
+  if(missing(x) | missing(y)){
+    stop("please provide a coordinate pair in sinusoidal projection...")
+  }
+
+  # convert to sf object
   coords <- sf::st_as_sf(x = data.frame(as.numeric(x),
                                         as.numeric(y),
                                         stringsAsFactors = FALSE),

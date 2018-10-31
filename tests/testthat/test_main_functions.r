@@ -247,10 +247,7 @@ test_that("test mt_batch_subset()",{
 
 # test coordinate conversions
 
-
-
-
-test_that("test mt_batch_subset()",{
+test_that("test coordinate transforms",{
 
   subset <- mt_subset(
     product = "MOD11A2",
@@ -262,21 +259,16 @@ test_that("test mt_batch_subset()",{
     progress = FALSE
   )
 
-  # bind with the original dataframe
-  subset <- cbind(subset, lat_lon)
-
   # test conversion
   expect_is(
-    sin_to_ll(subset$xllcorner, subset$yllcorner)
+    sin_to_ll(x = subset$xllcorner, y = subset$yllcorner)
     ,
     "data.frame"
   )
 
-  # test conversion
-  expect_is(
-    sin_to_ll(subset$xllcorner, subset$yllcorner)
-    ,
-    "data.frame"
+  # test conversion missing parameter
+  expect_error(
+    sin_to_ll(x = subset$xllcorner)
   )
 
   # test sf bounding box conversion
@@ -288,9 +280,20 @@ test_that("test mt_batch_subset()",{
              lat = x['latitude_ll'],
              cell_size = x['cellsize'],
              nrows = x['nrows'],
-             ncols = x['ncols'])[[1]]
-  }),
+             ncols = x['ncols'])
+  })[[1]],
   "sfc"
   )
 
+  # test sf bounding box conversion missing parameter
+  expect_error(
+    apply(
+      cbind(subset, sin_to_ll(subset$xllcorner, subset$yllcorner)),
+      1, function(x){
+        ll_to_bb(lat = x['latitude_ll'],
+                 cell_size = x['cellsize'],
+                 nrows = x['nrows'],
+                 ncols = x['ncols'])
+      })
+  )
 })
