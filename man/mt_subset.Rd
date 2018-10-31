@@ -7,7 +7,7 @@
 mt_subset(product, band, lat, lon, start = "2000-01-01",
   end = format(Sys.time(), "\%Y-\%m-\%d"), km_lr = 0, km_ab = 0,
   site_id, site_name = "sitename", out_dir = tempdir(),
-  internal = TRUE)
+  internal = TRUE, progress = TRUE)
 }
 \arguments{
 \item{product}{a valid MODIS product name}
@@ -36,6 +36,8 @@ mt_subset(product, band, lat, lon, start = "2000-01-01",
 
 \item{internal}{should the data be returned as an internal data structure
 \code{TRUE} or \code{FALSE} (default = \code{TRUE})}
+
+\item{progress}{show download progress}
 }
 \value{
 A nested list containing the downloaded data and a descriptive

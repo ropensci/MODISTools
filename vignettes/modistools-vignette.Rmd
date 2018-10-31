@@ -118,17 +118,36 @@ plot(date,
 
 Corner coordinates of the pixel area extracted are provided, these can be used to calculate the coverage of the extracted area. Coordinates are provided in the original sinusoidal grid coordinates and first have to be transformed into latitude longitude (for convenience).
 
-``` {r}
+``` {r }
 # convert the coordinates
-subset <- subset %>%
-  mutate(result = map2(xllcorner, yllcorner, sin_to_ll)) %>%
-  unnest()
+lat_lon <- sin_to_ll(subset$xllcorner, subset$yllcorner)
+
+# bind with the original dataframe
+subset <- cbind(subset, lat_lon)
+
+head(subset)
 ```
 
 Together with meta-data regarding cell size, number of columns and rows the bounding box of the extracted data can be calculated.
 
-``` {r eval = FALSE}
-# convert the bounding box
-subset <- subset %>% TODO
+``` {r }
+# convert to bounding box
+bb <- apply(subset, 1, function(x){
+  ll_to_bb(lon = x['longitude_ll'],
+           lat = x['latitude_ll'],
+           cell_size = x['cellsize'],
+           nrows = x['nrows'],
+           ncols = x['ncols'])
+})
+
+# plot one bounding box
+plot(bb[[1]])
+
+# add the location of the queried coordinate within the polygon
+points(subset$longitude[1],
+       subset$latitude[1],
+       pch = 20,
+       col = "red")
+
 ```
  

@@ -18,13 +18,13 @@
 #' (default = tempdir())
 #' @param internal should the data be returned as an internal data structure
 #' \code{TRUE} or \code{FALSE} (default = \code{TRUE})
+#' @param progress show download progress
 #' @return A nested list containing the downloaded data and a descriptive
 #' header with meta-data.
 #' @seealso [mt_products()] [mt_bands()] [mt_sites()] [mt_batch_subset()]
 #' [mt_dates()]
 #' @keywords MODIS Land Products Subsets, products, meta-data
 #' @export
-#' @importFrom magrittr %>%
 #' @examples
 #'
 #' \donttest{
@@ -50,7 +50,8 @@ mt_subset <- function(product,
                        site_id,
                        site_name = "sitename",
                        out_dir = tempdir(),
-                       internal = TRUE){
+                       internal = TRUE,
+                       progress = TRUE){
 
   # load all products and bands to check
   # valid combinations
@@ -124,6 +125,18 @@ mt_subset <- function(product,
   # list breaks, for downloads in chunks
   breaks <- seq(1, nrow(dates), 10)
 
+  # start progress bar chuncks
+  if(progress){
+    message("Downloading chunks:")
+    env <- environment()
+    counter <- 0
+    pb <- utils::txtProgressBar(
+      min = 0,
+      max = length(breaks),
+      style = 3
+      )
+  }
+
   # loop over all 10 value breaks
   subset_data <- lapply(breaks, function(b){
 
@@ -166,9 +179,21 @@ mt_subset <- function(product,
                                               encoding = "UTF-8"),
                                 simplifyVector = TRUE)
 
+    # set progress bar
+    if(progress){
+      tmp <- get("counter", envir = env)
+      assign("counter", tmp + 1 ,envir = env)
+      utils::setTxtProgressBar(get("pb", envir = env), tmp + 1)
+    }
+
     # return data
     return(chunk)
   })
+
+  # close progress bar
+  if(progress){
+    close(pb)
+  }
 
   # split out a header including
   # additional ancillary data
@@ -202,20 +227,22 @@ mt_subset <- function(product,
   subset_data <- cbind(subset_data[,!(names(subset_data) %in% "data")],
                             pixels)
 
-  # create tidy data frame
-  subset_data <- tidyr::gather(subset_data,
-         key = "pixel",
-         value = "value",
-         grep("[0-9]",names(subset_data)))
+  subset_data <- stats::reshape(subset_data,
+                         varying = grep("[0-9]",names(subset_data)),
+                         direction = "long",
+                         timevar = "pixel",
+                         v.names = "value")
+
+  # drop the id column
+  subset_data <- subset_data[ , !(names(subset_data) %in% "id")]
 
   # combine header with the data, this repeats
   # some meta-data but makes file handling easier
   subset_data <- data.frame(header, subset_data,
                             stringsAsFactors = FALSE)
 
-  # drop duplicate column
-  subset_data <- subset_data %>%
-    dplyr::select(-"band.1")
+  # drop duplicate band column
+  subset_data <- subset_data[ , !(names(subset_data) %in% "band.1")]
 
   # assign a class label, mostly for checks
   class(subset_data) <- c(class(subset_data), "MODISTools")

@@ -16,13 +16,8 @@ Depends:
 Imports:
     httr,
     utils,
-    tidyr,
-    dplyr,
-    purrr,
-    magrittr,
-    lubridate,
-    tibble,
     sf,
+    stats,
     memoise,
     jsonlite
 License: AGPL-3

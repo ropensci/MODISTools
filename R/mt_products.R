@@ -5,7 +5,6 @@
 #' @return A data frame of all available MODIS Land Products Subsets products
 #' @keywords MODIS Land Products Subsets, products, meta-data
 #' @export
-#' @importFrom magrittr %>%
 #' @examples
 #'
 #' \donttest{
@@ -20,21 +19,18 @@ mt_products <- memoise::memoise(function(){
   url <- paste(.Options$mt_server, "products", sep = "/")
 
   # try to download the data
-  products <- try(jsonlite::fromJSON(url))
+  products <- try(jsonlite::fromJSON(url))$products
 
   # trap errors on download, return a general error statement
   if (inherits(products, "try-error")){
     stop("Your requested timed out or the server is unreachable")
   }
 
-  # convert frequency to seconds, and labels to more sensible
-  # values
-  products <- products$products %>%
-    dplyr::mutate(frequency = gsub("-", " ", frequency)) %>%
-    dplyr::mutate(frequency = gsub("Day", "day", frequency)) %>%
-    dplyr::mutate(frequency = gsub("Daily", "1 day", frequency)) %>%
-    dplyr::mutate(frequency = gsub("Yearly", "1 year", frequency)) %>%
-    dplyr::mutate(frequency_sec = lubridate::duration(frequency))
+  # convert labels to more sensible names
+  products$frequency <- gsub("-", " ", products$frequency)
+  products$frequency <- gsub("Day", "day", products$frequency)
+  products$frequency <- gsub("Daily", "1 day", products$frequency)
+  products$frequency <- gsub("Yearly", "1 year", products$frequency)
 
   # return a data frame with all products and their details
   return(products)
