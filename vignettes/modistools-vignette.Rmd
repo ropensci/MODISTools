@@ -131,3 +131,4 @@ Together with meta-data regarding cell size, number of columns and rows the boun
 # convert the bounding box
 subset <- subset %>% TODO
 ```
+ 
