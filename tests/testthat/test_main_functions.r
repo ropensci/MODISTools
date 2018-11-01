@@ -82,8 +82,8 @@ test_that("test mt_subset()",{
       lat = 40,
       lon = -110,
       band = "LST_Day_1km",
-      start = "2000-01-01",
-      end = "2000-02-29",
+      start = "1990-01-01",
+      end = "1990-02-20",
       progress = FALSE
     )
   )
