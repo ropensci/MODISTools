@@ -88,6 +88,31 @@ test_that("test mt_subset()",{
     )
   )
 
+  # no band provided
+  expect_error(
+    mt_subset(
+      product = "MOD11A2",
+      lat = 40,
+      lon = -110,
+      start = "2004-01-01",
+      end = "2004-02-20",
+      progress = FALSE
+    )
+  )
+
+  # bad band provided
+  expect_error(
+    mt_subset(
+      product = "MOD11A2",
+      lat = 40,
+      lon = -110,
+      band = "LST_Day_0km",
+      start = "2004-01-01",
+      end = "2004-02-20",
+      progress = FALSE
+    )
+  )
+
   # missing coordinate
   expect_error(
     mt_subset(
@@ -99,17 +124,21 @@ test_that("test mt_subset()",{
     )
   )
 
-  # no band provided
-  expect_error(mt_subset(
-    product = "MOD11A2",
-    lat = 40,
-    start = "2004-01-01",
-    end = "2004-03-31"
-  ))
-
   # no product provided
   expect_error(
     mt_subset(
+      lat = 40,
+      lon = -110,
+      band = "LST_Day_1km",
+      start = "2004-01-01",
+      end = "2004-03-31"
+    )
+  )
+
+  # wrong product provided
+  expect_error(
+    mt_subset(
+      product = "MOD11AZ",
       lat = 40,
       lon = -110,
       band = "LST_Day_1km",
@@ -245,6 +274,18 @@ test_that("test mt_batch_subset()",{
     )
   )
 
+  # error bad product name
+  expect_error(
+    mt_batch_subset(
+      df = df,
+      product = "MOD11AZ",
+      band = "LST_Day_1km",
+      internal = TRUE,
+      start = "2004-01-01",
+      end = "2004-03-31"
+    )
+  )
+
   # error missing product
   expect_error(
     mt_batch_subset(
@@ -262,6 +303,17 @@ test_that("test mt_batch_subset()",{
       df = df,
       product = "MOD11A2",
       band = "LST_Day_0km",
+      internal = TRUE,
+      start = "2004-01-01",
+      end = "2004-03-31"
+    )
+  )
+
+  # missing band name
+  expect_error(
+    mt_batch_subset(
+      df = df,
+      product = "MOD11A2",
       internal = TRUE,
       start = "2004-01-01",
       end = "2004-03-31"
