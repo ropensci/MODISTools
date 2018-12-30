@@ -166,10 +166,10 @@ mt_subset <- function(
                          query = query,
                          httr::write_memory())
 
-    # trap errors on download, return a general error statement
-    # with the most common causes
+    # trap errors on download, return a detailed
+    # API error statement
     if (httr::http_error(json_chunk)){
-      warning("Your requested timed out or the server is unreachable")
+      warning(httr::content(json_chunk), call. = FALSE)
       return(NULL)
     }
 
@@ -179,7 +179,7 @@ mt_subset <- function(
       return(NULL)
     }
 
-    # grab content
+    # grab content from cached json chunk
     chunk <- jsonlite::fromJSON(httr::content(json_chunk, "text",
                                               encoding = "UTF-8"),
                                 simplifyVector = TRUE)
