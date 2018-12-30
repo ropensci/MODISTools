@@ -83,11 +83,11 @@ sin_to_ll <- function(x, y){
 #'
 #' # convert to bounding box
 #' bb <- apply(subset, 1, function(x){
-#'   mt_bbox(lon = x['xllcorner'],
-#'            lat = x['yllcorner'],
-#'            cellsize = x['cellsize'],
-#'            nrows = x['nrows'],
-#'            ncols = x['ncols'])
+#'   mt_bbox(xllcorner = x['xllcorner'],
+#'           yllcorner = x['yllcorner'],
+#'           cellsize = x['cellsize'],
+#'           nrows = x['nrows'],
+#'           ncols = x['ncols'])
 #' })
 #'
 #' head(bb)
