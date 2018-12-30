@@ -175,7 +175,7 @@ mt_subset <- function(
 
     # check the content of the response
     if (httr::http_type(json_chunk) != "application/json") {
-      warning("API did not return json", call. = FALSE)
+      warning("API did not return json...", call. = FALSE)
       return(NULL)
     }
 
