@@ -74,8 +74,7 @@ mt_dates <- function(
   # trap errors on download, return a general error statement
   # with the most common causes.
   if (httr::http_error(json_dates)){
-    stop("Your requested timed out or the server is unreachable",
-         call. = FALSE)
+    stop(httr::content(json_dates), call. = FALSE)
   }
 
   # check the content of the json_dates, stop if not json
