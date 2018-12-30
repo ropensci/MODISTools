@@ -49,16 +49,19 @@
 #' head(subsets)
 #'}
 
-mt_batch_subset <- function(df,
-                         product,
-                         band,
-                         start = "2000-01-01",
-                         end = format(Sys.time(),"%Y-%m-%d"),
-                         km_lr = 0,
-                         km_ab = 0,
-                         out_dir = tempdir(),
-                         internal = TRUE,
-                         ncores = "auto"){
+mt_batch_subset <- function(
+  df,
+  product,
+  band,
+  start = "2000-01-01",
+  end = format(Sys.time(),"%Y-%m-%d"),
+  km_lr = 0,
+  km_ab = 0,
+  out_dir = tempdir(),
+  internal = TRUE,
+  ncores = "auto"
+  ){
+
   # error trap
   if (missing(df)){
     stop("please specify a batch file...")

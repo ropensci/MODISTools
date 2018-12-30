@@ -41,19 +41,21 @@
 #'  head(subset)
 #'}
 
-mt_subset <- function(product,
-                       band,
-                       lat,
-                       lon,
-                       start = "2000-01-01",
-                       end = format(Sys.time(),"%Y-%m-%d"),
-                       km_lr = 0,
-                       km_ab = 0,
-                       site_id,
-                       site_name = "sitename",
-                       out_dir = tempdir(),
-                       internal = TRUE,
-                       progress = TRUE){
+mt_subset <- function(
+  product,
+  band,
+  lat,
+  lon,
+  start = "2000-01-01",
+  end = format(Sys.time(),"%Y-%m-%d"),
+  km_lr = 0,
+  km_ab = 0,
+  site_id,
+  site_name = "sitename",
+  out_dir = tempdir(),
+  internal = TRUE,
+  progress = TRUE
+  ){
 
   # error trap missing coordinates or site id
   if (missing(site_id) & (missing(lat) | missing(lon)) ){
