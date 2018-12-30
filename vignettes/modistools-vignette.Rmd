@@ -58,7 +58,7 @@ subset <- mt_subset(product = "MOD13Q1",
                     lon = -72.179003,
                     band = "250m_16_days_NDVI",
                     start = "2004-01-01",
-                    end = "2008-12-30",
+                    end = "2005-12-30",
                     km_lr = 0,
                     km_ab = 0,
                     site_name = "testsite",
@@ -131,12 +131,12 @@ head(subset)
 
 Together with meta-data regarding cell size, number of columns and rows the bounding box of the extracted data can be calculated.
 
-``` {r }
+```{r}
 # convert to bounding box
 bb <- apply(subset, 1, function(x){
-  ll_to_bb(lon = x['longitude_ll'],
-           lat = x['latitude_ll'],
-           cell_size = x['cellsize'],
+  mt_bbox(xllcorner = x['xllcorner'],
+          yllcorner = x['yllcorner'],
+           cellsize = x['cellsize'],
            nrows = x['nrows'],
            ncols = x['ncols'])
 })

@@ -348,25 +348,20 @@ test_that("test coordinate transforms",{
 
   # test sf bounding box conversion
   expect_is(
-  apply(
-    cbind(subset, sin_to_ll(subset$xllcorner, subset$yllcorner)),
-    1, function(x){
-    ll_to_bb(lon = x['longitude_ll'],
-             lat = x['latitude_ll'],
-             cell_size = x['cellsize'],
-             nrows = x['nrows'],
-             ncols = x['ncols'])
+  apply(subset,1, function(x){
+    mt_bbox(xllcorner = x['xllcorner'],
+            yllcorner = x['yllcorner'],
+            cellsize = x['cellsize'],
+            nrows = x['nrows'],
+            ncols = x['ncols'])
   })[[1]],
   "sfc"
   )
 
   # test sf bounding box conversion missing parameter
   expect_error(
-    apply(
-      cbind(subset, sin_to_ll(subset$xllcorner, subset$yllcorner)),
-      1, function(x){
-        ll_to_bb(lat = x['latitude_ll'],
-                 cell_size = x['cellsize'],
+    apply(sbuset, 1, function(x){
+        mt_bbox(cellsize = x['cellsize'],
                  nrows = x['nrows'],
                  ncols = x['ncols'])
       })

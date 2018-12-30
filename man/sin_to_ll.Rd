@@ -35,7 +35,7 @@ head(subset)
 }
 }
 \seealso{
-\code{\link[MODISTools]{ll_to_bb}}
+\code{\link[MODISTools]{mt_bbox}}
 }
 \keyword{Land}
 \keyword{MODIS}
