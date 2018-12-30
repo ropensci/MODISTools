@@ -2,7 +2,7 @@
 #'
 #' @param x sinusoidal x coordinate (vector)
 #' @param y sinusoidal y coordinate (vector)
-#' @seealso \code{\link[MODISTools]{ll_to_bb}}
+#' @seealso \code{\link[MODISTools]{mt_bbox}}
 #' @keywords MODIS Land Products Subsets, products, meta-data
 #' @export
 #' @examples
