@@ -12,7 +12,11 @@ sin_to_ll(x, y)
 \item{y}{sinusoidal y coordinate (vector)}
 }
 \description{
-Convert sinusoidal coordinates to lat / lon
+A full description of the sinusoidal projection is provided on the
+lpdaac page:
+https://lpdaac.usgs.gov/dataset_discovery/modis
+and wikipedia:
+https://en.wikipedia.org/wiki/Sinusoidal_projection
 }
 \examples{
 

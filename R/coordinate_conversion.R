@@ -1,5 +1,11 @@
 #' Convert sinusoidal coordinates to lat / lon
 #'
+#' A full description of the sinusoidal projection is provided on the
+#' lpdaac page:
+#' https://lpdaac.usgs.gov/dataset_discovery/modis
+#' and wikipedia:
+#' https://en.wikipedia.org/wiki/Sinusoidal_projection
+#'
 #' @param x sinusoidal x coordinate (vector)
 #' @param y sinusoidal y coordinate (vector)
 #' @seealso \code{\link[MODISTools]{mt_bbox}}
@@ -128,6 +134,12 @@ mt_bbox <- function(
   p <- sf::st_linestring(m)
   p <- sf::st_cast(p, "POLYGON")
   p <- sf::st_sfc(p, crs = "+proj=sinu +a=6371007.181 +b=6371007.181 +units=m")
+
+  # a full description of the sinusoidal projection is provided on the
+  # lpdaac page:
+  # https://lpdaac.usgs.gov/dataset_discovery/modis
+  # and wikipedia:
+  # https://en.wikipedia.org/wiki/Sinusoidal_projection
 
   # transform the polygon to lat-lon
   p <- sf::st_transform(p, crs = 4326)
