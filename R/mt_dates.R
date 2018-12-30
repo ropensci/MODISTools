@@ -21,10 +21,12 @@
 #' head(bands)
 #'}
 
-mt_dates <- function(product,
-                       lat,
-                       lon,
-                       site_id){
+mt_dates <- function(
+  product,
+  lat,
+  lon,
+  site_id
+  ){
 
   # load all products
   products <- MODISTools::mt_products()$product
