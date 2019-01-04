@@ -124,7 +124,8 @@ mt_subset <- function(
 
   # check if something remains
   if (nrow(dates) == 0){
-    stop("No data points exist for the selected date range...")
+    warning("No data points exist for the selected date range...")
+    return(invisible(NULL))
   }
 
   # list breaks, for downloads in chunks
