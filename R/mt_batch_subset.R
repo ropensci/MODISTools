@@ -106,6 +106,11 @@ mt_batch_subset <- function(
   df$out_dir <- path.expand(out_dir)
   df$internal <- internal
 
+  # convert names tolower case
+  # trapping naming issues of coordinates
+  # and sites
+  names(df) <- tolower(names(df))
+
   # Calculate the number of cores
   if (ncores == "auto"){
     ncores <- parallel::detectCores() - 1
