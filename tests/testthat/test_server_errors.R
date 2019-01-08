@@ -1,4 +1,4 @@
-context("test-server")
+context("Test server error messages")
 
 test_that("error messages from server are shown to the user", {
   skip_on_cran()
@@ -25,3 +25,4 @@ test_that("error messages from server are shown to the user", {
     "Invalid argument: Longitude must be between -180 and 180 degrees."
   )
 })
+
