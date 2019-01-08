@@ -7,6 +7,7 @@
 #' @seealso \code{\link[MODISTools]{mt_bands}}
 #' \code{\link[MODISTools]{mt_sites}} \code{\link[MODISTools]{mt_dates}}
 #' @export
+#' @importFrom memoise memoise
 #' @examples
 #'
 #' \donttest{
@@ -14,6 +15,7 @@
 #' products <- mt_products()
 #' head(products)
 #'}
+#'
 
 mt_products <- memoise::memoise(function(){
 

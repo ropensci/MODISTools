@@ -19,6 +19,7 @@ Lists all available MODIS Land Products Subset products.
 products <- mt_products()
 head(products)
 }
+
 }
 \seealso{
 \code{\link[MODISTools]{mt_bands}}

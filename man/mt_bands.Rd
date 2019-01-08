@@ -24,6 +24,7 @@ bands <- mt_bands(product = "MOD11A2")
 head(bands)
 
 }
+
 }
 \seealso{
 \code{\link[MODISTools]{mt_products}}

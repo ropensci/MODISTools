@@ -20,6 +20,7 @@ Lists all available MODIS Land Products Subset pre-processed sites
 sites <- mt_sites()
 print(head(sites))
 }
+
 }
 \seealso{
 \code{\link[MODISTools]{mt_products}}
