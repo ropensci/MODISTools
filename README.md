@@ -1,13 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# MODISTools <a href='https://khufkens.github.io/MODISTools/'><img src='MODISTools-logo.png' align="right" height="139" /></a>
+
 [![Build
 Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools)
 [![codecov](https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/khufkens/MODISTools)
 ![Status](https://www.r-pkg.org/badges/version/MODISTools)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/MODISTools)
-
-# MODISTools
 
 Programmatic interface to the [‘MODIS Land Products Subsets’ web
 services](https://modis.ornl.gov/data/modis_webservice.html). Allows for
@@ -262,7 +262,7 @@ head(dates)
 
 ## References
 
-Tuck et al. (2014). [MODISTools - downloading and processing MODIS
+Tuck et al. (2014). [MODISTools - downloading and processing MODIS
 remotely sensed data in R Ecology &
 Evolution](https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.1273),
 4(24), 4658 - 4668.
