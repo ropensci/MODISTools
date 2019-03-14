@@ -12,7 +12,7 @@ mt_subset(product, band, lat, lon, start = "2000-01-01",
 \arguments{
 \item{product}{a valid MODIS product name}
 
-\item{band}{band to download}
+\item{band}{band or bands (as a character vector) to download}
 
 \item{lat}{latitude in decimal degrees}
 
