@@ -273,4 +273,6 @@ Original development was supported by the UK Natural Environment
 Research Council (NERC; grants NE/K500811/1 and NE/J011193/1), and the
 Hans Rausing Scholarship. Refactoring was supported through the Belgian
 Science Policy office COBECORE project (BELSPO; grant
-BR/175/A3/COBECORE).
+BR/175/A3/COBECORE). Logo design elements are taken from the FontAwesome
+library according to [these terms](https://fontawesome.com/license),
+where the globe element was inverted and intersected.
