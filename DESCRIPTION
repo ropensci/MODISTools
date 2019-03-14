@@ -17,6 +17,7 @@ Imports:
     httr,
     utils,
     sf,
+    raster,
     stats,
     memoise,
     jsonlite
