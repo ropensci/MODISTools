@@ -1,3 +1,7 @@
+## MODISTools 1.1.1
+
+* added raster conversion function `mt_to_raster()`
+
 ## MODISTools 1.1.0
 
 * ropensci code review

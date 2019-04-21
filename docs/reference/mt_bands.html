@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODISTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -158,13 +158,14 @@ Products Subsets products</p>
 #&gt; 4      QC_Night     Nighttime LST Quality indicators   &lt;NA&gt;      0 to 255
 #&gt; 5 Day_view_time        Local time of day observation    hrs      0 to 240
 #&gt; 6   LST_Day_1km     Daytime Land Surface Temperature Kelvin 7500 to 65535
-#&gt;   fill_value
-#&gt; 1        255
-#&gt; 2          0
-#&gt; 3          0
-#&gt; 4       &lt;NA&gt;
-#&gt; 5        255
-#&gt; 6          0</div><div class='input'>
+#&gt;   fill_value scale_factor add_offset
+#&gt; 1        255            1        -65
+#&gt; 2          0        0.002       0.49
+#&gt; 3          0        0.002       0.49
+#&gt; 4       &lt;NA&gt;         &lt;NA&gt;       &lt;NA&gt;
+#&gt; 5        255          0.1          0
+#&gt; 6          0         0.02          0</div><div class='input'>
+</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -188,7 +189,7 @@ Products Subsets products</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
    </div>

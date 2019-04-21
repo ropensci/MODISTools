@@ -65,7 +65,7 @@ mt_to_raster <- function(df = subset){
     ncols = df$ncols[1])
 
   # convert to Spatial object (easier to get extent)
-  bb <- as(bb, 'Spatial')
+  bb <- methods::as(bb, 'Spatial')
 
   # assign extent + projection bb to raster
   raster::extent(r) <- raster::extent(bb)

@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODISTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@
       <h1>MODISTools</h1>
                         <h4 class="author">Koen Hufkens</h4>
             
-            <h4 class="date">2018-12-30</h4>
+            <h4 class="date">2019-04-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/khufkens/MODISTools/blob/master/vignettes/modistools-vignette.Rmd"><code>vignettes/modistools-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>modistools-vignette.Rmd</code></div>
@@ -131,13 +131,13 @@
 <a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt; 4   250m_16_days_NIR_reflectance      Surface Reflectance Band 2</span></a>
 <a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt; 5   250m_16_days_MIR_reflectance      Surface Reflectance Band 7</span></a>
 <a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt; 6              250m_16_days_NDVI             16 day NDVI average</span></a>
-<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt;                   units    valid_range fill_value</span></a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; 1             bit field     0 to 65534         -1</span></a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; 2           reflectance     0 to 10000      -1000</span></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt; 3                  rank         0 to 3         -1</span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; 4           reflectance     0 to 10000      -1000</span></a>
-<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; 5           reflectance     0 to 10000      -1000</span></a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; 6 NDVI ratio - No units -2000 to 10000      -3000</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt;                   units    valid_range fill_value scale_factor add_offset</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; 1             bit field     0 to 65534         -1         &lt;NA&gt;       &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; 2           reflectance     0 to 10000      -1000       0.0001          0</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt; 3                  rank         0 to 3         -1         &lt;NA&gt;       &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; 4           reflectance     0 to 10000      -1000       0.0001          0</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; 5           reflectance     0 to 10000      -1000       0.0001          0</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; 6 NDVI ratio - No units -2000 to 10000      -3000       0.0001          0</span></a></code></pre></div>
 <p>To list all available dates (temporal coverage) for a given product and location use the mt_dates() function.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">dates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mt_dates.html">mt_dates</a></span>(<span class="dt">product =</span> <span class="st">"MOD13Q1"</span>, <span class="dt">lat =</span> <span class="dv">42</span>, <span class="dt">lon =</span> <span class="dv">-110</span>)</a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(dates)</a>
@@ -330,7 +330,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
 </div>

@@ -21,7 +21,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-home">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">MODISTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -81,12 +81,17 @@
 
       
       </header><div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
+    
+
+    
+    
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<p><a href="https://travis-ci.org/khufkens/MODISTools"><img src="https://travis-ci.org/khufkens/MODISTools.svg" alt="Build Status"></a> <a href="https://codecov.io/gh/khufkens/MODISTools"><img src="https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg" alt="codecov"></a> <img src="https://www.r-pkg.org/badges/version/MODISTools" alt="Status"><img src="https://cranlogs.r-pkg.org/badges/grand-total/MODISTools" alt="Downloads"></p>
 <div id="modistools" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#modistools" class="anchor"></a>MODISTools</h1></div>
+<a href="#modistools" class="anchor"></a>MODISTools <a href="https://khufkens.github.io/MODISTools/"><img src="https://raw.githubusercontent.com/khufkens/MODISTools/master/MODISTools-logo.png" align="right" height="139"></a>
+</h1></div>
+<p><a href="https://travis-ci.org/khufkens/MODISTools"><img src="https://travis-ci.org/khufkens/MODISTools.svg" alt="Build Status"></a> <a href="https://codecov.io/gh/khufkens/MODISTools"><img src="https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg" alt="codecov"></a> <img src="https://www.r-pkg.org/badges/version/MODISTools" alt="Status"><img src="https://cranlogs.r-pkg.org/badges/grand-total/MODISTools" alt="Downloads"></p>
 <p>Programmatic interface to the <a href="https://modis.ornl.gov/data/modis_webservice.html">‘MODIS Land Products Subsets’ web services</a>. Allows for easy downloads of <a href="http://modis.gsfc.nasa.gov/">‘MODIS’</a> time series directly to your R workspace or your computer. When using the package please cite the manuscript as referenced below.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -310,13 +315,13 @@
 <a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt; 4      QC_Night     Nighttime LST Quality indicators   &lt;NA&gt;      0 to 255</span></a>
 <a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; 5 Day_view_time        Local time of day observation    hrs      0 to 240</span></a>
 <a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; 6   LST_Day_1km     Daytime Land Surface Temperature Kelvin 7500 to 65535</span></a>
-<a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt;   fill_value</span></a>
-<a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt; 1        255</span></a>
-<a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt; 2          0</span></a>
-<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt; 3          0</span></a>
-<a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt; 4       &lt;NA&gt;</span></a>
-<a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt; 5        255</span></a>
-<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt; 6          0</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt;   fill_value scale_factor add_offset</span></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt; 1        255            1        -65</span></a>
+<a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt; 2          0        0.002       0.49</span></a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt; 3          0        0.002       0.49</span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt; 4       &lt;NA&gt;         &lt;NA&gt;       &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt; 5        255          0.1          0</span></a>
+<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt; 6          0         0.02          0</span></a></code></pre></div>
 </div>
 <div id="listing-dates" class="section level3">
 <h3 class="hasAnchor">
@@ -341,12 +346,12 @@
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
-<p>Original development was supported by the UK Natural Environment Research Council (NERC; grants NE/K500811/1 and NE/J011193/1), and the Hans Rausing Scholarship. Refactoring was supported through the Belgian Science Policy office COBECORE project (BELSPO; grant BR/175/A3/COBECORE).</p>
+<p>Original development was supported by the UK Natural Environment Research Council (NERC; grants NE/K500811/1 and NE/J011193/1), and the Hans Rausing Scholarship. Refactoring was supported through the Belgian Science Policy office COBECORE project (BELSPO; grant BR/175/A3/COBECORE). Logo design elements are taken from the FontAwesome library according to <a href="https://fontawesome.com/license">these terms</a>, where the globe element was inverted and intersected.</p>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
@@ -377,7 +382,8 @@
 </ul>
 </div>
 
-  </div>
+      </div>
+
 </div>
 
 
@@ -386,7 +392,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
 </div>

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# MODISTools <a href='https://khufkens.github.io/MODISTools/'><img src='MODISTools-logo.png' align="right" height="139" /></a>
+# MODISTools <a href='https://khufkens.github.io/MODISTools/'><img src='https://raw.githubusercontent.com/khufkens/MODISTools/master/MODISTools-logo.png' align="right" height="139" /></a>
 
 [![Build
 Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools)
@@ -234,13 +234,13 @@ head(bands)
 #> 4      QC_Night     Nighttime LST Quality indicators   <NA>      0 to 255
 #> 5 Day_view_time        Local time of day observation    hrs      0 to 240
 #> 6   LST_Day_1km     Daytime Land Surface Temperature Kelvin 7500 to 65535
-#>   fill_value
-#> 1        255
-#> 2          0
-#> 3          0
-#> 4       <NA>
-#> 5        255
-#> 6          0
+#>   fill_value scale_factor add_offset
+#> 1        255            1        -65
+#> 2          0        0.002       0.49
+#> 3          0        0.002       0.49
+#> 4       <NA>         <NA>       <NA>
+#> 5        255          0.1          0
+#> 6          0         0.02          0
 ```
 
 ### listing dates
