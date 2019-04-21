@@ -10,4 +10,4 @@
 ^LICENSE$
 ^docs$
 ^\.httr-oauth$
-^.*-logo\\.
+^.*-logo\..*$
