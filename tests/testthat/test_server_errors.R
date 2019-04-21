@@ -2,6 +2,7 @@ context("Test server error messages")
 
 test_that("error messages from server are shown to the user", {
   skip_on_cran()
+
   # temporary wrapper
   ss <- function(lon, lat) {
     mt_subset(product = "MOD11A2",

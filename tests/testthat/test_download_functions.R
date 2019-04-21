@@ -3,20 +3,24 @@ context("Test downloads")
 # test functions without parameters
 # only can fail upon server error
 test_that("test mt_products()",{
+  skip_on_cran()
   expect_is(mt_products(), "data.frame")
 })
 
 test_that("test mt_sites()",{
+  skip_on_cran()
   expect_is(mt_sites(), "data.frame")
 })
 
 test_that("test mt_bands()",{
+  skip_on_cran()
   expect_is(mt_bands(product = "MOD11A2"), "data.frame")
   expect_error(mt_bands(product = "MOD11A6"))
 })
 
 # download tests
 test_that("test mt_dates()",{
+  skip_on_cran()
 
   # check dates
   expect_is(
@@ -62,6 +66,7 @@ test_that("test mt_dates()",{
 })
 
 test_that("test mt_subset()",{
+  skip_on_cran()
 
   # good query
   expect_is(
@@ -200,6 +205,7 @@ write.table(df, paste0(tempdir(),"/batch.csv"),
             sep = ",")
 
 test_that("test mt_batch_subset()",{
+  skip_on_cran()
 
   # test batch download
   expect_is(

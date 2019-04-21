@@ -2,7 +2,7 @@ context("Test coordinate conversions")
 
 # test coordinate conversions
 test_that("test coordinate transforms",{
-
+  skip_on_cran()
   subset <- mt_subset(
     product = "MOD11A2",
     lat = 40,
