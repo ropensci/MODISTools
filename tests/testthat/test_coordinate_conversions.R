@@ -1,4 +1,4 @@
-context("Test coordinate conversions")
+context("Ancillary functions")
 
 # test coordinate conversions
 test_that("test coordinate transforms",{
@@ -46,3 +46,27 @@ test_that("test coordinate transforms",{
     })
   )
 })
+
+# test raster conversions
+test_that("test raster conversion",{
+  skip_on_cran()
+  subset <- mt_subset(
+    product = "MOD11A2",
+    lat = 40,
+    lon = -110,
+    band = "LST_Day_1km",
+    start = "2004-01-01",
+    end = "2004-03-31",
+    progress = FALSE
+  )
+
+ # good conversion
+ expect_silent(mt_to_raster(subset))
+
+ # not a data frame
+ expect_error(mt_to_raster(df = "not a dataframe"))
+
+ # missing input
+ expect_error(mt_to_raster())
+})
+

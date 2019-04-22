@@ -30,8 +30,26 @@
 #' # convert to raster
 #' LC_r <- mt_to_raster(df = LC)
 #'}
+#'
+#' @importFrom raster stack
 
-mt_to_raster <- function(df = subset){
+mt_to_raster <- function(df){
+
+  # trap empty function
+  if(missing(df)){
+    stop("No data provided")
+  }
+
+  # check if data frame
+  if(!is.data.frame(df)){
+    stop("Data is not a data frame")
+  }
+
+  # check if MODISTools data frame
+  # (introduce class?)
+  if(!any(names(df) %in% "modis_date")){
+    stop("Data is not a MODISTools data frame")
+  }
 
   # find unique dates for which data should exist
   dates <- unique(df$calendar_date)
@@ -43,7 +61,6 @@ mt_to_raster <- function(df = subset){
   # loop over all dates, format rasters and return
   r <- do.call("stack",
                lapply(dates, function(date){
-
                  # stuff values into raster
                  m <- matrix(df$value[df$calendar_date == date] *
                                as.numeric(df$scale[df$calendar_date == date]),

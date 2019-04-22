@@ -4,7 +4,7 @@
 \alias{mt_to_raster}
 \title{Convert tidy data to raster}
 \usage{
-mt_to_raster(df = subset)
+mt_to_raster(df)
 }
 \arguments{
 \item{df}{a valid MODISTools data frame}
@@ -37,6 +37,7 @@ head(LC)
 # convert to raster
 LC_r <- mt_to_raster(df = LC)
 }
+
 }
 \seealso{
 \code{\link[MODISTools]{mt_subset}}
