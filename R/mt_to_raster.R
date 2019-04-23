@@ -3,6 +3,7 @@
 #' Convert tidy MODISTools data to a raster (stack)
 #'
 #' @param df a valid MODISTools data frame
+#' @param reproject reproject output to lat / long (default = \code{FALSE})
 #' @return A raster stack populated with the tidy dataframe values
 #' @keywords MODIS Land Products Subsets, products
 #' @seealso \code{\link[MODISTools]{mt_subset}}
@@ -33,7 +34,10 @@
 #'
 #' @importFrom raster stack
 
-mt_to_raster <- function(df){
+mt_to_raster <- function(
+  df,
+  reproject = FALSE
+  ){
 
   # trap empty function
   if(missing(df)){
@@ -89,6 +93,11 @@ mt_to_raster <- function(df){
   raster::extent(r) <- raster::extent(bb)
   raster::projection(r) <- raster::projection(bb)
   names(r) <- as.character(dates)
+
+  # reproject to lat long when desired
+  if(reproject){
+    r <- raster::projectRaster(r, crs = "+init=epsg:4326")
+  }
 
   # return the data
   return(r)

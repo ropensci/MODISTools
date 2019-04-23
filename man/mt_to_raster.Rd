@@ -4,10 +4,12 @@
 \alias{mt_to_raster}
 \title{Convert tidy data to raster}
 \usage{
-mt_to_raster(df)
+mt_to_raster(df, reproject = FALSE)
 }
 \arguments{
 \item{df}{a valid MODISTools data frame}
+
+\item{reproject}{reproject output to lat / long (default = \code{FALSE})}
 }
 \value{
 A raster stack populated with the tidy dataframe values
