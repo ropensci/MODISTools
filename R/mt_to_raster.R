@@ -62,7 +62,7 @@ mt_to_raster <- function(df){
   r <- do.call("stack",
                lapply(dates, function(date){
                  # stuff values into raster
-                 m <- matrix(df$value[df$calendar_date == date] *
+                 m <- matrix(as.numeric(df$value[df$calendar_date == date]) *
                                as.numeric(df$scale[df$calendar_date == date]),
                              df$nrows[1],
                              df$ncols[1],
@@ -79,7 +79,8 @@ mt_to_raster <- function(df){
     yllcorner = df$yllcorner[1],
     cellsize = df$cellsize[1],
     nrows = df$nrows[1],
-    ncols = df$ncols[1])
+    ncols = df$ncols[1],
+    transform = FALSE)
 
   # convert to Spatial object (easier to get extent)
   bb <- methods::as(bb, 'Spatial')

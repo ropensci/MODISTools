@@ -4,7 +4,7 @@
 \alias{mt_bbox}
 \title{Converts lower-left sinusoidal coordinates to lat-lon sf bounding box}
 \usage{
-mt_bbox(xllcorner, yllcorner, cellsize, nrows, ncols)
+mt_bbox(xllcorner, yllcorner, cellsize, nrows, ncols, transform = TRUE)
 }
 \arguments{
 \item{xllcorner}{lower left x coordinate as provided by
@@ -18,6 +18,9 @@ mt_bbox(xllcorner, yllcorner, cellsize, nrows, ncols)
 \item{nrows}{cell size provided by \code{\link[MODISTools]{mt_subset}}}
 
 \item{ncols}{cell size provided by \code{\link[MODISTools]{mt_subset}}}
+
+\item{transform}{transform the bounding box from sin to lat long coordinates,
+\code{TRUE} or \code{FALSE} (default = \code{TRUE})}
 }
 \description{
 Converts lower-left sinusoidal coordinates to lat-lon sf bounding box
