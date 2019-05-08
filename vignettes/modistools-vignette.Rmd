@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 # load the library
 library(MODISTools)
 library(raster)
+library(rgdal)
 ```
 
 The MODISTools package has as goal to facilitate the interface between R and the MODIS Land Product Subset API at the Oak Ridge National Laboratory Distributed Active Archive Center (DAAC). This programmatic interface to the ['MODIS Land Products Subsets' web services](https://modis.ornl.gov/data/modis_webservice.html) allows for easy downloads of 'MODIS' time series (of single pixels or small regions of interest) directly to your R workspace or your computer. Below an example is provided on how to download a MODIS time series as well as list ancillary data.
