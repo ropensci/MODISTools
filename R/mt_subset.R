@@ -1,7 +1,9 @@
 #' Download MODIS Land Products subsets
 #'
-#' Lists all available dates for a MODIS Land Products Subset product
-#' at a particular location.
+#' Download a MODIS Land Products Subset product
+#' for a given point location buffered with a given amount of kilometers
+#' left-right, top-bottom for a given location (provided as latitude and
+#' longitude values).
 #'
 #' @param product a valid MODIS product name
 #' @param band band or bands (as a character vector) to download
