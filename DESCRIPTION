@@ -32,5 +32,6 @@ Suggests:
     covr,
     testthat,
     rgdal,
-    ggplot2
+    ggplot2,
+    dplyr
 VignetteBuilder: knitr
