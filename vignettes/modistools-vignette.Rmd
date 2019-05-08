@@ -20,6 +20,11 @@ library(MODISTools)
 library(raster)
 library(rgdal)
 library(dplyr)
+
+# pre-load data
+data("arcachon_lai")
+data("arcachon_lc")
+
 ```
 
 The MODISTools package has as goal to facilitate the interface between R and the MODIS Land Product Subset API at the Oak Ridge National Laboratory Distributed Active Archive Center (DAAC). This programmatic interface to the ['MODIS Land Products Subsets' web services](https://modis.ornl.gov/data/modis_webservice.html) allows for easy downloads of 'MODIS' time series (of single pixels or small regions of interest) directly to your R workspace or your computer. Below an example is provided on how to download a MODIS time series as well as list ancillary data.
@@ -84,12 +89,6 @@ arcachon_lc <- mt_subset(product = "MCD12Q1",
 ```
 
 The output format is a *tidy* data frame, as shown above. When witten to a csv with the parameter `internal = FALSE` this will result in a flat file on disk.
-
-```{r echo = FALSE}
-# load data
-data("arcachon_lai")
-data("arcachon_lc")
-```
 
 ```{r}
 head(arcachon_lai)
