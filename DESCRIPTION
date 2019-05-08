@@ -31,5 +31,6 @@ Suggests:
     rmarkdown,
     covr,
     testthat,
-    rgdal
+    rgdal,
+    ggplot2
 VignetteBuilder: knitr

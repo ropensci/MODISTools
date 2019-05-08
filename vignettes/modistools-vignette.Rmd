@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 library(MODISTools)
 library(raster)
 library(rgdal)
+library(tidyverse)
 ```
 
 The MODISTools package has as goal to facilitate the interface between R and the MODIS Land Product Subset API at the Oak Ridge National Laboratory Distributed Active Archive Center (DAAC). This programmatic interface to the ['MODIS Land Products Subsets' web services](https://modis.ornl.gov/data/modis_webservice.html) allows for easy downloads of 'MODIS' time series (of single pixels or small regions of interest) directly to your R workspace or your computer. Below an example is provided on how to download a MODIS time series as well as list ancillary data.
@@ -52,25 +53,48 @@ head(dates)
 
 # Downloading MODIS time series
 
-Once you decide on which data to download using the above functions you can use these parameters to download a time series using the `mt_subset()` function. The below query downloads MOD13Q1 based normalized vegetation index (NDVI) for the year 2014. The location is named 'testsite'. The output is saved to a variable called subset in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file).
+Once you decide on which data to download using the above functions you can use these parameters to download a time series using the `mt_subset()` function. The below query downloads MOD15A2H based leaf area index (LAI) data for the year 2014 for an area around the Arcachon basin in the south west of France. We will also download land cover data (MCD12Q1, IGBP) at a similar scale. The location is named 'arcachon'. The output is saved to a variables called subset and LC in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file). Keep in mind that this operation might take a while.
 
-```{r eval = TRUE}
-# download data
-subset <- mt_subset(product = "MOD13Q1",
-                    lat = 42.534171,
-                    lon = -72.179003,
-                    band = "250m_16_days_NDVI",
+```{r eval = FALSE}
+# download the MODIS land cover (IGBP) and NDVI data
+# for a region around the French city and basin of Arcachon
+arcachon_lai <- mt_subset(product = "MOD15A2H",
+                    lat = 44.656286,
+                    lon =  -1.174748,
+                    band = "Lai_500m",
                     start = "2004-01-01",
                     end = "2004-12-30",
-                    km_lr = 0,
-                    km_ab = 0,
-                    site_name = "testsite",
+                    km_lr = 20,
+                    km_ab = 20,
+                    site_name = "arcachon",
                     internal = TRUE,
                     progress = FALSE)
-head(subset)
+
+arcachon_lc <- mt_subset(product = "MCD12Q1",
+  lat = 44.656286,
+  lon =  -1.174748,
+  band = "LC_Type1",
+  start = "2004-01-01",
+  end = "2004-3-20",
+  km_lr = 20,
+  km_ab = 20,
+  site_name = "arcachon",
+  internal = TRUE,
+  progress = FALSE)
 ```
 
 The output format is a *tidy* data frame, as shown above. When witten to a csv with the parameter `internal = FALSE` this will result in a flat file on disk.
+
+```{r echo = FALSE}
+# load data
+data("arcachon_lai")
+data("arcachon_lc")
+```
+
+```{r}
+head(arcachon_lai)
+head(arcachon_lc)
+```
 
 Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the `pixel` column in the data frame containing the time series data. The remote sensing values are listed in the `value` column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values. 
 
@@ -92,48 +116,70 @@ head(df)
 subsets <- mt_batch_subset(df = df,
                      product = "MOD13Q1",
                      band = "250m_16_days_NDVI",
+                     km_lr = 1,
+                     km_ab = 1,
                      start = "2004-01-01",
                      end = "2004-12-30",
                      internal = TRUE)
 ```
 
-# Worked example using NDVI values
+# Worked example using LAI values around the bay of Arcachon
 
-The above downloaded subset shows the normalized difference vegetation index (NDVI), and [an indicator of plant health, density and or complexity](https://earthobservatory.nasa.gov/Features/MeasuringVegetation/measuring_vegetation_2.php) for one year at the experimental [Harvard Forest](https://harvardforest.fas.harvard.edu/) site. When plotted the yearly pattern of rising and falling NDVI values shows vegetation growth in spring, and senescence or leaf drop in fall. Values lower than ~0.4 are contaminated by snow or clouds.
+The below example processes the data downloaded above to look at differences in the seasonal changes in leaf area index (LAI, or the amount of leaves per unit ground area) for the Arcachon bay in south-west France. To do this we merge the land cover and LAI data on a pixel by pixel basis.
+
+```{r}
+# merge land cover and lai data
+arcachon <- arcachon_lc %>%
+  rename("lc" = "value") %>%
+  select("lc","pixel") %>%
+  right_join(arcachon_lai, by = "pixel")
+```
+
+Then, filter out all non valid values (> 100), only select evergreen and deciduous land cover classes (1 and 5, or, ENF and DBF respectivelly), convert them to more readable labels, and across these land cover classes take the median per acquisition date.
+
+```{r}
+# create a plot of the data - accounting for the multiplier (scale) component
+arcachon <- arcachon %>%
+  filter(value <= 100,
+         lc %in% c("1","5")) %>% # retain everything but fill values
+  mutate(lc = ifelse(lc == 1, "ENF","DBF")) %>%
+  group_by(lc, calendar_date) %>% # group by lc and date
+  summarize(doy = as.numeric(format(as.Date(calendar_date)[1],"%j")),
+            lai_mean = median(value * as.double(scale)))
+```
+
+Finally, the plot will show you the seasonal time series of LAI for both land cover classes (ENF and DBF). Note the difference in timing and amplitude between both these forest types, where the evergreen (ENF) pixels show lower LAI values and a more gradual seasonal pattern compared to the deciduous trees.
 
 ```{r fig.width = 7, fig.height=3}
-# create a plot of the data - accounting for the multiplier (scale) component
-date <- as.Date(subset$calendar_date)
-NDVI <- subset$value * as.double(subset$scale)
-NDVI[NDVI <= 0.2] <- NA
-
-plot(date,
-     NDVI,
-     xlab = "Date",
-     ylab = "NDVI",
-     ylim = c(0,1),
-     type = "l")
+# plot LAI by date and per land cover class
+ggplot(arcachon, aes(x = doy, y = lai_mean)) +
+  geom_point() +
+  geom_smooth(span = 0.3, method = "loess") +
+  labs(x = "day of year (DOY)",
+       y = "leaf area index (LAI)") +
+  theme_minimal() +
+  facet_wrap(~ lc)
 ```
 
 # Conversion of corner coordinates
 
 Corner coordinates of the pixel area extracted are provided, these can be used to calculate the coverage of the extracted area. Coordinates are provided in the original sinusoidal grid coordinates and first have to be transformed into latitude longitude (for convenience).
 
-``` {r }
+```{r }
 # convert the coordinates
-lat_lon <- sin_to_ll(subset$xllcorner, subset$yllcorner)
+lat_lon <- sin_to_ll(arcachon_lc$xllcorner, arcachon_lc$yllcorner)
 
 # bind with the original dataframe
-subset <- cbind(subset, lat_lon)
+subset <- cbind(arcachon_lc, lat_lon)
 
 head(subset)
 ```
 
 Together with meta-data regarding cell size, number of columns and rows the bounding box of the extracted data can be calculated.
 
-```{r}
+```{r fig.width = 5, fig.height=5}
 # convert to bounding box
-bb <- apply(subset, 1, function(x){
+bb <- apply(arcachon_lc, 1, function(x){
   mt_bbox(xllcorner = x['xllcorner'],
           yllcorner = x['yllcorner'],
            cellsize = x['cellsize'],
@@ -145,11 +191,10 @@ bb <- apply(subset, 1, function(x){
 plot(bb[[1]])
 
 # add the location of the queried coordinate within the polygon
-points(subset$longitude[1],
-       subset$latitude[1],
+points(arcachon_lc$longitude[1],
+       arcachon_lc$latitude[1],
        pch = 20,
        col = "red")
-
 ```
  
 # Conversion to (gridded) raster data
@@ -158,34 +203,13 @@ Although the package is often used to deal with single pixel locations the provi
 
 Below a small region (20x20km) is downloaded around the seaside town of Arcachon, France for the [MODIS land cover product (MCD12Q1)](https://lpdaac.usgs.gov/products/mcd12q1v006/). The data is converted using `mt_to_raster()` with a reproject parameter set to true to plot latitude and longitude coordinates (instead of the default sinusoidal ones).
 
-```{r}
-# download the MODIS land cover (IGBP) data
-# for a region around the French city and basin of Arcachon
-LC <- mt_subset(product = "MCD12Q1",
-  lat = 44.656286,
-  lon =  -1.174748,
-  band = "LC_Type1",
-  start = "2005-01-01",
-  end = "2005-3-20",
-  km_lr = 20,
-  km_ab = 20,
-  site_name = "testsite",
-  internal = TRUE,
-  progress = FALSE)
 
-# list the tidy data
-head(LC)
-
+```{r fig.width = 5, fig.height=5}
 # convert to raster, when reproject is TRUE
 # the data is reprojected to lat / lon if FALSE
 # the data is shown in its original sinuidal projection
-LC_r <- mt_to_raster(df = LC, reproject = TRUE)
+LC_r <- mt_to_raster(df = arcachon_lc, reproject = TRUE)
 
 # plot the raster data as a map
 plot(LC_r)
 ```
-
-A google maps representation is given below.
-
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d131371.18290470247!2d-1.226894960881859!3d44.6867654089713!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd549ef8c86711e3%3A0x40665174816f060!2s33120+Arcachon!5e0!3m2!1sen!2sfr!4v1557266417926!5m2!1sen!2sfr" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-

@@ -8,7 +8,7 @@ mt_to_raster(df, reproject = FALSE)
 }
 \arguments{
 \item{df}{a valid MODISTools data frame with a single band (filter for a
-particular band using the dplyr \code{filter()} function or base \code{subset()})}
+particular band using the dplyr \code{filter()} function or base \code{subset()}}
 
 \item{reproject}{reproject output to lat / long (default = \code{FALSE})}
 }
