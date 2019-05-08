@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 library(MODISTools)
 library(raster)
 library(rgdal)
+library(ggplot2)
 library(dplyr)
 
 # pre-load data
