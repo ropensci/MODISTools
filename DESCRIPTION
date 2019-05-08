@@ -30,5 +30,6 @@ Suggests:
     knitr,
     rmarkdown,
     covr,
-    testthat
+    testthat,
+    rgdal
 VignetteBuilder: knitr
