@@ -1,6 +1,7 @@
 ## MODISTools 1.1.1
 
 * added raster conversion function `mt_to_raster()`
+* force integer values on buffer values
 
 ## MODISTools 1.1.0
 

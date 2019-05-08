@@ -60,8 +60,23 @@ test_that("test raster conversion",{
     progress = FALSE
   )
 
- # good conversion
+  multi_band <- mt_subset(product = "MCD12Q1",
+            lat = 48.383662,
+            lon = 2.610250,
+            band = c("LC_Type1","LC_Type2"),
+            start = "2005-01-01",
+            end = "2005-06-30",
+            km_lr = 2,
+            km_ab = 2,
+            site_name = "testsite",
+            internal = TRUE,
+            progress = FALSE)
+
+ # good conversion into stack
  expect_silent(mt_to_raster(subset))
+
+ # multi-band error
+ expect_error(mt_to_raster(multi_band))
 
  # not a data frame
  expect_error(mt_to_raster(df = "not a dataframe"))

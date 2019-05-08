@@ -17,39 +17,41 @@ knitr::opts_chunk$set(
 
 # load the library
 library(MODISTools)
-
+library(raster)
 ```
 
-The MODISTools package has as goal to facilitate the interface between R and the MODIS Land Product Subset API at the Oak Ridge National Laboratory DAAC. This programmatic interface to the ['MODIS Land Products Subsets' web services](https://modis.ornl.gov/data/modis_webservice.html) allows for easy downloads of 'MODIS' time series directly to your R workspace or your computer. Below an example is provided on how to download a MODIS time series as well as list ancillary data.
+The MODISTools package has as goal to facilitate the interface between R and the MODIS Land Product Subset API at the Oak Ridge National Laboratory Distributed Active Archive Center (DAAC). This programmatic interface to the ['MODIS Land Products Subsets' web services](https://modis.ornl.gov/data/modis_webservice.html) allows for easy downloads of 'MODIS' time series (of single pixels or small regions of interest) directly to your R workspace or your computer. Below an example is provided on how to download a MODIS time series as well as list ancillary data.
 
-### Listing products / bands / dates
+# Listing products / bands / dates
 
 In order to assess which products are available, which product bands are provided and which temporal range is covered one has to list these ancillary data. All these options can be queried using the `mt_*()` functions.
 
-To list all available products use the mt_products() function.
+To list all available products use the `mt_products()` function.
 
 ```{r eval = TRUE}
 products <- mt_products()
 head(products)
 ```
 
-To list all available bands for a given product use the mt_bands() function.
+Once you have settled on the product you want to use in your analysis you will have to select a band, or multiple bands you want to download for a given location. To list all available bands for a given product use the mt_bands() function. You can use the `mt_bands()` function to list all available bands for a given product. Below I list all bands for the MOD13Q1 vegetation index product.
 
 ```{r eval = TRUE}
 bands <- mt_bands(product = "MOD13Q1")
 head(bands)
 ```
 
-To list all available dates (temporal coverage) for a given product and location use the mt_dates() function.
+> Note the band names (listed in band column) you want to download, this variable will need to be passed in the final download statement.
+
+Similarly you can list all available dates (temporal coverage) for a given product and location defined using a latitude and longitude with the `mt_dates()` function.
 
 ```{r eval = TRUE}
 dates <- mt_dates(product = "MOD13Q1", lat = 42, lon = -110)
 head(dates)
 ```
 
-### Downloading MODIS time series
+# Downloading MODIS time series
 
-Once you decide on which data to download using the above functions you can use these parameters to download a time series using the `mt_subset()` function. The below query downloads MOD11A2 based daytime lands surface temperatures. The location is named 'testsite' and only covers the first six months of 2004. The output is saved to a variable called subset in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file).
+Once you decide on which data to download using the above functions you can use these parameters to download a time series using the `mt_subset()` function. The below query downloads MOD13Q1 based normalized vegetation index (NDVI) for the year 2014. The location is named 'testsite'. The output is saved to a variable called subset in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file).
 
 ```{r eval = TRUE}
 # download data
@@ -58,14 +60,13 @@ subset <- mt_subset(product = "MOD13Q1",
                     lon = -72.179003,
                     band = "250m_16_days_NDVI",
                     start = "2004-01-01",
-                    end = "2005-12-30",
+                    end = "2004-12-30",
                     km_lr = 0,
                     km_ab = 0,
                     site_name = "testsite",
                     internal = TRUE,
                     progress = FALSE)
 head(subset)
-
 ```
 
 The output format is a *tidy* data frame, as shown above. When witten to a csv with the parameter `internal = FALSE` this will result in a flat file on disk.
@@ -82,40 +83,38 @@ df$lat <- 40
 df$lon <- -110
 
 # an example batch download data frame
-print(df)
-
-# test batch download
-subsets <- mt_batch_subset(df = df,
-                     product = "MOD11A2",
-                     band = "LST_Day_1km",
-                     internal = TRUE,
-                     start = "2004-01-01",
-                     end = "2004-02-28",
-                     out_dir = "~")
-
-head(subsets)
+head(df)
 ```
 
+```{r eval = FALSE}
+# test batch download
+subsets <- mt_batch_subset(df = df,
+                     product = "MOD13Q1",
+                     band = "250m_16_days_NDVI",
+                     start = "2004-01-01",
+                     end = "2004-12-30",
+                     internal = TRUE)
+```
 
-### Worked example using NDVI values
+# Worked example using NDVI values
 
-The above downloaded subset shows normalized difference vegetation index (NDVI), and [an indicator of plant health, density and or complexity](https://earthobservatory.nasa.gov/Features/MeasuringVegetation/measuring_vegetation_2.php) for the experimental [Harvard Forest](https://harvardforest.fas.harvard.edu/) site. When plotted the yearly pattern of rising and falling NDVI values shows vegetation growth in spring, and senescence or leaf drop in fall. Values lower than ~0.4 are contaminated by snow or clouds.
+The above downloaded subset shows the normalized difference vegetation index (NDVI), and [an indicator of plant health, density and or complexity](https://earthobservatory.nasa.gov/Features/MeasuringVegetation/measuring_vegetation_2.php) for one year at the experimental [Harvard Forest](https://harvardforest.fas.harvard.edu/) site. When plotted the yearly pattern of rising and falling NDVI values shows vegetation growth in spring, and senescence or leaf drop in fall. Values lower than ~0.4 are contaminated by snow or clouds.
 
 ```{r fig.width = 7, fig.height=3}
 # create a plot of the data - accounting for the multiplier (scale) component
 date <- as.Date(subset$calendar_date)
-temperature <- subset$value * as.double(subset$scale)
-temperature[temperature == 0] <- NA
+NDVI <- subset$value * as.double(subset$scale)
+NDVI[NDVI <= 0.2] <- NA
 
 plot(date,
-     temperature,
+     NDVI,
      xlab = "Date",
      ylab = "NDVI",
      ylim = c(0,1),
      type = "l")
 ```
 
-### Conversion of corner coordinates
+# Conversion of corner coordinates
 
 Corner coordinates of the pixel area extracted are provided, these can be used to calculate the coverage of the extracted area. Coordinates are provided in the original sinusoidal grid coordinates and first have to be transformed into latitude longitude (for convenience).
 
@@ -152,3 +151,40 @@ points(subset$longitude[1],
 
 ```
  
+# Conversion to (gridded) raster data
+
+Although the package is often used to deal with single pixel locations the provisions to download a small region of interest defined by kilometers left-right (west-east) or top-bottom (north-south) allows you to grab small geographic regions for further analysis. The default tidy dataframe format isn't ideal for visualizing this inherently spatial data. Therefore a helper function `mt_to_raster()` is available to convert the tidy dataframe to a gridded (georeferenced) raster format.
+
+Below a small region (20x20km) is downloaded around the seaside town of Arcachon, France for the [MODIS land cover product (MCD12Q1)](https://lpdaac.usgs.gov/products/mcd12q1v006/). The data is converted using `mt_to_raster()` with a reproject parameter set to true to plot latitude and longitude coordinates (instead of the default sinusoidal ones).
+
+```{r}
+# download the MODIS land cover (IGBP) data
+# for a region around the French city and basin of Arcachon
+LC <- mt_subset(product = "MCD12Q1",
+  lat = 44.656286,
+  lon =  -1.174748,
+  band = "LC_Type1",
+  start = "2005-01-01",
+  end = "2005-3-20",
+  km_lr = 20,
+  km_ab = 20,
+  site_name = "testsite",
+  internal = TRUE,
+  progress = FALSE)
+
+# list the tidy data
+head(LC)
+
+# convert to raster, when reproject is TRUE
+# the data is reprojected to lat / lon if FALSE
+# the data is shown in its original sinuidal projection
+LC_r <- mt_to_raster(df = LC, reproject = TRUE)
+
+# plot the raster data as a map
+plot(LC_r)
+```
+
+A google maps representation is given below.
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d131371.18290470247!2d-1.226894960881859!3d44.6867654089713!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd549ef8c86711e3%3A0x40665174816f060!2s33120+Arcachon!5e0!3m2!1sen!2sfr!4v1557266417926!5m2!1sen!2sfr" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+

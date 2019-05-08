@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert tidy data to raster — mt_to_raster • MODISTools</title>
+<title>Convert tidy MODISTools data to raster (stack) — mt_to_raster • MODISTools</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Convert tidy data to raster — mt_to_raster" />
+<meta property="og:title" content="Convert tidy MODISTools data to raster (stack) — mt_to_raster" />
 
 <meta property="og:description" content="Convert tidy MODISTools data to a raster (stack)" />
 <meta name="twitter:card" content="summary" />
@@ -114,7 +114,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert tidy data to raster</h1>
+    <h1>Convert tidy MODISTools data to raster (stack)</h1>
     <small class="dont-index">Source: <a href='https://github.com/khufkens/MODISTools/blob/master/R/mt_to_raster.R'><code>R/mt_to_raster.R</code></a></small>
     <div class="hidden name"><code>mt_to_raster.Rd</code></div>
     </div>
@@ -125,14 +125,19 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>mt_to_raster</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='no'>subset</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_to_raster</span>(<span class='no'>df</span>, <span class='kw'>reproject</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>a valid MODISTools data frame</p></td>
+      <td><p>a valid MODISTools data frame with a single band (filter for a
+particular band using the dplyr <code><a href='https://www.rdocumentation.org/packages/stats/topics/filter'>filter()</a></code> function or base <code><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset()</a></code>)</p></td>
+    </tr>
+    <tr>
+      <th>reproject</th>
+      <td><p>reproject output to lat / long (default = <code>FALSE</code>)</p></td>
     </tr>
     </table>
     
@@ -151,16 +156,16 @@
 </div><div class='input'><span class='co'># list all available MODIS Land Products Subsets products</span>
 <span class='co'># download data</span>
 <span class='no'>LC</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_subset.html'>mt_subset</a></span>(<span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"MCD12Q1"</span>,
-<span class='kw'>lat</span> <span class='kw'>=</span> <span class='fl'>48.383662</span>,
-<span class='kw'>lon</span> <span class='kw'>=</span> <span class='fl'>2.610250</span>,
-<span class='kw'>band</span> <span class='kw'>=</span> <span class='st'>"LC_Type1"</span>,
-<span class='kw'>start</span> <span class='kw'>=</span> <span class='st'>"2005-01-01"</span>,
-<span class='kw'>end</span> <span class='kw'>=</span> <span class='st'>"2005-12-30"</span>,
-<span class='kw'>km_lr</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-<span class='kw'>km_ab</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-<span class='kw'>site_name</span> <span class='kw'>=</span> <span class='st'>"testsite"</span>,
-<span class='kw'>internal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-<span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+ <span class='kw'>lat</span> <span class='kw'>=</span> <span class='fl'>48.383662</span>,
+ <span class='kw'>lon</span> <span class='kw'>=</span> <span class='fl'>2.610250</span>,
+ <span class='kw'>band</span> <span class='kw'>=</span> <span class='st'>"LC_Type1"</span>,
+ <span class='kw'>start</span> <span class='kw'>=</span> <span class='st'>"2005-01-01"</span>,
+ <span class='kw'>end</span> <span class='kw'>=</span> <span class='st'>"2005-12-30"</span>,
+ <span class='kw'>km_lr</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+ <span class='kw'>km_ab</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+ <span class='kw'>site_name</span> <span class='kw'>=</span> <span class='st'>"testsite"</span>,
+ <span class='kw'>internal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+ <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>LC</span>)</div><div class='output co'>#&gt;     xllcorner  yllcorner      cellsize nrows ncols     band units         scale
 #&gt; 1.1 190884.84 5378134.05 463.312716528     9     9 LC_Type1 class Not Available
@@ -184,7 +189,8 @@
 #&gt; 1.5   A2005001    2005-01-01 h18v04 2018054111330     5     5
 #&gt; 1.6   A2005001    2005-01-01 h18v04 2018054111330     6     5</div><div class='input'>
 <span class='co'># convert to raster</span>
-<span class='no'>LC_r</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_to_raster</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='no'>LC</span>)</div><div class='output co'>#&gt; <span class='error'>Error in data.frame(values = unlist(unname(x)), ind, stringsAsFactors = FALSE): arguments imply differing number of rows: 81, 0</span></div></pre>
+<span class='no'>LC_r</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_to_raster</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='no'>LC</span>)</div><div class='output co'>#&gt; <span class='error'>Error in unique(LC$band): object 'LC' not found</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

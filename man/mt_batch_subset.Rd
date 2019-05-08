@@ -62,6 +62,23 @@ subsets <- mt_batch_subset(df = df,
                         start = "2004-01-01",
                         end = "2004-03-31")
 
+# the same can be done using a CSV file with
+# a data structure similar to the dataframe above
+
+write.table(df, "my_sites.csv",
+ quote = FALSE,
+ row.names = FALSE,
+ col.names = TRUE,
+ sep = ",")
+
+# test batch download form CSV
+subsets <- mt_batch_subset(df = "./my_sites.csv",
+                        product = "MOD11A2",
+                        band = "LST_Day_1km",
+                        internal = TRUE,
+                        start = "2004-01-01",
+                        end = "2004-03-31")
+
 head(subsets)
 }
 }

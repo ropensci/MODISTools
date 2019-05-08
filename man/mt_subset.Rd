@@ -22,9 +22,9 @@ mt_subset(product, band, lat, lon, start = "2000-01-01",
 
 \item{end}{end date}
 
-\item{km_lr}{km left-right to sample}
+\item{km_lr}{km left-right to sample (rounded to the nearest integer)}
 
-\item{km_ab}{km above-below to sample}
+\item{km_ab}{km above-below to sample (rounded to the nearest integer)}
 
 \item{site_id}{site id (overides lat / lon)}
 

@@ -125,7 +125,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>mt_bbox</span>(<span class='no'>xllcorner</span>, <span class='no'>yllcorner</span>, <span class='no'>cellsize</span>, <span class='no'>nrows</span>, <span class='no'>ncols</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_bbox</span>(<span class='no'>xllcorner</span>, <span class='no'>yllcorner</span>, <span class='no'>cellsize</span>, <span class='no'>nrows</span>, <span class='no'>ncols</span>, <span class='kw'>transform</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,6 +151,11 @@
     <tr>
       <th>ncols</th>
       <td><p>cell size provided by <code><a href='mt_subset.html'>mt_subset</a></code></p></td>
+    </tr>
+    <tr>
+      <th>transform</th>
+      <td><p>transform the bounding box from sin to lat long coordinates,
+<code>TRUE</code> or <code>FALSE</code> (default = <code>TRUE</code>)</p></td>
     </tr>
     </table>
     

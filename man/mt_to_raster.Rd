@@ -2,12 +2,13 @@
 % Please edit documentation in R/mt_to_raster.R
 \name{mt_to_raster}
 \alias{mt_to_raster}
-\title{Convert tidy data to raster}
+\title{Convert tidy MODISTools data to raster (stack)}
 \usage{
 mt_to_raster(df, reproject = FALSE)
 }
 \arguments{
-\item{df}{a valid MODISTools data frame}
+\item{df}{a valid MODISTools data frame with a single band (filter for a
+particular band using the dplyr \code{filter()} function or base \code{subset()})}
 
 \item{reproject}{reproject output to lat / long (default = \code{FALSE})}
 }
@@ -23,16 +24,16 @@ Convert tidy MODISTools data to a raster (stack)
 # list all available MODIS Land Products Subsets products
 # download data
 LC <- mt_subset(product = "MCD12Q1",
-lat = 48.383662,
-lon = 2.610250,
-band = "LC_Type1",
-start = "2005-01-01",
-end = "2005-12-30",
-km_lr = 2,
-km_ab = 2,
-site_name = "testsite",
-internal = TRUE,
-progress = FALSE)
+ lat = 48.383662,
+ lon = 2.610250,
+ band = "LC_Type1",
+ start = "2005-01-01",
+ end = "2005-12-30",
+ km_lr = 2,
+ km_ab = 2,
+ site_name = "testsite",
+ internal = TRUE,
+ progress = FALSE)
 
 head(LC)
 

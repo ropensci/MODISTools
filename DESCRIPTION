@@ -5,10 +5,11 @@ Authors@R: person("Hufkens","Koen",
 		  email="koen.hufkens@gmail.com",
 		  role=c("aut", "cre"),
 		  comment = c(ORCID = "0000-0002-5070-8109"))
-Description: Programmatic interface to the 'MODIS Land Products Subsets'
-    web services (<https://modis.ornl.gov/data/modis_webservice.html>).
-    Allows for easy downloads of 'MODIS' time series directly to your R 
-    workspace or your computer.
+Description: Programmatic interface to the Oak Ridge National Laboratories
+    'MODIS Land Products Subsets' web services 
+    (<https://modis.ornl.gov/data/modis_webservice.html>). Allows for easy
+    downloads of 'MODIS' time series directly to your R workspace or
+    your computer.
 URL: https://github.com/khufkens/MODISTools
 BugReports: https://github.com/khufkens/MODISTools/issues
 Depends:
@@ -20,8 +21,7 @@ Imports:
     raster,
     stats,
     memoise,
-    jsonlite,
-    methods
+    jsonlite
 License: AGPL-3
 LazyData: true
 ByteCompile: true

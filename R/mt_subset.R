@@ -9,8 +9,8 @@
 #' @param lon longitude in decimal degrees
 #' @param start start date
 #' @param end end date
-#' @param km_lr km left-right to sample
-#' @param km_ab km above-below to sample
+#' @param km_lr km left-right to sample (rounded to the nearest integer)
+#' @param km_ab km above-below to sample (rounded to the nearest integer)
 #' @param site_id site id (overides lat / lon)
 #' @param site_name arbitrary site name used in writing data to file
 #' (default = sitename)
@@ -165,8 +165,8 @@ mt_subset <- function(
                     "band" = band_name,
                     "startDate" = dates$modis_date[b],
                     "endDate" = end_date,
-                    "kmAboveBelow" = km_ab,
-                    "kmLeftRight" = km_lr)
+                    "kmAboveBelow" = round(km_ab),
+                    "kmLeftRight" = round(km_lr))
 
       # try to download the data
       json_chunk <- httr::GET(url = url,

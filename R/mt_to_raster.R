@@ -1,8 +1,9 @@
-#' Convert tidy data to raster
+#' Convert tidy MODISTools data to raster (stack)
 #'
 #' Convert tidy MODISTools data to a raster (stack)
 #'
-#' @param df a valid MODISTools data frame
+#' @param df a valid MODISTools data frame with a single band (filter for a
+#' particular band using the dplyr \code{filter()} function or base \code{subset()})
 #' @param reproject reproject output to lat / long (default = \code{FALSE})
 #' @return A raster stack populated with the tidy dataframe values
 #' @keywords MODIS Land Products Subsets, products
@@ -15,16 +16,16 @@
 #' # list all available MODIS Land Products Subsets products
 #' # download data
 #' LC <- mt_subset(product = "MCD12Q1",
-#' lat = 48.383662,
-#' lon = 2.610250,
-#' band = "LC_Type1",
-#' start = "2005-01-01",
-#' end = "2005-12-30",
-#' km_lr = 2,
-#' km_ab = 2,
-#' site_name = "testsite",
-#' internal = TRUE,
-#' progress = FALSE)
+#'  lat = 48.383662,
+#'  lon = 2.610250,
+#'  band = "LC_Type1",
+#'  start = "2005-01-01",
+#'  end = "2005-12-30",
+#'  km_lr = 2,
+#'  km_ab = 2,
+#'  site_name = "testsite",
+#'  internal = TRUE,
+#'  progress = FALSE)
 #'
 #' head(LC)
 #'
@@ -53,6 +54,12 @@ mt_to_raster <- function(
   # (introduce class?)
   if(!any(names(df) %in% "modis_date")){
     stop("Data is not a MODISTools data frame")
+  }
+
+  # check if there are multiple bands stop
+  # ask for a subset with a single band
+  if(length(unique(df$band)) != 1){
+    stop("Multiple bands in data frame, filter for a single band first!")
   }
 
   # find unique dates for which data should exist
@@ -87,7 +94,7 @@ mt_to_raster <- function(
     transform = FALSE)
 
   # convert to Spatial object (easier to get extent)
-  bb <- methods::as(bb, 'Spatial')
+  bb <- sf::as_Spatial(bb)
 
   # assign extent + projection bb to raster
   raster::extent(r) <- raster::extent(bb)

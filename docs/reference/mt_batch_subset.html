@@ -214,6 +214,23 @@ created by searching on sitename.</p>
                         <span class='kw'>start</span> <span class='kw'>=</span> <span class='st'>"2004-01-01"</span>,
                         <span class='kw'>end</span> <span class='kw'>=</span> <span class='st'>"2004-03-31"</span>)
 
+<span class='co'># the same can be done using a CSV file with</span>
+<span class='co'># a data structure similar to the dataframe above</span>
+
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/write.table'>write.table</a></span>(<span class='no'>df</span>, <span class='st'>"my_sites.csv"</span>,
+ <span class='kw'>quote</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+ <span class='kw'>row.names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+ <span class='kw'>col.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+ <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>","</span>)
+
+<span class='co'># test batch download form CSV</span>
+<span class='no'>subsets</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_batch_subset</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='st'>"./my_sites.csv"</span>,
+                        <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"MOD11A2"</span>,
+                        <span class='kw'>band</span> <span class='kw'>=</span> <span class='st'>"LST_Day_1km"</span>,
+                        <span class='kw'>internal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+                        <span class='kw'>start</span> <span class='kw'>=</span> <span class='st'>"2004-01-01"</span>,
+                        <span class='kw'>end</span> <span class='kw'>=</span> <span class='st'>"2004-03-31"</span>)
+
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>subsets</span>)</div><div class='output co'>#&gt;         xllcorner  yllcorner         cellsize nrows ncols        band  units
 #&gt; 1.1.1 -9370036.39 4447802.08 926.625433055834     1     1 LST_Day_1km Kelvin
 #&gt; 1.2.1 -9370036.39 4447802.08 926.625433055834     1     1 LST_Day_1km Kelvin
