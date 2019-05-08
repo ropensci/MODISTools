@@ -15,6 +15,7 @@ r:
 r_packages:
   - devtools
   - covr
+  - rgdal
 
 after_success:
   - Rscript -e 'covr::codecov()'
