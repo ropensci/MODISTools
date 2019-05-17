@@ -6,7 +6,9 @@
 [![Build
 Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools)
 [![codecov](https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/khufkens/MODISTools)
-![Status](https://www.r-pkg.org/badges/version/MODISTools)
+![Status](https://www.r-pkg.org/badges/version/MODISTools) [![rOpenSci
+Peer
+Review](https://badges.ropensci.org/246_status.svg)](https://github.com/ropensci/software-review/issues/246)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/MODISTools)
 
 Programmatic interface to the [‘MODIS Land Products Subsets’ web
@@ -275,4 +277,7 @@ Hans Rausing Scholarship. Refactoring was supported through the Belgian
 Science Policy office COBECORE project (BELSPO; grant
 BR/175/A3/COBECORE). Logo design elements are taken from the FontAwesome
 library according to [these terms](https://fontawesome.com/license),
-where the globe element was inverted and intersected.
+where the globe element was inverted and
+intersected.
+
+[![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)

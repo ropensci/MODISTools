@@ -13,7 +13,9 @@ knitr::opts_chunk$set(
 
 # MODISTools <a href='https://khufkens.github.io/MODISTools/'><img src='https://raw.githubusercontent.com/khufkens/MODISTools/master/MODISTools-logo.png' align="right" height="139" /></a>
 
-[![Build Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools) [![codecov](https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/khufkens/MODISTools) ![Status](https://www.r-pkg.org/badges/version/MODISTools) ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/MODISTools)
+[![Build Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools) [![codecov](https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/khufkens/MODISTools) ![Status](https://www.r-pkg.org/badges/version/MODISTools)
+[![rOpenSci Peer Review](https://badges.ropensci.org/246_status.svg)](https://github.com/ropensci/software-review/issues/246)
+![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/MODISTools)
 
 Programmatic interface to the ['MODIS Land Products Subsets' web services](https://modis.ornl.gov/data/modis_webservice.html). Allows for easy downloads of ['MODIS'](http://modis.gsfc.nasa.gov/) time series directly to your R workspace or your computer. When using the package please cite the manuscript as referenced below.
 
@@ -156,3 +158,4 @@ Tuck et al. (2014). [MODISTools - downloading and processing MODIS remotely sens
 
 Original development was supported by the UK Natural Environment Research Council (NERC; grants NE/K500811/1 and NE/J011193/1), and the Hans Rausing Scholarship. Refactoring was supported through the Belgian Science Policy office COBECORE project (BELSPO; grant BR/175/A3/COBECORE). Logo design elements are taken from the FontAwesome library according to [these terms](https://fontawesome.com/license), where the globe element was inverted and intersected.
 
+[![ropensci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
