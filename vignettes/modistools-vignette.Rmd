@@ -21,6 +21,7 @@ library(raster)
 library(rgdal)
 library(ggplot2)
 library(dplyr)
+library(sf)
 
 # pre-load data
 data("arcachon_lai")
