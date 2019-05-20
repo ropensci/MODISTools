@@ -9,14 +9,12 @@ addons:
       - sourceline: 'ppa:ubuntugis/ubuntugis-unstable'
     packages:
       - libudunits2-dev
-      - libunits-bin
       - libproj-dev
       - libgeos-dev
       - libspatialite-dev
       - libgdal-dev
       - libjson-c-dev
       - libnetcdf-dev
-      - netcdf-bin
       
 r:
   - release
