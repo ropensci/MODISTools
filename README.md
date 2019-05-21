@@ -4,8 +4,8 @@
 # MODISTools <a href='https://khufkens.github.io/MODISTools/'><img src='https://raw.githubusercontent.com/khufkens/MODISTools/master/MODISTools-logo.png' align="right" height="139" /></a>
 
 [![Build
-Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools)
-[![codecov](https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/khufkens/MODISTools)
+Status](https://travis-ci.org/ropensci/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools)
+[![codecov](https://codecov.io/gh/ropensci/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/MODISTools)
 ![Status](https://www.r-pkg.org/badges/version/MODISTools) [![rOpenSci
 Peer
 Review](https://badges.ropensci.org/246_status.svg)](https://github.com/ropensci/software-review/issues/246)
