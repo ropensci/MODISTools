@@ -4,7 +4,11 @@
 \alias{mt_sites}
 \title{Download all available fixed sites}
 \usage{
-mt_sites()
+mt_sites(network)
+}
+\arguments{
+\item{network}{the network for which to generate the site list,
+when not provided the complete list is provided}
 }
 \value{
 A data frame of all available MODIS Land Products Subsets
