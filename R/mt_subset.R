@@ -24,7 +24,6 @@
 #' \code{TRUE} or \code{FALSE} (default = \code{TRUE})
 #' @param progress show download progress
 #' @return A data frame combining meta-data and actual data values.
-#' @keywords MODIS Land Products Subsets, products, meta-data
 #' @seealso \code{\link[MODISTools]{mt_sites}}
 #' \code{\link[MODISTools]{mt_dates}} \code{\link[MODISTools]{mt_bands}}
 #' \code{\link[MODISTools]{mt_products}}

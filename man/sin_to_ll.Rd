@@ -41,9 +41,3 @@ head(subset)
 \seealso{
 \code{\link[MODISTools]{mt_bbox}}
 }
-\keyword{Land}
-\keyword{MODIS}
-\keyword{Products}
-\keyword{Subsets,}
-\keyword{meta-data}
-\keyword{products,}

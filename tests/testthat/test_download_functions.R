@@ -228,8 +228,7 @@ test_that("test mt_batch_subset()",{
       band = "LST_Day_1km",
       internal = TRUE,
       start = "2004-01-01",
-      end = "2004-03-31",
-      ncores = 4
+      end = "2004-03-31"
     ),
     "data.frame"
   )

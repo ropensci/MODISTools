@@ -6,7 +6,6 @@
 #' particular band using the dplyr \code{filter()} function or base \code{subset()}
 #' @param reproject reproject output to lat / long (default = \code{FALSE})
 #' @return A raster stack populated with the tidy dataframe values
-#' @keywords MODIS Land Products Subsets, products
 #' @seealso \code{\link[MODISTools]{mt_subset}}
 #' \code{\link[MODISTools]{mt_batch_subset}}
 #' @export

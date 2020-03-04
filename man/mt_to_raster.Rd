@@ -46,8 +46,3 @@ LC_r <- mt_to_raster(df = LC)
 \code{\link[MODISTools]{mt_subset}}
 \code{\link[MODISTools]{mt_batch_subset}}
 }
-\keyword{Land}
-\keyword{MODIS}
-\keyword{Products}
-\keyword{Subsets,}
-\keyword{products}

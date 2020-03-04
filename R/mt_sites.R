@@ -6,7 +6,6 @@
 #' when not provided the complete list is provided
 #' @return A data frame of all available MODIS Land Products Subsets
 #' pre-processed sites
-#' @keywords MODIS Land Products Subsets, products, meta-data
 #' @seealso \code{\link[MODISTools]{mt_products}}
 #' \code{\link[MODISTools]{mt_bands}} \code{\link[MODISTools]{mt_dates}}
 #' @export

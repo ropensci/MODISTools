@@ -9,7 +9,6 @@
 #' @param x sinusoidal x coordinate (vector)
 #' @param y sinusoidal y coordinate (vector)
 #' @seealso \code{\link[MODISTools]{mt_bbox}}
-#' @keywords MODIS Land Products Subsets, products, meta-data
 #' @export
 #' @examples
 #'
@@ -69,7 +68,6 @@ sin_to_ll <- function(x, y){
 #' \code{TRUE} or \code{FALSE} (default = \code{TRUE})
 #' @seealso \code{\link[MODISTools]{sin_to_ll}},
 #' \code{\link[MODISTools]{mt_subset}}
-#' @keywords MODIS Land Products Subsets, products, meta-data
 #' @export
 #' @examples
 #'

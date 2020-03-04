@@ -3,7 +3,6 @@
 #' Lists all available MODIS Land Products Subset products.
 #'
 #' @return A data frame of all available MODIS Land Products Subsets products
-#' @keywords MODIS Land Products Subsets, products, meta-data
 #' @seealso \code{\link[MODISTools]{mt_bands}}
 #' \code{\link[MODISTools]{mt_sites}} \code{\link[MODISTools]{mt_dates}}
 #' @export

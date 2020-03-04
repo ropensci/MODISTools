@@ -59,9 +59,3 @@ head(bb)
 \code{\link[MODISTools]{sin_to_ll}},
 \code{\link[MODISTools]{mt_subset}}
 }
-\keyword{Land}
-\keyword{MODIS}
-\keyword{Products}
-\keyword{Subsets,}
-\keyword{meta-data}
-\keyword{products,}
