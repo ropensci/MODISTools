@@ -30,9 +30,3 @@ head(bands)
 \code{\link[MODISTools]{mt_products}}
 \code{\link[MODISTools]{mt_sites}} \code{\link[MODISTools]{mt_dates}}
 }
-\keyword{Land}
-\keyword{MODIS}
-\keyword{Products}
-\keyword{Subsets,}
-\keyword{meta-data}
-\keyword{products,}

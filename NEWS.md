@@ -2,6 +2,7 @@
 
 * added raster conversion function `mt_to_raster()`
 * force integer values on buffer values
+* removed keywords
 
 ## MODISTools 1.1.0
 

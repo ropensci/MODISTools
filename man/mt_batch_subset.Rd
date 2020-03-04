@@ -4,9 +4,18 @@
 \alias{mt_batch_subset}
 \title{Batch download MODIS Land Products subsets}
 \usage{
-mt_batch_subset(df, product, band, start = "2000-01-01",
-  end = format(Sys.time(), "\%Y-\%m-\%d"), km_lr = 0, km_ab = 0,
-  out_dir = tempdir(), internal = TRUE, ncores = "auto")
+mt_batch_subset(
+  df,
+  product,
+  band,
+  start = "2000-01-01",
+  end = format(Sys.time(), "\%Y-\%m-\%d"),
+  km_lr = 0,
+  km_ab = 0,
+  out_dir = tempdir(),
+  internal = TRUE,
+  ncores = "auto"
+)
 }
 \arguments{
 \item{df}{a CSV file or data frame holding locations and their sitenames to
@@ -32,7 +41,7 @@ data are comma separated.}
 \code{TRUE} or \code{FALSE} (default = \code{TRUE})}
 
 \item{ncores}{number of cores to use while downloading in parallel
-(auto will select the all cpu cores - 1)}
+(auto will select the all cpu cores - 1 or 10)}
 }
 \value{
 A data frame combining meta-data and actual data values, data from
@@ -88,9 +97,3 @@ head(subsets)
 \code{\link[MODISTools]{mt_products}}
 \code{\link[MODISTools]{mt_subset}}
 }
-\keyword{Land}
-\keyword{MODIS}
-\keyword{Products}
-\keyword{Subsets,}
-\keyword{meta-data}
-\keyword{products,}

@@ -7,9 +7,10 @@
 #' @param lat latitude in decimal degrees
 #' @param lon longitude in decimal degrees
 #' @param site_id site id (overides lat / lon)
+#' @param network the network for which to generate the site list,
+#' when not provided the complete list is provided
 #' @return A data frame of all available dates for a MODIS Land
 #' Products Subsets products at the given location.
-#' @keywords MODIS Land Products Subsets, products, meta-data
 #' @seealso \code{\link[MODISTools]{mt_products}}
 #' \code{\link[MODISTools]{mt_sites}} \code{\link[MODISTools]{mt_bands}}
 #' @export
@@ -25,7 +26,8 @@ mt_dates <- function(
   product,
   lat,
   lon,
-  site_id
+  site_id,
+  network
   ){
 
   # load all products
@@ -43,6 +45,7 @@ mt_dates <- function(
 
   # check if site_id is valid
   if(!missing(site_id)){
+    if(missing(network)){
 
       # load all sites
       sites <- MODISTools::mt_sites()
@@ -51,19 +54,46 @@ mt_dates <- function(
       if (!(site_id %in% sites$siteid)){
         stop("please specify a valid site id...")
       }
+    } else {
+
+      # load all sites
+      sites <- MODISTools::mt_sites(network = network)
+
+      # check if the site id is valid
+      if (!(site_id %in% sites$network_siteid)){
+        stop("please specify a valid site id...")
+      }
+    }
   }
 
   # switch url in case of siteid
   if (missing(site_id)){
-    url <- paste(mt_server(), product, "dates", sep = "/")
+    url <- paste(mt_server(),
+                 product,
+                 "dates",
+                 sep = "/")
 
     # construct the query to be served to the server
     query <- list("latitude" = lat,
                   "longitude" = lon)
 
   } else {
-    url <- paste(mt_server(), product, site_id, "dates", sep = "/")
-    query <- NULL
+    if(missing(network)){
+      url <- paste(mt_server(),
+                   product,
+                   site_id,
+                   "dates",
+                   sep = "/")
+      query <- NULL
+    } else {
+      url <- paste(mt_server(),
+                   product,
+                   network,
+                   site_id,
+                   "dates",
+                   sep = "/")
+      query <- NULL
+    }
   }
 
   # try to download the data

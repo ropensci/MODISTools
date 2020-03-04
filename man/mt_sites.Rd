@@ -4,7 +4,11 @@
 \alias{mt_sites}
 \title{Download all available fixed sites}
 \usage{
-mt_sites()
+mt_sites(network)
+}
+\arguments{
+\item{network}{the network for which to generate the site list,
+when not provided the complete list is provided}
 }
 \value{
 A data frame of all available MODIS Land Products Subsets
@@ -26,9 +30,3 @@ print(head(sites))
 \code{\link[MODISTools]{mt_products}}
 \code{\link[MODISTools]{mt_bands}} \code{\link[MODISTools]{mt_dates}}
 }
-\keyword{Land}
-\keyword{MODIS}
-\keyword{Products}
-\keyword{Subsets,}
-\keyword{meta-data}
-\keyword{products,}

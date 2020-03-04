@@ -2,9 +2,10 @@
 #'
 #' Lists all available MODIS Land Products Subset pre-processed sites
 #'
+#' @param network the network for which to generate the site list,
+#' when not provided the complete list is provided
 #' @return A data frame of all available MODIS Land Products Subsets
 #' pre-processed sites
-#' @keywords MODIS Land Products Subsets, products, meta-data
 #' @seealso \code{\link[MODISTools]{mt_products}}
 #' \code{\link[MODISTools]{mt_bands}} \code{\link[MODISTools]{mt_dates}}
 #' @export
@@ -18,10 +19,16 @@
 #'}
 #'
 
-mt_sites <- memoise::memoise(function(){
+mt_sites <- memoise::memoise(function(
+  network
+){
 
   # define server settings
-  url <- paste(mt_server(), "sites", sep = "/")
+  if(missing(network)){
+   url <- paste(mt_server(), "sites", sep = "/")
+  } else{
+    url <- paste(mt_server(), network ,"sites", sep = "/")
+  }
 
   # try to download the data
   sites <- try(jsonlite::fromJSON(url))

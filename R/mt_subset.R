@@ -14,6 +14,8 @@
 #' @param km_lr km left-right to sample (rounded to the nearest integer)
 #' @param km_ab km above-below to sample (rounded to the nearest integer)
 #' @param site_id site id (overides lat / lon)
+#' @param network the network for which to generate the site list,
+#' when not provided the complete list is provided
 #' @param site_name arbitrary site name used in writing data to file
 #' (default = sitename)
 #' @param out_dir path where to store the data if writing to disk
@@ -22,7 +24,6 @@
 #' \code{TRUE} or \code{FALSE} (default = \code{TRUE})
 #' @param progress show download progress
 #' @return A data frame combining meta-data and actual data values.
-#' @keywords MODIS Land Products Subsets, products, meta-data
 #' @seealso \code{\link[MODISTools]{mt_sites}}
 #' \code{\link[MODISTools]{mt_dates}} \code{\link[MODISTools]{mt_bands}}
 #' \code{\link[MODISTools]{mt_products}}
@@ -53,6 +54,7 @@ mt_subset <- function(
   km_lr = 0,
   km_ab = 0,
   site_id,
+  network,
   site_name = "sitename",
   out_dir = tempdir(),
   internal = TRUE,
@@ -66,13 +68,24 @@ mt_subset <- function(
 
   # check if site_id is valid
   if(!missing(site_id)){
+    if(missing(network)){
 
-    # load all sites
-    sites <- MODISTools::mt_sites()
+      # load all sites
+      sites <- MODISTools::mt_sites()
 
-    # check if the site id is valid
-    if (!(site_id %in% sites$siteid)){
-      stop("please specify a valid site id...")
+      # check if the site id is valid
+      if (!(site_id %in% sites$siteid)){
+        stop("please specify a valid site id...")
+      }
+    } else {
+
+      # load all sites
+      sites <- MODISTools::mt_sites(network = network)
+
+      # check if the site id is valid
+      if (!(site_id %in% sites$network_siteid)){
+        stop("please specify a valid site id...")
+      }
     }
   }
 
@@ -104,15 +117,32 @@ mt_subset <- function(
                                   lat = lat,
                                   lon = lon)
   } else {
-    url <- paste(mt_server(),
-                  product,
-                  site_id,
-                  "subset",
-                 sep = "/")
+    if(missing(network)){
+      url <- paste(mt_server(),
+                    product,
+                    site_id,
+                    "subset",
+                   sep = "/")
 
-    # grab all available dates
-    dates <- MODISTools::mt_dates(product = product,
-                                  site_id = site_id)
+      # grab all available dates
+      dates <- MODISTools::mt_dates(
+        product = product,
+        site_id = site_id)
+    } else {
+      url <- paste(mt_server(),
+                   product,
+                   network,
+                   site_id,
+                   "subset",
+                   sep = "/")
+
+      # grab all available dates
+      dates <- MODISTools::mt_dates(
+        product = product,
+        network = network,
+        site_id = site_id)
+    }
+
     lat <- NULL
     lon <- NULL
   }

@@ -4,7 +4,7 @@
 \alias{mt_dates}
 \title{Download all available dates}
 \usage{
-mt_dates(product, lat, lon, site_id)
+mt_dates(product, lat, lon, site_id, network)
 }
 \arguments{
 \item{product}{a valid MODIS product name}
@@ -14,6 +14,9 @@ mt_dates(product, lat, lon, site_id)
 \item{lon}{longitude in decimal degrees}
 
 \item{site_id}{site id (overides lat / lon)}
+
+\item{network}{the network for which to generate the site list,
+when not provided the complete list is provided}
 }
 \value{
 A data frame of all available dates for a MODIS Land
@@ -35,9 +38,3 @@ head(bands)
 \code{\link[MODISTools]{mt_products}}
 \code{\link[MODISTools]{mt_sites}} \code{\link[MODISTools]{mt_bands}}
 }
-\keyword{Land}
-\keyword{MODIS}
-\keyword{Products}
-\keyword{Subsets,}
-\keyword{meta-data}
-\keyword{products,}

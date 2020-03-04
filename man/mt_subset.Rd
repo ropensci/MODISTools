@@ -4,10 +4,22 @@
 \alias{mt_subset}
 \title{Download MODIS Land Products subsets}
 \usage{
-mt_subset(product, band, lat, lon, start = "2000-01-01",
-  end = format(Sys.time(), "\%Y-\%m-\%d"), km_lr = 0, km_ab = 0,
-  site_id, site_name = "sitename", out_dir = tempdir(),
-  internal = TRUE, progress = TRUE)
+mt_subset(
+  product,
+  band,
+  lat,
+  lon,
+  start = "2000-01-01",
+  end = format(Sys.time(), "\%Y-\%m-\%d"),
+  km_lr = 0,
+  km_ab = 0,
+  site_id,
+  network,
+  site_name = "sitename",
+  out_dir = tempdir(),
+  internal = TRUE,
+  progress = TRUE
+)
 }
 \arguments{
 \item{product}{a valid MODIS product name}
@@ -27,6 +39,9 @@ mt_subset(product, band, lat, lon, start = "2000-01-01",
 \item{km_ab}{km above-below to sample (rounded to the nearest integer)}
 
 \item{site_id}{site id (overides lat / lon)}
+
+\item{network}{the network for which to generate the site list,
+when not provided the complete list is provided}
 
 \item{site_name}{arbitrary site name used in writing data to file
 (default = sitename)}
@@ -69,9 +84,3 @@ subset <- mt_subset(product = "MOD11A2",
 \code{\link[MODISTools]{mt_products}}
 \code{\link[MODISTools]{mt_batch_subset}}
 }
-\keyword{Land}
-\keyword{MODIS}
-\keyword{Products}
-\keyword{Subsets,}
-\keyword{meta-data}
-\keyword{products,}
