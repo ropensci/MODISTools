@@ -97,9 +97,11 @@ mt_dates <- function(
   }
 
   # try to download the data
-  json_dates <- httr::GET(url = url,
-                          query = query,
-                          httr::write_memory())
+  json_dates <- httr::RETRY(verb = "GET",
+                            url = url,
+                            query = query,
+                            httr::write_memory(),
+                            terminate_on = c(403, 404))
 
   # trap errors on download, return a general error statement
   # with the most common causes.
