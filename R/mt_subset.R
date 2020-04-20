@@ -201,9 +201,11 @@ mt_subset <- function(
                     "kmLeftRight" = round(km_lr))
 
       # try to download the data
-      json_chunk <- httr::GET(url = url,
-                           query = query,
-                           httr::write_memory())
+      json_chunk <- httr::RETRY(verb = "GET", 
+                                url = url,
+                                query = query,
+                                httr::write_memory(),
+                                terminate_on = c(403, 404))
 
       # trap errors on download, return a detailed
       # API error statement
