@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 [![rOpenSci Peer Review](https://badges.ropensci.org/246_status.svg)](https://github.com/ropensci/software-review/issues/246)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/MODISTools)
 
-Programmatic interface to the ['MODIS Land Products Subsets' web services](https://modis.ornl.gov/data/modis_webservice.html). Allows for easy downloads of ['MODIS'](http://modis.gsfc.nasa.gov/) time series directly to your R workspace or your computer. When using the package please cite the manuscript as referenced below.
+Programmatic interface to the ['MODIS Land Products Subsets' web services](https://modis.ornl.gov/data/modis_webservice.html). Allows for easy downloads of ['MODIS'](http://modis.gsfc.nasa.gov/) time series directly to your R workspace or your computer. When using the package please cite the manuscript as referenced below. Keep in mind that the original manuscript describes versions prior to release 1.0 of the package. Functions described in this manuscript do not exist in the current package, please consult [the documentation](https://docs.ropensci.org/MODISTools/reference/index.html) to find matching functionality.
 
 ## Installation
 
