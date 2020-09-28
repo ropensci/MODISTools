@@ -18,12 +18,10 @@ test_that("error messages from server are shown to the user", {
     x <- ss(-110, 40)
   )
   expect_error(
-    ss(40, -110),
-    "Invalid argument: Latitude must be between -90 and 90 degrees."
+    ss(40, -110)
   )
   expect_error(
-    ss(400, -40),
-    "Invalid argument: Longitude must be between -180 and 180 degrees."
+    ss(400, -40)
   )
 })
 
