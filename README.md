@@ -4,8 +4,8 @@
 # MODISTools <a href='https://khufkens.github.io/MODISTools/'><img src='https://raw.githubusercontent.com/khufkens/MODISTools/master/MODISTools-logo.png' align="right" height="139" /></a>
 
 [![Build
-Status](https://travis-ci.org/ropensci/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools)
-[![codecov](https://codecov.io/gh/ropensci/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/MODISTools)
+Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools)
+[![codecov](https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/khufkens/MODISTools)
 ![Status](https://www.r-pkg.org/badges/version/MODISTools) [![rOpenSci
 Peer
 Review](https://badges.ropensci.org/246_status.svg)](https://github.com/ropensci/software-review/issues/246)
@@ -15,7 +15,12 @@ Programmatic interface to the [‘MODIS Land Products Subsets’ web
 services](https://modis.ornl.gov/data/modis_webservice.html). Allows for
 easy downloads of [‘MODIS’](http://modis.gsfc.nasa.gov/) time series
 directly to your R workspace or your computer. When using the package
-please cite the manuscript as referenced below.
+please cite the manuscript as referenced below. Keep in mind that the
+original manuscript describes versions prior to release 1.0 of the
+package. Functions described in this manuscript do not exist in the
+current package, please consult [the
+documentation](https://docs.ropensci.org/MODISTools/reference/index.html)
+to find matching functionality.
 
 ## Installation
 
@@ -57,8 +62,7 @@ direct environment use the mt\_subset() function.
 
 <details>
 
-<summary>detailed parameter description (click to
-expand)</summary>
+<summary>detailed parameter description (click to expand)</summary>
 
 <p>
 
@@ -229,20 +233,20 @@ function.
 ``` r
 bands <- mt_bands(product = "MOD11A2")
 head(bands)
-#>            band                          description  units   valid_range
-#> 1 Day_view_angl View zenith angle of day observation degree      0 to 130
-#> 2       Emis_32                   Band 32 emissivity   <NA>      1 to 255
-#> 3       Emis_31                   Band 31 emissivity   <NA>      1 to 255
-#> 4      QC_Night     Nighttime LST Quality indicators   <NA>      0 to 255
-#> 5 Day_view_time        Local time of day observation    hrs      0 to 240
-#> 6   LST_Day_1km     Daytime Land Surface Temperature Kelvin 7500 to 65535
-#>   fill_value scale_factor add_offset
-#> 1        255            1        -65
-#> 2          0        0.002       0.49
-#> 3          0        0.002       0.49
-#> 4       <NA>         <NA>       <NA>
-#> 5        255          0.1          0
-#> 6          0         0.02          0
+#>               band                          description valid_range fill_value
+#> 1   Clear_sky_days               Day clear-sky coverage    1 to 255          0
+#> 2 Clear_sky_nights             Night clear-sky coverage    1 to 255          0
+#> 3    Day_view_angl View zenith angle of day observation    0 to 130        255
+#> 4    Day_view_time        Local time of day observation    0 to 240        255
+#> 5          Emis_31                   Band 31 emissivity    1 to 255          0
+#> 6          Emis_32                   Band 32 emissivity    1 to 255          0
+#>    units scale_factor add_offset
+#> 1   <NA>         <NA>       <NA>
+#> 2   <NA>         <NA>       <NA>
+#> 3 degree            1        -65
+#> 4    hrs          0.1          0
+#> 5   <NA>        0.002       0.49
+#> 6   <NA>        0.002       0.49
 ```
 
 ### listing dates
@@ -277,7 +281,6 @@ Hans Rausing Scholarship. Refactoring was supported through the Belgian
 Science Policy office COBECORE project (BELSPO; grant
 BR/175/A3/COBECORE). Logo design elements are taken from the FontAwesome
 library according to [these terms](https://fontawesome.com/license),
-where the globe element was inverted and
-intersected.
+where the globe element was inverted and intersected.
 
 [![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)

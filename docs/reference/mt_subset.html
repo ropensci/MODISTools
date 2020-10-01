@@ -138,22 +138,22 @@ left-right, top-bottom for a given location (provided as latitude and
 longitude values).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_subset</span>(
-  <span class='no'>product</span>,
-  <span class='no'>band</span>,
-  <span class='no'>lat</span>,
-  <span class='no'>lon</span>,
-  <span class='kw'>start</span> <span class='kw'>=</span> <span class='st'>"2000-01-01"</span>,
-  <span class='kw'>end</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(), <span class='st'>"%Y-%m-%d"</span>),
-  <span class='kw'>km_lr</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>km_ab</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='no'>site_id</span>,
-  <span class='no'>network</span>,
-  <span class='kw'>site_name</span> <span class='kw'>=</span> <span class='st'>"sitename"</span>,
-  <span class='kw'>out_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(),
-  <span class='kw'>internal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>mt_subset</span><span class='op'>(</span>
+  <span class='va'>product</span>,
+  <span class='va'>band</span>,
+  <span class='va'>lat</span>,
+  <span class='va'>lon</span>,
+  start <span class='op'>=</span> <span class='st'>"2000-01-01"</span>,
+  end <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"%Y-%m-%d"</span><span class='op'>)</span>,
+  km_lr <span class='op'>=</span> <span class='fl'>0</span>,
+  km_ab <span class='op'>=</span> <span class='fl'>0</span>,
+  <span class='va'>site_id</span>,
+  <span class='va'>network</span>,
+  site_name <span class='op'>=</span> <span class='st'>"sitename"</span>,
+  out_dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>,
+  internal <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  progress <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -235,14 +235,15 @@ when not provided the complete list is provided</p></td>
 <span class='co'># \donttest{</span>
 <span class='co'># list all available MODIS Land Products Subsets products</span>
 <span class='co'># download data</span>
-<span class='no'>subset</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_subset</span>(<span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"MOD11A2"</span>,
-                        <span class='kw'>lat</span> <span class='kw'>=</span> <span class='fl'>40</span>,
-                        <span class='kw'>lon</span> <span class='kw'>=</span> -<span class='fl'>110</span>,
-                        <span class='kw'>band</span> <span class='kw'>=</span> <span class='st'>"LST_Day_1km"</span>,
-                        <span class='kw'>start</span> <span class='kw'>=</span> <span class='st'>"2004-01-01"</span>,
-                        <span class='kw'>end</span> <span class='kw'>=</span> <span class='st'>"2004-03-31"</span>,
-                        <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
- <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>subset</span>)</div><div class='output co'>#&gt;       xllcorner  yllcorner         cellsize nrows ncols        band  units
+<span class='va'>subset</span> <span class='op'>&lt;-</span> <span class='fu'>mt_subset</span><span class='op'>(</span>product <span class='op'>=</span> <span class='st'>"MOD11A2"</span>,
+                        lat <span class='op'>=</span> <span class='fl'>40</span>,
+                        lon <span class='op'>=</span> <span class='op'>-</span><span class='fl'>110</span>,
+                        band <span class='op'>=</span> <span class='st'>"LST_Day_1km"</span>,
+                        start <span class='op'>=</span> <span class='st'>"2004-01-01"</span>,
+                        end <span class='op'>=</span> <span class='st'>"2004-03-31"</span>,
+                        progress <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+ <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>subset</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;       xllcorner  yllcorner         cellsize nrows ncols        band  units
 #&gt; 1.1 -9370036.39 4447802.08 926.625433055834     1     1 LST_Day_1km Kelvin
 #&gt; 2.1 -9370036.39 4447802.08 926.625433055834     1     1 LST_Day_1km Kelvin
 #&gt; 3.1 -9370036.39 4447802.08 926.625433055834     1     1 LST_Day_1km Kelvin
@@ -262,7 +263,7 @@ when not provided the complete list is provided</p></td>
 #&gt; 3.1   A2004017    2004-01-17 h09v05 2015212213103     1 13297
 #&gt; 4.1   A2004025    2004-01-25 h09v05 2015213005429     1 13323
 #&gt; 5.1   A2004033    2004-02-02 h09v05 2015213090158     1 13315
-#&gt; 6.1   A2004041    2004-02-10 h09v05 2015213165253     1 13227</div><div class='input'># }
+#&gt; 6.1   A2004041    2004-02-10 h09v05 2015213165253     1 13227</div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -279,7 +280,7 @@ when not provided the complete list is provided</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

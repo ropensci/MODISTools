@@ -1,7 +1,7 @@
 pandoc: 2.7.3
-pkgdown: 1.5.1
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   modistools-vignette: modistools-vignette.html
-last_built: 2020-09-24T12:08Z
+last_built: 2020-10-01T08:39Z
 

@@ -132,7 +132,7 @@
     <p>Lists all available MODIS Land Products Subset pre-processed sites</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_sites</span>(<span class='no'>network</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_sites</span><span class='op'>(</span><span class='va'>network</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,8 +157,9 @@ pre-processed sites</p>
     <pre class="examples"><div class='input'>
 <span class='co'># \donttest{</span>
 <span class='co'># list all available MODIS Land Products Subsets products</span>
-<span class='no'>sites</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_sites</span>()
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>sites</span>))</div><div class='output co'>#&gt;                   siteid                sitename network latitude longitude
+<span class='va'>sites</span> <span class='op'>&lt;-</span> <span class='fu'>mt_sites</span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sites</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                   siteid                sitename network latitude longitude
 #&gt; 1  ae_abudhabi_abu_dhabi            AE Abu Dhabi AERONET 24.47611  54.32889
 #&gt; 2     ae_abudhabi_al_ain     AE Abu Dhabi Al Ain AERONET 24.24217  55.70517
 #&gt; 3  ae_abudhabi_al_dhafra  AE Abu Dhabi Al Dhafra AERONET 24.25428  54.54967
@@ -171,7 +172,7 @@ pre-processed sites</p>
 #&gt; 3 AbuDhabi United Arab Emirates
 #&gt; 4 AbuDhabi United Arab Emirates
 #&gt; 5 AbuDhabi United Arab Emirates
-#&gt; 6 AbuDhabi United Arab Emirates</div><div class='input'># }
+#&gt; 6 AbuDhabi United Arab Emirates</div><div class='input'><span class='co'># }</span>
 
 </div></pre>
   </div>
@@ -189,7 +190,7 @@ pre-processed sites</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

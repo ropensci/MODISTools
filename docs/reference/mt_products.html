@@ -132,7 +132,7 @@
     <p>Lists all available MODIS Land Products Subset products.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_products</span>()</pre>
+    <pre class="usage"><span class='fu'>mt_products</span><span class='op'>(</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -147,8 +147,9 @@
     <pre class="examples"><div class='input'>
 <span class='co'># \donttest{</span>
 <span class='co'># list all available MODIS Land Products Subsets products</span>
-<span class='no'>products</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_products</span>()
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>products</span>)</div><div class='output co'>#&gt;    product
+<span class='va'>products</span> <span class='op'>&lt;-</span> <span class='fu'>mt_products</span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>products</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    product
 #&gt; 1   Daymet
 #&gt; 2  MCD12Q1
 #&gt; 3  MCD12Q2
@@ -168,7 +169,7 @@
 #&gt; 3    1 year               500
 #&gt; 4     8 day               500
 #&gt; 5     4 day               500
-#&gt; 6     8 day              1000</div><div class='input'># }
+#&gt; 6     8 day              1000</div><div class='input'><span class='co'># }</span>
 
 </div></pre>
   </div>
@@ -186,7 +187,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
