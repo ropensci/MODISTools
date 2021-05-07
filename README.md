@@ -1,11 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# MODISTools <a href='https://khufkens.github.io/MODISTools/'><img src='https://raw.githubusercontent.com/khufkens/MODISTools/master/MODISTools-logo.png' align="right" height="139" /></a>
+# MODISTools <a href='https://github.com/ropensci/MODISTools'><img src='https://raw.githubusercontent.com/ropensci/MODISTools/master/MODISTools-logo.png' align="right" height="139" /></a>
 
-[![Build
-Status](https://travis-ci.org/khufkens/MODISTools.svg)](https://travis-ci.org/khufkens/MODISTools)
-[![codecov](https://codecov.io/gh/khufkens/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/khufkens/MODISTools)
+[![R build
+status](https://github.com/ropensci/MODISTools/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/MODISTools/actions)
+[![codecov](https://codecov.io/gh/ropensci/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/MODISTools)
 ![Status](https://www.r-pkg.org/badges/version/MODISTools) [![rOpenSci
 Peer
 Review](https://badges.ropensci.org/246_status.svg)](https://github.com/ropensci/software-review/issues/246)
@@ -62,7 +62,8 @@ direct environment use the mt\_subset() function.
 
 <details>
 
-<summary>detailed parameter description (click to expand)</summary>
+<summary>detailed parameter description (click to
+expand)</summary>
 
 <p>
 
@@ -202,27 +203,27 @@ To list all available products use the mt\_products() function.
 ``` r
 products <- mt_products()
 head(products)
-#>    product
-#> 1   Daymet
-#> 2  MCD12Q1
-#> 3  MCD12Q2
-#> 4 MCD15A2H
-#> 5 MCD15A3H
-#> 6  MCD19A3
-#>                                                                        description
-#> 1  Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 3
-#> 2            MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid
-#> 3       MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid
-#> 4 MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR)  8-Day L4 Global 500 m SIN Grid
-#> 5  MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR) 4-Day L4 Global 500 m SIN Grid
-#> 6     MODIS/Terra+Aqua BRDF Model Parameters (MAIAC) 8-Day L3 Global 1 km SIN Grid
+#>        product
+#> 1       Daymet
+#> 2 ECO4ESIPTJPL
+#> 3      ECO4WUE
+#> 4       GEDI03
+#> 5      MCD12Q1
+#> 6      MCD12Q2
+#>                                                                       description
+#> 1 Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 4
+#> 2            ECOSTRESS Evaporative Stress Index PT-JPL (ESI) Daily L4 Global 70 m
+#> 3                       ECOSTRESS Water Use Efficiency (WUE) Daily L4 Global 70 m
+#> 4                        GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid
+#> 5           MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid
+#> 6      MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid
 #>   frequency resolution_meters
 #> 1     1 day              1000
-#> 2    1 year               500
-#> 3    1 year               500
-#> 4     8 day               500
-#> 5     4 day               500
-#> 6     8 day              1000
+#> 2    Varies                70
+#> 3    Varies                70
+#> 4  One time              1000
+#> 5    1 year               500
+#> 6    1 year               500
 ```
 
 ### Listing bands
@@ -281,6 +282,7 @@ Hans Rausing Scholarship. Refactoring was supported through the Belgian
 Science Policy office COBECORE project (BELSPO; grant
 BR/175/A3/COBECORE). Logo design elements are taken from the FontAwesome
 library according to [these terms](https://fontawesome.com/license),
-where the globe element was inverted and intersected.
+where the globe element was inverted and
+intersected.
 
 [![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
