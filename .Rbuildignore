@@ -11,3 +11,4 @@
 ^docs$
 ^\.httr-oauth$
 ^.*-logo\..*$
+^\.github$
