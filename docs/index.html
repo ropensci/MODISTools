@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">MODISTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -43,7 +43,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -69,7 +69,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/ropensci/MODISTools/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -87,10 +87,10 @@
   <div class="contents col-md-9">
 <div id="modistools-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#modistools-" class="anchor"></a>MODISTools <a href="https://khufkens.github.io/MODISTools/"><img src="https://raw.githubusercontent.com/khufkens/MODISTools/master/MODISTools-logo.png" align="right" height="139"></a>
+<a href="#modistools-" class="anchor"></a>MODISTools <a href="https://github.com/ropensci/MODISTools"><img src="https://raw.githubusercontent.com/ropensci/MODISTools/master/MODISTools-logo.png" align="right" height="139"></a>
 </h1></div>
 
-<p>Programmatic interface to the <a href="https://modis.ornl.gov/data/modis_webservice.html">‘MODIS Land Products Subsets’ web services</a>. Allows for easy downloads of <a href="http://modis.gsfc.nasa.gov/">‘MODIS’</a> time series directly to your R workspace or your computer. When using the package please cite the manuscript as referenced below.</p>
+<p>Programmatic interface to the <a href="https://modis.ornl.gov/data/modis_webservice.html">‘MODIS Land Products Subsets’ web services</a>. Allows for easy downloads of <a href="http://modis.gsfc.nasa.gov/">‘MODIS’</a> time series directly to your R workspace or your computer. When using the package please cite the manuscript as referenced below. Keep in mind that the original manuscript describes versions prior to release 1.0 of the package. Functions described in this manuscript do not exist in the current package, please consult <a href="https://docs.ropensci.org/MODISTools/reference/index.html">the documentation</a> to find matching functionality.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -98,23 +98,23 @@
 <h3 class="hasAnchor">
 <a href="#stable-release" class="anchor"></a>stable release</h3>
 <p>To install the current stable release use a CRAN repository:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"MODISTools"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://docs.ropensci.org/MODISTools">"MODISTools"</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"MODISTools"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://docs.ropensci.org/MODISTools">"MODISTools"</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="development-release" class="section level3">
 <h3 class="hasAnchor">
 <a href="#development-release" class="anchor"></a>development release</h3>
 <p>To install the development releases of the package run the following commands:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu">install.package</span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">}</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu">install.package</span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">}</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"khufkens/MODISTools"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://docs.ropensci.org/MODISTools">"MODISTools"</a></span><span class="op">)</span></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://docs.ropensci.org/MODISTools">"MODISTools"</a></span><span class="op">)</span></code></pre></div>
 <p>Vignettes are not rendered by default, if you want to include additional documentation please use:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu">install.package</span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">}</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu">install.package</span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">}</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"khufkens/MODISTools"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://docs.ropensci.org/MODISTools">"MODISTools"</a></span><span class="op">)</span></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://docs.ropensci.org/MODISTools">"MODISTools"</a></span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="use" class="section level2">
@@ -124,8 +124,9 @@
 <h3 class="hasAnchor">
 <a href="#downloading-modis-time-series" class="anchor"></a>Downloading MODIS time series</h3>
 <p>To extract a time series of modis data for a given location and its direct environment use the mt_subset() function.</p>
-<details><p><summary>detailed parameter description (click to expand)</summary></p>
-<p>
+<details><summary>
+detailed parameter description (click to expand)
+</summary><p>
 </p>
 <table class="table">
 <colgroup>
@@ -190,8 +191,8 @@
 <td>logical, TRUE or FALSE (show download progress)</td>
 </tr>
 </tbody>
-</table></details><div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co"># load the library</span>
+</table></details><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># load the library</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/MODISTools">MODISTools</a></span><span class="op">)</span>
 
 <span class="co"># download data</span>
@@ -229,7 +230,7 @@
 <span class="co">#&gt;  $ proc_date    : chr  "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...</span>
 <span class="co">#&gt;  $ pixel        : int  1 1 1 1 2 2 2 2 3 3 ...</span>
 <span class="co">#&gt;  $ value        : int  13135 13120 13350 13354 13123 13100 13324 13331 13098 13069 ...</span>
-<span class="co">#&gt; NULL</span></pre></div>
+<span class="co">#&gt; NULL</span></code></pre></div>
 <p>The output format is a <em>tidy</em> data frame, as shown above. When witten to a csv with the parameter <code>internal = FALSE</code> this will result in a flat file on disk.</p>
 <p>Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the <code>pixel</code> column in the data frame containing the time series data. The remote sensing values are listed in the <code>value</code> column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values. To list all available products, bands for particular products and temporal coverage see function descriptions below.</p>
 </div>
@@ -238,8 +239,8 @@
 <a href="#batch-downloading-modis-time-series" class="anchor"></a>Batch downloading MODIS time series</h3>
 <p>When a large selection of locations is needed you might benefit from using the batch download function <code><a href="reference/mt_batch_subset.html">mt_batch_subset()</a></code>, which provides a wrapper around the <code><a href="reference/mt_subset.html">mt_subset()</a></code> function in order to speed up large download batches. This function has a similar syntax to <code><a href="reference/mt_subset.html">mt_subset()</a></code> but requires a data frame defining site names (site_name) and locations (lat / lon) (or a comma delimited file with the same structure) to specify a list of download locations.</p>
 <p>Below an example is provided on how to batch download data for a data frame of given site names and locations (lat / lon).</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co"># create data frame with a site_name, lat and lon column</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create data frame with a site_name, lat and lon column</span>
 <span class="co"># holding the respective names of sites and their location</span>
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"site_name"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"test"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="va">df</span><span class="op">$</span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fl">40</span>
@@ -276,65 +277,65 @@
 <span class="co">#&gt;  $ proc_date    : chr  "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...</span>
 <span class="co">#&gt;  $ pixel        : int  1 1 1 1 1 1 1 1</span>
 <span class="co">#&gt;  $ value        : int  13098 13062 13297 13323 13098 13062 13297 13323</span>
-<span class="co">#&gt; NULL</span></pre></div>
+<span class="co">#&gt; NULL</span></code></pre></div>
 </div>
 <div id="listing-products" class="section level3">
 <h3 class="hasAnchor">
 <a href="#listing-products" class="anchor"></a>Listing products</h3>
 <p>To list all available products use the mt_products() function.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">products</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mt_products.html">mt_products</a></span><span class="op">(</span><span class="op">)</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">products</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mt_products.html">mt_products</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">products</span><span class="op">)</span>
-<span class="co">#&gt;    product</span>
-<span class="co">#&gt; 1   Daymet</span>
-<span class="co">#&gt; 2  MCD12Q1</span>
-<span class="co">#&gt; 3  MCD12Q2</span>
-<span class="co">#&gt; 4 MCD15A2H</span>
-<span class="co">#&gt; 5 MCD15A3H</span>
-<span class="co">#&gt; 6  MCD19A3</span>
-<span class="co">#&gt;                                                                        description</span>
-<span class="co">#&gt; 1  Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 3</span>
-<span class="co">#&gt; 2            MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid</span>
-<span class="co">#&gt; 3       MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid</span>
-<span class="co">#&gt; 4 MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR)  8-Day L4 Global 500 m SIN Grid</span>
-<span class="co">#&gt; 5  MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR) 4-Day L4 Global 500 m SIN Grid</span>
-<span class="co">#&gt; 6     MODIS/Terra+Aqua BRDF Model Parameters (MAIAC) 8-Day L3 Global 1 km SIN Grid</span>
+<span class="co">#&gt;        product</span>
+<span class="co">#&gt; 1       Daymet</span>
+<span class="co">#&gt; 2 ECO4ESIPTJPL</span>
+<span class="co">#&gt; 3      ECO4WUE</span>
+<span class="co">#&gt; 4       GEDI03</span>
+<span class="co">#&gt; 5      MCD12Q1</span>
+<span class="co">#&gt; 6      MCD12Q2</span>
+<span class="co">#&gt;                                                                       description</span>
+<span class="co">#&gt; 1 Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 4</span>
+<span class="co">#&gt; 2            ECOSTRESS Evaporative Stress Index PT-JPL (ESI) Daily L4 Global 70 m</span>
+<span class="co">#&gt; 3                       ECOSTRESS Water Use Efficiency (WUE) Daily L4 Global 70 m</span>
+<span class="co">#&gt; 4                        GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid</span>
+<span class="co">#&gt; 5           MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid</span>
+<span class="co">#&gt; 6      MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid</span>
 <span class="co">#&gt;   frequency resolution_meters</span>
 <span class="co">#&gt; 1     1 day              1000</span>
-<span class="co">#&gt; 2    1 year               500</span>
-<span class="co">#&gt; 3    1 year               500</span>
-<span class="co">#&gt; 4     8 day               500</span>
-<span class="co">#&gt; 5     4 day               500</span>
-<span class="co">#&gt; 6     8 day              1000</span></pre></div>
+<span class="co">#&gt; 2    Varies                70</span>
+<span class="co">#&gt; 3    Varies                70</span>
+<span class="co">#&gt; 4  One time              1000</span>
+<span class="co">#&gt; 5    1 year               500</span>
+<span class="co">#&gt; 6    1 year               500</span></code></pre></div>
 </div>
 <div id="listing-bands" class="section level3">
 <h3 class="hasAnchor">
 <a href="#listing-bands" class="anchor"></a>Listing bands</h3>
 <p>To list all available bands for a given product use the mt_bands() function.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="va">bands</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mt_bands.html">mt_bands</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MOD11A2"</span><span class="op">)</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bands</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mt_bands.html">mt_bands</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MOD11A2"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">bands</span><span class="op">)</span>
-<span class="co">#&gt;            band                          description  units   valid_range</span>
-<span class="co">#&gt; 1 Day_view_angl View zenith angle of day observation degree      0 to 130</span>
-<span class="co">#&gt; 2       Emis_32                   Band 32 emissivity   &lt;NA&gt;      1 to 255</span>
-<span class="co">#&gt; 3       Emis_31                   Band 31 emissivity   &lt;NA&gt;      1 to 255</span>
-<span class="co">#&gt; 4      QC_Night     Nighttime LST Quality indicators   &lt;NA&gt;      0 to 255</span>
-<span class="co">#&gt; 5 Day_view_time        Local time of day observation    hrs      0 to 240</span>
-<span class="co">#&gt; 6   LST_Day_1km     Daytime Land Surface Temperature Kelvin 7500 to 65535</span>
-<span class="co">#&gt;   fill_value scale_factor add_offset</span>
-<span class="co">#&gt; 1        255            1        -65</span>
-<span class="co">#&gt; 2          0        0.002       0.49</span>
-<span class="co">#&gt; 3          0        0.002       0.49</span>
-<span class="co">#&gt; 4       &lt;NA&gt;         &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="co">#&gt; 5        255          0.1          0</span>
-<span class="co">#&gt; 6          0         0.02          0</span></pre></div>
+<span class="co">#&gt;               band                          description valid_range fill_value</span>
+<span class="co">#&gt; 1   Clear_sky_days               Day clear-sky coverage    1 to 255          0</span>
+<span class="co">#&gt; 2 Clear_sky_nights             Night clear-sky coverage    1 to 255          0</span>
+<span class="co">#&gt; 3    Day_view_angl View zenith angle of day observation    0 to 130        255</span>
+<span class="co">#&gt; 4    Day_view_time        Local time of day observation    0 to 240        255</span>
+<span class="co">#&gt; 5          Emis_31                   Band 31 emissivity    1 to 255          0</span>
+<span class="co">#&gt; 6          Emis_32                   Band 32 emissivity    1 to 255          0</span>
+<span class="co">#&gt;    units scale_factor add_offset</span>
+<span class="co">#&gt; 1   &lt;NA&gt;         &lt;NA&gt;       &lt;NA&gt;</span>
+<span class="co">#&gt; 2   &lt;NA&gt;         &lt;NA&gt;       &lt;NA&gt;</span>
+<span class="co">#&gt; 3 degree            1        -65</span>
+<span class="co">#&gt; 4    hrs          0.1          0</span>
+<span class="co">#&gt; 5   &lt;NA&gt;        0.002       0.49</span>
+<span class="co">#&gt; 6   &lt;NA&gt;        0.002       0.49</span></code></pre></div>
 </div>
 <div id="listing-dates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#listing-dates" class="anchor"></a>listing dates</h3>
 <p>To list all available dates (temporal coverage) for a given product and location use the mt_dates() function.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mt_dates.html">mt_dates</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MOD11A2"</span>, lat <span class="op">=</span> <span class="fl">42</span>, lon <span class="op">=</span> <span class="op">-</span><span class="fl">110</span><span class="op">)</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mt_dates.html">mt_dates</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MOD11A2"</span>, lat <span class="op">=</span> <span class="fl">42</span>, lon <span class="op">=</span> <span class="op">-</span><span class="fl">110</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span>
 <span class="co">#&gt;   modis_date calendar_date</span>
 <span class="co">#&gt; 1   A2000049    2000-02-18</span>
@@ -342,7 +343,7 @@
 <span class="co">#&gt; 3   A2000065    2000-03-05</span>
 <span class="co">#&gt; 4   A2000073    2000-03-13</span>
 <span class="co">#&gt; 5   A2000081    2000-03-21</span>
-<span class="co">#&gt; 6   A2000089    2000-03-29</span></pre></div>
+<span class="co">#&gt; 6   A2000089    2000-03-29</span></code></pre></div>
 </div>
 </div>
 <div id="references" class="section level2">
@@ -393,7 +394,7 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/khufkens/MODISTools"><img src="https://travis-ci.org/ropensci/MODISTools.svg" alt="Build Status"></a></li>
+<li><a href="https://github.com/ropensci/MODISTools/actions"><img src="https://github.com/ropensci/MODISTools/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/ropensci/MODISTools"><img src="https://codecov.io/gh/ropensci/MODISTools/branch/master/graph/badge.svg" alt="codecov"></a></li>
 <li><a href="https://github.com/ropensci/software-review/issues/246"><img src="https://badges.ropensci.org/246_status.svg" alt="rOpenSci Peer Review"></a></li>
 </ul>

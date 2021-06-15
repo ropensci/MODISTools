@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODISTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -106,7 +106,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ropensci/MODISTools/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -149,27 +149,27 @@
 <span class='co'># list all available MODIS Land Products Subsets products</span>
 <span class='va'>products</span> <span class='op'>&lt;-</span> <span class='fu'>mt_products</span><span class='op'>(</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>products</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    product
-#&gt; 1   Daymet
-#&gt; 2  MCD12Q1
-#&gt; 3  MCD12Q2
-#&gt; 4 MCD15A2H
-#&gt; 5 MCD15A3H
-#&gt; 6  MCD19A3
-#&gt;                                                                        description
-#&gt; 1  Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 3
-#&gt; 2            MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid
-#&gt; 3       MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid
-#&gt; 4 MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR)  8-Day L4 Global 500 m SIN Grid
-#&gt; 5  MODIS/Terra+Aqua Leaf Area Index/FPAR (LAI/FPAR) 4-Day L4 Global 500 m SIN Grid
-#&gt; 6     MODIS/Terra+Aqua BRDF Model Parameters (MAIAC) 8-Day L3 Global 1 km SIN Grid
+</div><div class='output co'>#&gt;        product
+#&gt; 1       Daymet
+#&gt; 2 ECO4ESIPTJPL
+#&gt; 3      ECO4WUE
+#&gt; 4       GEDI03
+#&gt; 5      MCD12Q1
+#&gt; 6      MCD12Q2
+#&gt;                                                                       description
+#&gt; 1 Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 4
+#&gt; 2            ECOSTRESS Evaporative Stress Index PT-JPL (ESI) Daily L4 Global 70 m
+#&gt; 3                       ECOSTRESS Water Use Efficiency (WUE) Daily L4 Global 70 m
+#&gt; 4                        GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid
+#&gt; 5           MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid
+#&gt; 6      MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid
 #&gt;   frequency resolution_meters
 #&gt; 1     1 day              1000
-#&gt; 2    1 year               500
-#&gt; 3    1 year               500
-#&gt; 4     8 day               500
-#&gt; 5     4 day               500
-#&gt; 6     8 day              1000</div><div class='input'><span class='co'># }</span>
+#&gt; 2    Varies                70
+#&gt; 3    Varies                70
+#&gt; 4  One time              1000
+#&gt; 5    1 year               500
+#&gt; 6    1 year               500</div><div class='input'><span class='co'># }</span>
 
 </div></pre>
   </div>

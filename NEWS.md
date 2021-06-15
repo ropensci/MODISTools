@@ -1,3 +1,7 @@
+## MODISTools 1.1.2
+
+* removing parallel processing in batch tool due to timeout issues
+
 ## MODISTools 1.1.1
 
 * added raster conversion function `mt_to_raster()`
