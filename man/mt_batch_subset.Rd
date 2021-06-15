@@ -13,8 +13,7 @@ mt_batch_subset(
   km_lr = 0,
   km_ab = 0,
   out_dir = tempdir(),
-  internal = TRUE,
-  ncores = "auto"
+  internal = TRUE
 )
 }
 \arguments{
@@ -39,9 +38,6 @@ data are comma separated.}
 
 \item{internal}{should the data be returned as an internal data structure
 \code{TRUE} or \code{FALSE} (default = \code{TRUE})}
-
-\item{ncores}{number of cores to use while downloading in parallel
-(auto will select the all cpu cores - 1 or 10)}
 }
 \value{
 A data frame combining meta-data and actual data values, data from
@@ -54,7 +50,7 @@ at a particular location.
 }
 \examples{
 
-\donttest{
+\dontrun{
 # create data frame with a site_name, lat and lon column
 # holding the respective names of sites and their location
 df <- data.frame("site_name" = paste("test",1:2))
@@ -74,19 +70,20 @@ subsets <- mt_batch_subset(df = df,
 # the same can be done using a CSV file with
 # a data structure similar to the dataframe above
 
-write.table(df, "my_sites.csv",
+write.table(df, file.path(tempdir(),"my_sites.csv"),
  quote = FALSE,
  row.names = FALSE,
  col.names = TRUE,
  sep = ",")
 
 # test batch download form CSV
-subsets <- mt_batch_subset(df = "./my_sites.csv",
+subsets <- mt_batch_subset(df = file.path(tempdir(),"my_sites.csv"),
                         product = "MOD11A2",
                         band = "LST_Day_1km",
                         internal = TRUE,
                         start = "2004-01-01",
-                        end = "2004-03-31")
+                        end = "2004-03-31"
+                        )
 
 head(subsets)
 }

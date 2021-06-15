@@ -13,7 +13,7 @@
 #'
 #' \donttest{
 #' # list all available MODIS Land Products Subsets products
-#' bands <- mt_bands(product = "MOD11A2")
+#' bands <- mt_bands(product = "MCD12Q2")
 #' head(bands)
 #'
 #'}

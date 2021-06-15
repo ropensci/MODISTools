@@ -220,19 +220,6 @@ test_that("test mt_batch_subset()",{
     "data.frame"
   )
 
-  # good query, too many cores
-  expect_is(
-    mt_batch_subset(
-      df = df,
-      product = "MOD11A2",
-      band = "LST_Day_1km",
-      internal = TRUE,
-      start = "2004-01-01",
-      end = "2004-03-31"
-    ),
-    "data.frame"
-  )
-
   # write data to disk
   expect_silent(
     mt_batch_subset(

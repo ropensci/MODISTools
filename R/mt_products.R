@@ -22,12 +22,15 @@ mt_products <- memoise::memoise(function(){
   url <- paste(mt_server(), "products", sep = "/")
 
   # try to download the data
-  products <- try(jsonlite::fromJSON(url))$products
+  products <- try(jsonlite::fromJSON(url))
 
   # trap errors on download, return a general error statement
   if (inherits(products, "try-error")){
     stop("Your requested timed out or the server is unreachable")
   }
+
+  # split out data
+  products <- products$products
 
   # convert labels to more sensible names
   products$frequency <- gsub("-", " ", products$frequency)

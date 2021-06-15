@@ -4,7 +4,9 @@
 \name{arcachon_lai}
 \alias{arcachon_lai}
 \title{arcachon_lai}
-\format{A MODISTools tidy data frame}
+\format{
+A MODISTools tidy data frame
+}
 \usage{
 arcachon_lai
 }
