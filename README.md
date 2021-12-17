@@ -3,6 +3,8 @@
 
 # MODISTools <a href='https://github.com/ropensci/MODISTools'><img src='https://raw.githubusercontent.com/ropensci/MODISTools/master/MODISTools-logo.png' align="right" height="139" /></a>
 
+<!-- badges: start -->
+
 [![R build
 status](https://github.com/ropensci/MODISTools/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/MODISTools/actions)
 [![codecov](https://codecov.io/gh/ropensci/MODISTools/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/MODISTools)
@@ -10,6 +12,7 @@ status](https://github.com/ropensci/MODISTools/workflows/R-CMD-check/badge.svg)]
 Peer
 Review](https://badges.ropensci.org/246_status.svg)](https://github.com/ropensci/software-review/issues/246)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/MODISTools)
+<!-- badges: end -->
 
 Programmatic interface to the [‘MODIS Land Products Subsets’ web
 services](https://modis.ornl.gov/data/modis_webservice.html). Allows for
@@ -58,33 +61,31 @@ library("MODISTools")
 ### Downloading MODIS time series
 
 To extract a time series of modis data for a given location and its
-direct environment use the mt\_subset() function.
+direct environment use the mt_subset() function.
 
 <details>
-
-<summary>detailed parameter description (click to
-expand)</summary>
-
+<summary>
+detailed parameter description (click to expand)
+</summary>
 <p>
 
-| Parameter  | Description                                                                                                                     |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| product    | a MODIS product                                                                                                                 |
-| band       | a MODIS product band (if NULL all bands are downloaded)                                                                         |
-| lat        | latitude of the site                                                                                                            |
-| lon        | longitude of the site                                                                                                           |
-| start      | start year of the time series (data start in 1980)                                                                              |
-| end        | end year of the time series (current year - 2 years, use force = TRUE to override)                                              |
-| internal   | logical, TRUE or FALSE, if true data is imported into R workspace otherwise it is downloaded into the current working directory |
-| out\_dir   | path where to store the data when not used internally, defaults to tempdir()                                                    |
-| km\_lr     | force “out of temporal range” downloads (integer)                                                                               |
-| km\_ab     | suppress the verbose output (integer)                                                                                           |
-| site\_name | a site identifier                                                                                                               |
-| site\_id   | a site\_id for predefined locations (not required)                                                                              |
-| progress   | logical, TRUE or FALSE (show download progress)                                                                                 |
+| Parameter | Description                                                                                                                     |
+|-----------|---------------------------------------------------------------------------------------------------------------------------------|
+| product   | a MODIS product                                                                                                                 |
+| band      | a MODIS product band (if NULL all bands are downloaded)                                                                         |
+| lat       | latitude of the site                                                                                                            |
+| lon       | longitude of the site                                                                                                           |
+| start     | start year of the time series (data start in 1980)                                                                              |
+| end       | end year of the time series (current year - 2 years, use force = TRUE to override)                                              |
+| internal  | logical, TRUE or FALSE, if true data is imported into R workspace otherwise it is downloaded into the current working directory |
+| out_dir   | path where to store the data when not used internally, defaults to tempdir()                                                    |
+| km_lr     | force “out of temporal range” downloads (integer)                                                                               |
+| km_ab     | suppress the verbose output (integer)                                                                                           |
+| site_name | a site identifier                                                                                                               |
+| site_id   | a site_id for predefined locations (not required)                                                                               |
+| progress  | logical, TRUE or FALSE (show download progress)                                                                                 |
 
 </p>
-
 </details>
 
 ``` r
@@ -133,7 +134,7 @@ The output format is a *tidy* data frame, as shown above. When witten to
 a csv with the parameter `internal = FALSE` this will result in a flat
 file on disk.
 
-Note that when a a region is defined using km\_lr and km\_ab multiple
+Note that when a a region is defined using km_lr and km_ab multiple
 pixels might be returned. These are indexed using the `pixel` column in
 the data frame containing the time series data. The remote sensing
 values are listed in the `value` column. When no band is specified all
@@ -148,7 +149,7 @@ When a large selection of locations is needed you might benefit from
 using the batch download function `mt_batch_subset()`, which provides a
 wrapper around the `mt_subset()` function in order to speed up large
 download batches. This function has a similar syntax to `mt_subset()`
-but requires a data frame defining site names (site\_name) and locations
+but requires a data frame defining site names (site_name) and locations
 (lat / lon) (or a comma delimited file with the same structure) to
 specify a list of download locations.
 
@@ -198,7 +199,7 @@ print(str(subsets))
 
 ### Listing products
 
-To list all available products use the mt\_products() function.
+To list all available products use the mt_products() function.
 
 ``` r
 products <- mt_products()
@@ -214,7 +215,7 @@ head(products)
 #> 1 Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 4
 #> 2            ECOSTRESS Evaporative Stress Index PT-JPL (ESI) Daily L4 Global 70 m
 #> 3                       ECOSTRESS Water Use Efficiency (WUE) Daily L4 Global 70 m
-#> 4                        GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid
+#> 4             GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid, Version 2
 #> 5           MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid
 #> 6      MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid
 #>   frequency resolution_meters
@@ -228,7 +229,7 @@ head(products)
 
 ### Listing bands
 
-To list all available bands for a given product use the mt\_bands()
+To list all available bands for a given product use the mt_bands()
 function.
 
 ``` r
@@ -253,7 +254,7 @@ head(bands)
 ### listing dates
 
 To list all available dates (temporal coverage) for a given product and
-location use the mt\_dates() function.
+location use the mt_dates() function.
 
 ``` r
 dates <- mt_dates(product = "MOD11A2", lat = 42, lon = -110)
@@ -282,7 +283,6 @@ Hans Rausing Scholarship. Refactoring was supported through the Belgian
 Science Policy office COBECORE project (BELSPO; grant
 BR/175/A3/COBECORE). Logo design elements are taken from the FontAwesome
 library according to [these terms](https://fontawesome.com/license),
-where the globe element was inverted and
-intersected.
+where the globe element was inverted and intersected.
 
-[![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
+[![ropensci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
