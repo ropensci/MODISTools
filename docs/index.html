@@ -89,6 +89,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#modistools-" class="anchor"></a>MODISTools <a href="https://github.com/ropensci/MODISTools"><img src="https://raw.githubusercontent.com/ropensci/MODISTools/master/MODISTools-logo.png" align="right" height="139"></a>
 </h1></div>
+<!-- badges: start -->
 
 <p>Programmatic interface to the <a href="https://modis.ornl.gov/data/modis_webservice.html">‘MODIS Land Products Subsets’ web services</a>. Allows for easy downloads of <a href="http://modis.gsfc.nasa.gov/">‘MODIS’</a> time series directly to your R workspace or your computer. When using the package please cite the manuscript as referenced below. Keep in mind that the original manuscript describes versions prior to release 1.0 of the package. Functions described in this manuscript do not exist in the current package, please consult <a href="https://docs.ropensci.org/MODISTools/reference/index.html">the documentation</a> to find matching functionality.</p>
 <div id="installation" class="section level2">
@@ -108,12 +109,12 @@
 <p>To install the development releases of the package run the following commands:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu">install.package</span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">}</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"khufkens/MODISTools"</span><span class="op">)</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"khufkens/MODISTools"</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://docs.ropensci.org/MODISTools">"MODISTools"</a></span><span class="op">)</span></code></pre></div>
 <p>Vignettes are not rendered by default, if you want to include additional documentation please use:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu">install.package</span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">}</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"khufkens/MODISTools"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"khufkens/MODISTools"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://docs.ropensci.org/MODISTools">"MODISTools"</a></span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -297,7 +298,7 @@ detailed parameter description (click to expand)
 <span class="co">#&gt; 1 Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 4</span>
 <span class="co">#&gt; 2            ECOSTRESS Evaporative Stress Index PT-JPL (ESI) Daily L4 Global 70 m</span>
 <span class="co">#&gt; 3                       ECOSTRESS Water Use Efficiency (WUE) Daily L4 Global 70 m</span>
-<span class="co">#&gt; 4                        GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid</span>
+<span class="co">#&gt; 4             GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid, Version 2</span>
 <span class="co">#&gt; 5           MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid</span>
 <span class="co">#&gt; 6      MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid</span>
 <span class="co">#&gt;   frequency resolution_meters</span>

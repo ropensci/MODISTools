@@ -1,6 +1,7 @@
 # MODISTools 1.1.2
 
 * removing parallel processing in batch tool due to timeout issues
+* set error = TRUE on vignette to prevent stopping during render
 
 # MODISTools 1.1.1
 

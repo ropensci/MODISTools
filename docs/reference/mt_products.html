@@ -148,28 +148,8 @@
 <span class='co'># \donttest{</span>
 <span class='co'># list all available MODIS Land Products Subsets products</span>
 <span class='va'>products</span> <span class='op'>&lt;-</span> <span class='fu'>mt_products</span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>products</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        product
-#&gt; 1       Daymet
-#&gt; 2 ECO4ESIPTJPL
-#&gt; 3      ECO4WUE
-#&gt; 4       GEDI03
-#&gt; 5      MCD12Q1
-#&gt; 6      MCD12Q2
-#&gt;                                                                       description
-#&gt; 1 Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 4
-#&gt; 2            ECOSTRESS Evaporative Stress Index PT-JPL (ESI) Daily L4 Global 70 m
-#&gt; 3                       ECOSTRESS Water Use Efficiency (WUE) Daily L4 Global 70 m
-#&gt; 4                        GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid
-#&gt; 5           MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid
-#&gt; 6      MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid
-#&gt;   frequency resolution_meters
-#&gt; 1     1 day              1000
-#&gt; 2    Varies                70
-#&gt; 3    Varies                70
-#&gt; 4  One time              1000
-#&gt; 5    1 year               500
-#&gt; 6    1 year               500</div><div class='input'><span class='co'># }</span>
+</div><div class='output co'>#&gt; Error in open.connection(con, "rb") : HTTP error 500.</div><div class='output co'>#&gt; <span class='error'>Error in (function () {    url &lt;- paste(mt_server(), "products", sep = "/")    products &lt;- try(jsonlite::fromJSON(url))    if (inherits(products, "try-error")) {        stop("Your requested timed out or the server is unreachable")    }    products &lt;- products$products    products$frequency &lt;- gsub("-", " ", products$frequency)    products$frequency &lt;- gsub("Day", "day", products$frequency)    products$frequency &lt;- gsub("Daily", "1 day", products$frequency)    products$frequency &lt;- gsub("Yearly", "1 year", products$frequency)    return(products)})(): Your requested timed out or the server is unreachable</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>products</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in head(products): object 'products' not found</span></div><div class='input'><span class='co'># }</span>
 
 </div></pre>
   </div>

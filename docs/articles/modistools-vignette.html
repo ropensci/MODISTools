@@ -79,13 +79,13 @@
 
       
 
-      </header><script src="modistools-vignette_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
+      </header><script src="modistools-vignette_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>MODISTools</h1>
                         <h4 class="author">Koen Hufkens</h4>
             
-            <h4 class="date">2021-06-15</h4>
+            <h4 class="date">2022-03-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/MODISTools/blob/master/vignettes/modistools-vignette.Rmd"><code>vignettes/modistools-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>modistools-vignette.Rmd</code></div>
@@ -102,60 +102,27 @@
 <p>To list all available products use the <code><a href="../reference/mt_products.html">mt_products()</a></code> function.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">products</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_products.html">mt_products</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; Error in open.connection(con, "rb") : HTTP error 500.</span>
+<span class="co">#&gt; Error in (function () : Your requested timed out or the server is unreachable</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">products</span><span class="op">)</span>
-<span class="co">#&gt;        product</span>
-<span class="co">#&gt; 1       Daymet</span>
-<span class="co">#&gt; 2 ECO4ESIPTJPL</span>
-<span class="co">#&gt; 3      ECO4WUE</span>
-<span class="co">#&gt; 4       GEDI03</span>
-<span class="co">#&gt; 5      MCD12Q1</span>
-<span class="co">#&gt; 6      MCD12Q2</span>
-<span class="co">#&gt;                                                                       description</span>
-<span class="co">#&gt; 1 Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 4</span>
-<span class="co">#&gt; 2            ECOSTRESS Evaporative Stress Index PT-JPL (ESI) Daily L4 Global 70 m</span>
-<span class="co">#&gt; 3                       ECOSTRESS Water Use Efficiency (WUE) Daily L4 Global 70 m</span>
-<span class="co">#&gt; 4                        GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid</span>
-<span class="co">#&gt; 5           MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid</span>
-<span class="co">#&gt; 6      MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid</span>
-<span class="co">#&gt;   frequency resolution_meters</span>
-<span class="co">#&gt; 1     1 day              1000</span>
-<span class="co">#&gt; 2    Varies                70</span>
-<span class="co">#&gt; 3    Varies                70</span>
-<span class="co">#&gt; 4  One time              1000</span>
-<span class="co">#&gt; 5    1 year               500</span>
-<span class="co">#&gt; 6    1 year               500</span></code></pre></div>
+<span class="co">#&gt; Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'head': object 'products' not found</span></code></pre></div>
 <p>Once you have settled on the product you want to use in your analysis you will have to select a band, or multiple bands you want to download for a given location. To list all available bands for a given product use the mt_bands() function. You can use the <code><a href="../reference/mt_bands.html">mt_bands()</a></code> function to list all available bands for a given product. Below I list all bands for the MOD13Q1 vegetation index product.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bands</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_bands.html">mt_bands</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MOD13Q1"</span><span class="op">)</span>
+<span class="co">#&gt; Error in open.connection(con, "rb") : HTTP error 500.</span>
+<span class="co">#&gt; Error in (function () : Your requested timed out or the server is unreachable</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">bands</span><span class="op">)</span>
-<span class="co">#&gt;                                     band                description</span>
-<span class="co">#&gt; 1          250m_16_days_blue_reflectance Surface Reflectance Band 3</span>
-<span class="co">#&gt; 2 250m_16_days_composite_day_of_the_year       Day of year VI pixel</span>
-<span class="co">#&gt; 3                       250m_16_days_EVI         16 day EVI average</span>
-<span class="co">#&gt; 4           250m_16_days_MIR_reflectance Surface Reflectance Band 7</span>
-<span class="co">#&gt; 5                      250m_16_days_NDVI        16 day NDVI average</span>
-<span class="co">#&gt; 6           250m_16_days_NIR_reflectance Surface Reflectance Band 2</span>
-<span class="co">#&gt;                    units    valid_range fill_value scale_factor add_offset</span>
-<span class="co">#&gt; 1            reflectance     0 to 10000      -1000       0.0001          0</span>
-<span class="co">#&gt; 2 Julian day of the year       1 to 366         -1         &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="co">#&gt; 3   EVI ratio - No units -2000 to 10000      -3000       0.0001          0</span>
-<span class="co">#&gt; 4            reflectance     0 to 10000      -1000       0.0001          0</span>
-<span class="co">#&gt; 5  NDVI ratio - No units -2000 to 10000      -3000       0.0001          0</span>
-<span class="co">#&gt; 6            reflectance     0 to 10000      -1000       0.0001          0</span></code></pre></div>
+<span class="co">#&gt; Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'head': object 'bands' not found</span></code></pre></div>
 <blockquote>
 <p>Note the band names (listed in band column) you want to download, this variable will need to be passed in the final download statement.</p>
 </blockquote>
 <p>Similarly you can list all available dates (temporal coverage) for a given product and location defined using a latitude and longitude with the <code><a href="../reference/mt_dates.html">mt_dates()</a></code> function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_dates.html">mt_dates</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MOD13Q1"</span>, lat <span class="op">=</span> <span class="fl">42</span>, lon <span class="op">=</span> <span class="op">-</span><span class="fl">110</span><span class="op">)</span>
+<span class="co">#&gt; Error in open.connection(con, "rb") : HTTP error 500.</span>
+<span class="co">#&gt; Error in (function () : Your requested timed out or the server is unreachable</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span>
-<span class="co">#&gt;   modis_date calendar_date</span>
-<span class="co">#&gt; 1   A2000049    2000-02-18</span>
-<span class="co">#&gt; 2   A2000065    2000-03-05</span>
-<span class="co">#&gt; 3   A2000081    2000-03-21</span>
-<span class="co">#&gt; 4   A2000097    2000-04-06</span>
-<span class="co">#&gt; 5   A2000113    2000-04-22</span>
-<span class="co">#&gt; 6   A2000129    2000-05-08</span></code></pre></div>
+<span class="co">#&gt; Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'head': object 'dates' not found</span></code></pre></div>
 </div>
 <div id="downloading-modis-time-series" class="section level1">
 <h1 class="hasAnchor">
@@ -278,7 +245,8 @@
   <span class="fu">group_by</span><span class="op">(</span><span class="va">lc</span>, <span class="va">calendar_date</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># group by lc and date</span>
   <span class="fu">summarize</span><span class="op">(</span>doy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">calendar_date</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,<span class="st">"%j"</span><span class="op">)</span><span class="op">)</span>,
             lai_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">value</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span><span class="op">(</span><span class="va">scale</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; `summarise()` has grouped output by 'lc'. You can override using the `.groups` argument.</span></code></pre></div>
+<span class="co">#&gt; `summarise()` has grouped output by 'lc'. You can override using the `.groups`</span>
+<span class="co">#&gt; argument.</span></code></pre></div>
 <p>Finally, the plot will show you the seasonal time series of LAI for both land cover classes (ENF and DBF). Note the difference in timing and amplitude between both these forest types, where the evergreen (ENF) pixels show lower LAI values and a more gradual seasonal pattern compared to the deciduous trees.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot LAI by date and per land cover class</span>
@@ -299,6 +267,8 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># convert the coordinates</span>
 <span class="va">lat_lon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sin_to_ll.html">sin_to_ll</a></span><span class="op">(</span><span class="va">arcachon_lc</span><span class="op">$</span><span class="va">xllcorner</span>, <span class="va">arcachon_lc</span><span class="op">$</span><span class="va">yllcorner</span><span class="op">)</span>
+<span class="co">#&gt; Warning in CPL_crs_from_input(x): GDAL Message 1: +init=epsg:XXXX syntax is</span>
+<span class="co">#&gt; deprecated. It might return a CRS with a non-EPSG compliant axis order.</span>
 
 <span class="co"># bind with the original dataframe</span>
 <span class="va">subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">arcachon_lc</span>, <span class="va">lat_lon</span><span class="op">)</span>
@@ -363,6 +333,16 @@
 <span class="co"># the data is reprojected to lat / lon if FALSE</span>
 <span class="co"># the data is shown in its original sinuidal projection</span>
 <span class="va">LC_r</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_to_raster.html">mt_to_raster</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">arcachon_lc</span>, reproject <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj</span>
+<span class="co">#&gt; = prefer_proj): Discarded ellps unknown in Proj4 definition: +proj=sinu +lon_0=0</span>
+<span class="co">#&gt; +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs +type=crs</span>
+<span class="co">#&gt; Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum unknown in Proj4 definition</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded ellps unknown in Proj4 definition: +proj=sinu +lon_0=0</span>
+<span class="co">#&gt; +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs +type=crs</span>
+<span class="co">#&gt; Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =</span>
+<span class="co">#&gt; prefer_proj): Discarded datum unknown in Proj4 definition</span>
 
 <span class="co"># plot the raster data as a map</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">LC_r</span><span class="op">)</span></code></pre></div>

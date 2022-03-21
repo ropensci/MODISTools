@@ -157,21 +157,8 @@ Products Subsets products</p>
 <span class='co'># \donttest{</span>
 <span class='co'># list all available MODIS Land Products Subsets products</span>
 <span class='va'>bands</span> <span class='op'>&lt;-</span> <span class='fu'>mt_bands</span><span class='op'>(</span>product <span class='op'>=</span> <span class='st'>"MCD12Q2"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>bands</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                         band    description               units    valid_range
-#&gt; 1      Dormancy.Num_Modes_01 Onset_Dormancy days since 1-1-1970 11138 to 32766
-#&gt; 2      Dormancy.Num_Modes_02 Onset_Dormancy days since 1-1-1970 11138 to 32766
-#&gt; 3 EVI_Amplitude.Num_Modes_01  EVI_Amplitude           NBAR-EVI2     0 to 10000
-#&gt; 4 EVI_Amplitude.Num_Modes_02  EVI_Amplitude           NBAR-EVI2     0 to 10000
-#&gt; 5      EVI_Area.Num_Modes_01       EVI_Area           NBAR-EVI2      0 to 3700
-#&gt; 6      EVI_Area.Num_Modes_02       EVI_Area           NBAR-EVI2      0 to 3700
-#&gt;   fill_value scale_factor
-#&gt; 1      32767          1.0
-#&gt; 2      32767          1.0
-#&gt; 3      32767       0.0001
-#&gt; 4      32767       0.0001
-#&gt; 5      32767          0.1
-#&gt; 6      32767          0.1</div><div class='input'>
+</div><div class='output co'>#&gt; Error in open.connection(con, "rb") : HTTP error 500.</div><div class='output co'>#&gt; <span class='error'>Error in (function () {    url &lt;- paste(mt_server(), "products", sep = "/")    products &lt;- try(jsonlite::fromJSON(url))    if (inherits(products, "try-error")) {        stop("Your requested timed out or the server is unreachable")    }    products &lt;- products$products    products$frequency &lt;- gsub("-", " ", products$frequency)    products$frequency &lt;- gsub("Day", "day", products$frequency)    products$frequency &lt;- gsub("Daily", "1 day", products$frequency)    products$frequency &lt;- gsub("Yearly", "1 year", products$frequency)    return(products)})(): Your requested timed out or the server is unreachable</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>bands</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in head(bands): object 'bands' not found</span></div><div class='input'>
 <span class='co'># }</span>
 
 </div></pre>
