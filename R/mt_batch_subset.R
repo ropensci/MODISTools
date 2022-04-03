@@ -126,7 +126,7 @@ mt_batch_subset <- function(
   names(df) <- tolower(names(df))
 
   # paralllel loop (if requested)
-  output <- apply(df, function(x){
+  output <- apply(df, 1, function(x){
     MODISTools::mt_subset(
       site_name = as.character(x['site_name']),
       product = as.character(x['product']),
