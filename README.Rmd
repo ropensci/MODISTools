@@ -154,7 +154,7 @@ head(dates)
 
 ## References
 
-Tuck et al. (2014). [MODISTools - downloading and processing MODIS remotely sensed data in R Ecology & Evolution](https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.1273), 4(24), 4658 - 4668.
+Hufkens (2022). The MODISTools package: an interface to the MODIS Land Products Subsets Web Services https://github.com/ropensci/MODISTools
 
 ## Acknowledgements
 

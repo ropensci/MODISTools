@@ -61,7 +61,7 @@ library("MODISTools")
 ### Downloading MODIS time series
 
 To extract a time series of modis data for a given location and its
-direct environment use the mt_subset() function.
+direct environment use the mt\_subset() function.
 
 <details>
 <summary>
@@ -69,21 +69,21 @@ detailed parameter description (click to expand)
 </summary>
 <p>
 
-| Parameter | Description                                                                                                                     |
-|-----------|---------------------------------------------------------------------------------------------------------------------------------|
-| product   | a MODIS product                                                                                                                 |
-| band      | a MODIS product band (if NULL all bands are downloaded)                                                                         |
-| lat       | latitude of the site                                                                                                            |
-| lon       | longitude of the site                                                                                                           |
-| start     | start year of the time series (data start in 1980)                                                                              |
-| end       | end year of the time series (current year - 2 years, use force = TRUE to override)                                              |
-| internal  | logical, TRUE or FALSE, if true data is imported into R workspace otherwise it is downloaded into the current working directory |
-| out_dir   | path where to store the data when not used internally, defaults to tempdir()                                                    |
-| km_lr     | force “out of temporal range” downloads (integer)                                                                               |
-| km_ab     | suppress the verbose output (integer)                                                                                           |
-| site_name | a site identifier                                                                                                               |
-| site_id   | a site_id for predefined locations (not required)                                                                               |
-| progress  | logical, TRUE or FALSE (show download progress)                                                                                 |
+| Parameter  | Description                                                                                                                     |
+|------------|---------------------------------------------------------------------------------------------------------------------------------|
+| product    | a MODIS product                                                                                                                 |
+| band       | a MODIS product band (if NULL all bands are downloaded)                                                                         |
+| lat        | latitude of the site                                                                                                            |
+| lon        | longitude of the site                                                                                                           |
+| start      | start year of the time series (data start in 1980)                                                                              |
+| end        | end year of the time series (current year - 2 years, use force = TRUE to override)                                              |
+| internal   | logical, TRUE or FALSE, if true data is imported into R workspace otherwise it is downloaded into the current working directory |
+| out\_dir   | path where to store the data when not used internally, defaults to tempdir()                                                    |
+| km\_lr     | force “out of temporal range” downloads (integer)                                                                               |
+| km\_ab     | suppress the verbose output (integer)                                                                                           |
+| site\_name | a site identifier                                                                                                               |
+| site\_id   | a site\_id for predefined locations (not required)                                                                              |
+| progress   | logical, TRUE or FALSE (show download progress)                                                                                 |
 
 </p>
 </details>
@@ -106,8 +106,8 @@ subset <- mt_subset(product = "MOD11A2",
                     progress = FALSE)
 print(str(subset))
 #> 'data.frame':    36 obs. of  21 variables:
-#>  $ xllcorner    : chr  "-9370962.97" "-9370962.97" "-9370962.97" "-9370962.97" ...
-#>  $ yllcorner    : chr  "4446875.49" "4446875.49" "4446875.49" "4446875.49" ...
+#>  $ xllcorner    : chr  "-9370963.05" "-9370963.05" "-9370963.05" "-9370963.05" ...
+#>  $ yllcorner    : chr  "4445948.79" "4445948.79" "4445948.79" "4445948.79" ...
 #>  $ cellsize     : chr  "926.625433055834" "926.625433055834" "926.625433055834" "926.625433055834" ...
 #>  $ nrows        : int  3 3 3 3 3 3 3 3 3 3 ...
 #>  $ ncols        : int  3 3 3 3 3 3 3 3 3 3 ...
@@ -134,7 +134,7 @@ The output format is a *tidy* data frame, as shown above. When witten to
 a csv with the parameter `internal = FALSE` this will result in a flat
 file on disk.
 
-Note that when a a region is defined using km_lr and km_ab multiple
+Note that when a a region is defined using km\_lr and km\_ab multiple
 pixels might be returned. These are indexed using the `pixel` column in
 the data frame containing the time series data. The remote sensing
 values are listed in the `value` column. When no band is specified all
@@ -149,7 +149,7 @@ When a large selection of locations is needed you might benefit from
 using the batch download function `mt_batch_subset()`, which provides a
 wrapper around the `mt_subset()` function in order to speed up large
 download batches. This function has a similar syntax to `mt_subset()`
-but requires a data frame defining site names (site_name) and locations
+but requires a data frame defining site names (site\_name) and locations
 (lat / lon) (or a comma delimited file with the same structure) to
 specify a list of download locations.
 
@@ -173,8 +173,8 @@ subsets <- mt_batch_subset(df = df,
 
 print(str(subsets))
 #> 'data.frame':    8 obs. of  21 variables:
-#>  $ xllcorner    : chr  "-9370036.39" "-9370036.39" "-9370036.39" "-9370036.39" ...
-#>  $ yllcorner    : chr  "4447802.08" "4447802.08" "4447802.08" "4447802.08" ...
+#>  $ xllcorner    : chr  "-9370036.35" "-9370036.35" "-9370036.35" "-9370036.35" ...
+#>  $ yllcorner    : chr  "4446875.49" "4446875.49" "4446875.49" "4446875.49" ...
 #>  $ cellsize     : chr  "926.625433055834" "926.625433055834" "926.625433055834" "926.625433055834" ...
 #>  $ nrows        : int  1 1 1 1 1 1 1 1
 #>  $ ncols        : int  1 1 1 1 1 1 1 1
@@ -199,7 +199,7 @@ print(str(subsets))
 
 ### Listing products
 
-To list all available products use the mt_products() function.
+To list all available products use the mt\_products() function.
 
 ``` r
 products <- mt_products()
@@ -229,7 +229,7 @@ head(products)
 
 ### Listing bands
 
-To list all available bands for a given product use the mt_bands()
+To list all available bands for a given product use the mt\_bands()
 function.
 
 ``` r
@@ -254,7 +254,7 @@ head(bands)
 ### listing dates
 
 To list all available dates (temporal coverage) for a given product and
-location use the mt_dates() function.
+location use the mt\_dates() function.
 
 ``` r
 dates <- mt_dates(product = "MOD11A2", lat = 42, lon = -110)
@@ -270,10 +270,8 @@ head(dates)
 
 ## References
 
-Tuck et al. (2014). [MODISTools - downloading and processing MODIS
-remotely sensed data in R Ecology &
-Evolution](https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.1273),
-4(24), 4658 - 4668.
+Hufkens (2022). The MODISTools package: an interface to the MODIS Land
+Products Subsets Web Services <https://github.com/ropensci/MODISTools>
 
 ## Acknowledgements
 
@@ -285,4 +283,4 @@ BR/175/A3/COBECORE). Logo design elements are taken from the FontAwesome
 library according to [these terms](https://fontawesome.com/license),
 where the globe element was inverted and intersected.
 
-[![ropensci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
+[![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)

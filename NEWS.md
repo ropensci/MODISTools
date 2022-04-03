@@ -2,6 +2,7 @@
 
 * removing parallel processing in batch tool due to timeout issues
 * set error = TRUE on vignette to prevent stopping during render
+* correct batch downloading, missing argument in apply()
 
 # MODISTools 1.1.1
 
