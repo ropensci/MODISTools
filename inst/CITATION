@@ -1,25 +1,12 @@
 citHeader("To cite package 'MODISTools' in publications use:")
 
-bibentry(bibtype = "Article",
-	 title = "MODISTools -- downloading and processing MODIS remotely sensed data in R",
-	 year = "2014",
-	 author = c(person(c("Sean", "L."), "Tuck"),
-			person(c("Helen", "R.P."), "Phillips"),
-			person(c("Rogier", "E."), "Hintzen"),
-			person(c("J{\"o}rn", "P.W."), "Scharlemann"),
-			person("Andy", "Purvis"),
-			person(c("Lawrence", "N."), "Hudson")
-			),
-	 journal = "Ecology and Evolution",
-	 volume = "4",
-	 number = "24",
-	 pages = "4658--4668",
-	 doi = "10.1002/ece3.1273",
-	 keywords = "Conservation biology, earth observation, global change,
-		land processes, macroecology, PREDICTS, remote-sensing, satellite imagery",
-	 url = "http://onlinelibrary.wiley.com/doi/10.1002/ece3.1273/full",
-	 textVersion  =
-      paste("Tuck et al. (2014).",
-      "MODISTools - downloading and processing MODIS remotely sensed data in R",
-      "Ecology & Evolution, 4(24), 4658 - 4668.")
+citEntry(entry = "Misc",
+         title = "The MODISTools package: an interface to the MODIS Land Products Subsets Web Services",
+         author = personList(as.person("Koen Hufkens")),
+         year = "2022",
+         url = "https://github.com/ropensci/MODISTools",
+         textVersion  =
+           paste("Hufkens (2022).",
+                 "The MODISTools package: an interface to the MODIS Land Products Subsets Web Services",
+                 "https://github.com/ropensci/MODISTools")
 )
