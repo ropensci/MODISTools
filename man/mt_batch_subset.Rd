@@ -50,7 +50,7 @@ at a particular location.
 }
 \examples{
 
-\dontrun{
+\donttest{
 # create data frame with a site_name, lat and lon column
 # holding the respective names of sites and their location
 df <- data.frame("site_name" = paste("test",1:2))
