@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
 # load the library
 library(MODISTools)
 library(terra)
-library(rgdal)
 library(ggplot2)
 library(dplyr)
 library(sf)
