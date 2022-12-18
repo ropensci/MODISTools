@@ -33,6 +33,7 @@
 #' LC_r <- mt_to_terra(df = LC)
 #'}
 #' @importFrom terra rast
+#' @import sp
 
 mt_to_terra <- function(
   df,
