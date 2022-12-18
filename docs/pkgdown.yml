@@ -1,7 +1,7 @@
-pandoc: 2.11.4
-pkgdown: 2.0.2
+pandoc: '2.18'
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   modistools-vignette: modistools-vignette.html
-last_built: 2022-04-04T09:15Z
+last_built: 2022-12-18T11:23Z
 

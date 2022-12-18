@@ -16,7 +16,8 @@ particular band using the dplyr \code{filter()} function or base \code{subset()}
 A terra SpatRaster populated with the tidy dataframe values
 }
 \description{
-Convert tidy MODISTools data to a terra SpatRaster
+Convert tidy MODISTools data to a terra SpatRaster for easy
+spatial processing and plotting.
 }
 \examples{
 

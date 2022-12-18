@@ -1,3 +1,7 @@
+# MODISTools 1.1.3
+
+* removing {raster} dependencies
+
 # MODISTools 1.1.2
 
 * removing parallel processing in batch tool due to timeout issues

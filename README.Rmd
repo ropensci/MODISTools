@@ -158,6 +158,8 @@ Hufkens (2022). The MODISTools package: an interface to the MODIS Land Products 
 
 ## Acknowledgements
 
-Original development was supported by the UK Natural Environment Research Council (NERC; grants NE/K500811/1 and NE/J011193/1), and the Hans Rausing Scholarship. Refactoring was supported through the Belgian Science Policy office COBECORE project (BELSPO; grant BR/175/A3/COBECORE). Logo design elements are taken from the FontAwesome library according to [these terms](https://fontawesome.com/license), where the globe element was inverted and intersected.
+Original development was supported by the UK Natural Environment Research Council (NERC; grants NE/K500811/1 and NE/J011193/1), and the Hans Rausing Scholarship. Refactoring was supported through the Belgian Science Policy office COBECORE project (BELSPO; grant BR/175/A3/COBECORE). Logo design elements are taken from the FontAwesome library according to [these terms](https://fontawesome.com/license), where the globe element was inverted and intersected. Continued support for MODISTools is provided by [BlueGreen Labs](https://bluegreenlabs.org).
+
+<a href='https://bluegreenlabs.org'><img src='https://bluegreenlabs.org/img/logo_text_small.png' width="200"/></a>
 
 [![ropensci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)

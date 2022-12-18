@@ -61,7 +61,7 @@ library("MODISTools")
 ### Downloading MODIS time series
 
 To extract a time series of modis data for a given location and its
-direct environment use the mt\_subset() function.
+direct environment use the mt_subset() function.
 
 <details>
 <summary>
@@ -69,21 +69,21 @@ detailed parameter description (click to expand)
 </summary>
 <p>
 
-| Parameter  | Description                                                                                                                     |
-|------------|---------------------------------------------------------------------------------------------------------------------------------|
-| product    | a MODIS product                                                                                                                 |
-| band       | a MODIS product band (if NULL all bands are downloaded)                                                                         |
-| lat        | latitude of the site                                                                                                            |
-| lon        | longitude of the site                                                                                                           |
-| start      | start year of the time series (data start in 1980)                                                                              |
-| end        | end year of the time series (current year - 2 years, use force = TRUE to override)                                              |
-| internal   | logical, TRUE or FALSE, if true data is imported into R workspace otherwise it is downloaded into the current working directory |
-| out\_dir   | path where to store the data when not used internally, defaults to tempdir()                                                    |
-| km\_lr     | force “out of temporal range” downloads (integer)                                                                               |
-| km\_ab     | suppress the verbose output (integer)                                                                                           |
-| site\_name | a site identifier                                                                                                               |
-| site\_id   | a site\_id for predefined locations (not required)                                                                              |
-| progress   | logical, TRUE or FALSE (show download progress)                                                                                 |
+| Parameter | Description                                                                                                                     |
+|-----------|---------------------------------------------------------------------------------------------------------------------------------|
+| product   | a MODIS product                                                                                                                 |
+| band      | a MODIS product band (if NULL all bands are downloaded)                                                                         |
+| lat       | latitude of the site                                                                                                            |
+| lon       | longitude of the site                                                                                                           |
+| start     | start year of the time series (data start in 1980)                                                                              |
+| end       | end year of the time series (current year - 2 years, use force = TRUE to override)                                              |
+| internal  | logical, TRUE or FALSE, if true data is imported into R workspace otherwise it is downloaded into the current working directory |
+| out_dir   | path where to store the data when not used internally, defaults to tempdir()                                                    |
+| km_lr     | force “out of temporal range” downloads (integer)                                                                               |
+| km_ab     | suppress the verbose output (integer)                                                                                           |
+| site_name | a site identifier                                                                                                               |
+| site_id   | a site_id for predefined locations (not required)                                                                               |
+| progress  | logical, TRUE or FALSE (show download progress)                                                                                 |
 
 </p>
 </details>
@@ -124,9 +124,9 @@ print(str(subset))
 #>  $ modis_date   : chr  "A2004001" "A2004009" "A2004017" "A2004025" ...
 #>  $ calendar_date: chr  "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...
 #>  $ tile         : chr  "h09v05" "h09v05" "h09v05" "h09v05" ...
-#>  $ proc_date    : chr  "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...
+#>  $ proc_date    : chr  "2020168005635" "2020168010833" "2020168012220" "2020168013617" ...
 #>  $ pixel        : int  1 1 1 1 2 2 2 2 3 3 ...
-#>  $ value        : int  13135 13120 13350 13354 13123 13100 13324 13331 13098 13069 ...
+#>  $ value        : int  13148 13160 13398 13412 13153 13140 13370 13388 13131 13096 ...
 #> NULL
 ```
 
@@ -134,7 +134,7 @@ The output format is a *tidy* data frame, as shown above. When witten to
 a csv with the parameter `internal = FALSE` this will result in a flat
 file on disk.
 
-Note that when a a region is defined using km\_lr and km\_ab multiple
+Note that when a a region is defined using km_lr and km_ab multiple
 pixels might be returned. These are indexed using the `pixel` column in
 the data frame containing the time series data. The remote sensing
 values are listed in the `value` column. When no band is specified all
@@ -149,7 +149,7 @@ When a large selection of locations is needed you might benefit from
 using the batch download function `mt_batch_subset()`, which provides a
 wrapper around the `mt_subset()` function in order to speed up large
 download batches. This function has a similar syntax to `mt_subset()`
-but requires a data frame defining site names (site\_name) and locations
+but requires a data frame defining site names (site_name) and locations
 (lat / lon) (or a comma delimited file with the same structure) to
 specify a list of download locations.
 
@@ -191,15 +191,15 @@ print(str(subsets))
 #>  $ modis_date   : chr  "A2004001" "A2004009" "A2004017" "A2004025" ...
 #>  $ calendar_date: chr  "2004-01-01" "2004-01-09" "2004-01-17" "2004-01-25" ...
 #>  $ tile         : chr  "h09v05" "h09v05" "h09v05" "h09v05" ...
-#>  $ proc_date    : chr  "2015212185706" "2015212201022" "2015212213103" "2015213005429" ...
+#>  $ proc_date    : chr  "2020168005635" "2020168010833" "2020168012220" "2020168013617" ...
 #>  $ pixel        : int  1 1 1 1 1 1 1 1
-#>  $ value        : int  13098 13062 13297 13323 13098 13062 13297 13323
+#>  $ value        : int  13129 13102 13343 13364 13129 13102 13343 13364
 #> NULL
 ```
 
 ### Listing products
 
-To list all available products use the mt\_products() function.
+To list all available products use the mt_products() function.
 
 ``` r
 products <- mt_products()
@@ -209,27 +209,27 @@ head(products)
 #> 2 ECO4ESIPTJPL
 #> 3      ECO4WUE
 #> 4       GEDI03
-#> 5      MCD12Q1
-#> 6      MCD12Q2
-#>                                                                       description
-#> 1 Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 4
-#> 2            ECOSTRESS Evaporative Stress Index PT-JPL (ESI) Daily L4 Global 70 m
-#> 3                       ECOSTRESS Water Use Efficiency (WUE) Daily L4 Global 70 m
-#> 4             GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid, Version 2
-#> 5           MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid
-#> 6      MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid
+#> 5     GEDI04_B
+#> 6      MCD12Q1
+#>                                                                          description
+#> 1 Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 4 R1
+#> 2               ECOSTRESS Evaporative Stress Index PT-JPL (ESI) Daily L4 Global 70 m
+#> 3                          ECOSTRESS Water Use Efficiency (WUE) Daily L4 Global 70 m
+#> 4                GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid, Version 2
+#> 5       GEDI Gridded Aboveground Biomass Density (AGBD) L4B 1km EASE-Grid, Version 2
+#> 6              MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid
 #>   frequency resolution_meters
 #> 1     1 day              1000
 #> 2    Varies                70
 #> 3    Varies                70
 #> 4  One time              1000
-#> 5    1 year               500
+#> 5  One time              1000
 #> 6    1 year               500
 ```
 
 ### Listing bands
 
-To list all available bands for a given product use the mt\_bands()
+To list all available bands for a given product use the mt_bands()
 function.
 
 ``` r
@@ -254,7 +254,7 @@ head(bands)
 ### listing dates
 
 To list all available dates (temporal coverage) for a given product and
-location use the mt\_dates() function.
+location use the mt_dates() function.
 
 ``` r
 dates <- mt_dates(product = "MOD11A2", lat = 42, lon = -110)
@@ -281,6 +281,10 @@ Hans Rausing Scholarship. Refactoring was supported through the Belgian
 Science Policy office COBECORE project (BELSPO; grant
 BR/175/A3/COBECORE). Logo design elements are taken from the FontAwesome
 library according to [these terms](https://fontawesome.com/license),
-where the globe element was inverted and intersected.
+where the globe element was inverted and intersected. Continued support
+for MODISTools is provided by [BlueGreen
+Labs](https://bluegreenlabs.org).
 
-[![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
+<a href='https://bluegreenlabs.org'><img src='https://bluegreenlabs.org/img/logo_text_small.png' width="200"/></a>
+
+[![ropensci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
