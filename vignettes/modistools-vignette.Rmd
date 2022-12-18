@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 # load the library
 library(MODISTools)
-library(raster)
+library(terra)
 library(rgdal)
 library(ggplot2)
 library(dplyr)
@@ -76,9 +76,11 @@ arcachon_lai <- mt_subset(product = "MOD15A2H",
                     km_ab = 20,
                     site_name = "arcachon",
                     internal = TRUE,
-                    progress = FALSE)
+                    progress = FALSE
+                    )
 
-arcachon_lc <- mt_subset(product = "MCD12Q1",
+arcachon_lc <- mt_subset(
+  product = "MCD12Q1",
   lat = 44.656286,
   lon =  -1.174748,
   band = "LC_Type1",
@@ -88,7 +90,8 @@ arcachon_lc <- mt_subset(product = "MCD12Q1",
   km_ab = 20,
   site_name = "arcachon",
   internal = TRUE,
-  progress = FALSE)
+  progress = FALSE
+  )
 ```
 
 The output format is a *tidy* data frame, as shown above. When witten to a csv with the parameter `internal = FALSE` this will result in a flat file on disk.
@@ -210,7 +213,7 @@ Below a small region (20x20km) is downloaded around the seaside town of Arcachon
 # convert to raster, when reproject is TRUE
 # the data is reprojected to lat / lon if FALSE
 # the data is shown in its original sinuidal projection
-LC_r <- mt_to_raster(df = arcachon_lc, reproject = TRUE)
+LC_r <- mt_to_terra(df = arcachon_lc, reproject = TRUE)
 
 # plot the raster data as a map
 plot(LC_r)
