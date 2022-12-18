@@ -29,7 +29,7 @@ ByteCompile: true
 RoxygenNote: 7.2.1
 Suggests:
     knitr,
-    rmarkdown,
+    markdown,
     covr,
     testthat,
     ggplot2,
