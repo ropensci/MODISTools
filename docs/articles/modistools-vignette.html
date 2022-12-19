@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODISTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
                         <h4 data-toc-skip class="author">Koen
 Hufkens</h4>
             
-            <h4 data-toc-skip class="date">2022-12-18</h4>
+            <h4 data-toc-skip class="date">2022-12-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/MODISTools/blob/HEAD/vignettes/modistools-vignette.Rmd" class="external-link"><code>vignettes/modistools-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>modistools-vignette.Rmd</code></div>
@@ -200,9 +200,11 @@ operation might take a while.</p>
 <span>                    km_ab <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>                    site_name <span class="op">=</span> <span class="st">"arcachon"</span>,</span>
 <span>                    internal <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                    progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>                    progress <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>                    <span class="op">)</span></span>
 <span></span>
-<span><span class="va">arcachon_lc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_subset.html">mt_subset</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MCD12Q1"</span>,</span>
+<span><span class="va">arcachon_lc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_subset.html">mt_subset</a></span><span class="op">(</span></span>
+<span>  product <span class="op">=</span> <span class="st">"MCD12Q1"</span>,</span>
 <span>  lat <span class="op">=</span> <span class="fl">44.656286</span>,</span>
 <span>  lon <span class="op">=</span>  <span class="op">-</span><span class="fl">1.174748</span>,</span>
 <span>  band <span class="op">=</span> <span class="st">"LC_Type1"</span>,</span>
@@ -212,7 +214,8 @@ operation might take a while.</p>
 <span>  km_ab <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>  site_name <span class="op">=</span> <span class="st">"arcachon"</span>,</span>
 <span>  internal <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span>  progress <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p>The output format is a <em>tidy</em> data frame, as shown above. When
 witten to a csv with the parameter <code>internal = FALSE</code> this
 will result in a flat file on disk.</p>
@@ -354,8 +357,6 @@ to be transformed into latitude longitude (for convenience).</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># convert the coordinates</span></span>
 <span><span class="va">lat_lon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sin_to_ll.html">sin_to_ll</a></span><span class="op">(</span><span class="va">arcachon_lc</span><span class="op">$</span><span class="va">xllcorner</span>, <span class="va">arcachon_lc</span><span class="op">$</span><span class="va">yllcorner</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in CPL_crs_from_input(x): GDAL Message 1: +init=epsg:XXXX syntax is</span></span>
-<span><span class="co">#&gt; deprecated. It might return a CRS with a non-EPSG compliant axis order.</span></span>
 <span></span>
 <span><span class="co"># bind with the original dataframe</span></span>
 <span><span class="va">subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">arcachon_lc</span>, <span class="va">lat_lon</span><span class="op">)</span></span>
@@ -400,18 +401,16 @@ rows the bounding box of the extracted data can be calculated.</p>
 <span>           nrows <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">'nrows'</span><span class="op">]</span>,</span>
 <span>           ncols <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">'ncols'</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in sf::st_sfc(p, crs = CRS): is.numeric(crs) || is.character(crs) || inherits(crs, "crs") is not TRUE</span></span>
 <span></span>
 <span><span class="co"># plot one bounding box</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bb</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'bb' not found</span></span>
 <span></span>
 <span><span class="co"># add the location of the queried coordinate within the polygon</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="va">arcachon_lc</span><span class="op">$</span><span class="va">longitude</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
 <span>       <span class="va">arcachon_lc</span><span class="op">$</span><span class="va">latitude</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
 <span>       pch <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>       col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in plot.xy(xy.coords(x, y), type = type, ...): plot.new has not been called yet</span></span></code></pre></div>
+<span>       col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="modistools-vignette_files/figure-html/unnamed-chunk-12-1.png" width="480"></p>
 </div>
 <div class="section level2">
 <h2 id="conversion-to-gridded-raster-data">Conversion to (gridded) raster data<a class="anchor" aria-label="anchor" href="#conversion-to-gridded-raster-data"></a>
@@ -434,8 +433,8 @@ sinusoidal ones).</p>
 <code class="sourceCode R"><span><span class="co"># convert to raster, when reproject is TRUE</span></span>
 <span><span class="co"># the data is reprojected to lat / lon if FALSE</span></span>
 <span><span class="co"># the data is shown in its original sinuidal projection</span></span>
-<span><span class="va">LC_r</span> <span class="op">&lt;-</span> <span class="fu">mt_to_raster</span><span class="op">(</span>df <span class="op">=</span> <span class="va">arcachon_lc</span>, reproject <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in mt_to_raster(df = arcachon_lc, reproject = TRUE): could not find function "mt_to_raster"</span></span>
+<span><span class="va">LC_r</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_to_terra.html">mt_to_terra</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">arcachon_lc</span>, reproject <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error: [write] unknown option(s): crs</span></span>
 <span></span>
 <span><span class="co"># plot the raster data as a map</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">LC_r</span><span class="op">)</span></span>
@@ -455,7 +454,7 @@ sinusoidal ones).</p>
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Hufkens Koen.</p>
+<p>Developed by Koen Hufkens, BlueGreen Labs.</p>
 </div>
 
 <div class="pkgdown">

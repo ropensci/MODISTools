@@ -18,7 +18,7 @@ at a particular location."><!-- mathjax --><script src="https://cdnjs.cloudflare
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODISTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
       </span>
     </div>
 
@@ -139,7 +139,7 @@ created by searching on sitename.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># create data frame with a site_name, lat and lon column</span></span></span>
 <span class="r-in"><span><span class="co"># holding the respective names of sites and their location</span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"site_name"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"test"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -147,9 +147,6 @@ created by searching on sitename.</p>
 <span class="r-in"><span><span class="va">df</span><span class="op">$</span><span class="va">lon</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">110</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   site_name lat  lon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    test 1  40 -110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    test 2  40 -110</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># test batch download</span></span></span>
 <span class="r-in"><span><span class="va">subsets</span> <span class="op">&lt;-</span> <span class="fu">mt_batch_subset</span><span class="op">(</span>df <span class="op">=</span> <span class="va">df</span>,</span></span>
@@ -178,28 +175,7 @@ created by searching on sitename.</p>
 <span class="r-in"><span>                        <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">subsets</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       xllcorner  yllcorner         cellsize nrows ncols        band  units</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.1 -9370036.35 4446875.49 926.625433055834     1     1 LST_Day_1km Kelvin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2.1 -9370036.35 4446875.49 926.625433055834     1     1 LST_Day_1km Kelvin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3.1 -9370036.35 4446875.49 926.625433055834     1     1 LST_Day_1km Kelvin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4.1 -9370036.35 4446875.49 926.625433055834     1     1 LST_Day_1km Kelvin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5.1 -9370036.35 4446875.49 926.625433055834     1     1 LST_Day_1km Kelvin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6.1 -9370036.35 4446875.49 926.625433055834     1     1 LST_Day_1km Kelvin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     scale latitude longitude   site product      start        end complete</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.1  0.02       40      -110 test 1 MOD11A2 2004-01-01 2004-03-31     TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2.1  0.02       40      -110 test 1 MOD11A2 2004-01-01 2004-03-31     TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3.1  0.02       40      -110 test 1 MOD11A2 2004-01-01 2004-03-31     TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4.1  0.02       40      -110 test 1 MOD11A2 2004-01-01 2004-03-31     TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5.1  0.02       40      -110 test 1 MOD11A2 2004-01-01 2004-03-31     TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6.1  0.02       40      -110 test 1 MOD11A2 2004-01-01 2004-03-31     TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     modis_date calendar_date   tile     proc_date pixel value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.1   A2004001    2004-01-01 h09v05 2020168005635     1 13129</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2.1   A2004009    2004-01-09 h09v05 2020168010833     1 13102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3.1   A2004017    2004-01-17 h09v05 2020168012220     1 13343</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4.1   A2004025    2004-01-25 h09v05 2020168013617     1 13364</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5.1   A2004033    2004-02-02 h09v05 2020168015053     1 13364</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6.1   A2004041    2004-02-10 h09v05 2020168022045     1 13272</span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -210,7 +186,7 @@ created by searching on sitename.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Hufkens Koen.</p>
+  <p></p><p>Developed by Koen Hufkens, BlueGreen Labs.</p>
 </div>
 
 <div class="pkgdown">

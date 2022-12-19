@@ -21,7 +21,7 @@ https://en.wikipedia.org/wiki/Sinusoidal_projection"><!-- mathjax --><script src
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODISTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
       </span>
     </div>
 
@@ -104,11 +104,9 @@ https://en.wikipedia.org/wiki/Sinusoidal_projection</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># convert sinusoidal to lat / lon</span></span></span>
 <span class="r-in"><span><span class="va">lat_lon</span> <span class="op">&lt;-</span> <span class="fu">sin_to_ll</span><span class="op">(</span><span class="va">subset</span><span class="op">$</span><span class="va">xllcorner</span>, <span class="va">subset</span><span class="op">$</span><span class="va">yllcorner</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in (function (classes, fdef, mtable) {    methods &lt;- .findInheritedMethods(classes, fdef, mtable)    if (length(methods) == 1L)         return(methods[[1L]])    else if (length(methods) == 0L) {        cnames &lt;- paste0("\"", vapply(classes, as.character,             ""), "\"", collapse = ", ")        stop(gettextf("unable to find an inherited method for function %s for signature %s",             sQuote(fdef@generic), sQuote(cnames)), domain = NA)    }    else stop("Internal error in finding inherited methods; didn't return a unique method",         domain = NA)})(list("character"), new("standardGeneric", .Data = function (x,     ...) standardGeneric("crs"), generic = structure("crs", package = "terra"),     package = "terra", group = list(), valueClass = character(0),     signature = "x", default = NULL, skeleton = (function (x,         ...)     stop(gettextf("invalid call in method dispatch to '%s' (no default method)",         "crs"), domain = NA))(x, ...)), &lt;environment&gt;):</span> unable to find an inherited method for function ‘crs’ for signature ‘"character"’</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># bind with the original dataframe</span></span></span>
 <span class="r-in"><span><span class="va">subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">subset</span>, <span class="va">lat_lon</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in data.frame(..., check.names = FALSE):</span> object 'lat_lon' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">subset</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       xllcorner  yllcorner         cellsize nrows ncols        band  units</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1.1 -9370036.35 4446875.49 926.625433055834     1     1 LST_Day_1km Kelvin</span>
@@ -124,13 +122,20 @@ https://en.wikipedia.org/wiki/Sinusoidal_projection</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4.1  0.02       40      -110 sitename MOD11A2 2004-01-01 2004-03-31     TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5.1  0.02       40      -110 sitename MOD11A2 2004-01-01 2004-03-31     TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6.1  0.02       40      -110 sitename MOD11A2 2004-01-01 2004-03-31     TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     modis_date calendar_date   tile     proc_date pixel value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.1   A2004001    2004-01-01 h09v05 2020168005635     1 13129</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2.1   A2004009    2004-01-09 h09v05 2020168010833     1 13102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3.1   A2004017    2004-01-17 h09v05 2020168012220     1 13343</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4.1   A2004025    2004-01-25 h09v05 2020168013617     1 13364</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5.1   A2004033    2004-02-02 h09v05 2020168015053     1 13364</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6.1   A2004041    2004-02-10 h09v05 2020168022045     1 13272</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     modis_date calendar_date   tile     proc_date pixel value longitude_ll</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.1   A2004001    2004-01-01 h09v05 2020168005635     1 13129    -109.9889</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2.1   A2004009    2004-01-09 h09v05 2020168010833     1 13102    -109.9889</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3.1   A2004017    2004-01-17 h09v05 2020168012220     1 13343    -109.9889</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4.1   A2004025    2004-01-25 h09v05 2020168013617     1 13364    -109.9889</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5.1   A2004033    2004-02-02 h09v05 2020168015053     1 13364    -109.9889</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6.1   A2004041    2004-02-10 h09v05 2020168022045     1 13272    -109.9889</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     latitude_ll</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.1    39.99167</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2.1    39.99167</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3.1    39.99167</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4.1    39.99167</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5.1    39.99167</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6.1    39.99167</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
@@ -142,7 +147,7 @@ https://en.wikipedia.org/wiki/Sinusoidal_projection</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Hufkens Koen.</p>
+  <p></p><p>Developed by Koen Hufkens, BlueGreen Labs.</p>
 </div>
 
 <div class="pkgdown">
