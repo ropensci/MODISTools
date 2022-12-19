@@ -63,12 +63,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_products</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_products</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame of all available MODIS Land Products Subsets products</p>
+    
+
+<p>A data frame of all available MODIS Land Products Subsets products</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -78,34 +80,34 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co"># list all available MODIS Land Products Subsets products</span></span>
-<span class="r-in"><span class="va">products</span> <span class="op">&lt;-</span> <span class="fu">mt_products</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">products</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># list all available MODIS Land Products Subsets products</span></span></span>
+<span class="r-in"><span><span class="va">products</span> <span class="op">&lt;-</span> <span class="fu">mt_products</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">products</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        product</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1       Daymet</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 ECO4ESIPTJPL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3      ECO4WUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4       GEDI03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5      MCD12Q1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6      MCD12Q2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                       description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2            ECOSTRESS Evaporative Stress Index PT-JPL (ESI) Daily L4 Global 70 m</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                       ECOSTRESS Water Use Efficiency (WUE) Daily L4 Global 70 m</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4             GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid, Version 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5           MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6      MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     GEDI04_B</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      MCD12Q1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                          description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 4 R1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2               ECOSTRESS Evaporative Stress Index PT-JPL (ESI) Daily L4 Global 70 m</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                          ECOSTRESS Water Use Efficiency (WUE) Daily L4 Global 70 m</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid, Version 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       GEDI Gridded Aboveground Biomass Density (AGBD) L4B 1km EASE-Grid, Version 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6              MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   frequency resolution_meters</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     1 day              1000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    Varies                70</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3    Varies                70</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4  One time              1000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    1 year               500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  One time              1000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6    1 year               500</span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -120,7 +122,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

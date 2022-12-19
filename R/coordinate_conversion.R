@@ -38,14 +38,17 @@ sin_to_ll <- function(x, y){
   }
 
   # convert to sf object
-  coords <- sf::st_as_sf(x = data.frame(as.numeric(x),
-                                        as.numeric(y),
-                                        stringsAsFactors = FALSE),
-                     coords = c("as.numeric.x.", "as.numeric.y."),
-                     crs = "+proj=sinu +a=6371007.181 +b=6371007.181 +units=m")
+  coords <- suppressWarnings(
+  sf::st_as_sf(
+    x = data.frame(as.numeric(x),
+                   as.numeric(y),
+                   stringsAsFactors = FALSE),
+    coords = c("as.numeric.x.", "as.numeric.y."),
+    crs = "+proj=sinu +a=6371007.181 +b=6371007.181 +units=m +type=crs"
+  ))
 
   # reproject coordinates
-  coords <- sf::st_transform(coords, "+init=epsg:4326")
+  coords <- sf::st_transform(coords, crs = 4326)
 
   # unravel the sf dataframe into a normal one
   coords <- as.data.frame(do.call("rbind", lapply(coords$geometry, unlist)))
@@ -134,7 +137,9 @@ mt_bbox <- function(
   # projection etc.
   p <- sf::st_linestring(m)
   p <- sf::st_cast(p, "POLYGON")
-  p <- sf::st_sfc(p, crs = "+proj=sinu +a=6371007.181 +b=6371007.181 +units=m")
+  p <- suppressWarnings(
+    sf::st_sfc(p, crs = "+proj=sinu +a=6371007.181 +b=6371007.181 +units=m +type=crs")
+  )
 
   # a full description of the sinusoidal projection is provided on the
   # lpdaac page:

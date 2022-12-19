@@ -63,7 +63,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_sites</span><span class="op">(</span><span class="va">network</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_sites</span><span class="op">(</span><span class="va">network</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -71,10 +71,13 @@
     <dl><dt>network</dt>
 <dd><p>the network for which to generate the site list,
 when not provided the complete list is provided</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame of all available MODIS Land Products Subsets
+    
+
+<p>A data frame of all available MODIS Land Products Subsets
 pre-processed sites</p>
     </div>
     <div id="see-also">
@@ -85,11 +88,11 @@ pre-processed sites</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co"># list all available MODIS Land Products Subsets products</span></span>
-<span class="r-in"><span class="va">sites</span> <span class="op">&lt;-</span> <span class="fu">mt_sites</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sites</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># list all available MODIS Land Products Subsets products</span></span></span>
+<span class="r-in"><span><span class="va">sites</span> <span class="op">&lt;-</span> <span class="fu">mt_sites</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sites</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   siteid                sitename network latitude longitude</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  ae_abudhabi_abu_dhabi            AE Abu Dhabi AERONET 24.47611  54.32889</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     ae_abudhabi_al_ain     AE Abu Dhabi Al Ain AERONET 24.24217  55.70517</span>
@@ -104,8 +107,8 @@ pre-processed sites</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4 AbuDhabi United Arab Emirates</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5 AbuDhabi United Arab Emirates</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6 AbuDhabi United Arab Emirates</span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -120,7 +123,7 @@ pre-processed sites</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -1,6 +1,7 @@
 #' Convert tidy MODISTools data to terra SpatRaster
 #'
-#' Convert tidy MODISTools data to a terra SpatRaster
+#' Convert tidy MODISTools data to a terra SpatRaster for easy
+#' spatial processing and plotting.
 #'
 #' @param df a valid MODISTools data frame with a single band (filter for a
 #' particular band using the dplyr \code{filter()} function or base \code{subset()}
@@ -32,6 +33,7 @@
 #' LC_r <- mt_to_terra(df = LC)
 #'}
 #' @importFrom terra rast
+#' @import sp
 
 mt_to_terra <- function(
   df,
@@ -70,12 +72,14 @@ mt_to_terra <- function(
   # loop over all dates, format rasters and return
   r <- do.call("c",
                lapply(dates, function(date){
+
                  # stuff values into raster
                  m <- matrix(as.numeric(df$value[df$calendar_date == date]) *
                                as.numeric(df$scale[df$calendar_date == date]),
                              df$nrows[1],
                              df$ncols[1],
-                             byrow = TRUE)
+                             byrow = TRUE
+                             )
 
                  # convert to raster and return
                  return(terra::rast(m))
@@ -89,21 +93,22 @@ mt_to_terra <- function(
     cellsize = df$cellsize[1],
     nrows = df$nrows[1],
     ncols = df$ncols[1],
-    transform = FALSE)
+    transform = FALSE
+    )
 
   # convert to Spatial object (easier to get extent)
   bb <- sf::as_Spatial(bb)
 
   # assign extent + projection bb to raster
   terra::ext(r) <- terra::ext(bb)
-  terra::crs(r) <- as.character(terra::crs(bb))
+  terra::crs(r) <- bb@proj4string@projargs
   names(r) <- as.character(dates)
 
   # reproject to lat long when desired
   if(reproject){
     r <- terra::project(
       r,
-      "epsg:4326"
+      crs = 4326
       )
   }
 

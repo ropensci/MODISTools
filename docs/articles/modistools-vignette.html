@@ -79,9 +79,10 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>MODISTools</h1>
-                        <h4 data-toc-skip class="author">Koen Hufkens</h4>
+                        <h4 data-toc-skip class="author">Koen
+Hufkens</h4>
             
-            <h4 data-toc-skip class="date">2022-04-04</h4>
+            <h4 data-toc-skip class="date">2022-12-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/MODISTools/blob/HEAD/vignettes/modistools-vignette.Rmd" class="external-link"><code>vignettes/modistools-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>modistools-vignette.Rmd</code></div>
@@ -90,282 +91,355 @@
 
     
     
-<p>The MODISTools package has as goal to facilitate the interface between R and the MODIS Land Product Subset API at the Oak Ridge National Laboratory Distributed Active Archive Center (DAAC). This programmatic interface to the <a href="https://modis.ornl.gov/data/modis_webservice.html" class="external-link">‘MODIS Land Products Subsets’ web services</a> allows for easy downloads of ‘MODIS’ time series (of single pixels or small regions of interest) directly to your R workspace or your computer. Below an example is provided on how to download a MODIS time series as well as list ancillary data.</p>
+<p>The MODISTools package has as goal to facilitate the interface
+between R and the MODIS Land Product Subset API at the Oak Ridge
+National Laboratory Distributed Active Archive Center (DAAC). This
+programmatic interface to the <a href="https://modis.ornl.gov/data/modis_webservice.html" class="external-link">‘MODIS Land
+Products Subsets’ web services</a> allows for easy downloads of ‘MODIS’
+time series (of single pixels or small regions of interest) directly to
+your R workspace or your computer. Below an example is provided on how
+to download a MODIS time series as well as list ancillary data.</p>
 <div class="section level2">
 <h2 id="listing-products-bands-dates">Listing products / bands / dates<a class="anchor" aria-label="anchor" href="#listing-products-bands-dates"></a>
 </h2>
-<p>In order to assess which products are available, which product bands are provided and which temporal range is covered one has to list these ancillary data. All these options can be queried using the <code>mt_*()</code> functions.</p>
-<p>To list all available products use the <code><a href="../reference/mt_products.html">mt_products()</a></code> function.</p>
+<p>In order to assess which products are available, which product bands
+are provided and which temporal range is covered one has to list these
+ancillary data. All these options can be queried using the
+<code>mt_*()</code> functions.</p>
+<p>To list all available products use the <code><a href="../reference/mt_products.html">mt_products()</a></code>
+function.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">products</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_products.html">mt_products</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">products</span><span class="op">)</span>
-<span class="co">#&gt;        product</span>
-<span class="co">#&gt; 1       Daymet</span>
-<span class="co">#&gt; 2 ECO4ESIPTJPL</span>
-<span class="co">#&gt; 3      ECO4WUE</span>
-<span class="co">#&gt; 4       GEDI03</span>
-<span class="co">#&gt; 5      MCD12Q1</span>
-<span class="co">#&gt; 6      MCD12Q2</span>
-<span class="co">#&gt;                                                                       description</span>
-<span class="co">#&gt; 1 Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 4</span>
-<span class="co">#&gt; 2            ECOSTRESS Evaporative Stress Index PT-JPL (ESI) Daily L4 Global 70 m</span>
-<span class="co">#&gt; 3                       ECOSTRESS Water Use Efficiency (WUE) Daily L4 Global 70 m</span>
-<span class="co">#&gt; 4             GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid, Version 2</span>
-<span class="co">#&gt; 5           MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid</span>
-<span class="co">#&gt; 6      MODIS/Terra+Aqua Land Cover Dynamics (LCD) Yearly L3 Global 500 m SIN Grid</span>
-<span class="co">#&gt;   frequency resolution_meters</span>
-<span class="co">#&gt; 1     1 day              1000</span>
-<span class="co">#&gt; 2    Varies                70</span>
-<span class="co">#&gt; 3    Varies                70</span>
-<span class="co">#&gt; 4  One time              1000</span>
-<span class="co">#&gt; 5    1 year               500</span>
-<span class="co">#&gt; 6    1 year               500</span></code></pre></div>
-<p>Once you have settled on the product you want to use in your analysis you will have to select a band, or multiple bands you want to download for a given location. To list all available bands for a given product use the mt_bands() function. You can use the <code><a href="../reference/mt_bands.html">mt_bands()</a></code> function to list all available bands for a given product. Below I list all bands for the MOD13Q1 vegetation index product.</p>
+<code class="sourceCode R"><span><span class="va">products</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_products.html">mt_products</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">products</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        product</span></span>
+<span><span class="co">#&gt; 1       Daymet</span></span>
+<span><span class="co">#&gt; 2 ECO4ESIPTJPL</span></span>
+<span><span class="co">#&gt; 3      ECO4WUE</span></span>
+<span><span class="co">#&gt; 4       GEDI03</span></span>
+<span><span class="co">#&gt; 5     GEDI04_B</span></span>
+<span><span class="co">#&gt; 6      MCD12Q1</span></span>
+<span><span class="co">#&gt;                                                                          description</span></span>
+<span><span class="co">#&gt; 1 Daily Surface Weather Data (Daymet) on a 1-km Grid for North America, Version 4 R1</span></span>
+<span><span class="co">#&gt; 2               ECOSTRESS Evaporative Stress Index PT-JPL (ESI) Daily L4 Global 70 m</span></span>
+<span><span class="co">#&gt; 3                          ECOSTRESS Water Use Efficiency (WUE) Daily L4 Global 70 m</span></span>
+<span><span class="co">#&gt; 4                GEDI Gridded Land Surface Metrics (LSM) L3 1km EASE-Grid, Version 2</span></span>
+<span><span class="co">#&gt; 5       GEDI Gridded Aboveground Biomass Density (AGBD) L4B 1km EASE-Grid, Version 2</span></span>
+<span><span class="co">#&gt; 6              MODIS/Terra+Aqua Land Cover Type (LC) Yearly L3 Global 500 m SIN Grid</span></span>
+<span><span class="co">#&gt;   frequency resolution_meters</span></span>
+<span><span class="co">#&gt; 1     1 day              1000</span></span>
+<span><span class="co">#&gt; 2    Varies                70</span></span>
+<span><span class="co">#&gt; 3    Varies                70</span></span>
+<span><span class="co">#&gt; 4  One time              1000</span></span>
+<span><span class="co">#&gt; 5  One time              1000</span></span>
+<span><span class="co">#&gt; 6    1 year               500</span></span></code></pre></div>
+<p>Once you have settled on the product you want to use in your analysis
+you will have to select a band, or multiple bands you want to download
+for a given location. To list all available bands for a given product
+use the mt_bands() function. You can use the <code><a href="../reference/mt_bands.html">mt_bands()</a></code>
+function to list all available bands for a given product. Below I list
+all bands for the MOD13Q1 vegetation index product.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bands</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_bands.html">mt_bands</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MOD13Q1"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">bands</span><span class="op">)</span>
-<span class="co">#&gt;                                     band                description</span>
-<span class="co">#&gt; 1          250m_16_days_blue_reflectance Surface Reflectance Band 3</span>
-<span class="co">#&gt; 2 250m_16_days_composite_day_of_the_year       Day of year VI pixel</span>
-<span class="co">#&gt; 3                       250m_16_days_EVI         16 day EVI average</span>
-<span class="co">#&gt; 4           250m_16_days_MIR_reflectance Surface Reflectance Band 7</span>
-<span class="co">#&gt; 5                      250m_16_days_NDVI        16 day NDVI average</span>
-<span class="co">#&gt; 6           250m_16_days_NIR_reflectance Surface Reflectance Band 2</span>
-<span class="co">#&gt;                    units    valid_range fill_value scale_factor add_offset</span>
-<span class="co">#&gt; 1            reflectance     0 to 10000      -1000       0.0001          0</span>
-<span class="co">#&gt; 2 Julian day of the year       1 to 366         -1         &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="co">#&gt; 3   EVI ratio - No units -2000 to 10000      -3000       0.0001          0</span>
-<span class="co">#&gt; 4            reflectance     0 to 10000      -1000       0.0001          0</span>
-<span class="co">#&gt; 5  NDVI ratio - No units -2000 to 10000      -3000       0.0001          0</span>
-<span class="co">#&gt; 6            reflectance     0 to 10000      -1000       0.0001          0</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">bands</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_bands.html">mt_bands</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MOD13Q1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">bands</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                                     band                description</span></span>
+<span><span class="co">#&gt; 1          250m_16_days_blue_reflectance Surface Reflectance Band 3</span></span>
+<span><span class="co">#&gt; 2 250m_16_days_composite_day_of_the_year       Day of year VI pixel</span></span>
+<span><span class="co">#&gt; 3                       250m_16_days_EVI         16 day EVI average</span></span>
+<span><span class="co">#&gt; 4           250m_16_days_MIR_reflectance Surface Reflectance Band 7</span></span>
+<span><span class="co">#&gt; 5                      250m_16_days_NDVI        16 day NDVI average</span></span>
+<span><span class="co">#&gt; 6           250m_16_days_NIR_reflectance Surface Reflectance Band 2</span></span>
+<span><span class="co">#&gt;                    units    valid_range fill_value scale_factor add_offset</span></span>
+<span><span class="co">#&gt; 1            reflectance     0 to 10000      -1000       0.0001          0</span></span>
+<span><span class="co">#&gt; 2 Julian day of the year       1 to 366         -1         &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3   EVI ratio - No units -2000 to 10000      -3000       0.0001          0</span></span>
+<span><span class="co">#&gt; 4            reflectance     0 to 10000      -1000       0.0001          0</span></span>
+<span><span class="co">#&gt; 5  NDVI ratio - No units -2000 to 10000      -3000       0.0001          0</span></span>
+<span><span class="co">#&gt; 6            reflectance     0 to 10000      -1000       0.0001          0</span></span></code></pre></div>
 <blockquote>
-<p>Note the band names (listed in band column) you want to download, this variable will need to be passed in the final download statement.</p>
+<p>Note the band names (listed in band column) you want to download,
+this variable will need to be passed in the final download
+statement.</p>
 </blockquote>
-<p>Similarly you can list all available dates (temporal coverage) for a given product and location defined using a latitude and longitude with the <code><a href="../reference/mt_dates.html">mt_dates()</a></code> function.</p>
+<p>Similarly you can list all available dates (temporal coverage) for a
+given product and location defined using a latitude and longitude with
+the <code><a href="../reference/mt_dates.html">mt_dates()</a></code> function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_dates.html">mt_dates</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MOD13Q1"</span>, lat <span class="op">=</span> <span class="fl">42</span>, lon <span class="op">=</span> <span class="op">-</span><span class="fl">110</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span>
-<span class="co">#&gt;   modis_date calendar_date</span>
-<span class="co">#&gt; 1   A2000049    2000-02-18</span>
-<span class="co">#&gt; 2   A2000065    2000-03-05</span>
-<span class="co">#&gt; 3   A2000081    2000-03-21</span>
-<span class="co">#&gt; 4   A2000097    2000-04-06</span>
-<span class="co">#&gt; 5   A2000113    2000-04-22</span>
-<span class="co">#&gt; 6   A2000129    2000-05-08</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_dates.html">mt_dates</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MOD13Q1"</span>, lat <span class="op">=</span> <span class="fl">42</span>, lon <span class="op">=</span> <span class="op">-</span><span class="fl">110</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   modis_date calendar_date</span></span>
+<span><span class="co">#&gt; 1   A2000049    2000-02-18</span></span>
+<span><span class="co">#&gt; 2   A2000065    2000-03-05</span></span>
+<span><span class="co">#&gt; 3   A2000081    2000-03-21</span></span>
+<span><span class="co">#&gt; 4   A2000097    2000-04-06</span></span>
+<span><span class="co">#&gt; 5   A2000113    2000-04-22</span></span>
+<span><span class="co">#&gt; 6   A2000129    2000-05-08</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="downloading-modis-time-series">Downloading MODIS time series<a class="anchor" aria-label="anchor" href="#downloading-modis-time-series"></a>
 </h2>
-<p>Once you decide on which data to download using the above functions you can use these parameters to download a time series using the <code><a href="../reference/mt_subset.html">mt_subset()</a></code> function. The below query downloads MOD15A2H based leaf area index (LAI) data for the year 2014 for an area around the Arcachon basin in the south west of France. We will also download land cover data (MCD12Q1, IGBP) at a similar scale. The location is named ‘arcachon’. The output is saved to a variables called subset and LC in the R workspace (as defined by the parameter internal = TRUE, when set to FALSE the data is written to file). Keep in mind that this operation might take a while.</p>
+<p>Once you decide on which data to download using the above functions
+you can use these parameters to download a time series using the
+<code><a href="../reference/mt_subset.html">mt_subset()</a></code> function. The below query downloads MOD15A2H
+based leaf area index (LAI) data for the year 2014 for an area around
+the Arcachon basin in the south west of France. We will also download
+land cover data (MCD12Q1, IGBP) at a similar scale. The location is
+named ‘arcachon’. The output is saved to a variables called subset and
+LC in the R workspace (as defined by the parameter internal = TRUE, when
+set to FALSE the data is written to file). Keep in mind that this
+operation might take a while.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># download the MODIS land cover (IGBP) and NDVI data</span>
-<span class="co"># for a region around the French city and basin of Arcachon</span>
-<span class="va">arcachon_lai</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_subset.html">mt_subset</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MOD15A2H"</span>,
-                    lat <span class="op">=</span> <span class="fl">44.656286</span>,
-                    lon <span class="op">=</span>  <span class="op">-</span><span class="fl">1.174748</span>,
-                    band <span class="op">=</span> <span class="st">"Lai_500m"</span>,
-                    start <span class="op">=</span> <span class="st">"2004-01-01"</span>,
-                    end <span class="op">=</span> <span class="st">"2004-12-30"</span>,
-                    km_lr <span class="op">=</span> <span class="fl">20</span>,
-                    km_ab <span class="op">=</span> <span class="fl">20</span>,
-                    site_name <span class="op">=</span> <span class="st">"arcachon"</span>,
-                    internal <span class="op">=</span> <span class="cn">TRUE</span>,
-                    progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="va">arcachon_lc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_subset.html">mt_subset</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MCD12Q1"</span>,
-  lat <span class="op">=</span> <span class="fl">44.656286</span>,
-  lon <span class="op">=</span>  <span class="op">-</span><span class="fl">1.174748</span>,
-  band <span class="op">=</span> <span class="st">"LC_Type1"</span>,
-  start <span class="op">=</span> <span class="st">"2004-01-01"</span>,
-  end <span class="op">=</span> <span class="st">"2004-3-20"</span>,
-  km_lr <span class="op">=</span> <span class="fl">20</span>,
-  km_ab <span class="op">=</span> <span class="fl">20</span>,
-  site_name <span class="op">=</span> <span class="st">"arcachon"</span>,
-  internal <span class="op">=</span> <span class="cn">TRUE</span>,
-  progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<p>The output format is a <em>tidy</em> data frame, as shown above. When witten to a csv with the parameter <code>internal = FALSE</code> this will result in a flat file on disk.</p>
+<code class="sourceCode R"><span><span class="co"># download the MODIS land cover (IGBP) and NDVI data</span></span>
+<span><span class="co"># for a region around the French city and basin of Arcachon</span></span>
+<span><span class="va">arcachon_lai</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_subset.html">mt_subset</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MOD15A2H"</span>,</span>
+<span>                    lat <span class="op">=</span> <span class="fl">44.656286</span>,</span>
+<span>                    lon <span class="op">=</span>  <span class="op">-</span><span class="fl">1.174748</span>,</span>
+<span>                    band <span class="op">=</span> <span class="st">"Lai_500m"</span>,</span>
+<span>                    start <span class="op">=</span> <span class="st">"2004-01-01"</span>,</span>
+<span>                    end <span class="op">=</span> <span class="st">"2004-12-30"</span>,</span>
+<span>                    km_lr <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>                    km_ab <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>                    site_name <span class="op">=</span> <span class="st">"arcachon"</span>,</span>
+<span>                    internal <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                    progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">arcachon_lc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_subset.html">mt_subset</a></span><span class="op">(</span>product <span class="op">=</span> <span class="st">"MCD12Q1"</span>,</span>
+<span>  lat <span class="op">=</span> <span class="fl">44.656286</span>,</span>
+<span>  lon <span class="op">=</span>  <span class="op">-</span><span class="fl">1.174748</span>,</span>
+<span>  band <span class="op">=</span> <span class="st">"LC_Type1"</span>,</span>
+<span>  start <span class="op">=</span> <span class="st">"2004-01-01"</span>,</span>
+<span>  end <span class="op">=</span> <span class="st">"2004-3-20"</span>,</span>
+<span>  km_lr <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  km_ab <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  site_name <span class="op">=</span> <span class="st">"arcachon"</span>,</span>
+<span>  internal <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p>The output format is a <em>tidy</em> data frame, as shown above. When
+witten to a csv with the parameter <code>internal = FALSE</code> this
+will result in a flat file on disk.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">arcachon_lai</span><span class="op">)</span>
-<span class="co">#&gt;      xllcorner  yllcorner      cellsize nrows ncols     band   units scale</span>
-<span class="co">#&gt; 1.1 -111658.35 4946789.87 463.312716528    81    81 Lai_500m m^2/m^2   0.1</span>
-<span class="co">#&gt; 2.1 -111658.35 4946789.87 463.312716528    81    81 Lai_500m m^2/m^2   0.1</span>
-<span class="co">#&gt; 3.1 -111658.35 4946789.87 463.312716528    81    81 Lai_500m m^2/m^2   0.1</span>
-<span class="co">#&gt; 4.1 -111658.35 4946789.87 463.312716528    81    81 Lai_500m m^2/m^2   0.1</span>
-<span class="co">#&gt; 5.1 -111658.35 4946789.87 463.312716528    81    81 Lai_500m m^2/m^2   0.1</span>
-<span class="co">#&gt; 6.1 -111658.35 4946789.87 463.312716528    81    81 Lai_500m m^2/m^2   0.1</span>
-<span class="co">#&gt;     latitude longitude     site  product      start        end complete</span>
-<span class="co">#&gt; 1.1 44.65629 -1.174748 arcachon MOD15A2H 2004-01-01 2004-12-30     TRUE</span>
-<span class="co">#&gt; 2.1 44.65629 -1.174748 arcachon MOD15A2H 2004-01-01 2004-12-30     TRUE</span>
-<span class="co">#&gt; 3.1 44.65629 -1.174748 arcachon MOD15A2H 2004-01-01 2004-12-30     TRUE</span>
-<span class="co">#&gt; 4.1 44.65629 -1.174748 arcachon MOD15A2H 2004-01-01 2004-12-30     TRUE</span>
-<span class="co">#&gt; 5.1 44.65629 -1.174748 arcachon MOD15A2H 2004-01-01 2004-12-30     TRUE</span>
-<span class="co">#&gt; 6.1 44.65629 -1.174748 arcachon MOD15A2H 2004-01-01 2004-12-30     TRUE</span>
-<span class="co">#&gt;     modis_date calendar_date   tile     proc_date pixel value</span>
-<span class="co">#&gt; 1.1   A2004001    2004-01-01 h17v04 2015085012715     1   254</span>
-<span class="co">#&gt; 2.1   A2004009    2004-01-09 h17v04 2015085075443     1   254</span>
-<span class="co">#&gt; 3.1   A2004017    2004-01-17 h17v04 2015085081742     1   254</span>
-<span class="co">#&gt; 4.1   A2004025    2004-01-25 h17v04 2015112185738     1   254</span>
-<span class="co">#&gt; 5.1   A2004033    2004-02-02 h17v04 2015085192313     1   254</span>
-<span class="co">#&gt; 6.1   A2004041    2004-02-10 h17v04 2015086043310     1   254</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">arcachon_lc</span><span class="op">)</span>
-<span class="co">#&gt;      xllcorner  yllcorner      cellsize nrows ncols     band units</span>
-<span class="co">#&gt; 1.1 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span>
-<span class="co">#&gt; 1.2 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span>
-<span class="co">#&gt; 1.3 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span>
-<span class="co">#&gt; 1.4 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span>
-<span class="co">#&gt; 1.5 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span>
-<span class="co">#&gt; 1.6 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span>
-<span class="co">#&gt;             scale latitude longitude     site product      start       end</span>
-<span class="co">#&gt; 1.1 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span>
-<span class="co">#&gt; 1.2 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span>
-<span class="co">#&gt; 1.3 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span>
-<span class="co">#&gt; 1.4 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span>
-<span class="co">#&gt; 1.5 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span>
-<span class="co">#&gt; 1.6 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span>
-<span class="co">#&gt;     complete modis_date calendar_date   tile     proc_date pixel value</span>
-<span class="co">#&gt; 1.1     TRUE   A2004001    2004-01-01 h17v04 2018054103350     1    17</span>
-<span class="co">#&gt; 1.2     TRUE   A2004001    2004-01-01 h17v04 2018054103350     2    17</span>
-<span class="co">#&gt; 1.3     TRUE   A2004001    2004-01-01 h17v04 2018054103350     3    17</span>
-<span class="co">#&gt; 1.4     TRUE   A2004001    2004-01-01 h17v04 2018054103350     4    17</span>
-<span class="co">#&gt; 1.5     TRUE   A2004001    2004-01-01 h17v04 2018054103350     5    17</span>
-<span class="co">#&gt; 1.6     TRUE   A2004001    2004-01-01 h17v04 2018054103350     6    17</span></code></pre></div>
-<p>Note that when a a region is defined using km_lr and km_ab multiple pixels might be returned. These are indexed using the <code>pixel</code> column in the data frame containing the time series data. The remote sensing values are listed in the <code>value</code> column. When no band is specified all bands of a given product are returned, be mindful of the fact that different bands might require different multipliers to represent their true values.</p>
-<p>When a large selection of locations is needed you might benefit from using the batch download function <code><a href="../reference/mt_batch_subset.html">mt_batch_subset()</a></code>, which provides a wrapper around the <code><a href="../reference/mt_subset.html">mt_subset()</a></code> function in order to speed up large download batches. This function has a similar syntax to <code><a href="../reference/mt_subset.html">mt_subset()</a></code> but requires a data frame defining site names (site_name) and locations (lat / lon) (or a comma delimited file with the same structure) to specify a list of download locations.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">arcachon_lai</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      xllcorner  yllcorner      cellsize nrows ncols     band   units scale</span></span>
+<span><span class="co">#&gt; 1.1 -111658.35 4946789.87 463.312716528    81    81 Lai_500m m^2/m^2   0.1</span></span>
+<span><span class="co">#&gt; 2.1 -111658.35 4946789.87 463.312716528    81    81 Lai_500m m^2/m^2   0.1</span></span>
+<span><span class="co">#&gt; 3.1 -111658.35 4946789.87 463.312716528    81    81 Lai_500m m^2/m^2   0.1</span></span>
+<span><span class="co">#&gt; 4.1 -111658.35 4946789.87 463.312716528    81    81 Lai_500m m^2/m^2   0.1</span></span>
+<span><span class="co">#&gt; 5.1 -111658.35 4946789.87 463.312716528    81    81 Lai_500m m^2/m^2   0.1</span></span>
+<span><span class="co">#&gt; 6.1 -111658.35 4946789.87 463.312716528    81    81 Lai_500m m^2/m^2   0.1</span></span>
+<span><span class="co">#&gt;     latitude longitude     site  product      start        end complete</span></span>
+<span><span class="co">#&gt; 1.1 44.65629 -1.174748 arcachon MOD15A2H 2004-01-01 2004-12-30     TRUE</span></span>
+<span><span class="co">#&gt; 2.1 44.65629 -1.174748 arcachon MOD15A2H 2004-01-01 2004-12-30     TRUE</span></span>
+<span><span class="co">#&gt; 3.1 44.65629 -1.174748 arcachon MOD15A2H 2004-01-01 2004-12-30     TRUE</span></span>
+<span><span class="co">#&gt; 4.1 44.65629 -1.174748 arcachon MOD15A2H 2004-01-01 2004-12-30     TRUE</span></span>
+<span><span class="co">#&gt; 5.1 44.65629 -1.174748 arcachon MOD15A2H 2004-01-01 2004-12-30     TRUE</span></span>
+<span><span class="co">#&gt; 6.1 44.65629 -1.174748 arcachon MOD15A2H 2004-01-01 2004-12-30     TRUE</span></span>
+<span><span class="co">#&gt;     modis_date calendar_date   tile     proc_date pixel value</span></span>
+<span><span class="co">#&gt; 1.1   A2004001    2004-01-01 h17v04 2015085012715     1   254</span></span>
+<span><span class="co">#&gt; 2.1   A2004009    2004-01-09 h17v04 2015085075443     1   254</span></span>
+<span><span class="co">#&gt; 3.1   A2004017    2004-01-17 h17v04 2015085081742     1   254</span></span>
+<span><span class="co">#&gt; 4.1   A2004025    2004-01-25 h17v04 2015112185738     1   254</span></span>
+<span><span class="co">#&gt; 5.1   A2004033    2004-02-02 h17v04 2015085192313     1   254</span></span>
+<span><span class="co">#&gt; 6.1   A2004041    2004-02-10 h17v04 2015086043310     1   254</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">arcachon_lc</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      xllcorner  yllcorner      cellsize nrows ncols     band units</span></span>
+<span><span class="co">#&gt; 1.1 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span></span>
+<span><span class="co">#&gt; 1.2 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span></span>
+<span><span class="co">#&gt; 1.3 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span></span>
+<span><span class="co">#&gt; 1.4 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span></span>
+<span><span class="co">#&gt; 1.5 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span></span>
+<span><span class="co">#&gt; 1.6 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span></span>
+<span><span class="co">#&gt;             scale latitude longitude     site product      start       end</span></span>
+<span><span class="co">#&gt; 1.1 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span></span>
+<span><span class="co">#&gt; 1.2 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span></span>
+<span><span class="co">#&gt; 1.3 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span></span>
+<span><span class="co">#&gt; 1.4 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span></span>
+<span><span class="co">#&gt; 1.5 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span></span>
+<span><span class="co">#&gt; 1.6 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span></span>
+<span><span class="co">#&gt;     complete modis_date calendar_date   tile     proc_date pixel value</span></span>
+<span><span class="co">#&gt; 1.1     TRUE   A2004001    2004-01-01 h17v04 2018054103350     1    17</span></span>
+<span><span class="co">#&gt; 1.2     TRUE   A2004001    2004-01-01 h17v04 2018054103350     2    17</span></span>
+<span><span class="co">#&gt; 1.3     TRUE   A2004001    2004-01-01 h17v04 2018054103350     3    17</span></span>
+<span><span class="co">#&gt; 1.4     TRUE   A2004001    2004-01-01 h17v04 2018054103350     4    17</span></span>
+<span><span class="co">#&gt; 1.5     TRUE   A2004001    2004-01-01 h17v04 2018054103350     5    17</span></span>
+<span><span class="co">#&gt; 1.6     TRUE   A2004001    2004-01-01 h17v04 2018054103350     6    17</span></span></code></pre></div>
+<p>Note that when a a region is defined using km_lr and km_ab multiple
+pixels might be returned. These are indexed using the <code>pixel</code>
+column in the data frame containing the time series data. The remote
+sensing values are listed in the <code>value</code> column. When no band
+is specified all bands of a given product are returned, be mindful of
+the fact that different bands might require different multipliers to
+represent their true values.</p>
+<p>When a large selection of locations is needed you might benefit from
+using the batch download function <code><a href="../reference/mt_batch_subset.html">mt_batch_subset()</a></code>, which
+provides a wrapper around the <code><a href="../reference/mt_subset.html">mt_subset()</a></code> function in order
+to speed up large download batches. This function has a similar syntax
+to <code><a href="../reference/mt_subset.html">mt_subset()</a></code> but requires a data frame defining site
+names (site_name) and locations (lat / lon) (or a comma delimited file
+with the same structure) to specify a list of download locations.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create data frame with a site_name, lat and lon column</span>
-<span class="co"># holding the respective names of sites and their location</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"site_name"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"test"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">df</span><span class="op">$</span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fl">40</span>
-<span class="va">df</span><span class="op">$</span><span class="va">lon</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">110</span>
-
-<span class="co"># an example batch download data frame</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt;   site_name lat  lon</span>
-<span class="co">#&gt; 1    test 1  40 -110</span>
-<span class="co">#&gt; 2    test 2  40 -110</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># create data frame with a site_name, lat and lon column</span></span>
+<span><span class="co"># holding the respective names of sites and their location</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"site_name"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"test"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fl">40</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">lon</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">110</span></span>
+<span></span>
+<span><span class="co"># an example batch download data frame</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   site_name lat  lon</span></span>
+<span><span class="co">#&gt; 1    test 1  40 -110</span></span>
+<span><span class="co">#&gt; 2    test 2  40 -110</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># test batch download</span>
-<span class="va">subsets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_batch_subset.html">mt_batch_subset</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">df</span>,
-                     product <span class="op">=</span> <span class="st">"MOD13Q1"</span>,
-                     band <span class="op">=</span> <span class="st">"250m_16_days_NDVI"</span>,
-                     km_lr <span class="op">=</span> <span class="fl">1</span>,
-                     km_ab <span class="op">=</span> <span class="fl">1</span>,
-                     start <span class="op">=</span> <span class="st">"2004-01-01"</span>,
-                     end <span class="op">=</span> <span class="st">"2004-12-30"</span>,
-                     internal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># test batch download</span></span>
+<span><span class="va">subsets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_batch_subset.html">mt_batch_subset</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">df</span>,</span>
+<span>                     product <span class="op">=</span> <span class="st">"MOD13Q1"</span>,</span>
+<span>                     band <span class="op">=</span> <span class="st">"250m_16_days_NDVI"</span>,</span>
+<span>                     km_lr <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                     km_ab <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                     start <span class="op">=</span> <span class="st">"2004-01-01"</span>,</span>
+<span>                     end <span class="op">=</span> <span class="st">"2004-12-30"</span>,</span>
+<span>                     internal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="worked-example-using-lai-values-around-the-bay-of-arcachon">Worked example using LAI values around the bay of Arcachon<a class="anchor" aria-label="anchor" href="#worked-example-using-lai-values-around-the-bay-of-arcachon"></a>
 </h2>
-<p>The below example processes the data downloaded above to look at differences in the seasonal changes in leaf area index (LAI, or the amount of leaves per unit ground area) for the Arcachon bay in south-west France. To do this we merge the land cover and LAI data on a pixel by pixel basis.</p>
+<p>The below example processes the data downloaded above to look at
+differences in the seasonal changes in leaf area index (LAI, or the
+amount of leaves per unit ground area) for the Arcachon bay in
+south-west France. To do this we merge the land cover and LAI data on a
+pixel by pixel basis.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># merge land cover and lai data</span>
-<span class="va">arcachon</span> <span class="op">&lt;-</span> <span class="va">arcachon_lc</span> <span class="op">%&gt;%</span>
-  <span class="fu">rename</span><span class="op">(</span><span class="st">"lc"</span> <span class="op">=</span> <span class="st">"value"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">select</span><span class="op">(</span><span class="st">"lc"</span>,<span class="st">"pixel"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">right_join</span><span class="op">(</span><span class="va">arcachon_lai</span>, by <span class="op">=</span> <span class="st">"pixel"</span><span class="op">)</span></code></pre></div>
-<p>Then, filter out all non valid values (&gt; 100), only select evergreen and deciduous land cover classes (1 and 5, or, ENF and DBF respectivelly), convert them to more readable labels, and across these land cover classes take the median per acquisition date.</p>
+<code class="sourceCode R"><span><span class="co"># merge land cover and lai data</span></span>
+<span><span class="va">arcachon</span> <span class="op">&lt;-</span> <span class="va">arcachon_lc</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">rename</span><span class="op">(</span><span class="st">"lc"</span> <span class="op">=</span> <span class="st">"value"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="st">"lc"</span>,<span class="st">"pixel"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">right_join</span><span class="op">(</span><span class="va">arcachon_lai</span>, by <span class="op">=</span> <span class="st">"pixel"</span><span class="op">)</span></span></code></pre></div>
+<p>Then, filter out all non valid values (&gt; 100), only select
+evergreen and deciduous land cover classes (1 and 5, or, ENF and DBF
+respectivelly), convert them to more readable labels, and across these
+land cover classes take the median per acquisition date.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create a plot of the data - accounting for the multiplier (scale) component</span>
-<span class="va">arcachon</span> <span class="op">&lt;-</span> <span class="va">arcachon</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">value</span> <span class="op">&lt;=</span> <span class="fl">100</span>,
-         <span class="va">lc</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>,<span class="st">"5"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># retain everything but fill values</span>
-  <span class="fu">mutate</span><span class="op">(</span>lc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">lc</span> <span class="op">==</span> <span class="fl">1</span>, <span class="st">"ENF"</span>,<span class="st">"DBF"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">group_by</span><span class="op">(</span><span class="va">lc</span>, <span class="va">calendar_date</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># group by lc and date</span>
-  <span class="fu">summarize</span><span class="op">(</span>doy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">calendar_date</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,<span class="st">"%j"</span><span class="op">)</span><span class="op">)</span>,
-            lai_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">value</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html" class="external-link">as.double</a></span><span class="op">(</span><span class="va">scale</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; `summarise()` has grouped output by 'lc'. You can override using the `.groups`</span>
-<span class="co">#&gt; argument.</span></code></pre></div>
-<p>Finally, the plot will show you the seasonal time series of LAI for both land cover classes (ENF and DBF). Note the difference in timing and amplitude between both these forest types, where the evergreen (ENF) pixels show lower LAI values and a more gradual seasonal pattern compared to the deciduous trees.</p>
+<code class="sourceCode R"><span><span class="co"># create a plot of the data - accounting for the multiplier (scale) component</span></span>
+<span><span class="va">arcachon</span> <span class="op">&lt;-</span> <span class="va">arcachon</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">value</span> <span class="op">&lt;=</span> <span class="fl">100</span>,</span>
+<span>         <span class="va">lc</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>,<span class="st">"5"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># retain everything but fill values</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>lc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">lc</span> <span class="op">==</span> <span class="fl">1</span>, <span class="st">"ENF"</span>,<span class="st">"DBF"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">lc</span>, <span class="va">calendar_date</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># group by lc and date</span></span>
+<span>  <span class="fu">summarize</span><span class="op">(</span>doy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">calendar_date</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,<span class="st">"%j"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>            lai_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">value</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html" class="external-link">as.double</a></span><span class="op">(</span><span class="va">scale</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `summarise()` has grouped output by 'lc'. You can override using the `.groups`</span></span>
+<span><span class="co">#&gt; argument.</span></span></code></pre></div>
+<p>Finally, the plot will show you the seasonal time series of LAI for
+both land cover classes (ENF and DBF). Note the difference in timing and
+amplitude between both these forest types, where the evergreen (ENF)
+pixels show lower LAI values and a more gradual seasonal pattern
+compared to the deciduous trees.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># plot LAI by date and per land cover class</span>
-<span class="fu">ggplot</span><span class="op">(</span><span class="va">arcachon</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">doy</span>, y <span class="op">=</span> <span class="va">lai_mean</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_smooth</span><span class="op">(</span>span <span class="op">=</span> <span class="fl">0.3</span>, method <span class="op">=</span> <span class="st">"loess"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"day of year (DOY)"</span>,
-       y <span class="op">=</span> <span class="st">"leaf area index (LAI)"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span> <span class="va">lc</span><span class="op">)</span>
-<span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># plot LAI by date and per land cover class</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">arcachon</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">doy</span>, y <span class="op">=</span> <span class="va">lai_mean</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>span <span class="op">=</span> <span class="fl">0.3</span>, method <span class="op">=</span> <span class="st">"loess"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"day of year (DOY)"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"leaf area index (LAI)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span> <span class="va">lc</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using formula = 'y ~ x'</span></span></code></pre></div>
 <p><img src="modistools-vignette_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="conversion-of-corner-coordinates">Conversion of corner coordinates<a class="anchor" aria-label="anchor" href="#conversion-of-corner-coordinates"></a>
 </h2>
-<p>Corner coordinates of the pixel area extracted are provided, these can be used to calculate the coverage of the extracted area. Coordinates are provided in the original sinusoidal grid coordinates and first have to be transformed into latitude longitude (for convenience).</p>
+<p>Corner coordinates of the pixel area extracted are provided, these
+can be used to calculate the coverage of the extracted area. Coordinates
+are provided in the original sinusoidal grid coordinates and first have
+to be transformed into latitude longitude (for convenience).</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># convert the coordinates</span>
-<span class="va">lat_lon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sin_to_ll.html">sin_to_ll</a></span><span class="op">(</span><span class="va">arcachon_lc</span><span class="op">$</span><span class="va">xllcorner</span>, <span class="va">arcachon_lc</span><span class="op">$</span><span class="va">yllcorner</span><span class="op">)</span>
-<span class="co">#&gt; Warning in CPL_crs_from_input(x): GDAL Message 1: +init=epsg:XXXX syntax is</span>
-<span class="co">#&gt; deprecated. It might return a CRS with a non-EPSG compliant axis order.</span>
-
-<span class="co"># bind with the original dataframe</span>
-<span class="va">subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">arcachon_lc</span>, <span class="va">lat_lon</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">subset</span><span class="op">)</span>
-<span class="co">#&gt;      xllcorner  yllcorner      cellsize nrows ncols     band units</span>
-<span class="co">#&gt; 1.1 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span>
-<span class="co">#&gt; 1.2 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span>
-<span class="co">#&gt; 1.3 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span>
-<span class="co">#&gt; 1.4 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span>
-<span class="co">#&gt; 1.5 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span>
-<span class="co">#&gt; 1.6 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span>
-<span class="co">#&gt;             scale latitude longitude     site product      start       end</span>
-<span class="co">#&gt; 1.1 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span>
-<span class="co">#&gt; 1.2 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span>
-<span class="co">#&gt; 1.3 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span>
-<span class="co">#&gt; 1.4 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span>
-<span class="co">#&gt; 1.5 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span>
-<span class="co">#&gt; 1.6 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span>
-<span class="co">#&gt;     complete modis_date calendar_date   tile     proc_date pixel value</span>
-<span class="co">#&gt; 1.1     TRUE   A2004001    2004-01-01 h17v04 2018054103350     1    17</span>
-<span class="co">#&gt; 1.2     TRUE   A2004001    2004-01-01 h17v04 2018054103350     2    17</span>
-<span class="co">#&gt; 1.3     TRUE   A2004001    2004-01-01 h17v04 2018054103350     3    17</span>
-<span class="co">#&gt; 1.4     TRUE   A2004001    2004-01-01 h17v04 2018054103350     4    17</span>
-<span class="co">#&gt; 1.5     TRUE   A2004001    2004-01-01 h17v04 2018054103350     5    17</span>
-<span class="co">#&gt; 1.6     TRUE   A2004001    2004-01-01 h17v04 2018054103350     6    17</span>
-<span class="co">#&gt;     longitude_ll latitude_ll</span>
-<span class="co">#&gt; 1.1    -1.407572     44.4875</span>
-<span class="co">#&gt; 1.2    -1.407572     44.4875</span>
-<span class="co">#&gt; 1.3    -1.407572     44.4875</span>
-<span class="co">#&gt; 1.4    -1.407572     44.4875</span>
-<span class="co">#&gt; 1.5    -1.407572     44.4875</span>
-<span class="co">#&gt; 1.6    -1.407572     44.4875</span></code></pre></div>
-<p>Together with meta-data regarding cell size, number of columns and rows the bounding box of the extracted data can be calculated.</p>
+<code class="sourceCode R"><span><span class="co"># convert the coordinates</span></span>
+<span><span class="va">lat_lon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sin_to_ll.html">sin_to_ll</a></span><span class="op">(</span><span class="va">arcachon_lc</span><span class="op">$</span><span class="va">xllcorner</span>, <span class="va">arcachon_lc</span><span class="op">$</span><span class="va">yllcorner</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in CPL_crs_from_input(x): GDAL Message 1: +init=epsg:XXXX syntax is</span></span>
+<span><span class="co">#&gt; deprecated. It might return a CRS with a non-EPSG compliant axis order.</span></span>
+<span></span>
+<span><span class="co"># bind with the original dataframe</span></span>
+<span><span class="va">subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">arcachon_lc</span>, <span class="va">lat_lon</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">subset</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      xllcorner  yllcorner      cellsize nrows ncols     band units</span></span>
+<span><span class="co">#&gt; 1.1 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span></span>
+<span><span class="co">#&gt; 1.2 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span></span>
+<span><span class="co">#&gt; 1.3 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span></span>
+<span><span class="co">#&gt; 1.4 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span></span>
+<span><span class="co">#&gt; 1.5 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span></span>
+<span><span class="co">#&gt; 1.6 -111658.35 4946789.87 463.312716528    81    81 LC_Type1 class</span></span>
+<span><span class="co">#&gt;             scale latitude longitude     site product      start       end</span></span>
+<span><span class="co">#&gt; 1.1 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span></span>
+<span><span class="co">#&gt; 1.2 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span></span>
+<span><span class="co">#&gt; 1.3 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span></span>
+<span><span class="co">#&gt; 1.4 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span></span>
+<span><span class="co">#&gt; 1.5 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span></span>
+<span><span class="co">#&gt; 1.6 Not Available 44.65629 -1.174748 arcachon MCD12Q1 2004-01-01 2004-3-20</span></span>
+<span><span class="co">#&gt;     complete modis_date calendar_date   tile     proc_date pixel value</span></span>
+<span><span class="co">#&gt; 1.1     TRUE   A2004001    2004-01-01 h17v04 2018054103350     1    17</span></span>
+<span><span class="co">#&gt; 1.2     TRUE   A2004001    2004-01-01 h17v04 2018054103350     2    17</span></span>
+<span><span class="co">#&gt; 1.3     TRUE   A2004001    2004-01-01 h17v04 2018054103350     3    17</span></span>
+<span><span class="co">#&gt; 1.4     TRUE   A2004001    2004-01-01 h17v04 2018054103350     4    17</span></span>
+<span><span class="co">#&gt; 1.5     TRUE   A2004001    2004-01-01 h17v04 2018054103350     5    17</span></span>
+<span><span class="co">#&gt; 1.6     TRUE   A2004001    2004-01-01 h17v04 2018054103350     6    17</span></span>
+<span><span class="co">#&gt;     longitude_ll latitude_ll</span></span>
+<span><span class="co">#&gt; 1.1    -1.407572     44.4875</span></span>
+<span><span class="co">#&gt; 1.2    -1.407572     44.4875</span></span>
+<span><span class="co">#&gt; 1.3    -1.407572     44.4875</span></span>
+<span><span class="co">#&gt; 1.4    -1.407572     44.4875</span></span>
+<span><span class="co">#&gt; 1.5    -1.407572     44.4875</span></span>
+<span><span class="co">#&gt; 1.6    -1.407572     44.4875</span></span></code></pre></div>
+<p>Together with meta-data regarding cell size, number of columns and
+rows the bounding box of the extracted data can be calculated.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># convert to bounding box</span>
-<span class="va">bb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">arcachon_lc</span>, <span class="fl">1</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
-  <span class="fu"><a href="../reference/mt_bbox.html">mt_bbox</a></span><span class="op">(</span>xllcorner <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">'xllcorner'</span><span class="op">]</span>,
-          yllcorner <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">'yllcorner'</span><span class="op">]</span>,
-           cellsize <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">'cellsize'</span><span class="op">]</span>,
-           nrows <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">'nrows'</span><span class="op">]</span>,
-           ncols <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">'ncols'</span><span class="op">]</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>
-
-<span class="co"># plot one bounding box</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bb</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
-
-<span class="co"># add the location of the queried coordinate within the polygon</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="va">arcachon_lc</span><span class="op">$</span><span class="va">longitude</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-       <span class="va">arcachon_lc</span><span class="op">$</span><span class="va">latitude</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-       pch <span class="op">=</span> <span class="fl">20</span>,
-       col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
-<p><img src="modistools-vignette_files/figure-html/unnamed-chunk-12-1.png" width="480"></p>
+<code class="sourceCode R"><span><span class="co"># convert to bounding box</span></span>
+<span><span class="va">bb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">arcachon_lc</span>, <span class="fl">1</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/mt_bbox.html">mt_bbox</a></span><span class="op">(</span>xllcorner <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">'xllcorner'</span><span class="op">]</span>,</span>
+<span>          yllcorner <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">'yllcorner'</span><span class="op">]</span>,</span>
+<span>           cellsize <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">'cellsize'</span><span class="op">]</span>,</span>
+<span>           nrows <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">'nrows'</span><span class="op">]</span>,</span>
+<span>           ncols <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">'ncols'</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in sf::st_sfc(p, crs = CRS): is.numeric(crs) || is.character(crs) || inherits(crs, "crs") is not TRUE</span></span>
+<span></span>
+<span><span class="co"># plot one bounding box</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bb</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'bb' not found</span></span>
+<span></span>
+<span><span class="co"># add the location of the queried coordinate within the polygon</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="va">arcachon_lc</span><span class="op">$</span><span class="va">longitude</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>       <span class="va">arcachon_lc</span><span class="op">$</span><span class="va">latitude</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>       pch <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>       col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in plot.xy(xy.coords(x, y), type = type, ...): plot.new has not been called yet</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="conversion-to-gridded-raster-data">Conversion to (gridded) raster data<a class="anchor" aria-label="anchor" href="#conversion-to-gridded-raster-data"></a>
 </h2>
-<p>Although the package is often used to deal with single pixel locations the provisions to download a small region of interest defined by kilometers left-right (west-east) or top-bottom (north-south) allows you to grab small geographic regions for further analysis. The default tidy dataframe format isn’t ideal for visualizing this inherently spatial data. Therefore a helper function <code><a href="../reference/mt_to_raster.html">mt_to_raster()</a></code> is available to convert the tidy dataframe to a gridded (georeferenced) raster format.</p>
-<p>Below a small region (20x20km) is downloaded around the seaside town of Arcachon, France for the <a href="https://lpdaac.usgs.gov/products/mcd12q1v006/" class="external-link">MODIS land cover product (MCD12Q1)</a>. The data is converted using <code><a href="../reference/mt_to_raster.html">mt_to_raster()</a></code> with a reproject parameter set to true to plot latitude and longitude coordinates (instead of the default sinusoidal ones).</p>
+<p>Although the package is often used to deal with single pixel
+locations the provisions to download a small region of interest defined
+by kilometers left-right (west-east) or top-bottom (north-south) allows
+you to grab small geographic regions for further analysis. The default
+tidy dataframe format isn’t ideal for visualizing this inherently
+spatial data. Therefore a helper function <code>mt_to_raster()</code> is
+available to convert the tidy dataframe to a gridded (georeferenced)
+raster format.</p>
+<p>Below a small region (20x20km) is downloaded around the seaside town
+of Arcachon, France for the <a href="https://lpdaac.usgs.gov/products/mcd12q1v006/" class="external-link">MODIS land cover
+product (MCD12Q1)</a>. The data is converted using
+<code>mt_to_raster()</code> with a reproject parameter set to true to
+plot latitude and longitude coordinates (instead of the default
+sinusoidal ones).</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># convert to raster, when reproject is TRUE</span>
-<span class="co"># the data is reprojected to lat / lon if FALSE</span>
-<span class="co"># the data is shown in its original sinuidal projection</span>
-<span class="va">LC_r</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mt_to_raster.html">mt_to_raster</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">arcachon_lc</span>, reproject <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="co"># plot the raster data as a map</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">LC_r</span><span class="op">)</span></code></pre></div>
-<p><img src="modistools-vignette_files/figure-html/unnamed-chunk-13-1.png" width="480"></p>
+<code class="sourceCode R"><span><span class="co"># convert to raster, when reproject is TRUE</span></span>
+<span><span class="co"># the data is reprojected to lat / lon if FALSE</span></span>
+<span><span class="co"># the data is shown in its original sinuidal projection</span></span>
+<span><span class="va">LC_r</span> <span class="op">&lt;-</span> <span class="fu">mt_to_raster</span><span class="op">(</span>df <span class="op">=</span> <span class="va">arcachon_lc</span>, reproject <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in mt_to_raster(df = arcachon_lc, reproject = TRUE): could not find function "mt_to_raster"</span></span>
+<span></span>
+<span><span class="co"># plot the raster data as a map</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">LC_r</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'LC_r' not found</span></span></code></pre></div>
 </div>
   </div>
 
@@ -386,7 +460,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
